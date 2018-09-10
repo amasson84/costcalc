@@ -96,6 +96,13 @@ class CostOutput extends React.Component {
     }
 }
 
+function Textoutput(props){
+    return(
+        <div className="alert alert-primary" role="alert">
+            {props.text}
+        </div>
+    );
+}
 
 class AmountRatesCost extends React.Component {
     constructor(props) {
@@ -119,6 +126,7 @@ class AmountRatesCost extends React.Component {
 
         return (
             <div className="row">
+                <p className="h1">{this.props.name}</p>
                 <AmountInput id={this.props.name} min={this.props.data.AmountMin} max={this.props.data.AmountMax}
                              step={this.props.data.AmountStep} value={Amount} name={this.props.data.AmountName}
                              unit={this.props.data.AmountUnit} onAmountChange={this.handleAmountChange} />
@@ -172,6 +180,7 @@ class CategoryAmountRatesCost extends React.Component {
 
         return (
             <div className="row">
+                <p className="h1">{this.props.name}</p>
                 <RatesInput id={this.props.name+'-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={Cat}
                             unit={this.props.data.CatUnit} onRateChange={this.handleCatChange} />
 
@@ -187,6 +196,45 @@ class CategoryAmountRatesCost extends React.Component {
     }
     makecost(cat,amount,rate) {
         var total=cat+amount*rate;
+        total=tomoney(total);
+        this.props.onCostChange(this.props.name,total);
+        return total;
+    }
+}
+
+class CategoryCost extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state={SelectCat : 0,  Cat : this.props.data.Cat[Object.keys(this.props.data.Cat)[0]]};
+        this.handleCatChange = this.handleCatChange.bind(this);
+
+    }
+
+
+    handleCatChange(select) {
+        this.setState({SelectCat: select});
+        this.setState({Cat: this.props.data.Cat[select]});
+    }
+    // handleCostChange(total) {
+    //     this.props.onCostChange(this.props.name,total);
+    // }
+    render() {
+        const Cat=this.state.Cat;
+
+        const Cost=this.makecost(Cat);
+
+        return (
+            <div className="row">
+                <p className="h1">{this.props.name}</p>
+                <RatesInput id={this.props.name+'-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={Cat}
+                            unit={this.props.data.CatUnit} onRateChange={this.handleCatChange} />
+
+                <CostOutput id={this.props.name+'-Cost'} name={"Cost"} value={Cost} />
+            </div>
+        );
+    }
+    makecost(cat) {
+        var total=cat;
         total=tomoney(total);
         this.props.onCostChange(this.props.name,total);
         return total;
@@ -209,10 +257,16 @@ class PluginsMain extends React.Component {
     }
     render() {
         return(
+            <div className="container">
             <div id={"plugins"}>
                 <AmountRatesCost data={NasEpfl} name={"NAS"} onCostChange={this.handleCostChange} />
 
+                <CategoryCost data={MysqlEpfl} name={"DataBase"} onCostChange={this.handleCostChange}/>
+
                 <CategoryAmountRatesCost data={SLIMSEpfl} name={"ELN"} onCostChange={this.handleCostChange} />
+
+
+            </div>
             </div>
         );
     }
