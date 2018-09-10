@@ -75,6 +75,33 @@ class RatesInput extends React.Component {
     }
 }
 
+class SelectorInput extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.listoptions = props.options.map((opt) =>
+            <option key={opt.toString()}>{opt}</option>);
+
+    }
+
+    handleChange(e) {
+        this.props.onChange(e.target.value);
+    }
+
+    render() {
+        const value = this.props.value;
+        return (
+            <div className="col">
+                <label htmlFor={this.props.id}> {this.props.name} </label>
+                <select id={this.props.id} className="form-control" value={value}  onChange={this.handleChange}>
+                    {this.listoptions}
+                </select>
+                <small id="nas-amount-cost" className="form-text text-muted">{this.props.legend}</small>
+            </div>
+        );
+    }
+}
+
 class CostOutput extends React.Component {
     constructor(props) {
         super(props);
@@ -139,7 +166,7 @@ class AmountRatesCost extends React.Component {
         );
     }
     makecost(amount,rate) {
-        var total=amount*rate;
+        var total=(amount-this.props.data.AmountFree)*rate;
         total=tomoney(total);
         this.props.onCostChange(this.props.name,total);
         return total;
@@ -195,7 +222,7 @@ class CategoryAmountRatesCost extends React.Component {
         );
     }
     makecost(cat,amount,rate) {
-        var total=cat+amount*rate;
+        var total=cat+(amount-this.props.data.AmountFree)*rate;
         total=tomoney(total);
         this.props.onCostChange(this.props.name,total);
         return total;
@@ -241,12 +268,64 @@ class CategoryCost extends React.Component {
     }
 }
 
+class ProviderPluginsSelector extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleCostChange = this.handleCostChange.bind(this);
+        this.handleProviderChange = this.handleProviderChange.bind(this);
+
+        this.state={selected:0,keys:this.ProvidersName(this.props.data)}
+
+    }
+
+    handleCostChange(name,e) {
+        this.props.handleCostChange(name,e.target.value);
+    }
+    handleProviderChange(e){
+
+    }
+    render() {
+        const Test=this.cmp2string("AmountRatesCost");//window[NasEpfl.style];
+        return(
+                <div id={"plugin"}>
+                    <Test data={NasEpfl} name={"NAS"} onCostChange={this.handleCostChange} />
+
+                    <CategoryCost data={MysqlEpfl} name={"DataBase"} onCostChange={this.handleCostChange}/>
+
+                    <CategoryAmountRatesCost data={SLIMSEpfl} name={"ELN"} onCostChange={this.handleCostChange} />
+
+
+                </div>
+        );
+    }
+    cmp2string(str){
+        switch (str) {
+            case "AmountRatesCost" : return AmountRatesCost;
+            case "CategoryCost" : return CategoryCost;
+            case "CategoryAmountRatesCost" : return CategoryAmountRatesCost
+
+        }
+    }
+    ProvidersName(main){
+        var data=main.data;
+        console.log(data)
+
+        var providers=[];
+        for (var i = 0; i < data.length; i++) {
+            providers.push(data[i].provider)
+        }
+        return providers;
+    }
+
+}
+
 
 class PluginsMain extends React.Component {
     constructor(props) {
         super(props);
         this.handleCostChange = this.handleCostChange.bind(this);
         this.state={'varsum':{}};
+        console.log(this.ProvidersName(storage))
     }
 
     handleCostChange(name,e) {
@@ -256,10 +335,11 @@ class PluginsMain extends React.Component {
 
     }
     render() {
+        const Test=this.cmp2string("AmountRatesCost");//window[NasEpfl.style];
         return(
             <div className="container">
-            <div id={"plugins"}>
-                <AmountRatesCost data={NasEpfl} name={"NAS"} onCostChange={this.handleCostChange} />
+            <div id={"pluginsmain"}>
+                <Test data={NasEpfl} name={"NAS"} onCostChange={this.handleCostChange} />
 
                 <CategoryCost data={MysqlEpfl} name={"DataBase"} onCostChange={this.handleCostChange}/>
 
@@ -270,6 +350,8 @@ class PluginsMain extends React.Component {
             </div>
         );
     }
+
+
 }
 
 class Main extends React.Component {
