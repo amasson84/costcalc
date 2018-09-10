@@ -139,7 +139,7 @@ class AmountRatesCost extends React.Component {
         );
     }
     makecost(amount,rate) {
-        var total=amount*rate;
+        var total=(amount-this.props.data.AmountFree)*rate;
         total=tomoney(total);
         this.props.onCostChange(this.props.name,total);
         return total;
@@ -195,7 +195,7 @@ class CategoryAmountRatesCost extends React.Component {
         );
     }
     makecost(cat,amount,rate) {
-        var total=cat+amount*rate;
+        var total=cat+(amount-this.props.data.AmountFree)*rate;
         total=tomoney(total);
         this.props.onCostChange(this.props.name,total);
         return total;
@@ -247,6 +247,7 @@ class PluginsMain extends React.Component {
         super(props);
         this.handleCostChange = this.handleCostChange.bind(this);
         this.state={'varsum':{}};
+        console.log(this.ProvidersName(storage))
     }
 
     handleCostChange(name,e) {
@@ -256,10 +257,11 @@ class PluginsMain extends React.Component {
 
     }
     render() {
+        const Test=this.cmp2string("AmountRatesCost");//window[NasEpfl.style];
         return(
             <div className="container">
             <div id={"plugins"}>
-                <AmountRatesCost data={NasEpfl} name={"NAS"} onCostChange={this.handleCostChange} />
+                <Test data={NasEpfl} name={"NAS"} onCostChange={this.handleCostChange} />
 
                 <CategoryCost data={MysqlEpfl} name={"DataBase"} onCostChange={this.handleCostChange}/>
 
@@ -270,6 +272,25 @@ class PluginsMain extends React.Component {
             </div>
         );
     }
+    cmp2string(str){
+        switch (str) {
+            case "AmountRatesCost" : return AmountRatesCost;
+            case "CategoryCost" : return CategoryCost;
+            case "CategoryAmountRatesCost" : return CategoryAmountRatesCost
+
+        }
+    }
+    ProvidersName(main){
+        var data=main.data;
+        console.log(data)
+
+        var providers=[];
+        for (var i = 0; i < data.length; i++) {
+            providers.push(data[i].provider)
+        }
+        return providers;
+    }
+
 }
 
 class Main extends React.Component {
