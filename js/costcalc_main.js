@@ -114,6 +114,53 @@ class SelectorInput extends React.Component {
         );
     }
 }
+class CheckboxInput extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.state={checked:this.props.defaults};
+    }
+
+    handleChange() {
+
+        this.setState({checked: !this.state.checked});
+        this.props.onChange(!this.state.checked);
+
+    }
+
+    render() {
+        return (
+            <div className="form-check">
+                <input className="form-check-input" type="checkbox"  id={this.props.id} onChange={this.handleChange}
+                       defaultChecked={this.state.checked}/>
+                    <label className="form-check-label" htmlFor={this.props.id}>{this.props.name}</label>
+            </div>
+        );
+    }
+}
+class ButtonInput extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange() {
+
+        this.props.onClick(this.props.n);
+
+    }
+
+    render() {
+        return (
+            <button id={this.props.id} onClick={this.handleChange} type="button" className="btn btn-primary">{this.props.name}</button>
+        );
+    }
+}
+
+
+
 
 // Outputs definition
 // ---------------------
@@ -133,7 +180,7 @@ class CostOutput extends React.Component {
             <div className="col">
                 <label htmlFor="{this.props.id}">{this.props.name}</label>
                 <input type="text" className="form-control" id="{this.props.id}" className="form-control"
-                       value={this.props.value} onChange={this.handleChange}/>
+                       value={this.props.value} onChange={this.handleChange} readOnly/>
             </div>
         );
     }
@@ -292,13 +339,20 @@ class ProviderPluginsSelector extends React.Component {
         super(props);
         this.handleCostChange = this.handleCostChange.bind(this);
         this.handleProviderChange = this.handleProviderChange.bind(this);
-        this.state={selected:0,
+        this.handleEnableChange = this.handleEnableChange.bind(this);
+        this.state={
+            selected:0,
             keys:this.ProvidersName(props.data),
+            enabled :false,
+            n:1,
         };
     }
 
     handleCostChange(n,e) {
-        console.log("here n : "+n+" e = "+ e);
+        // console.log("here n : "+n+" e = "+ e);
+        if(! this.state.enabled){
+            e=0;
+        }
         this.props.handleCostChange(n,e);
     }
     handleProviderChange(e){
@@ -306,14 +360,26 @@ class ProviderPluginsSelector extends React.Component {
         this.setState({selected:select});
 
     }
+    handleEnableChange(e){
+        this.setState({enabled:e});
+
+    }
     render() {
-        console.log("n= "+this.props.n)
+        // console.log("n= "+this.props.n)
         const Cmp=this.cmp2string(this.cmpdata(this.state.selected).style);
         const Cdata=this.cmpdata(this.state.selected);
+
         return(
+
             <div id={"plugin"}>
                 <span id={"plugin-name"}>{this.props.data.name}</span>
-                <div id={"providerselector"}>
+                <div id={"plugin-control"}>
+                    <CheckboxInput id={"enable"} name={"Enable feature"} onChange={this.handleEnableChange} defaults={this.state.enabled}/>
+                    <ButtonInput id={"add-btn"} name={"+"} onClick={this.props.addplugin} n={this.props.n}/>
+                </div>
+                <fieldset disabled={!this.state.enabled} >
+                <div id={"provider-selector"}>
+
                     <SelectorInput id={"providerselect"} name={"Provider"} options={this.state.keys}
                                    onChange={this.handleProviderChange}/>
                 </div>
@@ -322,9 +388,13 @@ class ProviderPluginsSelector extends React.Component {
                     <Cmp data={Cdata} key={this.state.selected} name={Cdata.name}
                          onCostChange={this.handleCostChange} n={this.props.n} />
                 </div>
+                 </fieldset>
             </div>
         );
     }
+
+
+
     cmpdata(select){return this.props.data.data[select];}
 
     cmp2string(str){
@@ -337,7 +407,7 @@ class ProviderPluginsSelector extends React.Component {
     }
     ProvidersName(main){
         var data=main.data;
-        console.log(data);
+        // console.log(data);
 
         var providers=[];
         for (var i = 0; i < data.length; i++) {
@@ -345,6 +415,34 @@ class ProviderPluginsSelector extends React.Component {
         }
         return providers;
     }
+
+}
+
+class ManagePlugins extends React.Component{
+    constructor(props) {
+        super(props);
+        this.handleCostChange = this.handleCostChange.bind(this);
+        this.handleAddPlugin = this.handleAddPlugin.bind(this);
+        this.state={
+            n:1,
+            'varsum':{}
+        };
+    }
+    handleAddPlugin(key){
+        console.log("add : "+key);
+    }
+    handleCostChange(name,e) {
+        this.state.varsum[name]=e;
+        this.props.handleCostChange(this.props.n,sum(this.state.varsum));
+    }
+    render() {
+        return(
+    <Repeat numTimes={this.state.n}>
+        {(index) => <ProviderPluginsSelector data={this.props.data} key={index}
+                                 n={index} handleCostChange={this.handleCostChange} addplugin={this.handleAddPlugin}/>}
+    </Repeat>
+        );}
+
 
 }
 
@@ -357,7 +455,7 @@ class PluginsMain extends React.Component {
     }
 
     handleCostChange(name,e) {
-        console.log("name"+name);
+        // console.log("name"+name);
         this.state.varsum[name]=e;
         this.props.TotalCost(sum(this.state.varsum));
 
@@ -367,7 +465,7 @@ class PluginsMain extends React.Component {
         return(
             <div className="container">
                 <Repeat numTimes={this.props.data.length}>
-                    {(index) => <ProviderPluginsSelector data={this.props.data[index]} key={index}
+                    {(index) => <ManagePlugins data={this.props.data[index]} key={index}
                                                          n={index} handleCostChange={this.handleCostChange}/>}
                 </Repeat>
             </div>
@@ -386,10 +484,10 @@ class Main extends React.Component {
     }
 
     handleCostChange(total) {
-        console.log("there total : "+total )
+        // console.log("there total : "+total )
         if (this.state.prevtotal != total){
-            console.log("updated :"+total);
-            console.log("prev :"+this.state.prevtotal);
+            // console.log("updated :"+total);
+            // console.log("prev :"+this.state.prevtotal);
             this.setState({'total':total});
             this.setState({'prevtotal':total});
         }
