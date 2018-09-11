@@ -5,6 +5,7 @@
 const NasEpfl =  {
     style: "AmountRatesCost",
     provider : "EPFL-VPSI",
+    name:'NAS',
     url : '',
     AmountName: "Amount",
     AmountUnit: "TB",
@@ -20,12 +21,13 @@ const NasEpfl =  {
         'On-line archive': 110,
         'Raw': 55
     },
-    RateUnit : "TB / CHF"
+    RateUnit : "CHF / TB"
 };
 
 const SwitchEpfl = {
     style : 'CategoryCost',
     provider : "Switch-EPFL",
+    name:'Online Storage',
     url : '',
     CatName:'Options',
     Cat:{
@@ -37,6 +39,7 @@ const SwitchEpfl = {
 const GoogleDriveEdu = {
     style : 'CategoryCost',
     provider : "Google Drive Educ",
+    name:'Online Storage',
     url : '',
     CatName:'Options',
     Cat:{
@@ -50,6 +53,7 @@ const GoogleDriveEdu = {
 const SLIMSEpfl =  {
     style:'CategoryAmountRatesCost',
     provider : "EPFL-LSIS",
+    name:'SLIMS',
     url : '',
     CatName:'PI Status',
     Cat:{
@@ -70,13 +74,14 @@ const SLIMSEpfl =  {
     Rates : {
         'Stored on EPFL Server': 300,
     },
-    RateUnit : "TB / CHF"
+    RateUnit : "CHF / TB"
 };
 
 // Database
 const MysqlEpfl = {
     style : 'CategoryCost',
     provider : "EPFL-VPSI",
+    name:'MySql',
     url : '',
     CatName:'Options',
     Cat:{
@@ -89,6 +94,7 @@ const MysqlEpfl = {
 const Zenodo = {
     style : 'CategoryCost',
     provider : "Zenodo-CERN",
+    name:'Zenodo',
     url : '',
     CatName:'Options',
     Cat:{
@@ -100,6 +106,7 @@ const Zenodo = {
 const C4science = {
     style : 'CategoryCost',
     provider : "EPFL-SCITAS",
+    name:'C4Science',
     url : '',
     CatName:'Options',
     Cat:{
@@ -111,6 +118,7 @@ const C4science = {
 const Github = {
     style: "AmountRatesCost",
     provider : "GitHub",
+    name:'GitHub',
     url : '',
     AmountName: "Number of user",
     AmountUnit: "User(s)",
@@ -120,19 +128,20 @@ const Github = {
     AmountFree:0,
     AmountFreeCumulative:false,
     RateVar : true,
-    CatName:'Plan',
-    Cat:{
+    RateName:'Plan',
+    Rates:{
         'OpenSource project':0,
         'Developer (for one user)':81.6,
         'Team (min 5 users)':104.9,
         'Business Cloud':244.7
     },
-    CatUnit:'CHF / Users',
+    RateUnit:'CHF / Users',
 };
 
 const Bitbucket= {
     style: "AmountRatesCost",
     provider : "Bitbucket",
+    name:'BitBucket',
     url : '',
     AmountName: "Number of user",
     AmountUnit: "User(s)",
@@ -142,17 +151,18 @@ const Bitbucket= {
     AmountFree:0,
     AmountFreeCumulative:false,
     RateVar : true,
-    CatName:'Plan',
-    Cat:{
+    RateName:'Plan',
+    Rates:{
         'Free (up to 5 users)':0,
         'Standard for growing teams (min 5 users)':24,
         'Premium for large teams (min 5 users)':60,
     },
-    CatUnit:'CHF / Users',
+    RateUnit:'CHF / Users',
 };
 const Gitlab= {
     style: "AmountRatesCost",
     provider : "Gitlab",
+    name:'Gitlab',
     url : '',
     AmountName: "Number of user",
     AmountUnit: "User(s)",
@@ -162,8 +172,8 @@ const Gitlab= {
     AmountFree:0,
     AmountFreeCumulative:false,
     RateVar : true,
-    CatName:'Plan',
-    Cat:{
+    RateName:'Plan',
+    Rates:{
         'Core Self Hosted':0,
         'Free Cloud Based' : 0,
         'Starter Self Hosted':48,
@@ -171,11 +181,12 @@ const Gitlab= {
         'Premium Self Hosted':228,
         'Silver Cloud Based':228
     },
-    CatUnit:'CHF / Users',
+    RateUnit:'CHF / Users',
 };
 const Figshare = {
     style : 'CategoryCost',
     provider : "FigShare",
+    name:'Figshare',
     url : '',
     CatName:'Options',
     Cat:{
@@ -188,7 +199,8 @@ const Figshare = {
 };
 const Dryad = {
     style : 'CategoryAmountRatesCost',
-    provider : "FigShare",
+    provider : "Dyrad",
+    name:'Dyrad',
     url : '',
     CatName:'Options',
     Cat:{
@@ -206,9 +218,9 @@ const Dryad = {
     RateVar : true,
     RateName: 'ELN Storage',
     Rates : {
-    'Extra Storage': 300,
-},
-RateUnit : "GB / CHF"
+    'Extra Storage': 50,
+    },
+    RateUnit : "CHF / GB"
 };
 
 
@@ -221,7 +233,7 @@ const storage={
     url : '',
     intro :'',
     data :[NasEpfl,
-        SLIMSEpfl,
+        SwitchEpfl,
         GoogleDriveEdu
 
     ]
@@ -245,6 +257,27 @@ const database={
     data :[MysqlEpfl,
 
     ]
-
+};
+const repository={
+        name : 'Repository',
+        icon : '',
+        url : '',
+        intro :'',
+        data :[Zenodo,
+            C4science,
+            Github,
+            Bitbucket,
+            Gitlab,
+            Figshare,
+            Dryad,
+        ]
 };
 
+
+// Combine Categories
+// ----------------------------------------------------
+// ----------------------------------------------------
+
+const maincat={
+    data:[storage,ELN,database,repository]
+};

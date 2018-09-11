@@ -1,5 +1,16 @@
 'use strict';
 
+// Functions Tools
+// ---------------------
+// ---------------------
+
+function Repeat(props) {
+    let items = [];
+    for (let i = 0; i < props.numTimes; i++) {
+        items.push(props.children(i));
+    }
+    return <div>{items}</div>;
+}
 
 function tonumeric (value) {
     return parseFloat(
@@ -24,7 +35,9 @@ function sum(obj) {
     return total;
 }
 
-
+// Inputs Definition
+// ---------------------
+// ---------------------
 class AmountInput extends React.Component {
     constructor(props) {
         super(props);
@@ -84,14 +97,14 @@ class SelectorInput extends React.Component {
 
     }
 
-    handleChange(e) {
-        this.props.onChange(e.target.value);
+    handleChange(select) {
+        this.props.onChange(select);
     }
 
     render() {
         const value = this.props.value;
         return (
-            <div className="col">
+            <div className="selector">
                 <label htmlFor={this.props.id}> {this.props.name} </label>
                 <select id={this.props.id} className="form-control" value={value}  onChange={this.handleChange}>
                     {this.listoptions}
@@ -102,6 +115,9 @@ class SelectorInput extends React.Component {
     }
 }
 
+// Outputs definition
+// ---------------------
+// ---------------------
 class CostOutput extends React.Component {
     constructor(props) {
         super(props);
@@ -131,6 +147,9 @@ function Textoutput(props){
     );
 }
 
+// Plugins definition
+// ---------------------
+// ---------------------
 class AmountRatesCost extends React.Component {
     constructor(props) {
         super(props);
@@ -153,7 +172,7 @@ class AmountRatesCost extends React.Component {
 
         return (
             <div className="row">
-                <p className="h1">{this.props.name}</p>
+                <span id="component-name">{this.props.name}</span>
                 <AmountInput id={this.props.name} min={this.props.data.AmountMin} max={this.props.data.AmountMax}
                              step={this.props.data.AmountStep} value={Amount} name={this.props.data.AmountName}
                              unit={this.props.data.AmountUnit} onAmountChange={this.handleAmountChange} />
@@ -168,7 +187,7 @@ class AmountRatesCost extends React.Component {
     makecost(amount,rate) {
         var total=(amount-this.props.data.AmountFree)*rate;
         total=tomoney(total);
-        this.props.onCostChange(this.props.name,total);
+        this.props.onCostChange(this.props.n,total);
         return total;
     }
     }
@@ -196,9 +215,7 @@ class CategoryAmountRatesCost extends React.Component {
         this.setState({SelectCat: select});
         this.setState({Cat: this.props.data.Cat[select]});
     }
-    // handleCostChange(total) {
-    //     this.props.onCostChange(this.props.name,total);
-    // }
+
     render() {
         const Cat=this.state.Cat;
         const Amount = this.state.amount;
@@ -207,7 +224,7 @@ class CategoryAmountRatesCost extends React.Component {
 
         return (
             <div className="row">
-                <p className="h1">{this.props.name}</p>
+                <span id="component-name">{this.props.name}</span>
                 <RatesInput id={this.props.name+'-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={Cat}
                             unit={this.props.data.CatUnit} onRateChange={this.handleCatChange} />
 
@@ -224,7 +241,7 @@ class CategoryAmountRatesCost extends React.Component {
     makecost(cat,amount,rate) {
         var total=cat+(amount-this.props.data.AmountFree)*rate;
         total=tomoney(total);
-        this.props.onCostChange(this.props.name,total);
+        this.props.onCostChange(this.props.n,total);
         return total;
     }
 }
@@ -242,9 +259,7 @@ class CategoryCost extends React.Component {
         this.setState({SelectCat: select});
         this.setState({Cat: this.props.data.Cat[select]});
     }
-    // handleCostChange(total) {
-    //     this.props.onCostChange(this.props.name,total);
-    // }
+
     render() {
         const Cat=this.state.Cat;
 
@@ -252,7 +267,7 @@ class CategoryCost extends React.Component {
 
         return (
             <div className="row">
-                <p className="h1">{this.props.name}</p>
+                <span id="component-name">{this.props.name}</span>
                 <RatesInput id={this.props.name+'-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={Cat}
                             unit={this.props.data.CatUnit} onRateChange={this.handleCatChange} />
 
@@ -263,56 +278,70 @@ class CategoryCost extends React.Component {
     makecost(cat) {
         var total=cat;
         total=tomoney(total);
-        this.props.onCostChange(this.props.name,total);
+        this.props.onCostChange(this.props.n,total);
         return total;
     }
 }
 
+
+// Combine plugins
+// ---------------------
+// ---------------------
 class ProviderPluginsSelector extends React.Component {
     constructor(props) {
         super(props);
         this.handleCostChange = this.handleCostChange.bind(this);
         this.handleProviderChange = this.handleProviderChange.bind(this);
-
-        this.state={selected:0,keys:this.ProvidersName(this.props.data)}
-
+        this.state={selected:0,
+            keys:this.ProvidersName(props.data),
+        };
     }
 
-    handleCostChange(name,e) {
-        this.props.handleCostChange(name,e.target.value);
+    handleCostChange(n,e) {
+        console.log("here n : "+n+" e = "+ e);
+        this.props.handleCostChange(n,e);
     }
     handleProviderChange(e){
+        const select=this.state.keys.indexOf(e.target.value);
+        this.setState({selected:select});
 
     }
     render() {
-        const Test=this.cmp2string("AmountRatesCost");//window[NasEpfl.style];
+        console.log("n= "+this.props.n)
+        const Cmp=this.cmp2string(this.cmpdata(this.state.selected).style);
+        const Cdata=this.cmpdata(this.state.selected);
         return(
-                <div id={"plugin"}>
-                    <Test data={NasEpfl} name={"NAS"} onCostChange={this.handleCostChange} />
-
-                    <CategoryCost data={MysqlEpfl} name={"DataBase"} onCostChange={this.handleCostChange}/>
-
-                    <CategoryAmountRatesCost data={SLIMSEpfl} name={"ELN"} onCostChange={this.handleCostChange} />
-
-
+            <div id={"plugin"}>
+                <span id={"plugin-name"}>{this.props.data.name}</span>
+                <div id={"providerselector"}>
+                    <SelectorInput id={"providerselect"} name={"Provider"} options={this.state.keys}
+                                   onChange={this.handleProviderChange}/>
                 </div>
+
+                <div id={"component"}>
+                    <Cmp data={Cdata} key={this.state.selected} name={Cdata.name}
+                         onCostChange={this.handleCostChange} n={this.props.n} />
+                </div>
+            </div>
         );
     }
+    cmpdata(select){return this.props.data.data[select];}
+
     cmp2string(str){
         switch (str) {
             case "AmountRatesCost" : return AmountRatesCost;
             case "CategoryCost" : return CategoryCost;
-            case "CategoryAmountRatesCost" : return CategoryAmountRatesCost
+            case "CategoryAmountRatesCost" : return CategoryAmountRatesCost;
 
         }
     }
     ProvidersName(main){
         var data=main.data;
-        console.log(data)
+        console.log(data);
 
         var providers=[];
         for (var i = 0; i < data.length; i++) {
-            providers.push(data[i].provider)
+            providers.push(data[i].provider);
         }
         return providers;
     }
@@ -325,35 +354,30 @@ class PluginsMain extends React.Component {
         super(props);
         this.handleCostChange = this.handleCostChange.bind(this);
         this.state={'varsum':{}};
-        console.log(this.ProvidersName(storage))
     }
 
     handleCostChange(name,e) {
-  //      this.props.costs{name:e};
+        console.log("name"+name);
         this.state.varsum[name]=e;
         this.props.TotalCost(sum(this.state.varsum));
 
     }
     render() {
-        const Test=this.cmp2string("AmountRatesCost");//window[NasEpfl.style];
+
         return(
             <div className="container">
-            <div id={"pluginsmain"}>
-                <Test data={NasEpfl} name={"NAS"} onCostChange={this.handleCostChange} />
-
-                <CategoryCost data={MysqlEpfl} name={"DataBase"} onCostChange={this.handleCostChange}/>
-
-                <CategoryAmountRatesCost data={SLIMSEpfl} name={"ELN"} onCostChange={this.handleCostChange} />
-
-
-            </div>
+                <Repeat numTimes={this.props.data.length}>
+                    {(index) => <ProviderPluginsSelector data={this.props.data[index]} key={index}
+                                                         n={index} handleCostChange={this.handleCostChange}/>}
+                </Repeat>
             </div>
         );
     }
 
-
 }
 
+// ---------------------
+// ---------------------
 class Main extends React.Component {
     constructor(props) {
         super(props);
@@ -362,8 +386,10 @@ class Main extends React.Component {
     }
 
     handleCostChange(total) {
+        console.log("there total : "+total )
         if (this.state.prevtotal != total){
-            // console.log("updated :"+total)
+            console.log("updated :"+total);
+            console.log("prev :"+this.state.prevtotal);
             this.setState({'total':total});
             this.setState({'prevtotal':total});
         }
@@ -372,7 +398,7 @@ class Main extends React.Component {
     render() {
         return(
             <form>
-                <PluginsMain TotalCost={this.handleCostChange}/>
+                <PluginsMain TotalCost={this.handleCostChange} data={maincat.data}/>
 
                 <CostOutput name={"Total Cost per year"} id={"ctotal"} value={tomoney(this.state.total)}/>
             </form>
@@ -380,5 +406,6 @@ class Main extends React.Component {
     }
 }
 
-
+// ---------------------
+// ---------------------
 ReactDOM.render(<Main />,document.getElementById('root'));
