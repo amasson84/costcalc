@@ -4,6 +4,7 @@
     <list default="true" id="32058667-6761-4492-a704-290762d93e35" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/costcalc_main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/costcalc_main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/data.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/data.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -64,24 +65,30 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="9" />
-          <entry key="js" value="6069" />
+          <entry key="css" value="282" />
+          <entry key="html" value="193" />
+          <entry key="js" value="9754" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="9" />
-          <entry key="JavaScript" value="6069" />
+          <entry key="CSS" value="282" />
+          <entry key="HTML" value="193" />
+          <entry key="JavaScript" value="9754" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="js" value="1" />
+          <entry key="css" value="1" />
+          <entry key="js" value="2" />
+          <entry key="png" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JavaScript" value="1" />
+          <entry key="CSS" value="1" />
+          <entry key="Image" value="1" />
+          <entry key="JavaScript" value="2" />
         </counts>
       </usages-collector>
     </session>
@@ -116,8 +123,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+            <state relative-caret-position="351">
+              <caret line="20" column="56" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -125,8 +132,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/costcalc_main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4446">
-              <caret line="433" column="30" lean-forward="true" selection-start-line="433" selection-start-column="30" selection-end-line="433" selection-end-column="30" />
+            <state relative-caret-position="187">
+              <caret line="501" column="44" selection-start-line="501" selection-start-column="44" selection-end-line="501" selection-end-column="44" />
               <folding>
                 <element signature="n#!!block;n#Repeat#0" />
                 <element signature="n#!!block;n#tonumeric#0" />
@@ -135,16 +142,25 @@
                 <element signature="n#AmountInput#0" />
                 <element signature="n#RatesInput#0" />
                 <element signature="n#SelectorInput#0" />
+                <element signature="n#CheckboxInput#0" />
                 <element signature="n#CostOutput#0" />
                 <element signature="n#!!block;n#Textoutput#0" />
                 <element signature="n#AmountRatesCost#0" />
                 <element signature="n#CategoryAmountRatesCost#0" />
                 <element signature="n#CategoryCost#0" />
-                <element signature="n#!!block;n#cmp2string#0;n#ProviderPluginsSelector#0" />
-                <element signature="n#!!block;n#ProvidersName#0;n#ProviderPluginsSelector#0" />
+                <element signature="n#NoneSelect#0" />
+                <element signature="n#ManagePlugins#0" />
                 <element signature="n#PluginsMain#0" />
-                <element signature="n#Main#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/css/costcalc.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="508">
+              <caret line="23" column="21" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -152,20 +168,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/data.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5554">
-              <caret line="281" column="41" selection-start-line="281" selection-start-column="41" selection-end-line="281" selection-end-column="41" />
+            <state relative-caret-position="501">
+              <caret line="307" column="21" selection-start-line="307" selection-start-column="21" selection-end-line="307" selection-end-column="21" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/jquery.nas-calculator.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="208" column="10" selection-start-line="208" selection-start-column="10" selection-end-line="212" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -177,6 +184,7 @@
       <list>
         <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -184,6 +192,7 @@
     <findStrings>
       <find>length</find>
       <find>console</find>
+      <find>opt</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -199,8 +208,10 @@
         <option value="$PROJECT_DIR$/js/jquery.nas-calculator.js" />
         <option value="$PROJECT_DIR$/script.js" />
         <option value="$PROJECT_DIR$/js/script.js" />
+        <option value="$PROJECT_DIR$/costcalc.css" />
         <option value="$PROJECT_DIR$/js/data.js" />
         <option value="$PROJECT_DIR$/js/costcalc_main.js" />
+        <option value="$PROJECT_DIR$/css/costcalc.css" />
         <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
@@ -241,12 +252,7 @@
             <path>
               <item name="costcalc" type="b2602c69:ProjectViewProjectNode" />
               <item name="costcalc" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="costcalc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="costcalc" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="icons" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -258,15 +264,17 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/css" />
       <recent name="C:\Users\almasson\WebstormProjects\costcalc\js" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\almasson\WebstormProjects\costcalc\js" />
     </key>
   </component>
@@ -283,14 +291,12 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="jquery.nas-calculator.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="jquery.nas-calculator.js" working-dir="$PROJECT_DIR$/js">
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" engineId="98ca6316-2f89-46d9-a9e5-fa9e2b0625b3" uri="http://localhost:63343/costcalc/index.html" useFirstLineBreakpoints="true">
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Node.js.jquery.nas-calculator.js" />
-      </list>
-    </recent_temporary>
+    <configuration name="index" type="JavascriptDebugType" factoryName="JavaScript Debug" uri="http://localhost:63343/costcalc/index.html" useFirstLineBreakpoints="true">
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -313,7 +319,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77136000" />
+    <option name="totallyTimeSpent" value="100268000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -328,18 +334,18 @@
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4988263" visible="true" weight="0.20554551" />
-      <window_info id="Structure" order="1" sideWeight="0.50117373" side_tool="true" weight="0.2496329" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49690402" visible="true" weight="0.20554551" />
+      <window_info id="Structure" order="1" sideWeight="0.503096" side_tool="true" visible="true" weight="0.20554551" />
       <window_info id="Favorites" order="2" sideWeight="0.50117373" side_tool="true" weight="0.2496329" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32945737" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39937758" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" visible="true" weight="0.32987553" />
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -377,15 +383,18 @@
     <entry file="file://$PROJECT_DIR$/js/like_button.js" />
     <entry file="file://$PROJECT_DIR$/js/jquery.nas-calculator.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="847">
           <caret line="208" column="10" selection-start-line="208" selection-start-column="10" selection-end-line="212" selection-end-column="11" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/icons/storage.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/data.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5554">
-          <caret line="281" column="41" selection-start-line="281" selection-start-column="41" selection-end-line="281" selection-end-column="41" />
+        <state relative-caret-position="501">
+          <caret line="307" column="21" selection-start-line="307" selection-start-column="21" selection-end-line="307" selection-end-column="21" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -394,8 +403,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/costcalc_main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4446">
-          <caret line="433" column="30" lean-forward="true" selection-start-line="433" selection-start-column="30" selection-end-line="433" selection-end-column="30" />
+        <state relative-caret-position="187">
+          <caret line="501" column="44" selection-start-line="501" selection-start-column="44" selection-end-line="501" selection-end-column="44" />
           <folding>
             <element signature="n#!!block;n#Repeat#0" />
             <element signature="n#!!block;n#tonumeric#0" />
@@ -404,23 +413,30 @@
             <element signature="n#AmountInput#0" />
             <element signature="n#RatesInput#0" />
             <element signature="n#SelectorInput#0" />
+            <element signature="n#CheckboxInput#0" />
             <element signature="n#CostOutput#0" />
             <element signature="n#!!block;n#Textoutput#0" />
             <element signature="n#AmountRatesCost#0" />
             <element signature="n#CategoryAmountRatesCost#0" />
             <element signature="n#CategoryCost#0" />
-            <element signature="n#!!block;n#cmp2string#0;n#ProviderPluginsSelector#0" />
-            <element signature="n#!!block;n#ProvidersName#0;n#ProviderPluginsSelector#0" />
+            <element signature="n#NoneSelect#0" />
+            <element signature="n#ManagePlugins#0" />
             <element signature="n#PluginsMain#0" />
-            <element signature="n#Main#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/costcalc.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="508">
+          <caret line="23" column="21" selection-start-line="23" selection-start-column="21" selection-end-line="23" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="17" column="52" selection-start-line="17" selection-start-column="52" selection-end-line="17" selection-end-column="52" />
+        <state relative-caret-position="351">
+          <caret line="20" column="56" selection-start-line="20" selection-start-column="56" selection-end-line="20" selection-end-column="56" />
         </state>
       </provider>
     </entry>

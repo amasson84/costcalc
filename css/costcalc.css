@@ -1,0 +1,51 @@
+#plugin-name{
+    text-transform: capitalize;
+    font-size:x-large;
+    font-weight: bold;
+}
+#plugin-number{
+    font-size: large;
+    text-decoration: none;
+}
+
+#plugin-info{
+    font-size: large;
+    text-decoration: none;
+    text-align: center;
+}
+#plugin-cost{
+     text-align: center;
+     font-size: large;
+    ;
+ }
+#plugin-menu{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+}
+#ccost{
+    text-align: center;
+    font-size: large;
+}
+#module-name{
+    font-weight: bold;
+}
+
+#component{
+    padding-top: 1em;
+}
+
+#infotxt{
+    text-align: center;
+}
+#service{
+    font-size: medium;
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    text-align: center;
+}
+
+#ctotal{
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+}

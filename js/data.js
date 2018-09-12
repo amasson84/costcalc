@@ -6,7 +6,9 @@ const NasEpfl =  {
     style: "AmountRatesCost",
     provider : "EPFL-VPSI",
     name:'NAS',
-    url : '',
+    url : [
+        {name:'VPSI-Website',url:'https://support.epfl.ch/help/epfl?id=epfl_service_status&service=49a363acdb34c700ef64731b8c96191f'}
+    ],
     AmountName: "Amount",
     AmountUnit: "TB",
     AmountMin : 1,
@@ -24,11 +26,14 @@ const NasEpfl =  {
     RateUnit : "CHF / TB"
 };
 
+
 const SwitchEpfl = {
     style : 'CategoryCost',
     provider : "Switch-EPFL",
     name:'Online Storage',
-    url : '',
+    url : [
+        {name:'Switch Website',url:'https://drive.switch.ch/'}
+    ],
     CatName:'Options',
     Cat:{
         'Cloud Based max 50GB':0,
@@ -40,7 +45,9 @@ const GoogleDriveEdu = {
     style : 'CategoryCost',
     provider : "Google Drive Educ",
     name:'Online Storage',
-    url : '',
+    url : [
+        {name :'Google Education Page',url:'https://edu.google.com/?modal_active=none'}
+    ],
     CatName:'Options',
     Cat:{
         'Cloud Based illimited':0,
@@ -54,7 +61,11 @@ const SLIMSEpfl =  {
     style:'CategoryAmountRatesCost',
     provider : "EPFL-LSIS",
     name:'SLIMS',
-    url : '',
+    url : [
+        {name:'SLIMS on LSIS Website',url:'https://lsis.epfl.ch/page-140284-en.html'},
+        {name:'SLIMS Cost on LSIS Website',url:'https://lsis.epfl.ch/cms/site/lsis/lang/en/lims'},
+        {name: 'Genohm (SLIMS Company)',url:'https://www.genohm.com/'}
+    ],
     CatName:'PI Status',
     Cat:{
         'Full Professor':3000,
@@ -82,7 +93,9 @@ const MysqlEpfl = {
     style : 'CategoryCost',
     provider : "EPFL-VPSI",
     name:'MySql',
-    url : '',
+    url : [
+        {name:'EPFL VPSI ',url:'https://support.epfl.ch/epfl?id=epfl_service_status&service=eb026fa0db34c700ef64731b8c96198e'}
+    ],
     CatName:'Options',
     Cat:{
         'MySQL max 2GB':0,
@@ -95,7 +108,10 @@ const Zenodo = {
     style : 'CategoryCost',
     provider : "Zenodo-CERN",
     name:'Zenodo',
-    url : '',
+    url : [
+        {name:'Zenodo Website',url:'https://www.zenodo.org/'},
+        {name:'About Zenodo',url:'http://about.zenodo.org/'},
+    ],
     CatName:'Options',
     Cat:{
         'Max 50GB per dataset':0,
@@ -107,7 +123,9 @@ const C4science = {
     style : 'CategoryCost',
     provider : "EPFL-SCITAS",
     name:'C4Science',
-    url : '',
+    url : [
+        {name:'C4Science Website',url:'https://www.c4science.ch/'}
+    ],
     CatName:'Options',
     Cat:{
         'Free for text file':0,
@@ -119,7 +137,9 @@ const Github = {
     style: "AmountRatesCost",
     provider : "GitHub",
     name:'GitHub',
-    url : '',
+    url : [
+        {name:'Github Website Pricing',url:'https://github.com/pricing'}
+    ],
     AmountName: "Number of user",
     AmountUnit: "User(s)",
     AmountMin : 1,
@@ -142,7 +162,9 @@ const Bitbucket= {
     style: "AmountRatesCost",
     provider : "Bitbucket",
     name:'BitBucket',
-    url : '',
+    url : [
+        {name:'Bitbucket Website Pricing',url:'https://bitbucket.org/product/pricing'}
+    ],
     AmountName: "Number of user",
     AmountUnit: "User(s)",
     AmountMin : 1,
@@ -163,7 +185,9 @@ const Gitlab= {
     style: "AmountRatesCost",
     provider : "Gitlab",
     name:'Gitlab',
-    url : '',
+    url : [
+        {name:'Gitlab Website Pricing',url:'https://about.gitlab.com/pricing/'}
+    ],
     AmountName: "Number of user",
     AmountUnit: "User(s)",
     AmountMin : 1,
@@ -187,7 +211,10 @@ const Figshare = {
     style : 'CategoryCost',
     provider : "FigShare",
     name:'Figshare',
-    url : '',
+    url : [
+        {name:'Figshare website',url:'https://figshare.com/'},
+        {name:'Figshare Pricing',url:'https://www.g2crowd.com/products/figshare/pricing'}
+    ],
     CatName:'Options',
     Cat:{
         'Free 1GB':0,
@@ -201,7 +228,9 @@ const Dryad = {
     style : 'CategoryAmountRatesCost',
     provider : "Dyrad",
     name:'Dyrad',
-    url : '',
+    url : [
+    {name:'Dyrad Website Pricing',url:'https://datadryad.org/pages/payment'}
+],
     CatName:'Options',
     Cat:{
         'up to 20GB if DPC covered':0,
@@ -227,43 +256,63 @@ const Dryad = {
 // Categories definition
 // ----------------------------------------------------
 // ----------------------------------------------------
+const NoneSelected={
+    style: 'NoneSelect',
+    provider:'Select a provider',
+    name:'',
+    url:'',
+
+};
+
 const storage={
     name : 'Active Storage',
-    icon : '',
-    url : '',
+    icon : 'storage.png',
+    url : [
+        {name:'EPFL RDM',url:'https://researchdata.epfl.ch/work-with-data/storage/'}
+    ],
     intro :'',
-    data :[NasEpfl,
+    data :[NoneSelected,
+        NasEpfl,
         SwitchEpfl,
         GoogleDriveEdu
+
 
     ]
 
 };
 const ELN={
     name : 'Electronic LabBook',
-    icon : '',
-    url : '',
+    icon : 'eln.png',
+    url : [
+        {name: 'EPFL RDM',url:'https://researchdata.epfl.ch/work-with-data/active-data-management/'}
+    ],
     intro :'',
-    data :[SLIMSEpfl,
+    data :[NoneSelected,
+        SLIMSEpfl,
 
     ]
 
 };
 const database={
     name : 'Database',
-    icon : '',
+    icon : 'database.png',
     url : '',
     intro :'',
-    data :[MysqlEpfl,
+    data :[NoneSelected,
+        MysqlEpfl,
 
     ]
 };
 const repository={
         name : 'Repository',
-        icon : '',
-        url : '',
+        icon : 'repos.png',
+        url : [
+            {name:'EPFL RDM WebPage',url:'https://researchdata.epfl.ch/publish-preserve/'}
+        ],
         intro :'',
-        data :[Zenodo,
+        data :[
+            NoneSelected,
+            Zenodo,
             C4science,
             Github,
             Bitbucket,
