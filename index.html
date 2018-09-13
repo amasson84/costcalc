@@ -7,18 +7,43 @@
 
     <title>Cost Calculator (beta)</title>
 
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.0/JSXTransformer.js"></script>
+
+    <!--Load Bootstrap-->
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/jquery-ui.js"></script>
+
+    <script src="js/popper-1.14.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>-->
+    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>-->
+
     <link rel="stylesheet" href="css/bootstrap.css">
     <!--<script src="js/bootstrap.bundle.js"></script>-->
     <!--<script src="js/jquery.nas-calculator.js"></script>-->
     <link rel="stylesheet" href="js/jquery-ui.css">
     <link rel="stylesheet" href="css/costcalc.css">
+    <script src="js/data.js"></script>
+
+    <script type="text/jsx" src="js/costcalc_main.js"></script>
+    <script>
+        $(window).bind('beforeunload', function(){
+            return '>>>>>Before You Go<<<<<<<< \n Your data will be lost are you sure ?';
+        });
+    </script>
 
 
 </head>
 <body>
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h1 class="display-4">Cost Calculator (beta V1.0)</h1>
+        <h1 class="display-4">Cost Calculator (beta V1.1)</h1>
         <p class="lead">
         Welcome to our cost calculator this tool will help for ...
         </p>
@@ -28,26 +53,6 @@
      <!-- This div's content will be managed by React. -->
  </div>
 
- <!-- Load React. -->
- <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
- <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
- <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.0/JSXTransformer.js"></script>
-
-<!--Load Bootstrap-->
- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
- <script src="js/jquery-3.3.1.js"></script>
- <script src="js/jquery-ui.js"></script>
- <script src="js/data.js"></script>
-
- <script type="text/jsx" src="js/costcalc_main.js"></script>
-<!--<script>
-    $(window).bind('beforeunload', function(){
-        return '>>>>>Before You Go<<<<<<<< \n Your data will be lost are you sure ?';
-    });
-</script>-->
 
 </body>
 </html>

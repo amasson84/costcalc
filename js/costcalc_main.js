@@ -47,75 +47,98 @@ class AmountInput extends React.Component {
     }
 
     handleChange(e) {
-        this.props.onAmountChange(e.target.value);
+        this.props.onChange(e.target.value);
     }
 
     render() {
         const value = this.props.value;
         return (
-            <div className="col">
+            <div className="col"   >
+                <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
                 <label htmlFor={this.props.id}> {this.props.name} </label>
                 <input type="range" className="form-control-range" id={this.props.id} min={this.props.min} max={this.props.max}
-                       step={this.props.step} value={value}  onChange={this.handleChange} />
+                       step={this.props.step} value={value}  onChange={this.handleChange}/>
                 <small id="nas-amount-cost" className="form-text text-muted">Amount : {value} {this.props.unit} </small>
+                </span>
             </div>
         );
     }
 }
 
-class RatesInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.listoptions = props.options.map((opt) =>
-            <option key={opt.toString()}>{opt}</option>);
-
-    }
-
-    handleChange(e) {
-        this.props.onRateChange(e.target.value);
-    }
-
-    render() {
-        const value = this.props.value;
-        return (
-            <div className="col">
-                <label htmlFor={this.props.id}> {this.props.name} </label>
-                <select id={this.props.id} className="form-control" value={value}  onChange={this.handleChange}>
-                    {this.listoptions}
-                </select>
-               <small id="nas-amount-cost" className="form-text text-muted">Rate : {this.props.rate}  {this.props.unit} </small>
-            </div>
-        );
-    }
-}
 
 class SelectorInput extends React.Component {
     constructor(props) {
         super(props);
+        // this.state={listoptions:this.makelist(props.options)};
         this.handleChange = this.handleChange.bind(this);
-        this.listoptions = props.options.map((opt) =>
-            <option key={opt.toString()}>{opt}</option>);
 
     }
+    rate(i){
+        return i;
+        // if(this.props.rate==null){
+        //     return i;
+        // }else{
+        //     return this.props.rate[i];
+        // }
+    }
+    makelist(data){
+        var listoptions=[];
 
+        for (var i = 0; i < data.length; i++) {
+            listoptions.push(<button className="dropdown-item btn-success " type="button" key={i}  value={this.rate(i)} onClick={this.handleChange}>{data[i]}</button>);
+        }
+        return listoptions;
+    }
     handleChange(select) {
-        this.props.onChange(select);
+        this.props.onChange(select.target.value);
     }
-
+    makerate(){
+        if (this.props.rate!=null){
+            return( <small id="nas-amount-cost" className="form-text text-muted">Rate : {this.props.rate}  {this.props.unit}</small> );}
+    }
+    maketitle(title){
+        const maxstr=20
+        if (title.length>maxstr){
+            title=title.substr(0,maxstr)+"...";
+        }
+        return title;
+    }
     render() {
-        const value = this.props.value;
         return (
-            <div className="selector">
-                <label htmlFor={this.props.id}> {this.props.name} </label>
-                <select id={this.props.id} className="form-control" value={value}  onChange={this.handleChange}>
-                    {this.listoptions}
-                </select>
-                <small id="nas-amount-cost" className="form-text text-muted">{this.props.legend}</small>
+
+            <div className="Container">
+
+                <div className="row">
+                    <label htmlFor={this.props.id}> {this.props.name} </label>
+                </div>
+
+
+                <div className="row">
+            <div className="btn-group">
+
+
+                <a className={"btn "+this.props.class+" dropdown-toggle"} href="#" role="button" id={this.props.id} data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false" >
+            <span  data-toggle="tooltip" data-placement="top" title={this.props.tips}>
+                    {this.maketitle(this.props.options[this.props.selected])}
+            </span>
+                </a>
+                    <div className="dropdown-menu" aria-labelledby={this.props.id}>
+                      {this.makelist(this.props.options)}
+                    </div>
+
+           </div>
             </div>
-        );
+            <div className="row">
+                {this.makerate()}
+            </div>
+            </div>
+        )
     }
 }
+
+
+
 class CheckboxInput extends React.Component {
 
     constructor(props) {
@@ -156,7 +179,7 @@ class ButtonInput extends React.Component {
 
     render() {
         return (
-            <button id={this.props.id} onClick={this.handleChange} type="button" className="btn btn-primary">{this.props.name}</button>
+            <button id={this.props.id} onClick={this.handleChange} type="button" className="btn btn-primary" data-toggle="tooltip" data-placement="top" title={this.props.tips}>{this.props.name}</button>
         );
     }
 }
@@ -178,10 +201,13 @@ class MenuInput extends React.Component {
 
     render() {
         return (
+
             <div className="btn-group">
-                <a className="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id={this.props.id} data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
+                <a className={"btn "+this.props.class+" btn-sm dropdown-toggle"} href="#" role="button" id={this.props.id} data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false" >
+                     <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
                     {this.props.name}
+                     </span>
                 </a>
                 <div className="dropdown-menu" aria-labelledby={this.props.id}>
                     {this.state.listoptions}
@@ -191,7 +217,27 @@ class MenuInput extends React.Component {
     }
 }
 
+class TxtInput extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
 
+    handleChange(e) {
+        this.props.onChange(e.target.value);
+    }
+
+    render() {
+        const value = this.props.value;
+        return (
+            <div className="col">
+                <label htmlFor={this.props.id}> {this.props.name} </label>
+                <input type="text" className="form-control" id="formGroupExampleInput" placeholder={this.props.placeholder} onChange={this.handleChange} value={value}
+                       data-toggle="tooltip" data-placement="top" title={this.props.tips}/>
+            </div>
+        );
+    }
+}
 
 // Outputs definition
 // ---------------------
@@ -210,9 +256,9 @@ class CostOutput extends React.Component {
         return (
             <div className={"form-group row align-items-center"}>
                 <label htmlFor={this.props.id} className={"col-form-label"}>{this.props.name}</label>
-                <div className="col">
+                <div className="col align-self-center">
                     <input type={"text"} className={"form-control"} id={this.props.id} className={"form-control"}
-                       value={this.props.value} onChange={this.handleChange} readOnly/>
+                       value={this.props.value} onChange={this.handleChange} readOnly data-toggle="tooltip" data-placement="top" title={this.props.tips}/>
                 </div>
             </div>
         );
@@ -221,7 +267,7 @@ class CostOutput extends React.Component {
 
 function Textoutput(props){
     return(
-        <div className="alert alert-primary" role="alert">
+        <div className="alert alert-primary" role="alert" data-toggle="tooltip" data-placement="top" title="Expand this...">
             {props.text}
         </div>
     );
@@ -242,7 +288,7 @@ class AmountRatesCost extends React.Component {
     }
     handleRateChange(select) {
         this.setState({SelectRate: select});
-        this.setState({Rate: this.props.data.Rates[select]});
+        this.setState({Rate: this.props.data.Rates[Object.keys(this.props.data.Rates)[select]]});
     }
 
     render() {
@@ -255,11 +301,11 @@ class AmountRatesCost extends React.Component {
                 <div className="col">
                 <AmountInput id={this.props.name} min={this.props.data.AmountMin} max={this.props.data.AmountMax}
                              step={this.props.data.AmountStep} value={Amount} name={this.props.data.AmountName}
-                             unit={this.props.data.AmountUnit} onAmountChange={this.handleAmountChange} />
+                             unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} tips="Select the desired amount"/>
                 </div>
                 <div className="col-3">
-                    <RatesInput id={this.props.name+'-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)}
-                                rate={Rate} unit={this.props.data.RateUnit} onRateChange={this.handleRateChange} />
+                    <SelectorInput id={this.props.name+'-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)}
+                                   class="btn-secondary" selected={this.state.SelectRate} rate={Rate} unit={this.props.data.RateUnit} onChange={this.handleRateChange} />
                 </div>
                 {/*<CostOutput id={this.props.name+'-Cost'} name={"Cost"} value={Cost} />*/}
             </div>
@@ -292,12 +338,12 @@ class CategoryAmountRatesCost extends React.Component {
     }
     handleRateChange(select) {
         this.setState({SelectRate: select});
-        this.setState({Rate: this.props.data.Rates[select]});
+        this.setState({Rate: this.props.data.Rates[Object.keys(this.props.data.Rates)[select]]});
     }
 
     handleCatChange(select) {
         this.setState({SelectCat: select});
-        this.setState({Cat: this.props.data.Cat[select]});
+        this.setState({Cat: this.props.data.Cat[Object.keys(this.props.data.Cat)[select]]});
     }
 
     render() {
@@ -309,17 +355,17 @@ class CategoryAmountRatesCost extends React.Component {
         return (
             <div className="row align-items-center">
                 <div className="col-3">
-                     <RatesInput id={this.props.name+'-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={Cat}
-                            unit={this.props.data.CatUnit} onRateChange={this.handleCatChange} />
+                     <SelectorInput id={this.props.name+'-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={Cat}
+                                    class="btn-secondary" selected={this.state.SelectCat} unit={this.props.data.CatUnit} onChange={this.handleCatChange} />
                 </div>
 
                 <div className="col-4">
                 <AmountInput id={this.props.name} min={this.props.data.AmountMin} max={this.props.data.AmountMax} step={this.props.data.AmountStep}
-                             value={Amount} name={this.props.data.AmountName} unit={this.props.data.AmountUnit} onAmountChange={this.handleAmountChange} />
+                             value={Amount} name={this.props.data.AmountName} unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} />
                 </div>
                 <div className="col-4">
-                    <RatesInput id={this.props.name+'-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)} rate={Rate}
-                            unit={this.props.data.RateUnit} onRateChange={this.handleRateChange} />
+                    <SelectorInput id={this.props.name+'-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)} rate={Rate}
+                                   class="btn-secondary" selected={this.state.SelectRate} unit={this.props.data.RateUnit} onChange={this.handleRateChange} />
                 </div>
 
                 {/*<CostOutput id={this.props.name+'-Cost'} name={"Cost"} value={Cost} />*/}
@@ -348,7 +394,7 @@ class CategoryCost extends React.Component {
 
     handleCatChange(select) {
         this.setState({SelectCat: select});
-        this.setState({Cat: this.props.data.Cat[select]});
+        this.setState({Cat: this.props.data.Cat[Object.keys(this.props.data.Cat)[select]]});
     }
 
     render() {
@@ -359,8 +405,8 @@ class CategoryCost extends React.Component {
         return (
             <div className="row align-items-center">
                 <div className="col-4">
-                    <RatesInput id={this.props.name+'-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={Cat}
-                            unit={this.props.data.CatUnit} onRateChange={this.handleCatChange} />
+                    <SelectorInput id={this.props.name+'-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={Cat}
+                                   class="btn-secondary" selected={this.state.SelectCat} unit={this.props.data.CatUnit} onChange={this.handleCatChange} />
 
                 </div>
             </div>
@@ -403,8 +449,9 @@ class ProviderPluginsSelector extends React.Component {
         super(props);
         this.handleCostChange = this.handleCostChange.bind(this);
         this.handleProviderChange = this.handleProviderChange.bind(this);
-        this.handleEnableChange = this.handleEnableChange.bind(this);
+        this.handleCommentChange = this.handleCommentChange.bind(this);
         this.handleAddPlugin = this.handleAddPlugin.bind(this);
+
         this.state={
             selected:0,
             keys:this.ProvidersName(props.data),
@@ -412,6 +459,7 @@ class ProviderPluginsSelector extends React.Component {
             n:1,
             cost:0,
             prevcost:0,
+            comments:"",
         };
     }
 
@@ -426,14 +474,14 @@ class ProviderPluginsSelector extends React.Component {
 
         this.props.handleCostChange(n,e);}
     }
-    handleProviderChange(e){
-        const select=this.state.keys.indexOf(e.target.value);
+    handleProviderChange(select){
+
         this.setState({selected:select});
 
     }
-    handleEnableChange(e){
-        this.setState({enabled:e});
+    handleCommentChange(com){
 
+        this.setState({comments:com});
     }
     handleAddPlugin(n){
         this.props.handleAddPlugin(n);
@@ -441,13 +489,16 @@ class ProviderPluginsSelector extends React.Component {
 
     makemenu(data,n){
         if (((data.url != '')||(data.url==null))&&(n==0)) {
-            return (<MenuInput name={"More about " + data.name} options={data.url} id="plugin-knowmore"/>);
+            return (<MenuInput name={<img src="./icons/info.png" height="20" width="20"/>} options={data.url} id="btn-plugin-knowmore" class="btn-primary" tips={"Know more about "+data.name}/>);
         }
     }
 
     makeinfo(selected,Cdata){
         if (selected>0){
         return  (<span><span id="module-provider">{this.state.keys[selected]} : </span>  <span id="module-name">{Cdata.name}</span></span>);
+        }
+        else {
+            return  (<span id="module-name">{Cdata.name}</span>);
         }
     }
     render() {
@@ -468,42 +519,43 @@ class ProviderPluginsSelector extends React.Component {
                 <div className="card-header" id={id}>
                     <div className="container">
                         <div className="row align-items-center">
-                        <div  className=" col-1">
+                        <div  className=" col-1 align-self-start">
                             <img className="img-fluid" src={"icons/"+this.props.data.icon}/>
                         </div>
-
-                            {/*<div className="col-1 align-self-start ">
-                            <CheckboxInput id={"enable"} name={"Enable feature"} onChange={this.handleEnableChange} defaults={this.state.enabled}/>
-                        </div>*/}
-                            <div className="col-3 ">
-                                <div className="row">
-                                    <div className="col">
-                                        <button className="btn btn-link" type="button" data-toggle="collapse" data-target={"#collapse"+id}
-                                                aria-expanded="false" aria-controls={"collapse"+id}>
+                            <div className="col-4 ">
+                                <div className="row align-items-end">
+                                <div className="col-auto">
+                                    <span data-toggle="tooltip" data-placement="top" title="Expand this..." >
+                                        <button className="btn btn-outline-primary  dropdown-toggle" type="button" data-toggle="collapse" data-target={"#collapse"+id}
+                                                aria-expanded="false" aria-controls={"collapse"+id} id="btn-plugins" >
                                             <span id={"plugin-number"}> {this.props.n+1}. </span> <span id={"plugin-name"}>{this.props.data.name}</span>
                                         </button>
+                                    </span>
+                                </div>
+                                    <div id="plugin-knowmore"className="col-1">
+                                        {this.makemenu(this.props.data,this.props.n)}
                                     </div>
-
                                 </div>
                             </div>
                             <div id="plugin-info" className="col-4">
-                                {this.makeinfo(selected,Cdata)}
+                                <div className="row">
+                                    {this.makeinfo(selected,Cdata)}
+                                </div>
+                                <div className="row">
+                                    {this.state.comments}
+                                </div>
                             </div>
-                            <div className="col-1 ">
-                                <ButtonInput id={"add-btn"} name={"+"} onClick={this.handleAddPlugin} n={this.props.n}/>
+
+                            <div id="plugin-cost" className="col-2 align-self-end">
+                                <CostOutput id="ccost" name={"Cost"} value={Cost} tips="Total cost for this provider"/>
                             </div>
-                            <div id="plugin-cost" className="col-2 ">
-                                <CostOutput id="ccost" name={"Cost"} value={Cost} />
+                            <div className="col-1 align-self-end">
+                                <ButtonInput id={"add-btn"} name={"+"} onClick={this.handleAddPlugin} n={this.props.n} tips={"Add a new "+this.props.data.name}/>
                             </div>
 
                         </div>
 
-                    <div className="row align-items-center">
-                        <div id='plugin-menu'className="col-12">
-                            {this.makemenu(this.props.data,this.props.n)}
                         </div>
-                    </div>
-                </div>
             </div>
 
 
@@ -511,22 +563,25 @@ class ProviderPluginsSelector extends React.Component {
                      data-parent="#accordion">
                     <div className="card-body">
 
-                        <fieldset disabled={!this.state.enabled} >
+                            <div className="container">
                             <div className="row align-items-end">
-                            <div id="provider-selector" className="col-3">
+                            <div id="provider-selector" className="col-auto">
 
-                                <SelectorInput id="providerselect" name="Provider" options={this.state.keys}
-                                               onChange={this.handleProviderChange}/>
+                                <SelectorInput id="providerselect" name="Select a provider" selected={selected} options={this.state.keys}
+                                               class="btn-primary lg-btn" onChange={this.handleProviderChange} tips="Select a provider"/>
                             </div>
-                                <div className="col-3">
+                                <div className="col-1">
                                     {this.makemenu(Cdata,0)}
                                 </div>
+                                <div className="col-4">
+                                    <TxtInput id="module-comments" name="My Comments" placeholder="I can put a comment here..." onChange={this.handleCommentChange}/>
+                                </div>
+                            </div>
                             </div>
 
-                            <div id="component" className="container">
+                            <div id="component" className="container bg-light">
                                 <Cmp data={Cdata} key={selected} name="" onCostChange={this.handleCostChange} n={this.props.n} />
                             </div>
-                        </fieldset>
                     </div>
                 </div>
             </div>
@@ -653,7 +708,7 @@ class Main extends React.Component {
                                     Total Cost
                                 </div>
                                 <div id="plugin-cost" className="col-5  text-right">
-                                    <CostOutput name={"Total Cost per year"} id={"ctotal"} value={tomoney(this.state.total)}/>
+                                    <CostOutput name={"Total Cost per year"} id={"ctotal"} value={tomoney(this.state.total)} tips="Total cost per year"/>
                                 </div>
                             </div>
 
@@ -680,3 +735,6 @@ class Main extends React.Component {
 // ---------------------
 ReactDOM.render(<Main />,document.getElementById('root'));
 
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})

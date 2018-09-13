@@ -23,6 +23,11 @@
     padding-bottom: 0.5em;
     padding-left: 1em;
 }
+#plugin-knowmore{
+
+    padding-left: 0em;
+    /*padding-right: 1em;*/
+}
 #ccost{
     text-align: center;
     font-size: large;
@@ -33,6 +38,9 @@
 
 #component{
     padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
 }
 
 #infotxt{

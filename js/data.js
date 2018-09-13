@@ -258,8 +258,8 @@ const Dryad = {
 // ----------------------------------------------------
 const NoneSelected={
     style: 'NoneSelect',
-    provider:'Select a provider',
-    name:'',
+    provider:'None',
+    name:'Select a Provider',
     url:'',
 
 };
