@@ -1,6 +1,18 @@
+@media screen and (max-width: 768px) {
+    .lead {
+        font-size:25px;
+    }
+}
+
+@media screen and (max-width: 568px) {
+    .lead {
+        font-size:0.5em;
+    }
+}
+
 #plugin-name{
     text-transform: capitalize;
-    font-size:x-large;
+    font-size: $h2-font-size;
     font-weight: bold;
 }
 #plugin-number{
@@ -54,6 +66,6 @@
 
 #ctotal{
     text-align: center;
-    font-size: x-large;
+    font-size: $h2-font-size;
     font-weight: bold;
 }

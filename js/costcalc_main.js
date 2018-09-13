@@ -137,6 +137,31 @@ class SelectorInput extends React.Component {
     }
 }
 
+class MakeknowmoreInput extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+    render() {
+        const data = this.props.data;
+        const n = this.props.n;
+        if (((data.url != '') || (data.url == null)) && (n == 0)) {
+            if (data.url.length==1){
+                return(
+                    <ButtonHrefInput name={<img src="./icons/info.png" height="20" width="20"/>} url={data.url[0].url}
+                id="btn-plugin-knowmore"
+            class="btn-primary" tips={"Know more about " + data.name}/>
+                );
+            }else {
+            return (<MenuInput name={<img src="./icons/info.png" height="20" width="20"/>} options={data.url}
+                               id="btn-plugin-knowmore"
+                               class="btn-primary" tips={"Know more about " + data.name}/>);}
+        }
+        else{
+            return null
+        }
+
+    }
+}
 
 
 class CheckboxInput extends React.Component {
@@ -164,6 +189,23 @@ class CheckboxInput extends React.Component {
         );
     }
 }
+
+
+class ButtonHrefInput extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+
+
+    render() {
+        return (
+            <a id={this.props.id} href={this.props.url} type="button" className="btn btn-primary" data-toggle="tooltip" data-placement="top" title={this.props.tips}  aria-disabled="true" target="_blank">{this.props.name}</a>
+        );
+    }
+}
+
 class ButtonInput extends React.Component {
 
     constructor(props) {
@@ -477,7 +519,8 @@ class ProviderPluginsSelector extends React.Component {
     handleProviderChange(select){
 
         this.setState({selected:select});
-
+        // this.setState({Cdata:this.cmpdata(this.state.selected)});
+        // this.setSate({kmm:this.makemenu(this.state.Cdata,0)});
     }
     handleCommentChange(com){
 
@@ -487,80 +530,27 @@ class ProviderPluginsSelector extends React.Component {
         this.props.handleAddPlugin(n);
     }
 
-    makemenu(data,n){
-        if (((data.url != '')||(data.url==null))&&(n==0)) {
-            return (<MenuInput name={<img src="./icons/info.png" height="20" width="20"/>} options={data.url} id="btn-plugin-knowmore" class="btn-primary" tips={"Know more about "+data.name}/>);
-        }
-    }
 
-    makeinfo(selected,Cdata){
-        if (selected>0){
-        return  (<span><span id="module-provider">{this.state.keys[selected]} : </span>  <span id="module-name">{Cdata.name}</span></span>);
-        }
-        else {
-            return  (<span id="module-name">{Cdata.name}</span>);
-        }
-    }
+
+
     render() {
         // console.log("n= "+this.props.n)
         const Cmp=this.cmp2string(this.cmpdata(this.state.selected).style);
         const Cdata=this.cmpdata(this.state.selected);
         const id=this.props.data.name.replace(/\s/g,'')+this.props.n;
-        const Cost=this.state.cost;
         const selected=this.state.selected;
 
 
         return(
-
-
-
-            <div id={"plugin"}>
+           <div id={"plugin"}>
 
                 <div className="card-header" id={id}>
-                    <div className="container">
-                        <div className="row align-items-center">
-                        <div  className=" col-1 align-self-start">
-                            <img className="img-fluid" src={"icons/"+this.props.data.icon}/>
-                        </div>
-                            <div className="col-4 ">
-                                <div className="row align-items-end">
-                                <div className="col-auto">
-                                    <span data-toggle="tooltip" data-placement="top" title="Expand this..." >
-                                        <button className="btn btn-outline-primary  dropdown-toggle" type="button" data-toggle="collapse" data-target={"#collapse"+id}
-                                                aria-expanded="false" aria-controls={"collapse"+id} id="btn-plugins" >
-                                            <span id={"plugin-number"}> {this.props.n+1}. </span> <span id={"plugin-name"}>{this.props.data.name}</span>
-                                        </button>
-                                    </span>
-                                </div>
-                                    <div id="plugin-knowmore"className="col-1">
-                                        {this.makemenu(this.props.data,this.props.n)}
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="plugin-info" className="col-4">
-                                <div className="row">
-                                    {this.makeinfo(selected,Cdata)}
-                                </div>
-                                <div className="row">
-                                    {this.state.comments}
-                                </div>
-                            </div>
-
-                            <div id="plugin-cost" className="col-2 align-self-end">
-                                <CostOutput id="ccost" name={"Cost"} value={Cost} tips="Total cost for this provider"/>
-                            </div>
-                            <div className="col-1 align-self-end">
-                                <ButtonInput id={"add-btn"} name={"+"} onClick={this.handleAddPlugin} n={this.props.n} tips={"Add a new "+this.props.data.name}/>
-                            </div>
-
-                        </div>
-
-                        </div>
-            </div>
+                    <ModuleHeader id={id} data={this.props.data} selected={selected} Cdata={Cdata} n={this.props.n} Cost={this.state.cost}
+                    comments={this.state.comments} handleAddPlugin={this.handleAddPlugin} keys={this.state.keys}/>
+                </div>
 
 
-                <div id={"collapse"+id} className="collapse" aria-labelledby={id}
-                     data-parent="#accordion">
+                <div id={"collapse"+id} className="collapse" aria-labelledby={id} data-parent="#accordion">
                     <div className="card-body">
 
                             <div className="container">
@@ -571,7 +561,7 @@ class ProviderPluginsSelector extends React.Component {
                                                class="btn-primary lg-btn" onChange={this.handleProviderChange} tips="Select a provider"/>
                             </div>
                                 <div className="col-1">
-                                    {this.makemenu(Cdata,0)}
+                                    <MakeknowmoreInput key={selected} data={Cdata} truc={Cmp}  name="" n="0" />
                                 </div>
                                 <div className="col-4">
                                     <TxtInput id="module-comments" name="My Comments" placeholder="I can put a comment here..." onChange={this.handleCommentChange}/>
@@ -601,7 +591,7 @@ class ProviderPluginsSelector extends React.Component {
         }
     }
     ProvidersName(main){
-        var data=main.data;
+        const data = main.data;
         // console.log(data);
 
         var providers=[];
@@ -613,6 +603,69 @@ class ProviderPluginsSelector extends React.Component {
 
 }
 
+function makeinfo(keys,selected,Cdata){
+    if (selected>0){
+        return  (<span><span id="module-provider">{keys[selected]} : </span>  <span id="module-name">{Cdata.name}</span></span>);
+    }
+    else {
+        return  (<span id="module-name">{Cdata.name}</span>);
+    }
+}
+
+class ModuleHeader  extends React.Component{
+    constructor(props) {
+        super(props);
+        this.handleAddPlugin = this.handleAddPlugin.bind(this);
+    }
+    handleAddPlugin(n){
+        this.props.handleAddPlugin(n);
+    }
+
+    render() {
+ return(
+     <div className="container">
+         <div className="row align-items-center">
+             <div  className=" col-1 align-self-start">
+                 <img className="img-fluid" src={"icons/"+this.props.data.icon}/>
+             </div>
+             <div className="col-4 ">
+                 <div className="row align-items-end">
+                     <div className="col-auto">
+                                    <span data-toggle="tooltip" data-placement="top" title="Expand this..." >
+                                        <button className="btn btn-outline-primary  dropdown-toggle" type="button" data-toggle="collapse" data-target={"#collapse"+this.props.id}
+                                                aria-expanded="false" aria-controls={"collapse"+this.props.id} id="btn-plugins" >
+                                            <span id={"plugin-number"}> {this.props.n+1}. </span> <span id={"plugin-name"}>{this.props.data.name}</span>
+                                        </button>
+                                    </span>
+                     </div>
+                     <div id="plugin-knowmore"className="col-1">
+                         <MakeknowmoreInput data={this.props.data} n={this.props.n}/>
+                     </div>
+                 </div>
+             </div>
+             <div id="plugin-info" className="col-4">
+                 <div className="row">
+                     {makeinfo(this.props.keys,this.props.selected,this.props.Cdata,this.props.n)}
+                 </div>
+                 <div className="row">
+                     {this.props.comments}
+                 </div>
+             </div>
+
+             <div id="plugin-cost" className="col-2 align-self-end">
+                 <CostOutput id="ccost" name={"Cost"} value={this.props.Cost} tips="Total cost for this provider"/>
+             </div>
+             <div className="col-1 align-self-end">
+                 <ButtonInput id={"add-btn"} name={"+"} onClick={this.handleAddPlugin} n={this.props.n} tips={"Add a new "+this.props.data.name}/>
+             </div>
+
+         </div>
+
+     </div>
+ );
+    }
+
+}
 class ManagePlugins extends React.Component{
     constructor(props) {
         super(props);
@@ -646,6 +699,7 @@ class ManagePlugins extends React.Component{
 
 
 }
+
 
 
 class PluginsMain extends React.Component {

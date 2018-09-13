@@ -226,10 +226,10 @@ const Figshare = {
 };
 const Dryad = {
     style : 'CategoryAmountRatesCost',
-    provider : "Dyrad",
+    provider : "Dryad",
     name:'Dyrad',
     url : [
-    {name:'Dyrad Website Pricing',url:'https://datadryad.org/pages/payment'}
+    {name:'Dryad Website Pricing',url:'https://datadryad.org/pages/payment'}
 ],
     CatName:'Options',
     Cat:{
