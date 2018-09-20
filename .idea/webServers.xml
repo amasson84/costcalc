@@ -2,13 +2,16 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="85da660e-e5cc-40ab-96cf-16c701e7bfa5" name="amasson" url="http://amasson/epfl">
+      <webServer id="85da660e-e5cc-40ab-96cf-16c701e7bfa5" name="amasson" url="https://amasson.ch/epfl">
         <fileTransfer host="192.168.1.20" port="22" rootFolder="/amasson/html/epfl" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
           </advancedOptions>
           <option name="port" value="22" />
         </fileTransfer>
+      </webServer>
+      <webServer id="59e937d2-29b3-44c8-9206-23375a1c07c3" name="test local" url="http://localhost:63342">
+        <fileTransfer port="0" mountedRoot="C:\Users\almasson\Documents\c4science clone\costcalculator" accessType="MOUNT" />
       </webServer>
     </option>
   </component>

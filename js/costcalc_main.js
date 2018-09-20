@@ -25,7 +25,7 @@ function tomoney(numeric) {
         numeric = parseFloat(numeric);
     }
 
-    return numeric.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + ' CHF';
+    return numeric.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + ' '+MainData.Currency;
 }
 
 function sum(obj) {
@@ -64,7 +64,6 @@ class AmountInput extends React.Component {
         );
     }
 }
-
 
 class SelectorInput extends React.Component {
     constructor(props) {
@@ -140,21 +139,23 @@ class SelectorInput extends React.Component {
 class MakeknowmoreInput extends React.Component {
     constructor(props) {
         super(props);
+        this.state={btnsize:20}
     }
     render() {
         const data = this.props.data;
         const n = this.props.n;
-        if (((data.url != '') || (data.url == null)) && (n == 0)) {
-            if (data.url.length==1){
-                return(
-                    <ButtonHrefInput name={<img src="./icons/info.png" height="20" width="20"/>} url={data.url[0].url}
-                id="btn-plugin-knowmore"
-            class="btn-primary" tips={"Know more about " + data.name}/>
-                );
-            }else {
-            return (<MenuInput name={<img src="./icons/info.png" height="20" width="20"/>} options={data.url}
+        if (((data.Url != '') || (data.Url == null)) && (n == 0)) {
+            // if (data.Url.length==1){
+            //     return(
+            //         <ButtonHrefInput name={<img src="./icons/info.png" width={this.state.btnsize}/>} url={data.Url[0].Url}
+            //     id="btn-plugin-knowmore"
+            // class="btn-primary btn-sm" tips={"Know more about " + data.Name}/>
+            //     );
+            // }else {
+            return (<MenuInput name={<img src="./icons/info.png"  width={this.state.btnsize}/>} options={data.Url}
                                id="btn-plugin-knowmore"
-                               class="btn-primary" tips={"Know more about " + data.name}/>);}
+                               class="btn-primary btn-sm" tips={"Know more about " + data.Name}/>);
+        //}
         }
         else{
             return null
@@ -221,7 +222,9 @@ class ButtonInput extends React.Component {
 
     render() {
         return (
-            <button id={this.props.id} onClick={this.handleChange} type="button" className="btn btn-primary" data-toggle="tooltip" data-placement="top" title={this.props.tips}>{this.props.name}</button>
+            <div>
+                <button id={this.props.id} onClick={this.handleChange} type="button" className={"btn "+ this.props.class} data-toggle="tooltip" data-placement="top" title={this.props.tips}>{this.props.name}</button>
+            </div>
         );
     }
 }
@@ -236,7 +239,7 @@ class MenuInput extends React.Component {
     makelist(data){
         var listoptions=[];
         for (var i = 0; i < data.length; i++) {
-            listoptions.push(<a className="dropdown-item" href={data[i].url} key={data[i].name} target="_blank">{data[i].name}</a>);
+            listoptions.push(<a className="dropdown-item" href={data[i].Url} key={data[i].Name} target="_blank">{data[i].Name}</a>);
         }
         return listoptions;
     }
@@ -535,9 +538,9 @@ class ProviderPluginsSelector extends React.Component {
 
     render() {
         // console.log("n= "+this.props.n)
-        const Cmp=this.cmp2string(this.cmpdata(this.state.selected).style);
+        const Cmp=this.cmp2string(this.cmpdata(this.state.selected).Style);
         const Cdata=this.cmpdata(this.state.selected);
-        const id=this.props.data.name.replace(/\s/g,'')+this.props.n;
+        const id=this.props.data.Name.replace(/\s/g,'')+this.props.n;
         const selected=this.state.selected;
 
 
@@ -559,9 +562,9 @@ class ProviderPluginsSelector extends React.Component {
 
                                 <SelectorInput id="providerselect" name="Select a provider" selected={selected} options={this.state.keys}
                                                class="btn-primary lg-btn" onChange={this.handleProviderChange} tips="Select a provider"/>
-                            </div>
-                                <div className="col-1">
-                                    <MakeknowmoreInput key={selected} data={Cdata} truc={Cmp}  name="" n="0" />
+                            {/*</div>*/}
+                                {/*<div className="col-sm-auto">*/}
+                                    <MakeknowmoreInput key={selected} data={Cdata}  name="" n="0" />
                                 </div>
                                 <div className="col-4">
                                     <TxtInput id="module-comments" name="My Comments" placeholder="I can put a comment here..." onChange={this.handleCommentChange}/>
@@ -579,9 +582,10 @@ class ProviderPluginsSelector extends React.Component {
     }
 
 
-    cmpdata(select){return this.props.data.data[select];}
+    cmpdata(select){return this.props.data.Data[select];}
 
     cmp2string(str){
+
         switch (str) {
             case "AmountRatesCost" : return AmountRatesCost;
             case "CategoryCost" : return CategoryCost;
@@ -591,12 +595,12 @@ class ProviderPluginsSelector extends React.Component {
         }
     }
     ProvidersName(main){
-        const data = main.data;
+        const data = main.Data;
         // console.log(data);
 
         var providers=[];
         for (var i = 0; i < data.length; i++) {
-            providers.push(data[i].provider);
+            providers.push(data[i].Provider);
         }
         return providers;
     }
@@ -625,25 +629,31 @@ class ModuleHeader  extends React.Component{
  return(
      <div className="container">
          <div className="row align-items-center">
+             <div className="col-1 align-self-start">
+                 <div  id="plugin-add">
+                     <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>} onClick={this.handleAddPlugin} n={this.props.n} tips={"Add a new "+this.props.data.Name}/>
+                 </div>
+                 <div id="plugin-knowmore">
+                     <MakeknowmoreInput data={this.props.data} n={this.props.n}/>
+                 </div>
+            </div>
              <div  className=" col-1 align-self-start">
-                 <img className="img-fluid" src={"icons/"+this.props.data.icon}/>
+                 <img className="img-fluid" src={"icons/"+this.props.data.Icon} width="100"/>
              </div>
-             <div className="col-4 ">
+             <div className="col-3 ">
                  <div className="row align-items-end">
                      <div className="col-auto">
                                     <span data-toggle="tooltip" data-placement="top" title="Expand this..." >
                                         <button className="btn btn-outline-primary  dropdown-toggle" type="button" data-toggle="collapse" data-target={"#collapse"+this.props.id}
                                                 aria-expanded="false" aria-controls={"collapse"+this.props.id} id="btn-plugins" >
-                                            <span id={"plugin-number"}> {this.props.n+1}. </span> <span id={"plugin-name"}>{this.props.data.name}</span>
+                                            <span id={"plugin-number"}> {this.props.n+1}. </span> <span id={"plugin-name"}>{this.props.data.Name}</span>
                                         </button>
                                     </span>
-                     </div>
-                     <div id="plugin-knowmore"className="col-1">
-                         <MakeknowmoreInput data={this.props.data} n={this.props.n}/>
+
                      </div>
                  </div>
              </div>
-             <div id="plugin-info" className="col-4">
+             <div id="plugin-info" className="col-3">
                  <div className="row">
                      {makeinfo(this.props.keys,this.props.selected,this.props.Cdata,this.props.n)}
                  </div>
@@ -654,9 +664,6 @@ class ModuleHeader  extends React.Component{
 
              <div id="plugin-cost" className="col-2 align-self-end">
                  <CostOutput id="ccost" name={"Cost"} value={this.props.Cost} tips="Total cost for this provider"/>
-             </div>
-             <div className="col-1 align-self-end">
-                 <ButtonInput id={"add-btn"} name={"+"} onClick={this.handleAddPlugin} n={this.props.n} tips={"Add a new "+this.props.data.name}/>
              </div>
 
          </div>
@@ -753,7 +760,7 @@ class Main extends React.Component {
             <form>
                 <div className={"container"}>
                     <div className={"accordion"} id={"accordion"}>
-                        <PluginsMain TotalCost={this.handleCostChange} data={maincat.data}/>
+                        <PluginsMain TotalCost={this.handleCostChange} data={MainData.Data}/>
                     </div>
                     <div className="card" id="finalcost">
                         <div className="card-header">
@@ -771,7 +778,8 @@ class Main extends React.Component {
                         </div>
                         <div className="card-footer">
                             <div className="alert alert-danger" role="alert" id="infotxt">
-                                The information published on this service are only informative.
+                                The values published on this service are only informative and cannot be used for exact calculation. If you see some mistake or would like to
+                                have another services please contact us.
                             </div>
                             <div id="service">
                                 <p>This service has been developed by ... 2018 </p>
