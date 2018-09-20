@@ -207,6 +207,54 @@ class ButtonHrefInput extends React.Component {
     }
 }
 
+
+class ButtonInputWpop extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.state={target:"Modal"+this.props.idp};
+
+    }
+
+    handleChange() {
+        const out={n:this.props.n,target:this.state.target};
+        this.props.onClick(out);
+
+    }
+
+    render() {
+        return (
+            <div>
+                <button type="button" className={"btn "+ this.props.class} id={this.props.id} data-toggle="modal" data-target={"#"+this.state.target}>
+                    {this.props.name}
+                </button>
+
+                <div className = "modal fade" id = {this.state.target} tabIndex = "-1" role = "dialog" >
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" >Are you sure you want to suppress this line ?</h5>
+                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                You are removing a item. Please confirm you want to suppress : {this.props.info}
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" className="btn btn-danger" onClick={this.handleChange}>Yes I want to remove it</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
+
+
 class ButtonInput extends React.Component {
 
     constructor(props) {
@@ -228,6 +276,9 @@ class ButtonInput extends React.Component {
         );
     }
 }
+
+
+
 
 class MenuInput extends React.Component {
     constructor(props) {
@@ -486,6 +537,9 @@ class NoneSelect extends React.Component {
 }
 
 
+
+
+
 // Combine plugins
 // ---------------------
 // ---------------------
@@ -496,6 +550,7 @@ class ProviderPluginsSelector extends React.Component {
         this.handleProviderChange = this.handleProviderChange.bind(this);
         this.handleCommentChange = this.handleCommentChange.bind(this);
         this.handleAddPlugin = this.handleAddPlugin.bind(this);
+        this.handleRmvPlugin = this.handleRmvPlugin.bind(this);
 
         this.state={
             selected:0,
@@ -532,7 +587,9 @@ class ProviderPluginsSelector extends React.Component {
     handleAddPlugin(n){
         this.props.handleAddPlugin(n);
     }
-
+    handleRmvPlugin(n){
+        this.props.handleRmvPlugin(n);
+    }
 
 
 
@@ -549,27 +606,29 @@ class ProviderPluginsSelector extends React.Component {
 
                 <div className="card-header" id={id}>
                     <ModuleHeader id={id} data={this.props.data} selected={selected} Cdata={Cdata} n={this.props.n} Cost={this.state.cost}
-                    comments={this.state.comments} handleAddPlugin={this.handleAddPlugin} keys={this.state.keys}/>
+                    comments={this.state.comments} handleAddPlugin={this.handleAddPlugin} handleRmvPlugin={this.handleRmvPlugin}
+                                  keys={this.state.keys} show_minus={this.props.show_minus} />
                 </div>
 
 
                 <div id={"collapse"+id} className="collapse" aria-labelledby={id} data-parent="#accordion">
                     <div className="card-body">
 
-                            <div className="container">
                             <div className="row align-items-end">
-                            <div id="provider-selector" className="col-auto">
-
-                                <SelectorInput id="providerselect" name="Select a provider" selected={selected} options={this.state.keys}
-                                               class="btn-primary lg-btn" onChange={this.handleProviderChange} tips="Select a provider"/>
-                            {/*</div>*/}
-                                {/*<div className="col-sm-auto">*/}
-                                    <MakeknowmoreInput key={selected} data={Cdata}  name="" n="0" />
+                                <div className="col-auto">
+                                    <div id="provider-selector" >
+                                         <SelectorInput id="providerselect" name="Select a provider" selected={selected} options={this.state.keys}
+                                                   class="btn-primary lg-btn" onChange={this.handleProviderChange} tips="Select a provider"/>
+                                    </div>
+                                </div>
+                                <div className="col-auto">
+                                    <div id="plugin-knowmore" >
+                                        <MakeknowmoreInput key={selected} data={Cdata}  name="" n="0" />
+                                    </div>
                                 </div>
                                 <div className="col-4">
                                     <TxtInput id="module-comments" name="My Comments" placeholder="I can put a comment here..." onChange={this.handleCommentChange}/>
                                 </div>
-                            </div>
                             </div>
 
                             <div id="component" className="container bg-light">
@@ -620,18 +679,33 @@ class ModuleHeader  extends React.Component{
     constructor(props) {
         super(props);
         this.handleAddPlugin = this.handleAddPlugin.bind(this);
+        this.handleRmvPlugin = this.handleRmvPlugin.bind(this);
     }
     handleAddPlugin(n){
         this.props.handleAddPlugin(n);
     }
-
+    handleRmvPlugin(n){
+        this.props.handleRmvPlugin(n);
+    }
     render() {
+        let minus='';
+        if (this.props.show_minus){
+            minus=<ButtonInputWpop class="btn-danger btn-sm" id="plugins-add-btn"
+                                   name={<img className="img-fluid" src="icons\minus.png" width="20"/>}
+                                   onClick={this.handleRmvPlugin} n={this.props.n} tips={"Remove this line"}
+                                    idp={this.props.id} info={this.props.data.Name}/>;
+        }
  return(
      <div className="container">
          <div className="row align-items-center">
              <div className="col-1 align-self-start">
-                 <div  id="plugin-add">
+                 <div className="row">
+                 <div className="col-auto" id="plugin-add">
                      <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>} onClick={this.handleAddPlugin} n={this.props.n} tips={"Add a new "+this.props.data.Name}/>
+                 </div>
+                 <div className="col-auto" id="plugin-add">
+                     {minus}
+                 </div>
                  </div>
                  <div id="plugin-knowmore">
                      <MakeknowmoreInput data={this.props.data} n={this.props.n}/>
@@ -678,29 +752,77 @@ class ManagePlugins extends React.Component{
         super(props);
         this.handleCostChange = this.handleCostChange.bind(this);
         this.handleAddPlugin = this.handleAddPlugin.bind(this);
-        this.handleRemovePlugin = this.handleRemovePlugin.bind(this);
+        this.handleRmvPlugin = this.handleRmvPlugin.bind(this);
+
         this.state={
-            n:1,
-            'varsum':{}
+            displayed:[],
+            varsum:{}
         };
+        this.state.displayed.push(this.randomint());
     }
-    handleRemovePlugin(key){
-        const n=this.state.n+1;
-        this.setState({n:n});
+    handleRmvPlugin(n){
+    console.log("remove : "+n);
+        console.log(this.state.displayed);
+
+        $('#'+n.target).modal('hide');
+        var tmp=this.state.displayed;
+        tmp.splice(n.n,1);
+        this.setState({displayed:tmp});
+        console.log(this.state.displayed);
+        this.handleCostChange(n.n,0);
+
     }
-    handleAddPlugin(key){
-        const n=this.state.n+1;
-        this.setState({n:n});
+    handleAddPlugin(n){
+        var tmp=this.state.displayed;
+        tmp.splice(n+1,0,this.randomint());
+        this.setState({displayed:tmp});
     }
-    handleCostChange(name,e) {
-        this.state.varsum[name]=e;
+    handleCostChange(n,cost) {
+        console.log("here");
+        this.state.varsum[n]=cost;
         this.props.handleCostChange(this.props.n,sum(this.state.varsum));
     }
+    randomint(){
+        const tmp=this.state.displayed;
+        var rnd;
+        do {
+            rnd=Math.floor(Math.random() * 100);
+            var cont=false;
+            for (let i = 0; i < tmp.length ; i++) {
+                if (tmp[i]==rnd){
+                    cont=true;
+                }
+            }
+        } while(cont);
+        return rnd;
+    }
+    give_id(index){
+        return this.state.displayed[index]
+    }
+    give_n(){
+        const disp=this.state.displayed;
+        // console.log(disp);
+        // var n=0;
+        // for (let i in disp) {
+        //     console.log("here");
+        //     if (disp[i] == true ){
+        //         n++;
+        //     }
+        // }
+        // console.log("n= "+n)
+        return disp.length
+    }
+
     render() {
-        return(
-    <Repeat numTimes={this.state.n}>
-        {(index) => <ProviderPluginsSelector data={this.props.data} key={index}
-                                 n={index} handleCostChange={this.handleCostChange} handleAddPlugin={this.handleAddPlugin}/>}
+        let show_minus = false;
+        if (this.give_n()>1) {
+            show_minus=true;
+        }
+           return(
+    <Repeat numTimes={this.give_n()}>
+        {(index) => <ProviderPluginsSelector data={this.props.data} key={this.state.displayed[index]}
+                                 show_minus={show_minus} n={index}
+                                 handleCostChange={this.handleCostChange} handleAddPlugin={this.handleAddPlugin} handleRmvPlugin={this.handleRmvPlugin}/>}
     </Repeat>
         );}
 
@@ -797,6 +919,14 @@ class Main extends React.Component {
 // ---------------------
 ReactDOM.render(<Main />,document.getElementById('root'));
 
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
-})
+});
+$('.popover-dismiss').popover({
+    trigger: 'focus'
+});
+
+

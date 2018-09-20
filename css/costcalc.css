@@ -36,14 +36,14 @@
     padding-left: 1em;
 }
 #plugin-knowmore {
-    padding-top: 0em;
-    padding-bottom: 0em;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
     padding-left: 0.1em;
     padding-right: 0.1em;
 }
 #plugin-add{
-    padding-top: 0em;
-    padding-bottom: 0em;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
     padding-left: 0.1em;
     padding-right: 0.1em;
 }
@@ -55,6 +55,12 @@
     font-weight: bold;
 }
 
+#provider-selector{
+    padding-top: 1em;
+    padding-bottom: 0em;
+    padding-left: 2em;
+    padding-right: 0.1em;
+}
 #component{
     padding-top: 1em;
     padding-bottom: 1em;
