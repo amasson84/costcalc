@@ -295,7 +295,7 @@ const ELN={
 };
 const Database={
     Name : 'Database',
-    Icon : 'Database.png',
+    Icon : 'database.png',
     Url : '',
     Intro :'',
     Data :[NoneSelected,
