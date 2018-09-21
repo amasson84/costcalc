@@ -74,11 +74,6 @@ class SelectorInput extends React.Component {
     }
     rate(i){
         return i;
-        // if(this.props.rate==null){
-        //     return i;
-        // }else{
-        //     return this.props.rate[i];
-        // }
     }
     makelist(data){
         var listoptions=[];
@@ -144,7 +139,7 @@ class MakeknowmoreInput extends React.Component {
     render() {
         const data = this.props.data;
         const n = this.props.n;
-        if (((data.Url != '') || (data.Url == null)) && (n == 0)) {
+        if (((data.Url !== '') || (data.Url == null)) && (n === 0)) {
             // if (data.Url.length==1){
             //     return(
             //         <ButtonHrefInput name={<img src="./icons/info.png" width={this.state.btnsize}/>} url={data.Url[0].Url}
@@ -324,13 +319,19 @@ class TxtInput extends React.Component {
     }
 
     render() {
-        const value = this.props.value;
         return (
-            <div className="col">
+            <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
                 <label htmlFor={this.props.id}> {this.props.name} </label>
-                <input type="text" className="form-control" id="formGroupExampleInput" placeholder={this.props.placeholder} onChange={this.handleChange} value={value}
-                       data-toggle="tooltip" data-placement="top" title={this.props.tips}/>
-            </div>
+                <div className="input-group">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text" id="inputGroupPrepend2">{this.props.Prepend}</span>
+                    </div>
+                    <input type="text" className={"form-control "+this.props.class} id={this.props.id} placeholder={this.props.placeholder} onChange={this.handleChange} value={this.props.value} />
+                    <div className="invalid-feedback">
+                        {this.props.InvalidMessage}
+                    </div>
+                </div>
+            </span>
         );
     }
 }
@@ -536,6 +537,75 @@ class NoneSelect extends React.Component {
 
 }
 
+class UserCost extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleProviderChange = this.handleProviderChange.bind(this);
+        this.handleServiceChange = this.handleServiceChange.bind(this);
+        this.state={total:0,
+            CostError:false,
+            ProviderError:true,
+            ServiceError:true,
+        };
+    }
+    handleChange(value){
+        if (isNaN(value)||value===''){
+           console.log("Nan Detected");
+           this.setState({CostError: true});
+           value=0;
+        }else{
+            this.setState({CostError: false});
+        }
+        this.setState({total:value});
+        this.props.onCostChange(this.props.n,tomoney(value));
+    }
+    handleProviderChange(txt){
+        this.props.handleProviderChange(txt);
+        if(txt ===''){
+            this.setState({ProviderError: true});
+        }
+        else {
+            this.setState({ProviderError: false});
+        }
+    }
+    handleServiceChange(txt){
+        this.props.handleServiceChange(txt);
+        if(txt ===''){
+            this.setState({ServiceError: true});
+        }
+        else {
+            this.setState({ServiceError: false});
+        }
+    }
+    classtxt(error){
+        if(error){
+            return "is-invalid";
+        }
+        else {
+            return "is-valid";
+        }
+    }
+    render() {
+        // this.handleChange(this.state.total);
+        return (<div className="row align-items-baseline">
+                <div className="col-3">
+                    <TxtInput id="usercost-input"  name="Provider" placeholder="Put your provider here" tips="Add your own cost calculation here" onChange={this.handleProviderChange}
+                              class={this.classtxt(this.state.ProviderError)} Prepend="" InvalidMessage="Please provide a Provider"/>
+                </div>
+                <div className="col-3">
+                    <TxtInput id="usercost-input"  name="Service" placeholder="Put your service here" tips="Add your own cost calculation here" onChange={this.handleServiceChange}
+                              class={this.classtxt(this.state.ServiceError)} Prepend="" InvalidMessage="Please provide a Service"/>
+                </div>
+                <div className="col-3">
+                   <TxtInput id="usercost-input"  name="Cost" placeholder="Put your cost here" tips="Add your own cost calculation here" onChange={this.handleChange}
+                             class={this.classtxt(this.state.CostError)} Prepend={MainData.Currency} InvalidMessage="Please provide a correct numerical value" />
+                </div>
+            </div>
+        );
+    }
+
+}
 
 
 
@@ -551,7 +621,8 @@ class ProviderPluginsSelector extends React.Component {
         this.handleCommentChange = this.handleCommentChange.bind(this);
         this.handleAddPlugin = this.handleAddPlugin.bind(this);
         this.handleRmvPlugin = this.handleRmvPlugin.bind(this);
-
+        this.handleProviderChangetxt = this.handleProviderChangetxt.bind(this);
+        this.handleServiceChangetxt = this.handleServiceChangetxt.bind(this);
         this.state={
             selected:0,
             keys:this.ProvidersName(props.data),
@@ -560,6 +631,9 @@ class ProviderPluginsSelector extends React.Component {
             cost:0,
             prevcost:0,
             comments:"",
+            Provider:"",
+            Name:"",
+            manualname:false,
         };
     }
 
@@ -568,14 +642,15 @@ class ProviderPluginsSelector extends React.Component {
         if(! this.state.enabled){
             e=0;
         }
-        if (this.state.prevcost != e ) {
+        if (this.state.prevcost !== e ) {
             this.setState({cost: e});
             this.setState({prevcost: e});
 
         this.props.handleCostChange(n,e);}
     }
     handleProviderChange(select){
-
+        this.state.Provider='';
+        this.state.Name='';
         this.setState({selected:select});
         // this.setState({Cdata:this.cmpdata(this.state.selected)});
         // this.setSate({kmm:this.makemenu(this.state.Cdata,0)});
@@ -591,14 +666,24 @@ class ProviderPluginsSelector extends React.Component {
         this.props.handleRmvPlugin(n);
     }
 
+    handleProviderChangetxt(txt){
+        this.setState({Provider:txt});
 
+
+    }
+    handleServiceChangetxt(txt){
+        this.setState({Name:txt});
+    }
 
     render() {
         // console.log("n= "+this.props.n)
-        const Cmp=this.cmp2string(this.cmpdata(this.state.selected).Style);
-        const Cdata=this.cmpdata(this.state.selected);
-        const id=this.props.data.Name.replace(/\s/g,'')+this.props.n;
         const selected=this.state.selected;
+        this.state.manualname=false;
+        this.state.keys=this.ProvidersName(this.props.data);
+        const Cmp=this.cmp2string(this.cmpdata(selected).Style);
+        const Cdata=this.cmpdata(selected);
+        const id=this.props.data.Name.replace(/\s/g,'')+this.props.n;
+
 
 
         return(
@@ -627,12 +712,13 @@ class ProviderPluginsSelector extends React.Component {
                                     </div>
                                 </div>
                                 <div className="col-4">
-                                    <TxtInput id="module-comments" name="My Comments" placeholder="I can put a comment here..." onChange={this.handleCommentChange}/>
+                                    <TxtInput type="text" id="module-comments" name="My Comments" placeholder="I can put a comment here..." onChange={this.handleCommentChange}/>
                                 </div>
                             </div>
 
                             <div id="component" className="container bg-light">
-                                <Cmp data={Cdata} key={selected} name="" onCostChange={this.handleCostChange} n={this.props.n} />
+                                <Cmp data={Cdata} key={selected} name="" onCostChange={this.handleCostChange} n={this.props.n}
+                                handleProviderChange={this.handleProviderChangetxt} handleServiceChange={this.handleServiceChangetxt}/>
                             </div>
                     </div>
                 </div>
@@ -641,15 +727,21 @@ class ProviderPluginsSelector extends React.Component {
     }
 
 
-    cmpdata(select){return this.props.data.Data[select];}
+    cmpdata(select){
+        let out=this.props.data.Data[select];
+        if (this.state.manualname){
+            out.Name=this.state.Name;
+            this.state.keys[select]=this.state.Provider;}
+        return out;
+        }
 
     cmp2string(str){
-
         switch (str) {
             case "AmountRatesCost" : return AmountRatesCost;
             case "CategoryCost" : return CategoryCost;
             case "CategoryAmountRatesCost" : return CategoryAmountRatesCost;
             case "NoneSelect":return NoneSelect;
+            case "UserCost":{this.state.manualname=true;  return UserCost;}
 
         }
     }
@@ -667,11 +759,14 @@ class ProviderPluginsSelector extends React.Component {
 }
 
 function makeinfo(keys,selected,Cdata){
-    if (selected>0){
-        return  (<span><span id="module-provider">{keys[selected]} : </span>  <span id="module-name">{Cdata.name}</span></span>);
-    }
-    else {
-        return  (<span id="module-name">{Cdata.name}</span>);
+    let name=Cdata.Name;
+    if ( name ===''&&keys[selected]===''){
+        name='Please provide a Provider';
+        return  (<span id="module-name">{name}</span>);
+    }else if(keys[selected]==='None'){
+        return  (<span id="module-name">{name}</span>);
+    }else{
+        return  (<span><span id="module-provider">{keys[selected]} : </span>  <span id="module-name">{name}</span></span>);
     }
 }
 
@@ -727,9 +822,9 @@ class ModuleHeader  extends React.Component{
                      </div>
                  </div>
              </div>
-             <div id="plugin-info" className="col-3">
+             <div id="plugin-info" className="col-4">
                  <div className="row">
-                     {makeinfo(this.props.keys,this.props.selected,this.props.Cdata,this.props.n)}
+                     {makeinfo(this.props.keys,this.props.selected,this.props.Cdata)}
                  </div>
                  <div className="row">
                      {this.props.comments}
@@ -778,7 +873,6 @@ class ManagePlugins extends React.Component{
         this.setState({displayed:tmp});
     }
     handleCostChange(n,cost) {
-        console.log("here");
         this.state.varsum[n]=cost;
         this.props.handleCostChange(this.props.n,sum(this.state.varsum));
     }
@@ -789,7 +883,7 @@ class ManagePlugins extends React.Component{
             rnd=Math.floor(Math.random() * 100);
             var cont=false;
             for (let i = 0; i < tmp.length ; i++) {
-                if (tmp[i]==rnd){
+                if (tmp[i]===rnd){
                     cont=true;
                 }
             }
@@ -801,15 +895,6 @@ class ManagePlugins extends React.Component{
     }
     give_n(){
         const disp=this.state.displayed;
-        // console.log(disp);
-        // var n=0;
-        // for (let i in disp) {
-        //     console.log("here");
-        //     if (disp[i] == true ){
-        //         n++;
-        //     }
-        // }
-        // console.log("n= "+n)
         return disp.length
     }
 
@@ -864,12 +949,14 @@ class Main extends React.Component {
     constructor(props) {
         super(props);
         this.handleCostChange = this.handleCostChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.state={'total':0,'prevtotal':0};
+        this.input = React.createRef();
     }
 
     handleCostChange(total) {
         // console.log("there total : "+total )
-        if (this.state.prevtotal != total){
+        if (this.state.prevtotal !== total){
             // console.log("updated :"+total);
             // console.log("prev :"+this.state.prevtotal);
             this.setState({'total':total});
@@ -877,9 +964,17 @@ class Main extends React.Component {
         }
 
     }
+    handleSubmit(event) {
+        alert('A name was submitted: ');
+        console.log(event);
+        event.preventDefault();
+        //console.log(this.input)
+        var json = toJSONString(this.input);
+        console.log(json);
+    }
     render() {
         return(
-            <form>
+            <form id="mainform"  method="post" onSubmit={this.handleSubmit} ref={this.input}>
                 <div className={"container"}>
                     <div className={"accordion"} id={"accordion"}>
                         <PluginsMain TotalCost={this.handleCostChange} data={MainData.Data}/>
@@ -897,6 +992,9 @@ class Main extends React.Component {
 
                         </div>
                         <div className="card-body">
+                            <input type="submit" value="Send" className="btn btn-primary btn-block"/>
+                            <pre id="output"></pre>
+
                         </div>
                         <div className="card-footer">
                             <div className="alert alert-danger" role="alert" id="infotxt">
@@ -919,14 +1017,9 @@ class Main extends React.Component {
 // ---------------------
 ReactDOM.render(<Main />,document.getElementById('root'));
 
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover();
-});
+
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
-});
-$('.popover-dismiss').popover({
-    trigger: 'focus'
 });
 
 

@@ -253,7 +253,9 @@ const Dryad = {
 };
 
 
-// Categories definition
+
+
+// System variable definition
 // ----------------------------------------------------
 // ----------------------------------------------------
 const NoneSelected={
@@ -264,6 +266,16 @@ const NoneSelected={
 
 };
 
+const UserCostSelect={
+    Style : 'UserCost',
+    Provider:'Provide your own provider',
+    Name:'',
+    Url:'',
+};
+
+// Categories definition
+// ----------------------------------------------------
+// ----------------------------------------------------
 const storage={
     Name : 'Active Storage',
     Icon : 'storage.png',
@@ -274,7 +286,8 @@ const storage={
     Data :[NoneSelected,
         NasEpfl,
         SwitchEpfl,
-        GoogleDriveEdu
+        GoogleDriveEdu,
+        UserCostSelect,
 
 
     ]
@@ -289,7 +302,7 @@ const ELN={
     Intro :'',
     Data :[NoneSelected,
         SLIMSEpfl,
-
+        UserCostSelect,
     ]
 
 };
@@ -300,7 +313,7 @@ const Database={
     Intro :'',
     Data :[NoneSelected,
         MysqlEpfl,
-
+        UserCostSelect,
     ]
 };
 const repository={
@@ -319,6 +332,7 @@ const repository={
             Gitlab,
             Figshare,
             Dryad,
+            UserCostSelect,
         ]
 };
 
