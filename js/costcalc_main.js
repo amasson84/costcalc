@@ -850,11 +850,16 @@ class ManagePlugins extends React.Component{
     }
     handleRmvPlugin(n){
         $('#'+n.target).modal('hide');
-        this.setState({displayed:this.state.displayed.splice(n.n,1)});
+        var tmp=this.state.displayed;
+        tmp.splice(n.n,1);
+        this.setState({displayed:tmp});
         this.handleCostChange(n.n,0);
     }
     handleAddPlugin(n){
-        this.setState({displayed:this.state.displayed.splice(n+1,0,this.randomint())});
+        console.log("add")
+        var tmp=this.state.displayed;
+        tmp.splice(n+1,0,this.randomint());
+        this.setState({displayed:tmp});
     }
     handleCostChange(n,cost) {
         this.state.varsum[n]=cost;
