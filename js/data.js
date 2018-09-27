@@ -7,7 +7,8 @@ const NasEpfl =  {
     Provider : "EPFL-VPSI",
     Name:'NAS',
     Url : [
-        {Name:'VPSI-Website',Url:'https://support.epfl.ch/help/epfl?id=epfl_service_status&service=49a363acdb34c700ef64731b8c96191f'}
+        {Name:'VPSI-Website',Url:'https://support.epfl.ch/help/epfl?id=epfl_service_status&service=49a363acdb34c700ef64731b8c96191f'},
+        {Name:'SV-IT Storage Website',Url:'https://sv-it.epfl.ch/stockage'}
     ],
     AmountName: "Amount",
     AmountUnit: "TB",
@@ -59,11 +60,10 @@ const GoogleDriveEdu = {
 // ELN
 const SLIMSEpfl =  {
     Style:'CategoryAmountRatesCost',
-    Provider : "EPFL-LSIS",
+    Provider : "EPFL-SV-IT",
     Name:'SLIMS',
     Url : [
-        {Name:'SLIMS on LSIS Website',Url:'https://lsis.epfl.ch/page-140284-en.html'},
-        {Name:'SLIMS Cost on LSIS Website',Url:'https://lsis.epfl.ch/cms/site/lsis/lang/en/lims'},
+        {Name:'SLIMS on SV-IT Website',Url:'https://sv-it.epfl.ch/lims'},
         {Name: 'Genohm (SLIMS Company)',Url:'https://www.genohm.com/'}
     ],
     CatName:'PI Status',
@@ -83,7 +83,7 @@ const SLIMSEpfl =  {
     RateVar : true,
     RateName: 'ELN Storage',
     Rates : {
-        'Stored on EPFL Server': 300,
+        'Stored on EPFL Server': 165,
     },
     RateUnit : "CHF / TB"
 };

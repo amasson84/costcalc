@@ -135,8 +135,7 @@ class MakeknowmoreInput extends React.Component {
     }
     render() {
         const data = this.props.data;
-        const n = this.props.n;
-        if (((data.Url !== '') || (data.Url == null)) && (n === 0)) {
+        if (((data.Url !== '') )) {
             // if (data.Url.length==1){
             //     return(
             //         <ButtonHrefInput name={<img src="./icons/info.png" width={this.state.btnsize}/>} url={data.Url[0].Url}
