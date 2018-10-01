@@ -621,6 +621,7 @@ class ProviderPluginsSelector extends React.Component {
             Provider:"",
             Name:"",
             manualname:false,
+            show_plus:false,
         };
     }
 
@@ -635,6 +636,11 @@ class ProviderPluginsSelector extends React.Component {
         this.state.Provider='';
         this.state.Name='';
         this.setState({selected:select});
+        if (select>0){
+            this.setState({show_plus:true});
+        }else {
+            this.setState({show_plus:false});
+        }
         // this.setState({Cdata:this.cmpdata(this.state.selected)});
         // this.setSate({kmm:this.makemenu(this.state.Cdata,0)});
     }
@@ -666,14 +672,13 @@ class ProviderPluginsSelector extends React.Component {
         const Cmp=this.cmp2string(this.cmpdata(selected).Style);
         const Cdata=this.cmpdata(selected);
         const id=this.props.data.Name.replace(/\s/g,'')+this.props.n;
-
         return(
            <div id={"plugin"}>
 
                 <div className="card-header" id={id}>
                     <ModuleHeader id={id} data={this.props.data} selected={selected} Cdata={Cdata} n={this.props.n} Cost={this.state.cost}
                     comments={this.state.comments} handleAddPlugin={this.handleAddPlugin} handleRmvPlugin={this.handleRmvPlugin}
-                                  keys={this.state.keys} show_minus={this.props.show_minus} />
+                                  keys={this.state.keys} show_minus={this.props.show_minus} show_plus={this.state.show_plus}/>
                 </div>
 
 
@@ -771,11 +776,16 @@ class ModuleHeader  extends React.Component{
     }
     render() {
         let minus='';
+        let plus='';
         if (this.props.show_minus){
             minus=<ButtonInputWpop class="btn-danger btn-sm" id="plugins-add-btn"
                                    name={<img className="img-fluid" src="icons\minus.png" width="20"/>}
                                    onClick={this.handleRmvPlugin} n={this.props.n} tips={"Remove this line"}
                                     idp={this.props.id} info={this.props.data.Name}/>;
+        }
+        if (this.props.show_plus){
+           plus= <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>}
+                         onClick={this.handleAddPlugin} n={this.props.n} tips={"Add a new "+this.props.data.Name}/>
         }
  return(
      <div className="container">
@@ -783,8 +793,7 @@ class ModuleHeader  extends React.Component{
              <div className="col-1 align-self-start">
                  <div className="row">
                  <div className="col-auto" id="plugin-add">
-                     <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>}
-                                  onClick={this.handleAddPlugin} n={this.props.n} tips={"Add a new "+this.props.data.Name}/>
+                     {plus}
                  </div>
                  <div className="col-auto" id="plugin-add">
                      {minus}
@@ -864,10 +873,12 @@ class ManagePlugins extends React.Component{
         this.state.varsum[n]=cost;
         this.props.handleCostChange(this.props.n,sum(this.state.varsum));
     }
-    handletest(n){
-        console.log(this.export[0])
+    handletest(n) {
+        for (var i = 0; i < this.give_n(); i++) {
+            rawexport[this.props.n]=
+            console.log(this.export[i].props.data)
+        }
     }
-
     randomint(){
         const tmp=this.state.displayed;
         var rnd;
@@ -903,7 +914,7 @@ class ManagePlugins extends React.Component{
                                  handleCostChange={this.handleCostChange} handleAddPlugin={this.handleAddPlugin}
                                              handleRmvPlugin={this.handleRmvPlugin} ref={(input) => {this.export[index] = input }}/>}
     </Repeat>
-                   {/*<ButtonInput name={'test'} onClick={this.handletest}/>*/}
+                   <ButtonInput name={'test'} onClick={this.handletest}/>
                </div>
 
 

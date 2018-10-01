@@ -1,3 +1,6 @@
+var rawexport=[];
+
+
 function toJSONString( form ) {
     let obj = {};
     let elements = form.querySelectorAll( "input, select, textarea" );
@@ -13,4 +16,9 @@ function toJSONString( form ) {
         }
     }
     return JSON.stringify( obj );
+}
+class ManageExport extends React.Component{
+    constructor(props) {
+        super(props);
+    }
 }
