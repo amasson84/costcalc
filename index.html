@@ -22,11 +22,11 @@
 
     <!--Load Cost calc engine-->
     <link rel="stylesheet" href="css/costcalc.css">
-
-    <script type="text/jsx" src="js/costcalc_main.js"></script>
-    <script src="js/costcal_export.js"></script>
-    <!--Load cost calc data-->
     <script src="js/data.js"></script>
+    <script type="text/jsx" src="js/costcalc_export.jsx"></script>
+    <script type="text/jsx" src="js/costcalc_main.jsx"></script>
+    <!--Load cost calc data-->
+
 
     <!--<script>-->
         <!--$(window).bind('beforeunload', function(){-->
@@ -36,29 +36,7 @@
 
 </head>
 <body>
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <div class="row">
-            <div class="col-auto">
-                <img src="./icons/costcalc.png" width="100">
-            </div>
-            <div class="col-auto">
-        <h1 class="display-4"> Cost Calculator for Data Management</h1>
-            </div>
-            <div class="col">
-        <p class="lead">
-            Welcome to our cost calculator this tool will help researcher/professor to have an estimate of the cost of managing, storing and publishing data.
-        </p>
-        <p className="lead">
-            Many providers are included in the service and you will be able to calculate a cost based on your needs. Total cost is calculated dynamically based on your inputs.
-        </p>
-        <p className="lead">
-            We hope you will enjoy this tool and it will be useful for you.
-        </p>
-            </div>
-        </div>
-    </div>
-</div>
+
  <div id="root">
      <!-- This div's content will be managed by React. -->
  </div>
