@@ -1,4 +1,4 @@
-
+"use strict";
 // Functions Tools
 // ---------------------
 // ---------------------
@@ -32,7 +32,46 @@ function sum(obj) {
     }
     return total;
 }
+Object.compare = function (obj1, obj2) {
+    //Loop through properties in object 1
+    for (var p in obj1) {
+        //Check property exists on both objects
+        if (obj1.hasOwnProperty(p) !== obj2.hasOwnProperty(p)) return false;
 
+        switch (typeof (obj1[p])) {
+            //Deep compare objects
+            case 'object':
+                if (!Object.compare(obj1[p], obj2[p])) return false;
+                break;
+            //Compare function code
+            case 'function':
+                if (typeof (obj2[p]) == 'undefined' || (p != 'compare' && obj1[p].toString() != obj2[p].toString())) return false;
+                break;
+            //Compare values
+            default:
+                if (obj1[p] != obj2[p]) return false;
+        }
+    }
+
+    //Check object 2 for any extra properties
+    for (var p in obj2) {
+        if (typeof (obj1[p]) == 'undefined') return false;
+    }
+    return true;
+};
+function randomint(not){
+    var rnd;
+    do {
+        rnd=Math.floor(Math.random() * 100);
+        var cont=false;
+        for (let i = 0; i < not.length ; i++) {
+            if (not[i]===rnd){
+                cont=true;
+            }
+        }
+    } while(cont);
+    return rnd;
+}
 // Inputs Definition
 // ---------------------
 // ---------------------
@@ -389,6 +428,7 @@ class AmountRatesCost extends React.Component {
             {Name:"Amount",Value:this.state.Amount+" "+this.props.data.AmountUnit},
             {Name:this.props.data.RateName,Value:Object.keys(this.props.data.Rates)[this.state.SelectRate]}
         ];
+        this.props.export(this.export);
     }
     componentDidUpdate(){
         this.makecost(this.state.Amount,this.state.Rate);
@@ -456,6 +496,7 @@ class CategoryAmountRatesCost extends React.Component {
             {Name:"Amount",Value:this.state.Amount+" "+this.props.data.AmountUnit},
             {Name:this.props.data.RateName,Value:Object.keys(this.props.data.Rates)[this.state.SelectRate]}
         ];
+        this.props.export(this.export);
     }
     componentDidUpdate(){
         this.makecost(this.state.Cat,this.state.Amount,this.state.Rate);
@@ -512,6 +553,7 @@ class CategoryCost extends React.Component {
         this.export=[
             {Name:this.props.data.CatName,Value:Object.keys(this.props.data.Cat)[this.state.SelectCat]},
         ];
+        this.props.export(this.export);
     }
     componentDidUpdate(){
         this.makecost(this.state.Cat);
@@ -548,6 +590,7 @@ class NoneSelect extends React.Component {
     render() {
         const Cost=tomoney(0);
         this.props.onCostChange(this.props.n,Cost);
+        this.props.export(this.export);
 
         return (<div className="alert alert-info" id="infotxt">
                 Please select a provider in the list.
@@ -574,7 +617,6 @@ class UserCost extends React.Component {
     }
     handleChange(value){
         if (isNaN(value)||value===''){
-           console.log("Nan Detected");
            this.setState({CostError: true});
            value=0;
         }else{
@@ -610,7 +652,7 @@ class UserCost extends React.Component {
         }
     }
     render() {
-        // this.handleChange(this.state.total);
+        this.props.export(this.export);
         return (<div className="row align-items-baseline">
                 <div className="col-3">
                     <TxtInput id={this.props.id+'-input'}  name="Provider" placeholder="Put your provider here" tips="Add your own cost calculation here" onChange={this.handleProviderChange}
@@ -643,31 +685,27 @@ class ProviderPluginsSelector extends React.Component {
         this.handleRmvPlugin = this.handleRmvPlugin.bind(this);
         this.handleProviderChangetxt = this.handleProviderChangetxt.bind(this);
         this.handleServiceChangetxt = this.handleServiceChangetxt.bind(this);
-
-        this.refcmp = React.createRef();
-
+        this.make_exportcmp = this.make_exportcmp.bind(this);
+        this.make_export = this.make_export.bind(this);
         this.state={
             selected:0,
             keys:this.ProvidersName(props.data),
             n:1,
             cost:0,
-            prevcost:0,
             comments:"",
             Provider:"",
-            exportcmp:"",
-
             Name:"",
             manualname:false,
             show_plus:false,
+            exportcmp:"",
         };
     }
 
     handleCostChange(n,e) {
-        if (this.state.prevcost !== e ) {
+        if (this.state.cost !== e ) {
             this.setState({cost: e});
-            this.setState({prevcost: e});
-
-        this.props.handleCostChange(n,e);}
+        this.props.handleCostChange(n,e);
+        }
     }
     handleProviderChange(select){
 
@@ -683,9 +721,24 @@ class ProviderPluginsSelector extends React.Component {
         this.props.handleCostChange(this.props.n,this.state.cost);
     }
     componentDidUpdate(){
-        this.state.exportcmp=this.refcmp.current.export;
-        this.props.handleCostChange(this.props.n,this.state.cost);//provoke export update on the parent
+        this.props.handleCostChange(this.props.n,this.state.cost);
+        this.make_export();
 
+    }
+    make_exportcmp(data){
+        this.state.exportcmp=data
+    }
+    make_export(){
+        const out={
+            Category:this.props.data.Name,
+            Provider:this.state.Provider,
+            Name:this.state.Name,
+            Comments:this.state.comments,
+            ExportCmp:this.state.exportcmp,
+            Cost:this.state.cost,
+        };
+
+        this.props.export(out,this.props.n)
     }
     handleCommentChange(com){
 
@@ -711,7 +764,6 @@ class ProviderPluginsSelector extends React.Component {
     }
 
     render() {
-        // console.log("n= "+this.props.n)
         const selected=this.state.selected;
         this.state.manualname=false;
         this.state.keys=this.ProvidersName(this.props.data);
@@ -752,7 +804,7 @@ class ProviderPluginsSelector extends React.Component {
                             <div id="component" className="container bg-light">
                                 <Cmp data={Cdata} key={selected} id="component-settings" onCostChange={this.handleCostChange} n={this.props.n}
                                 handleProviderChange={this.handleProviderChangetxt} handleServiceChange={this.handleServiceChangetxt}
-                                ref={this.refcmp}/>
+                                export={this.make_exportcmp}/>
                             </div>
                     </div>
                 </div>
@@ -786,7 +838,6 @@ class ProviderPluginsSelector extends React.Component {
     }
     ProvidersName(main){
         const data = main.Data;
-        // console.log(data);
 
         var providers=[];
         for (var i = 0; i < data.length; i++) {
@@ -795,18 +846,6 @@ class ProviderPluginsSelector extends React.Component {
         return providers;
     }
 
-}
-
-function makeinfo(keys,selected,Cdata){
-    let name=Cdata.Name;
-    if ( name ===''&&keys[selected]===''){
-        name='Please provide a Provider';
-        return  (<span id="module-name">{name}</span>);
-    }else if(keys[selected]==='None'){
-        return  (<span id="module-name">{name}</span>);
-    }else{
-        return  (<span><span id="module-provider">{keys[selected]} : </span>  <span id="module-name">{name}</span></span>);
-    }
 }
 
 class ModuleHeader  extends React.Component{
@@ -839,10 +878,10 @@ class ModuleHeader  extends React.Component{
          <div className="row align-items-center">
              <div className="col-1 align-self-start">
                  <div className="row">
-                 <div className="col-auto" id="plugin-add">
+                 <div className="col-6" id="plugin-add">
                      {plus}
                  </div>
-                 <div className="col-auto" id="plugin-add">
+                 <div className="col-6" id="plugin-add">
                      {minus}
                  </div>
                  </div>
@@ -868,7 +907,7 @@ class ModuleHeader  extends React.Component{
              </div>
              <div id="plugin-info" className="col-4">
                  <div className="row">
-                     {makeinfo(this.props.keys,this.props.selected,this.props.Cdata)}
+                     {this.makeinfo(this.props.keys,this.props.selected,this.props.Cdata)}
                  </div>
                  <div className="row">
                      {this.props.comments}
@@ -884,7 +923,17 @@ class ModuleHeader  extends React.Component{
      </div>
  );
     }
-
+    makeinfo(keys,selected,Cdata){
+        let name=Cdata.Name;
+        if ( name ===''&&keys[selected]===''){
+            name='Please provide a Provider';
+            return  (<span id="module-name">{name}</span>);
+        }else if(keys[selected]==='None'){
+            return  (<span id="module-name">{name}</span>);
+        }else{
+            return  (<span><span id="module-provider">{keys[selected]} : </span>  <span id="module-name">{name}</span></span>);
+        }
+    }
 }
 
 class ManagePlugins extends React.Component{
@@ -893,15 +942,16 @@ class ManagePlugins extends React.Component{
         this.handleCostChange = this.handleCostChange.bind(this);
         this.handleAddPlugin = this.handleAddPlugin.bind(this);
         this.handleRmvPlugin = this.handleRmvPlugin.bind(this);
-        // this.handletest = this.handletest.bind(this);
+        this.make_exportplug=this.make_exportplug.bind(this);
+        this.make_export = this.make_export.bind(this);
 
         this.state={
             displayed:[],
             varsum:{},
             plugins:[],
+            export:[],
         };
-        this.state.displayed.push(this.randomint());
-        this.export=[];
+        this.state.displayed.push(randomint(this.state.displayed));
     }
     handleRmvPlugin(n){
 
@@ -913,41 +963,32 @@ class ManagePlugins extends React.Component{
     }
     handleAddPlugin(n){
         var tmp=this.state.displayed;
-        tmp.splice(n+1,0,this.randomint());
+        tmp.splice(n+1,0,randomint(this.state.displayed));
         this.setState({displayed:tmp});
     }
     handleCostChange(n,cost) {
 
         this.state.varsum[n]=cost;
         this.props.handleCostChange(this.props.n,sum(this.state.varsum));
+    }
+    make_exportplug(data,n) {
+        this.state.export[n] = data;
         this.make_export()
     }
-    make_export() {
-        // console.log("export asked : "+this.props.n);
-        var pdata=[];
-        var state=[];
-        for (var i = 0; i < this.export.length; i++) {
-            if((this.export[i]!==null)&&(typeof this.export[i].props !== 'undefined')&&(typeof this.export[i].state !== 'undefined')){
-                   pdata[i]=this.export[i].props.data;
-                   state[i]=this.export[i].state;
-        }}
-        rawexport[this.props.n]={data:pdata,state:state};
-        // console.log(rawexport);
+    make_export(){
+        // var out=[];
+        // for (var i = 0; i < this.state.export.length; i++) {
+        //     if((this.state.export[i]!==null)&&
+        //         (typeof this.state.export[i].data !== 'undefined')&&(typeof this.state.export[i].state !== 'undefined')){
+        //            out.push({data:this.state.export[i].data,state:this.state.export[i].state});
+        // }}
+        //
+        // this.props.export(out,this.props.n)
+        if (this.state.export.length === this.give_n()) {
+            this.props.export(this.state.export, this.props.n)
+        }
     }
-    randomint(){
-        const tmp=this.state.displayed;
-        var rnd;
-        do {
-            rnd=Math.floor(Math.random() * 100);
-            var cont=false;
-            for (let i = 0; i < tmp.length ; i++) {
-                if (tmp[i]===rnd){
-                    cont=true;
-                }
-            }
-        } while(cont);
-        return rnd;
-    }
+
     give_id(index){
         return this.state.displayed[index]
     }
@@ -967,19 +1008,16 @@ class ManagePlugins extends React.Component{
         this.make_export();
            return(
                <div>
-    <Repeat numTimes={this.give_n()}>
-        {(index) => <ProviderPluginsSelector data={this.props.data} key={this.state.displayed[index]}
-                                 show_minus={show_minus} n={index}
-                                 handleCostChange={this.handleCostChange} handleAddPlugin={this.handleAddPlugin}
-                                             handleRmvPlugin={this.handleRmvPlugin} ref={(input) => {this.export[index] = input }}/>}
-    </Repeat>
-                   {/*<ButtonInput name={'test'} onClick={this.handletest}/>*/}
+                    <Repeat numTimes={this.give_n()}>
+                        {(index) => <ProviderPluginsSelector data={this.props.data} key={this.state.displayed[index]}
+                                                 show_minus={show_minus} n={index}
+                                                 handleCostChange={this.handleCostChange} handleAddPlugin={this.handleAddPlugin}
+                                                             handleRmvPlugin={this.handleRmvPlugin} export={this.make_exportplug}/>}
+
+                    </Repeat>
                </div>
 
-
-
-        );}
-
+           );}
 
 }
 
@@ -987,19 +1025,36 @@ class PluginsMain extends React.Component {
     constructor(props) {
         super(props);
         this.handleCostChange = this.handleCostChange.bind(this);
-        this.state={'varsum':{}};
+        this.make_exportplug=this.make_exportplug.bind(this);
+        this.make_export = this.make_export.bind(this);
+
+        this.state={
+            varsum:{},
+            export:[]
+        };
     }
 
     handleCostChange(name,e) {
-        // console.log("name"+name);
         this.state.varsum[name]=e;
         this.props.TotalCost(sum(this.state.varsum));
 
+    }
+    make_exportplug(data,n) {
+        this.state.export[n] = data;
+        this.make_export()
+    }
+
+    make_export(){
+            if (this.state.export.length === this.props.data.length) {
+                this.props.export(this.state.export);
+
+            }
     }
     render() {
 
         return(
             <div id="PluginsMain">
+                <div className="accordion" id="accordion">
             <div className="card-header text-white bg-dark">
                 <div className="row">
                     <div className="col-2 text-center">
@@ -1017,11 +1072,13 @@ class PluginsMain extends React.Component {
                     </div>
                 </div>
             </div>
+
             <div className="card">
                 <Repeat numTimes={this.props.data.length}>
                     {(index) => <ManagePlugins data={this.props.data[index]} key={index}
-                                                         n={index} handleCostChange={this.handleCostChange}/>}
+                                               export={this.make_exportplug} n={index} handleCostChange={this.handleCostChange}/>}
                 </Repeat>
+            </div>
             </div>
             </div>
         );
@@ -1036,35 +1093,56 @@ class Main extends React.Component {
     constructor(props) {
         super(props);
         this.handleCostChange = this.handleCostChange.bind(this);
-        this.state={
-            'total':0,
-            'prevtotal':0};
-        this.input = React.createRef();
+        this.make_exportmain = this.make_exportmain.bind(this);
+
+        this.state= {
+            total: 0,
+            export: [],
+            exportmain:[],
+        };
+
+        this.init=true;
     }
 
     handleCostChange(total) {
-        // console.log("there total : "+total )
-        if (this.state.prevtotal !== total){
-
-            this.setState({'total':total});
-            this.setState({'prevtotal':total});
+        if (this.state.total !== total){
+            this.setState({total:total});
         }
 
     }
+    make_exportmain(idata) {
+
+        const tmp=JSON.parse(JSON.stringify(idata));
+        let disp=false;
+        if(!this.init){
+            if(!Object.compare(tmp,this.state.exportmain.data)){
+                disp=true;
+            }
+
+
+        }
+            if((this.init)||(disp)){
+                this.setState({exportmain: {data: tmp, total: tomoney(this.state.total)}});
+                this.init=false;
+           }
+
+    }
+
+
 
     render() {
         return(
             <div id="main">
                 {this.page_head()}
 
-                <div id="plugins-body" className={"container"}>
+                <div id="plugins-body" className="container">
 
 
-                    <PluginsMain TotalCost={this.handleCostChange} data={MainData.Data} />
+                    <PluginsMain TotalCost={this.handleCostChange} data={MainData.Data} export={this.make_exportmain}/>
 
                     {this.final_cost()}
 
-                    <ManageExport total={tomoney(this.state.total)}/>
+                    <ManageExport data={this.state.exportmain}/>
 
                     {this.howto()}
                 </div>
@@ -1155,7 +1233,7 @@ class Main extends React.Component {
                     <div className="col-1">
                     </div>
                     <div className="col-1">
-                        <img className="img-fluid" src="./icons/totalcost.png" width="100"/>
+                        {/*<img className="img-fluid" src="./icons/totalcost.png" width="100"/>*/}
                     </div>
                     <div className="col-5 align-self-start" id="plugin-name">
                         <h3>Total Cost</h3>

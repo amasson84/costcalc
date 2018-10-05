@@ -1,4 +1,4 @@
-var rawexport=[];
+"use strict";
 
 class ManageExport extends React.Component {
     constructor(props) {
@@ -6,22 +6,26 @@ class ManageExport extends React.Component {
         this.make_export = this.make_export.bind(this);
         this.make_copy = this.make_copy.bind(this);
         this.rmvempty = this.rmvempty.bind(this);
+        this.hide = this.hide.bind(this);
         this.state={
             output:'',
-            cols:["Category","Service","Name","Comments","Options","Cost"],
+            cols:["Category","Provider","Name","Comments","Options","Cost"],
             disp:false,
             rmvempty:false,
+            typexp:"",
 
         }
-        this.typexp="";
 
     }
 
     render() {
         let opt="";
+        let output="";
         if (this.state.disp){
             opt=this.options_btn();
+            output=this.make_output(this.props.data.data);
         }
+
         return (
             <div id="export-group">
                 <div className="card">
@@ -30,7 +34,7 @@ class ManageExport extends React.Component {
                     </div>
                     <div className="card-body">
                         <div id="export-output" >
-                            {this.state.output}
+                            {output}
 
                         </div>
                     </div>
@@ -78,12 +82,19 @@ class ManageExport extends React.Component {
                     <ButtonInput class="btn-primary" onClick={this.rmvempty} id="btn-export" name={Namermv} tips="Remove line(s) that don't have a provider"
                                  n="mark"/>
                 </div>
+                <div className="col-auto">
+                    <ButtonInput class="btn-dark" onClick={this.hide} id="btn-export" name="Hide Export" tips="Hide export"
+                                 n="mark"/>
+                </div>
             </div>
         );
     }
     rmvempty(){
-        this.state.rmvempty=!this.state.rmvempty;
-        this.make_export(this.typexp)
+        this.setState({rmvempty:!this.state.rmvempty});
+        // this.make_export(this.typexp)
+    }
+    hide(){
+        this.setState({disp:false})
     }
     make_copy(){
         this.fnSelect("export-output");
@@ -91,59 +102,57 @@ class ManageExport extends React.Component {
         this.fnDeSelect()
         alert("Copied");
     }
-    make_export(typexp){
-        var data=this.read_export(typexp);
-        this.typexp=typexp;
-        switch(typexp){
+    make_output(rdata){
+        const data=this.read_export(rdata,this.state.typexp);
+        const hcol=this.state.cols;
+        switch(this.state.typexp){
             case 'html':
-                this.setState({output:this.htmlout(data)});
-                this.setState({disp:true});
-                return;
+                return this.htmlout(hcol,data);
             case 'htmlsrc':
-                this.setState({output:this.htmlsrcout(data)});
-                this.setState({disp:true});
-                return;
+                return this.htmlsrcout(hcol,data);
             case 'mark':
-                this.setState({output:this.markout(data)});
-                this.setState({disp:true});
-                return;
+                return this.markout(hcol,data);
         }
     }
+    make_export(typ){
+        this.setState({typexp:typ});
+        this.setState({disp:true});
 
-    htmlout(data){
+    }
 
+    htmlout(hcol,data){
         return(
             <div id="htmlexport" className="container">
                     <table className="table table-striped table-bordered" width="100%">
                         <thead className="thead-dark">
                             <tr>
-                                {this.makecol(this.state.cols,'html',true)}
+                                {this.makecol(hcol,'html',true)}
                             </tr>
                         </thead>
                         <tbody>
                             {this.htmltable(data)}
                             <tr className="table-info">
-                                <td colSpan="5" align="right"><strong>Total Cost</strong></td>
-                                <td align="center"><strong>{this.props.total}</strong></td>
+                                <td colSpan={hcol.length-1} align="right"><strong>Total Cost</strong></td>
+                                <td align="center"><strong>{this.props.data.total}</strong></td>
                             </tr>
                         </tbody>
                 </table>
             </div>
         );
     }
-    htmlsrcout(data){
+    htmlsrcout(hcol,data){
 
         return(
             <div id="htmlexport">
                 <pre><code>
                     &lt;table&gt;<br/>
                     &lt;thead&gt;<br/>
-                    {this.makecol(this.state.cols,'htmlsrc',true)}
+                    {this.makecol(hcol,'htmlsrc',true)}
                     &lt;/thead&gt;<br/>
                     &lt;tbody&gt;<br/>
                     {this.htmlsrctable(data)}
                     &lt;tr &gt;<br/>
-                    &lt;td colSpan="5" align="right"&gt;&lt;strong&gt;Total Cost&lt;/strong&gt;&lt;/td&gt;&lt;td align="center"&gt;&lt;strong&gt;{this.props.total}&lt;/strong&gt;&lt;/td&gt;<br/>
+                    &lt;td colSpan={hcol.length-1} align="right"&gt;&lt;strong&gt;Total Cost&lt;/strong&gt;&lt;/td&gt;&lt;td align="center"&gt;&lt;strong&gt;{this.props.data.total}&lt;/strong&gt;&lt;/td&gt;<br/>
                 &lt;/tr&gt;<br/>
                 &lt;/tbody&gt;<br/>
                 &lt;/table&gt;<br/>
@@ -151,17 +160,18 @@ class ManageExport extends React.Component {
             </div>
         );
     }
-    markout(data){
+    markout(hcol,data){
         const Head=Array.from({length: this.state.cols.length}, (v, k) => "---");
+        const col=Array.from({length: hcol.length-1}, (v, k) => "| ");
         return(
             <div id="htmlexport">
                 <pre><code>
-                    |{this.makecol(this.state.cols,'mark',true)}<br/>
+                    |{this.makecol(hcol,'mark',true)}<br/>
                     |{this.makecol(Head,'mark')}<br/>
 
                     {this.marktable(data)}
 
-                    | | | | |Total Cost |{this.props.total}|<br/>
+                    {col} Total Cost |{this.props.data.total}|<br/>
 
                </code></pre>
             </div>
@@ -206,7 +216,6 @@ class ManageExport extends React.Component {
             let children = this.makecol(row,'html')
             items.push(<tr key={i}>{children}</tr>);
         }
-        // console.log(items);
         return items;
     }
     htmlsrctable(data){
@@ -216,7 +225,6 @@ class ManageExport extends React.Component {
             let children = this.makecol(row,'htmlsrc')
             items.push(<span key={i}>&lt;tr&gt; {children} &lt;/tr&gt;<br/></span>);
         }
-        // console.log(items);
         return items;
     }
     marktable(data){
@@ -226,38 +234,28 @@ class ManageExport extends React.Component {
             let children = this.makecol(row,'mark')
             items.push(<span key={i}>|{children}<br/></span>);
         }
-        // console.log(items);
         return items;
     }
 
-    read_export(n) {
-
+    read_export(rawexport,n) {
         var output = [];
         for (let cat = 0; cat < rawexport.length; cat++) {
-            const state = rawexport[cat].state;
-            // var data = [];
+            const state = rawexport[cat];
             for (let mod = 0; mod < state.length; mod++) {
                 if((!this.state.rmvempty) || (state[mod].Provider!==''))
                 output.push(
                     {
-                        Category:rawexport[cat].data[0].Name,
+                        Category:state[mod].Category,
                         Provider: state[mod].Provider,
                         Name: state[mod].Name,
-                        Comments: state[mod].comments,
-                        Options: this.read_options(state[mod].exportcmp),
-                        Cost: state[mod].cost,
+                        Comments: state[mod].Comments,
+                        Options: this.read_options(state[mod].ExportCmp),
+                        Cost: state[mod].Cost,
                     }
                 );
 
 
             }}
-            // output.push({
-            //         ,
-            //         Data: data
-            //
-            //     }
-
-
         return output;
     }
     read_options(Options){
