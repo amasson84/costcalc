@@ -19,6 +19,14 @@ html {
         font-size: 1.6rem;
     }
 }
+
+#PluginsMain{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 0em;
+    padding-right: 0em;
+}
+
 #plugin-name{
     text-transform: capitalize;
     font-size: $h2-font-size;
@@ -90,4 +98,18 @@ html {
     text-align: center;
     font-size: $h2-font-size;
     font-weight: bold;
+}
+#export-group{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+}
+#howto{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+}
+#page_foot{
+    padding-top: 2em;
+
 }

@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32058667-6761-4492-a704-290762d93e35" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/costcalc.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/costcalc.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/costcalc_main.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/costcalc_main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/data.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/data.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/costcalc_export.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/js/costcalc_export.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/costcalc_main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/js/costcalc_main.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -59,32 +61,40 @@
     <session id="-1962752238">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="4" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.4" value="4" />
-          <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.open.time.5" value="3" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="577" />
-          <entry key="js" value="5905" />
+          <entry key="css" value="101" />
+          <entry key="html" value="589" />
+          <entry key="js" value="7045" />
+          <entry key="jsx" value="8622" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="577" />
-          <entry key="JavaScript" value="5905" />
+          <entry key="CSS" value="101" />
+          <entry key="HTML" value="589" />
+          <entry key="JSX Harmony" value="8622" />
+          <entry key="JavaScript" value="7045" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="js" value="1" />
+          <entry key="html" value="1" />
+          <entry key="js" value="4" />
+          <entry key="jsx" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JavaScript" value="1" />
+          <entry key="HTML" value="1" />
+          <entry key="JSX Harmony" value="3" />
+          <entry key="JavaScript" value="4" />
         </counts>
       </usages-collector>
     </session>
@@ -105,15 +115,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="css" value="199" />
-          <entry key="html" value="45" />
-          <entry key="js" value="10858" />
+          <entry key="html" value="101" />
+          <entry key="js" value="11107" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="199" />
-          <entry key="HTML" value="45" />
-          <entry key="JavaScript" value="10858" />
+          <entry key="HTML" value="101" />
+          <entry key="JavaScript" value="11107" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -135,51 +145,106 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1014">
-              <caret line="39" column="47" selection-start-line="39" selection-start-column="47" selection-end-line="39" selection-end-column="47" />
+            <state relative-caret-position="325">
+              <caret line="13" column="90" selection-start-line="13" selection-start-column="90" selection-end-line="13" selection-end-column="90" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/js/costcalc_main.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index-dev.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="137" selection-start-line="137" selection-end-line="137" />
+            <state relative-caret-position="416">
+              <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/costcalc_main.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="368">
+              <caret line="883" column="38" selection-start-line="883" selection-start-column="38" selection-end-line="883" selection-end-column="38" />
               <folding>
-                <element signature="n#!!block;n#Repeat#0" />
-                <element signature="n#!!block;n#tonumeric#0" />
-                <element signature="n#!!block;n#tomoney#0" />
-                <element signature="n#!!block;n#sum#0" />
-                <element signature="n#AmountInput#0" />
-                <element signature="n#SelectorInput#0" />
-                <element signature="n#ButtonInputWpop#0" />
-                <element signature="n#MenuInput#0" />
-                <element signature="n#TxtInput#0" />
-                <element signature="n#CostOutput#0" />
-                <element signature="n#!!block;n#Textoutput#0" />
+                <element signature="e#162#308#0" />
+                <element signature="e#337#421#0" />
+                <element signature="e#449#629#0" />
+                <element signature="e#649#815#0" />
+                <element signature="e#786#1667#0" />
+                <element signature="e#1433#1780#0" />
+                <element signature="e#888#1794#0" />
+                <element signature="e#1796#3846#0" />
+                <element signature="e#2824#3844#0" />
+                <element signature="e#3848#4785#0" />
+                <element signature="e#4787#5525#0" />
+                <element signature="e#5527#5907#0" />
+                <element signature="e#5909#7859#0" />
+                <element signature="e#7861#8443#0" />
+                <element signature="e#8445#9529#0" />
+                <element signature="e#9531#10585#0" />
+                <element signature="e#10659#11480#0" />
+                <element signature="e#11508#11695#0" />
                 <element signature="n#AmountRatesCost#0" />
-                <element signature="n#CategoryAmountRatesCost#0" />
-                <element signature="n#CategoryCost#0" />
-                <element signature="n#NoneSelect#0" />
-                <element signature="n#UserCost#0" />
-                <element signature="n#!!block;n#makeinfo#0" />
-                <element signature="n#ManagePlugins#0" />
-                <element signature="n#PluginsMain#0" />
-                <element signature="n#Main#0" />
+                <element signature="e#13775#16543#0" />
+                <element signature="e#16545#17706#0" />
+                <element signature="e#17708#18063#0" />
+                <element signature="e#18065#20797#0" />
+                <element signature="n#ProviderPluginsSelector#0" />
+                <element signature="e#22005#22524#0" />
+                <element signature="e#22549#22661#0" />
+                <element signature="e#22690#22738#0" />
+                <element signature="e#22761#22807#0" />
+                <element signature="e#22830#22876#0" />
+                <element signature="e#22910#23065#0" />
+                <element signature="e#23097#23246#0" />
+                <element signature="n#!!block;n#render#0;n#ProviderPluginsSelector#0" />
+                <element signature="e#26034#26411#0" />
+                <element signature="e#26432#26791#0" />
+                <element signature="e#26815#27041#0" />
+                <element signature="e#32882#33287#0" />
+                <element signature="e#34027#36842#0" />
+                <element signature="n#!!block;n#handleRmvPlugin#0;n#ManagePlugins#0" />
+                <element signature="n#!!block;n#handleCostChange#0;n#ManagePlugins#0" />
+                <element signature="n#!!block;n#give_id#0;n#ManagePlugins#0" />
+                <element signature="n#!!block;n#give_n#0;n#ManagePlugins#0" />
+                <element signature="e#36886#38808#0" />
+                <element signature="e#38868#48716#0" />
+                <element signature="n#!!block;n#howto#0;n#Main#0" />
+                <element signature="n#!!block;n#final_cost#0;n#Main#0" />
+                <element signature="n#!!block;n#page_head#0;n#Main#0" />
+                <element signature="n#!!block;n#move2howto#0;n#Main#0" />
+                <element signature="n#!!block;n#page_foot#0;n#Main#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/js/costcal_export.js">
+        <entry file="file://$PROJECT_DIR$/js/costcalc_export.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
+            <state relative-caret-position="1198">
+              <caret line="209" column="1" selection-start-line="209" selection-start-column="1" selection-end-line="209" selection-end-column="1" />
+              <folding>
+                <element signature="n#!!block;n#export_btn#0;n#ManageExport#0" />
+                <element signature="n#!!block;n#options_btn#0;n#ManageExport#0" />
+                <element signature="n#!!block;n#hide#0;n#ManageExport#0" />
+                <element signature="n#!!block;n#make_copy#0;n#ManageExport#0" />
+                <element signature="n#!!block;n#make_output#0;n#ManageExport#0" />
+                <element signature="e#3781#3900#0" />
+                <element signature="n#!!block;n#htmlout#0;n#ManageExport#0" />
+                <element signature="n#!!block;n#htmlsrcout#0;n#ManageExport#0" />
+                <element signature="n#!!block;n#markout#0;n#ManageExport#0" />
+                <element signature="n#!!block;n#makecol#0;n#ManageExport#0" />
+                <element signature="n#!!block;n#htmltable#0;n#ManageExport#0" />
+                <element signature="n#!!block;n#htmlsrctable#0;n#ManageExport#0" />
+                <element signature="n#!!block;n#marktable#0;n#ManageExport#0" />
+                <element signature="n#!!block;n#read_options#0;n#ManageExport#0" />
+                <element signature="e#8556#8914#0" />
+                <element signature="e#8937#9079#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -187,8 +252,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/costcalc.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+            <state relative-caret-position="516">
+              <caret line="107" column="19" selection-start-line="107" selection-start-column="19" selection-end-line="107" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -196,7 +261,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/data.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4669">
+            <state relative-caret-position="182">
               <caret line="10" column="73" selection-start-line="10" selection-start-column="73" selection-end-line="10" selection-end-column="73" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -217,7 +282,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>console</find>
       <find>tip</find>
       <find>tooltip</find>
       <find>url</find>
@@ -230,12 +294,18 @@
       <find>here</find>
       <find>if</find>
       <find>UserCost</find>
+      <find>&gt;</find>
+      <find>upd</find>
+      <find>rawexport</find>
+      <find>randomint</find>
+      <find>console</find>
     </findStrings>
     <replaceStrings>
       <replace>Url</replace>
       <replace>Icon</replace>
       <replace>Data</replace>
       <replace>UserCostSelect</replace>
+      <replace>&amp;gt;</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -252,11 +322,15 @@
         <option value="$PROJECT_DIR$/script.js" />
         <option value="$PROJECT_DIR$/js/script.js" />
         <option value="$PROJECT_DIR$/js/popper.-1.14.3.min.js" />
-        <option value="$PROJECT_DIR$/js/costcal_export.js" />
-        <option value="$PROJECT_DIR$/css/costcalc.css" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/data.js" />
+        <option value="$PROJECT_DIR$/js/costcal_export.js" />
+        <option value="$PROJECT_DIR$/js/costcal_export.jsx" />
         <option value="$PROJECT_DIR$/js/costcalc_main.js" />
+        <option value="$PROJECT_DIR$/css/costcalc.css" />
+        <option value="$PROJECT_DIR$/js/costcalc_export.jsx" />
+        <option value="$PROJECT_DIR$/js/costcalc_main.jsx" />
+        <option value="$PROJECT_DIR$/index-dev.html" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -277,9 +351,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="72" />
-    <option name="y" value="23" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="113" />
+    <option name="y" value="30" />
     <option name="width" value="1680" />
     <option name="height" value="1027" />
   </component>
@@ -291,7 +365,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -308,6 +381,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -325,10 +399,11 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.build" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\almasson\WebstormProjects\costcalc\js" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="C:\Users\almasson\WebstormProjects\costcalc\js" />
     </key>
   </component>
@@ -393,11 +468,13 @@
       <workItem from="1537778949283" duration="9793000" />
       <workItem from="1537868487913" duration="6560000" />
       <workItem from="1538057441035" duration="831000" />
+      <workItem from="1538566211349" duration="10000" />
+      <workItem from="1538566236416" duration="43507000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="137097000" />
+    <option name="totallyTimeSpent" value="193879000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -409,11 +486,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1680" height="1027" extended-state="6" />
+    <frame x="113" y="30" width="1680" height="1027" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4988263" visible="true" weight="0.17842074" />
-      <window_info id="Structure" order="1" sideWeight="0.50117373" side_tool="true" weight="0.2496329" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49727964" visible="true" weight="0.17842074" />
+      <window_info id="Structure" order="1" sideWeight="0.50272036" side_tool="true" visible="true" weight="0.17842074" />
       <window_info id="Favorites" order="2" sideWeight="0.50117373" side_tool="true" weight="0.2496329" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3284091" />
@@ -421,16 +498,16 @@
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39981273" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3297062" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3297062" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3297062" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.3297062" />
       <window_info anchor="bottom" id="File Transfer" order="11" visible="true" weight="0.22198041" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Remote Host" order="3" weight="0.2887668" />
+      <window_info anchor="right" id="Remote Host" order="3" weight="0.28823856" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -469,30 +546,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1014">
-          <caret line="39" column="47" selection-start-line="39" selection-start-column="47" selection-end-line="39" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/costcal_export.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="6" column="29" selection-start-line="6" selection-start-column="29" selection-end-line="6" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/css/costcalc.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/data.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4669">
+        <state relative-caret-position="182">
           <caret line="10" column="73" selection-start-line="10" selection-start-column="73" selection-end-line="10" selection-end-column="73" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
@@ -500,32 +556,153 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/costcal_export.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="6" lean-forward="true" selection-start-column="6" selection-end-column="6" />
+          <folding>
+            <element signature="n#!!block;n#read_export#0;n#ManageExport#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/costcal_export.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1248">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/costcalc_main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="137" selection-start-line="137" selection-end-line="137" />
+        <state relative-caret-position="182">
+          <caret line="7" column="24" lean-forward="true" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
           <folding>
-            <element signature="n#!!block;n#Repeat#0" />
-            <element signature="n#!!block;n#tonumeric#0" />
-            <element signature="n#!!block;n#tomoney#0" />
-            <element signature="n#!!block;n#sum#0" />
-            <element signature="n#AmountInput#0" />
-            <element signature="n#SelectorInput#0" />
-            <element signature="n#ButtonInputWpop#0" />
-            <element signature="n#MenuInput#0" />
-            <element signature="n#TxtInput#0" />
-            <element signature="n#CostOutput#0" />
-            <element signature="n#!!block;n#Textoutput#0" />
-            <element signature="n#AmountRatesCost#0" />
-            <element signature="n#CategoryAmountRatesCost#0" />
-            <element signature="n#CategoryCost#0" />
-            <element signature="n#NoneSelect#0" />
-            <element signature="n#UserCost#0" />
-            <element signature="n#!!block;n#makeinfo#0" />
-            <element signature="n#ManagePlugins#0" />
-            <element signature="n#PluginsMain#0" />
-            <element signature="n#Main#0" />
+            <element signature="e#148#294#0" />
+            <element signature="e#323#407#0" />
+            <element signature="e#435#615#0" />
+            <element signature="e#635#801#0" />
+            <element signature="e#874#1780#0" />
+            <element signature="e#1782#3832#0" />
+            <element signature="e#3834#4771#0" />
+            <element signature="e#4773#5511#0" />
+            <element signature="e#5513#5893#0" />
+            <element signature="e#5895#7845#0" />
+            <element signature="e#8431#9515#0" />
+            <element signature="e#9517#10571#0" />
+            <element signature="e#10645#11466#0" />
+            <element signature="e#11494#11681#0" />
+            <element signature="e#11755#13759#0" />
+            <element signature="e#13761#16529#0" />
+            <element signature="e#16531#17692#0" />
+            <element signature="e#17694#18049#0" />
+            <element signature="e#18051#20783#0" />
+            <element signature="e#27070#27475#0" />
+            <element signature="e#33665#34417#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/css/costcalc.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="516">
+          <caret line="107" column="19" selection-start-line="107" selection-start-column="19" selection-end-line="107" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/costcalc_export.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1198">
+          <caret line="209" column="1" selection-start-line="209" selection-start-column="1" selection-end-line="209" selection-end-column="1" />
+          <folding>
+            <element signature="n#!!block;n#export_btn#0;n#ManageExport#0" />
+            <element signature="n#!!block;n#options_btn#0;n#ManageExport#0" />
+            <element signature="n#!!block;n#hide#0;n#ManageExport#0" />
+            <element signature="n#!!block;n#make_copy#0;n#ManageExport#0" />
+            <element signature="n#!!block;n#make_output#0;n#ManageExport#0" />
+            <element signature="e#3781#3900#0" />
+            <element signature="n#!!block;n#htmlout#0;n#ManageExport#0" />
+            <element signature="n#!!block;n#htmlsrcout#0;n#ManageExport#0" />
+            <element signature="n#!!block;n#markout#0;n#ManageExport#0" />
+            <element signature="n#!!block;n#makecol#0;n#ManageExport#0" />
+            <element signature="n#!!block;n#htmltable#0;n#ManageExport#0" />
+            <element signature="n#!!block;n#htmlsrctable#0;n#ManageExport#0" />
+            <element signature="n#!!block;n#marktable#0;n#ManageExport#0" />
+            <element signature="n#!!block;n#read_options#0;n#ManageExport#0" />
+            <element signature="e#8556#8914#0" />
+            <element signature="e#8937#9079#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/costcalc_main.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="883" column="38" selection-start-line="883" selection-start-column="38" selection-end-line="883" selection-end-column="38" />
+          <folding>
+            <element signature="e#162#308#0" />
+            <element signature="e#337#421#0" />
+            <element signature="e#449#629#0" />
+            <element signature="e#649#815#0" />
+            <element signature="e#786#1667#0" />
+            <element signature="e#1433#1780#0" />
+            <element signature="e#888#1794#0" />
+            <element signature="e#1796#3846#0" />
+            <element signature="e#2824#3844#0" />
+            <element signature="e#3848#4785#0" />
+            <element signature="e#4787#5525#0" />
+            <element signature="e#5527#5907#0" />
+            <element signature="e#5909#7859#0" />
+            <element signature="e#7861#8443#0" />
+            <element signature="e#8445#9529#0" />
+            <element signature="e#9531#10585#0" />
+            <element signature="e#10659#11480#0" />
+            <element signature="e#11508#11695#0" />
+            <element signature="n#AmountRatesCost#0" />
+            <element signature="e#13775#16543#0" />
+            <element signature="e#16545#17706#0" />
+            <element signature="e#17708#18063#0" />
+            <element signature="e#18065#20797#0" />
+            <element signature="n#ProviderPluginsSelector#0" />
+            <element signature="e#22005#22524#0" />
+            <element signature="e#22549#22661#0" />
+            <element signature="e#22690#22738#0" />
+            <element signature="e#22761#22807#0" />
+            <element signature="e#22830#22876#0" />
+            <element signature="e#22910#23065#0" />
+            <element signature="e#23097#23246#0" />
+            <element signature="n#!!block;n#render#0;n#ProviderPluginsSelector#0" />
+            <element signature="e#26034#26411#0" />
+            <element signature="e#26432#26791#0" />
+            <element signature="e#26815#27041#0" />
+            <element signature="e#32882#33287#0" />
+            <element signature="e#34027#36842#0" />
+            <element signature="n#!!block;n#handleRmvPlugin#0;n#ManagePlugins#0" />
+            <element signature="n#!!block;n#handleCostChange#0;n#ManagePlugins#0" />
+            <element signature="n#!!block;n#give_id#0;n#ManagePlugins#0" />
+            <element signature="n#!!block;n#give_n#0;n#ManagePlugins#0" />
+            <element signature="e#36886#38808#0" />
+            <element signature="e#38868#48716#0" />
+            <element signature="n#!!block;n#howto#0;n#Main#0" />
+            <element signature="n#!!block;n#final_cost#0;n#Main#0" />
+            <element signature="n#!!block;n#page_head#0;n#Main#0" />
+            <element signature="n#!!block;n#move2howto#0;n#Main#0" />
+            <element signature="n#!!block;n#page_foot#0;n#Main#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index-dev.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="13" column="90" selection-start-line="13" selection-start-column="90" selection-end-line="13" selection-end-column="90" />
         </state>
       </provider>
     </entry>
