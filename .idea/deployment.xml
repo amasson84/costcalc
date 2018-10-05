@@ -2,7 +2,7 @@
 <project version="4">
   <component name="PublishConfigData" serverName="test local">
     <serverData>
-      <paths name="amasson">
+      <paths name="amasson (project level)">
         <serverdata>
           <mappings>
             <mapping deploy="/" local="$PROJECT_DIR$" web="/" />

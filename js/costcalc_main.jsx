@@ -1,5 +1,4 @@
-'use strict';
-
+"use strict";
 // Functions Tools
 // ---------------------
 // ---------------------
@@ -33,7 +32,46 @@ function sum(obj) {
     }
     return total;
 }
+Object.compare = function (obj1, obj2) {
+    //Loop through properties in object 1
+    for (var p in obj1) {
+        //Check property exists on both objects
+        if (obj1.hasOwnProperty(p) !== obj2.hasOwnProperty(p)) return false;
 
+        switch (typeof (obj1[p])) {
+            //Deep compare objects
+            case 'object':
+                if (!Object.compare(obj1[p], obj2[p])) return false;
+                break;
+            //Compare function code
+            case 'function':
+                if (typeof (obj2[p]) == 'undefined' || (p != 'compare' && obj1[p].toString() != obj2[p].toString())) return false;
+                break;
+            //Compare values
+            default:
+                if (obj1[p] != obj2[p]) return false;
+        }
+    }
+
+    //Check object 2 for any extra properties
+    for (var p in obj2) {
+        if (typeof (obj1[p]) == 'undefined') return false;
+    }
+    return true;
+};
+function randomint(not){
+    var rnd;
+    do {
+        rnd=Math.floor(Math.random() * 100);
+        var cont=false;
+        for (let i = 0; i < not.length ; i++) {
+            if (not[i]===rnd){
+                cont=true;
+            }
+        }
+    } while(cont);
+    return rnd;
+}
 // Inputs Definition
 // ---------------------
 // ---------------------
@@ -367,35 +405,47 @@ function Textoutput(props){
 class AmountRatesCost extends React.Component {
     constructor(props) {
         super(props);
-        this.state={amount : 1, SelectRate : 0 , Rate : this.props.data.Rates[Object.keys(this.props.data.Rates)[0]]};
         this.handleAmountChange = this.handleAmountChange.bind(this);
         this.handleRateChange = this.handleRateChange.bind(this);
+
+        this.state={
+            Amount : 1,
+            SelectRate : 0 ,
+            Rate : this.props.data.Rates[Object.keys(this.props.data.Rates)[0]]
+        };
+        this.make_export();
+
     }
     handleAmountChange(amount) {
-        this.setState({amount: amount});
+        this.setState({Amount: amount});
     }
     handleRateChange(select) {
         this.setState({SelectRate: select});
         this.setState({Rate: this.props.data.Rates[Object.keys(this.props.data.Rates)[select]]});
     }
-
+    make_export(){
+        this.export=[
+            {Name:"Amount",Value:this.state.Amount+" "+this.props.data.AmountUnit},
+            {Name:this.props.data.RateName,Value:Object.keys(this.props.data.Rates)[this.state.SelectRate]}
+        ];
+        this.props.export(this.export);
+    }
+    componentDidUpdate(){
+        this.makecost(this.state.Amount,this.state.Rate);
+        this.make_export();
+    }
     render() {
-        const Amount = this.state.amount;
-        const Rate=this.state.Rate;
-        const Cost=this.makecost(Amount,Rate);
-
-        return (
+         return (
             <div className="row align-items-center">
                 <div className="col">
                 <AmountInput id={this.props.id} min={this.props.data.AmountMin} max={this.props.data.AmountMax}
-                             step={this.props.data.AmountStep} value={Amount} name={this.props.data.AmountName}
+                             step={this.props.data.AmountStep} value={this.state.Amount} name={this.props.data.AmountName}
                              unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} tips="Select the desired amount"/>
                 </div>
                 <div className="col-3">
                     <SelectorInput id={this.props.id+'-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)}
-                                   class="btn-secondary" selected={this.state.SelectRate} rate={Rate} unit={this.props.data.RateUnit} onChange={this.handleRateChange} />
+                                   class="btn-secondary" selected={this.state.SelectRate} rate={this.state.rate} unit={this.props.data.RateUnit} onChange={this.handleRateChange} />
                 </div>
-                {/*<CostOutput id={this.props.name+'-Cost'} name={"Cost"} value={Cost} />*/}
             </div>
         );
     }
@@ -413,16 +463,23 @@ class AmountRatesCost extends React.Component {
 class CategoryAmountRatesCost extends React.Component {
     constructor(props) {
         super(props);
-        this.state={SelectCat : 0,  Cat : this.props.data.Cat[Object.keys(this.props.data.Cat)[0]],
-            amount : 1, SelectRate : 0 , Rate : this.props.data.Rates[Object.keys(this.props.data.Rates)[0]]};
         this.handleCatChange = this.handleCatChange.bind(this);
         this.handleAmountChange = this.handleAmountChange.bind(this);
         this.handleRateChange = this.handleRateChange.bind(this);
-        // this.handleCostChange = this.handleCostChange.bind(this);
+        this.state={
+            SelectCat : 0,
+            Cat : this.props.data.Cat[Object.keys(this.props.data.Cat)[0]],
+            Amount : 1,
+            SelectRate : 0 ,
+            Rate : this.props.data.Rates[Object.keys(this.props.data.Rates)[0]]
+        };
+        this.make_export();
+
+
 
     }
     handleAmountChange(amount) {
-        this.setState({amount: amount});
+        this.setState({Amount: amount});
     }
     handleRateChange(select) {
         this.setState({SelectRate: select});
@@ -433,30 +490,34 @@ class CategoryAmountRatesCost extends React.Component {
         this.setState({SelectCat: select});
         this.setState({Cat: this.props.data.Cat[Object.keys(this.props.data.Cat)[select]]});
     }
-
+    make_export(){
+        this.export=[
+            {Name:this.props.data.CatName,Value:Object.keys(this.props.data.Cat)[this.state.SelectCat]},
+            {Name:"Amount",Value:this.state.Amount+" "+this.props.data.AmountUnit},
+            {Name:this.props.data.RateName,Value:Object.keys(this.props.data.Rates)[this.state.SelectRate]}
+        ];
+        this.props.export(this.export);
+    }
+    componentDidUpdate(){
+        this.makecost(this.state.Cat,this.state.Amount,this.state.Rate);
+        this.make_export();
+    }
     render() {
-        const Cat=this.state.Cat;
-        const Amount = this.state.amount;
-        const Rate=this.state.Rate;
-        const Cost=this.makecost(Cat,Amount,Rate);
-
         return (
             <div className="row align-items-center">
                 <div className="col-3">
-                     <SelectorInput id={this.props.id+'-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={Cat}
+                     <SelectorInput id={this.props.id+'-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={this.state.Cat}
                                     class="btn-secondary" selected={this.state.SelectCat} unit={this.props.data.CatUnit} onChange={this.handleCatChange} />
                 </div>
 
                 <div className="col-4">
                 <AmountInput id={this.props.id} min={this.props.data.AmountMin} max={this.props.data.AmountMax} step={this.props.data.AmountStep}
-                             value={Amount} name={this.props.data.AmountName} unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} />
+                             value={this.state.Amount} name={this.props.data.AmountName} unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} />
                 </div>
                 <div className="col-4">
-                    <SelectorInput id={this.props.id+'-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)} rate={Rate}
+                    <SelectorInput id={this.props.id+'-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)} rate={this.state.Rate}
                                    class="btn-secondary" selected={this.state.SelectRate} unit={this.props.data.RateUnit} onChange={this.handleRateChange} />
                 </div>
-
-                {/*<CostOutput id={this.props.name+'-Cost'} name={"Cost"} value={Cost} />*/}
             </div>
         );
     }
@@ -474,8 +535,12 @@ class CategoryAmountRatesCost extends React.Component {
 class CategoryCost extends React.Component {
     constructor(props) {
         super(props);
-        this.state={SelectCat : 0,  Cat : this.props.data.Cat[Object.keys(this.props.data.Cat)[0]]};
         this.handleCatChange = this.handleCatChange.bind(this);
+
+        this.state={SelectCat : 0,
+            Cat : this.props.data.Cat[Object.keys(this.props.data.Cat)[0]]
+        };
+        this.make_export();
 
     }
 
@@ -484,16 +549,22 @@ class CategoryCost extends React.Component {
         this.setState({SelectCat: select});
         this.setState({Cat: this.props.data.Cat[Object.keys(this.props.data.Cat)[select]]});
     }
-
+    make_export(){
+        this.export=[
+            {Name:this.props.data.CatName,Value:Object.keys(this.props.data.Cat)[this.state.SelectCat]},
+        ];
+        this.props.export(this.export);
+    }
+    componentDidUpdate(){
+        this.makecost(this.state.Cat);
+        this.make_export();
+    }
     render() {
-        const Cat=this.state.Cat;
-
-        const Cost=this.makecost(Cat);
 
         return (
             <div className="row align-items-center">
                 <div className="col-4">
-                    <SelectorInput id={this.props.id+'-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={Cat}
+                    <SelectorInput id={this.props.id+'-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={this.state.Cat}
                                    class="btn-secondary" selected={this.state.SelectCat} unit={this.props.data.CatUnit} onChange={this.handleCatChange} />
 
                 </div>
@@ -511,6 +582,7 @@ class CategoryCost extends React.Component {
 class NoneSelect extends React.Component {
     constructor(props) {
         super(props);
+        this.export=[]
 
     }
 
@@ -518,6 +590,7 @@ class NoneSelect extends React.Component {
     render() {
         const Cost=tomoney(0);
         this.props.onCostChange(this.props.n,Cost);
+        this.props.export(this.export);
 
         return (<div className="alert alert-info" id="infotxt">
                 Please select a provider in the list.
@@ -539,10 +612,11 @@ class UserCost extends React.Component {
             ProviderError:true,
             ServiceError:true,
         };
+        this.export=[]
+
     }
     handleChange(value){
         if (isNaN(value)||value===''){
-           console.log("Nan Detected");
            this.setState({CostError: true});
            value=0;
         }else{
@@ -578,7 +652,7 @@ class UserCost extends React.Component {
         }
     }
     render() {
-        // this.handleChange(this.state.total);
+        this.props.export(this.export);
         return (<div className="row align-items-baseline">
                 <div className="col-3">
                     <TxtInput id={this.props.id+'-input'}  name="Provider" placeholder="Put your provider here" tips="Add your own cost calculation here" onChange={this.handleProviderChange}
@@ -611,36 +685,65 @@ class ProviderPluginsSelector extends React.Component {
         this.handleRmvPlugin = this.handleRmvPlugin.bind(this);
         this.handleProviderChangetxt = this.handleProviderChangetxt.bind(this);
         this.handleServiceChangetxt = this.handleServiceChangetxt.bind(this);
+        this.make_exportcmp = this.make_exportcmp.bind(this);
+        this.make_export = this.make_export.bind(this);
         this.state={
             selected:0,
             keys:this.ProvidersName(props.data),
             n:1,
             cost:0,
-            prevcost:0,
             comments:"",
             Provider:"",
             Name:"",
             manualname:false,
+            show_plus:false,
+            exportcmp:"",
         };
     }
 
     handleCostChange(n,e) {
-        if (this.state.prevcost !== e ) {
+        if (this.state.cost !== e ) {
             this.setState({cost: e});
-            this.setState({prevcost: e});
-
-        this.props.handleCostChange(n,e);}
+        this.props.handleCostChange(n,e);
+        }
     }
     handleProviderChange(select){
-        this.state.Provider='';
-        this.state.Name='';
+
         this.setState({selected:select});
-        // this.setState({Cdata:this.cmpdata(this.state.selected)});
-        // this.setSate({kmm:this.makemenu(this.state.Cdata,0)});
+        if (select>0){
+            this.setState({show_plus:true});
+        }else {
+            this.setState({show_plus:false});
+        }
+        this.state.Provider=this.props.data.Data[select].Provider;
+        this.state.Name=this.props.data.Data[select].Name;
+
+        this.props.handleCostChange(this.props.n,this.state.cost);
+    }
+    componentDidUpdate(){
+        this.props.handleCostChange(this.props.n,this.state.cost);
+        this.make_export();
+
+    }
+    make_exportcmp(data){
+        this.state.exportcmp=data
+    }
+    make_export(){
+        const out={
+            Category:this.props.data.Name,
+            Provider:this.state.Provider,
+            Name:this.state.Name,
+            Comments:this.state.comments,
+            ExportCmp:this.state.exportcmp,
+            Cost:this.state.cost,
+        };
+
+        this.props.export(out,this.props.n)
     }
     handleCommentChange(com){
 
         this.setState({comments:com});
+
     }
     handleAddPlugin(n){
         this.props.handleAddPlugin(n);
@@ -651,29 +754,29 @@ class ProviderPluginsSelector extends React.Component {
 
     handleProviderChangetxt(txt){
         this.setState({Provider:txt});
+        // this.props.handleCostChange(this.props.n,this.state.cost);//provoke export update on the parent
 
 
     }
     handleServiceChangetxt(txt){
         this.setState({Name:txt});
+        // this.props.handleCostChange(this.props.n,this.state.cost);//provoke export update on the parent
     }
 
     render() {
-        // console.log("n= "+this.props.n)
         const selected=this.state.selected;
         this.state.manualname=false;
         this.state.keys=this.ProvidersName(this.props.data);
         const Cmp=this.cmp2string(this.cmpdata(selected).Style);
         const Cdata=this.cmpdata(selected);
         const id=this.props.data.Name.replace(/\s/g,'')+this.props.n;
-
         return(
            <div id={"plugin"}>
 
                 <div className="card-header" id={id}>
                     <ModuleHeader id={id} data={this.props.data} selected={selected} Cdata={Cdata} n={this.props.n} Cost={this.state.cost}
                     comments={this.state.comments} handleAddPlugin={this.handleAddPlugin} handleRmvPlugin={this.handleRmvPlugin}
-                                  keys={this.state.keys} show_minus={this.props.show_minus} />
+                                  keys={this.state.keys} show_minus={this.props.show_minus} show_plus={this.state.show_plus}/>
                 </div>
 
 
@@ -700,7 +803,8 @@ class ProviderPluginsSelector extends React.Component {
 
                             <div id="component" className="container bg-light">
                                 <Cmp data={Cdata} key={selected} id="component-settings" onCostChange={this.handleCostChange} n={this.props.n}
-                                handleProviderChange={this.handleProviderChangetxt} handleServiceChange={this.handleServiceChangetxt}/>
+                                handleProviderChange={this.handleProviderChangetxt} handleServiceChange={this.handleServiceChangetxt}
+                                export={this.make_exportcmp}/>
                             </div>
                     </div>
                 </div>
@@ -734,7 +838,6 @@ class ProviderPluginsSelector extends React.Component {
     }
     ProvidersName(main){
         const data = main.Data;
-        // console.log(data);
 
         var providers=[];
         for (var i = 0; i < data.length; i++) {
@@ -743,18 +846,6 @@ class ProviderPluginsSelector extends React.Component {
         return providers;
     }
 
-}
-
-function makeinfo(keys,selected,Cdata){
-    let name=Cdata.Name;
-    if ( name ===''&&keys[selected]===''){
-        name='Please provide a Provider';
-        return  (<span id="module-name">{name}</span>);
-    }else if(keys[selected]==='None'){
-        return  (<span id="module-name">{name}</span>);
-    }else{
-        return  (<span><span id="module-provider">{keys[selected]} : </span>  <span id="module-name">{name}</span></span>);
-    }
 }
 
 class ModuleHeader  extends React.Component{
@@ -771,22 +862,26 @@ class ModuleHeader  extends React.Component{
     }
     render() {
         let minus='';
+        let plus='';
         if (this.props.show_minus){
             minus=<ButtonInputWpop class="btn-danger btn-sm" id="plugins-add-btn"
                                    name={<img className="img-fluid" src="icons\minus.png" width="20"/>}
                                    onClick={this.handleRmvPlugin} n={this.props.n} tips={"Remove this line"}
                                     idp={this.props.id} info={this.props.data.Name}/>;
         }
+        if (this.props.show_plus){
+           plus= <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>}
+                         onClick={this.handleAddPlugin} n={this.props.n} tips={"Add a new "+this.props.data.Name}/>
+        }
  return(
      <div className="container">
          <div className="row align-items-center">
              <div className="col-1 align-self-start">
                  <div className="row">
-                 <div className="col-auto" id="plugin-add">
-                     <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>}
-                                  onClick={this.handleAddPlugin} n={this.props.n} tips={"Add a new "+this.props.data.Name}/>
+                 <div className="col-6" id="plugin-add">
+                     {plus}
                  </div>
-                 <div className="col-auto" id="plugin-add">
+                 <div className="col-6" id="plugin-add">
                      {minus}
                  </div>
                  </div>
@@ -812,7 +907,7 @@ class ModuleHeader  extends React.Component{
              </div>
              <div id="plugin-info" className="col-4">
                  <div className="row">
-                     {makeinfo(this.props.keys,this.props.selected,this.props.Cdata)}
+                     {this.makeinfo(this.props.keys,this.props.selected,this.props.Cdata)}
                  </div>
                  <div className="row">
                      {this.props.comments}
@@ -828,7 +923,17 @@ class ModuleHeader  extends React.Component{
      </div>
  );
     }
-
+    makeinfo(keys,selected,Cdata){
+        let name=Cdata.Name;
+        if ( name ===''&&keys[selected]===''){
+            name='Please provide a Provider';
+            return  (<span id="module-name">{name}</span>);
+        }else if(keys[selected]==='None'){
+            return  (<span id="module-name">{name}</span>);
+        }else{
+            return  (<span><span id="module-provider">{keys[selected]} : </span>  <span id="module-name">{name}</span></span>);
+        }
+    }
 }
 
 class ManagePlugins extends React.Component{
@@ -837,17 +942,19 @@ class ManagePlugins extends React.Component{
         this.handleCostChange = this.handleCostChange.bind(this);
         this.handleAddPlugin = this.handleAddPlugin.bind(this);
         this.handleRmvPlugin = this.handleRmvPlugin.bind(this);
-        this.handletest = this.handletest.bind(this);
+        this.make_exportplug=this.make_exportplug.bind(this);
+        this.make_export = this.make_export.bind(this);
 
         this.state={
             displayed:[],
             varsum:{},
             plugins:[],
+            export:[],
         };
-        this.state.displayed.push(this.randomint());
-        this.export=[];
+        this.state.displayed.push(randomint(this.state.displayed));
     }
     handleRmvPlugin(n){
+
         $('#'+n.target).modal('hide');
         var tmp=this.state.displayed;
         tmp.splice(n.n,1);
@@ -855,33 +962,33 @@ class ManagePlugins extends React.Component{
         this.handleCostChange(n.n,0);
     }
     handleAddPlugin(n){
-        console.log("add")
         var tmp=this.state.displayed;
-        tmp.splice(n+1,0,this.randomint());
+        tmp.splice(n+1,0,randomint(this.state.displayed));
         this.setState({displayed:tmp});
     }
     handleCostChange(n,cost) {
+
         this.state.varsum[n]=cost;
         this.props.handleCostChange(this.props.n,sum(this.state.varsum));
     }
-    handletest(n){
-        console.log(this.export[0])
+    make_exportplug(data,n) {
+        this.state.export[n] = data;
+        this.make_export()
+    }
+    make_export(){
+        // var out=[];
+        // for (var i = 0; i < this.state.export.length; i++) {
+        //     if((this.state.export[i]!==null)&&
+        //         (typeof this.state.export[i].data !== 'undefined')&&(typeof this.state.export[i].state !== 'undefined')){
+        //            out.push({data:this.state.export[i].data,state:this.state.export[i].state});
+        // }}
+        //
+        // this.props.export(out,this.props.n)
+        if (this.state.export.length === this.give_n()) {
+            this.props.export(this.state.export, this.props.n)
+        }
     }
 
-    randomint(){
-        const tmp=this.state.displayed;
-        var rnd;
-        do {
-            rnd=Math.floor(Math.random() * 100);
-            var cont=false;
-            for (let i = 0; i < tmp.length ; i++) {
-                if (tmp[i]===rnd){
-                    cont=true;
-                }
-            }
-        } while(cont);
-        return rnd;
-    }
     give_id(index){
         return this.state.displayed[index]
     }
@@ -889,27 +996,28 @@ class ManagePlugins extends React.Component{
         const disp=this.state.displayed;
         return disp.length
     }
+    componentDidUpdate(){
+        this.make_export();
+    }
 
     render() {
         let show_minus = false;
         if (this.give_n()>1) {
             show_minus=true;
         }
+        this.make_export();
            return(
                <div>
-    <Repeat numTimes={this.give_n()}>
-        {(index) => <ProviderPluginsSelector data={this.props.data} key={this.state.displayed[index]}
-                                 show_minus={show_minus} n={index}
-                                 handleCostChange={this.handleCostChange} handleAddPlugin={this.handleAddPlugin}
-                                             handleRmvPlugin={this.handleRmvPlugin} ref={(input) => {this.export[index] = input }}/>}
-    </Repeat>
-                   {/*<ButtonInput name={'test'} onClick={this.handletest}/>*/}
+                    <Repeat numTimes={this.give_n()}>
+                        {(index) => <ProviderPluginsSelector data={this.props.data} key={this.state.displayed[index]}
+                                                 show_minus={show_minus} n={index}
+                                                 handleCostChange={this.handleCostChange} handleAddPlugin={this.handleAddPlugin}
+                                                             handleRmvPlugin={this.handleRmvPlugin} export={this.make_exportplug}/>}
+
+                    </Repeat>
                </div>
 
-
-
-        );}
-
+           );}
 
 }
 
@@ -917,23 +1025,61 @@ class PluginsMain extends React.Component {
     constructor(props) {
         super(props);
         this.handleCostChange = this.handleCostChange.bind(this);
-        this.state={'varsum':{}};
+        this.make_exportplug=this.make_exportplug.bind(this);
+        this.make_export = this.make_export.bind(this);
+
+        this.state={
+            varsum:{},
+            export:[]
+        };
     }
 
     handleCostChange(name,e) {
-        // console.log("name"+name);
         this.state.varsum[name]=e;
         this.props.TotalCost(sum(this.state.varsum));
 
     }
+    make_exportplug(data,n) {
+        this.state.export[n] = data;
+        this.make_export()
+    }
+
+    make_export(){
+            if (this.state.export.length === this.props.data.length) {
+                this.props.export(this.state.export);
+
+            }
+    }
     render() {
 
         return(
+            <div id="PluginsMain">
+                <div className="accordion" id="accordion">
+            <div className="card-header text-white bg-dark">
+                <div className="row">
+                    <div className="col-2 text-center">
+                        Line controls
+                    </div>
+
+                    <div className="col-3 text-center">
+                        Category
+                    </div>
+                    <div className="col-4 text-center">
+                        Provider information
+                    </div>
+                    <div className="col-2 text-center">
+                        Cost
+                    </div>
+                </div>
+            </div>
+
             <div className="card">
                 <Repeat numTimes={this.props.data.length}>
                     {(index) => <ManagePlugins data={this.props.data[index]} key={index}
-                                                         n={index} handleCostChange={this.handleCostChange}/>}
+                                               export={this.make_exportplug} n={index} handleCostChange={this.handleCostChange}/>}
                 </Repeat>
+            </div>
+            </div>
             </div>
         );
     }
@@ -947,148 +1093,217 @@ class Main extends React.Component {
     constructor(props) {
         super(props);
         this.handleCostChange = this.handleCostChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.state={'total':0,'prevtotal':0};
-        this.input = React.createRef();
+        this.make_exportmain = this.make_exportmain.bind(this);
+
+        this.state= {
+            total: 0,
+            export: [],
+            exportmain:[],
+        };
+
+        this.init=true;
     }
 
     handleCostChange(total) {
-        // console.log("there total : "+total )
-        if (this.state.prevtotal !== total){
-            // console.log("updated :"+total);
-            // console.log("prev :"+this.state.prevtotal);
-            this.setState({'total':total});
-            this.setState({'prevtotal':total});
+        if (this.state.total !== total){
+            this.setState({total:total});
         }
 
     }
-    handleSubmit(event) {
-        // alert('A name was submitted: ');
-        event.preventDefault();
-        console.log(this.input.current);
+    make_exportmain(idata) {
 
-        //console.log(this.input)
-        var json = toJSONString(this.input.current);
-        console.log(json);
+        const tmp=JSON.parse(JSON.stringify(idata));
+        let disp=false;
+        if(!this.init){
+            if(!Object.compare(tmp,this.state.exportmain.data)){
+                disp=true;
+            }
+
+
+        }
+            if((this.init)||(disp)){
+                this.setState({exportmain: {data: tmp, total: tomoney(this.state.total)}});
+                this.init=false;
+           }
+
     }
+
+
+
     render() {
         return(
-            <form id="mainform"  method="post" onSubmit={this.handleSubmit} ref={this.input}>
-                <div className={"container"}>
-                    <div className={"accordion"} id={"accordion"}>
-                        <div className="card ">
-                            <div className="card-header ">
-                                <h2> <img src="./icons/sliders.png" width="40"/> HOWTO</h2>
-                            </div>
-                            <div className="card-body">
-                                <dl className="row">
-                                    <dt className="col-sm-3">Categories</dt>
-                                    <dd className="col-sm-9">
-                                        This tool is divided by category (for example Activate storage) by clicking
-                                        on the category name, and it will expand.
-                                    </dd>
-                                </dl>
-                                <dl className="row">
-                                    <dt className="col-sm-3">Providers</dt>
-                                    <dd className="col-sm-9">
-                                        <p>
-                                            Providers can be chosen from the <mark>Select a provider box</mark> You can then tune your setting for this provider to fit your needs.
-                                        </p>
+            <div id="main">
+                {this.page_head()}
 
-                                        <p>
-                                            If the provider you want is not registered, you can add it manually with <mark>Provide your own provider</mark> and then enter your provider/service and cost.
-                                        </p>
-                                    </dd>
-                                </dl>
-                                <dl className="row">
-                                    <dt className="col-sm-3">Add or Remove Line</dt>
-                                    <dd className="col-sm-9">
-                                        <p>If you want to add a new provider use the <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>}
-                                                                                                  tips={"Add a new category"}/> button.
-                                        </p>
-                                        <p>
-                                            You can also remove a provider with <ButtonInput class="btn-danger btn-sm" id="plugins-add-btn"
-                                                                                             name={<img className="img-fluid" src="icons\minus.png" width="20"/>}
-                                                                                             tips={"Remove this line"}/> button.
-                                        </p>
-                                    </dd>
-                                </dl>
-                                <dl className="row">
-                                    <dt className="col-sm-3">To know more about</dt>
-                                    <dd className="col-sm-9">
-                                        Some extra information about the category or the provider can be obtained with the <ButtonInput class="btn-primary btn-sm" id="plugins-add-btn"
-                                                                                                                                        name={<img className="img-fluid" src="icons\info.png" width="20"/>}
-                                                                                                                                        tips={"Know more"}/> button.
-                                    </dd>
-                                </dl>
-                                <dl className="row">
-                                    <dt className="col-sm-3">Comments your input</dt>
-                                    <dd className="col-sm-9">
-                                        Comments are for your personnal usage, you can use for remembering what each section is and for a nice export.
-                                    </dd>
-                                </dl>
-                            </div>
-                            <div className="card-footer text-white bg-dark">
-                                <div className="row">
-                                    <div className="col-2 text-center">
-                                        Line controls
-                                    </div>
-
-                                    <div className="col-3 text-center">
-                                        Category
-                                    </div>
-                                    <div className="col-4 text-center">
-                                        Provider information
-                                    </div>
-                                    <div className="col-2 text-center">
-                                        Cost
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div id="plugins-body" className="container">
 
 
-                        <PluginsMain TotalCost={this.handleCostChange} data={MainData.Data} />
+                    <PluginsMain TotalCost={this.handleCostChange} data={MainData.Data} export={this.make_exportmain}/>
+
+                    {this.final_cost()}
+
+                    <ManageExport data={this.state.exportmain}/>
+
+                    {this.howto()}
+                </div>
+
+                {this.page_foot()}
+            </div>
+
+        );
+    }
+
+
+    howto(){
+        return(
+            <div id="howto">
+            <div className="card" >
+                <div className="card-header ">
+                    <h2><img src="./icons/sliders.png" width="40"/> HOWTO</h2>
+                </div>
+                <div className="card-body">
+                    <dl className="row">
+                        <dt className="col-sm-3">Categories</dt>
+                        <dd className="col-sm-9">
+                            This tool is divided by categories (for example Activate storage). Click
+                            on the category name, and it will expand.
+                        </dd>
+                    </dl>
+                    <dl className="row">
+                        <dt className="col-sm-3">Providers</dt>
+                        <dd className="col-sm-9">
+                            <p>
+                                Providers can be chosen from the <mark>Select a provider box</mark>. You can then tune your setting for this provider to fit your needs.
+                            </p>
+
+                            <p>
+                                If the provider you want is not registered, you can add it manually with <mark>Provide your own provider</mark> and then enter your provider/service and cost.
+                            </p>
+                        </dd>
+                    </dl>
+                    <dl className="row">
+                        <dt className="col-sm-3">Add or Remove Line</dt>
+                        <dd className="col-sm-9">
+                            <p>If you want to add a new provider use the <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>}
+                                                                                      tips={"Add a new category"} onClick={this.fctnull}/> button.
+                            </p>
+                            <p>
+                                You can also remove a provider with <ButtonInput class="btn-danger btn-sm" id="plugins-add-btn"
+                                                                                 name={<img className="img-fluid" src="icons\minus.png" width="20"/>}
+                                                                                 tips={"Remove this line"} onClick={this.fctnull}/> button.
+                            </p>
+                        </dd>
+                    </dl>
+                    <dl className="row">
+                        <dt className="col-sm-3">To know more about</dt>
+                        <dd className="col-sm-9">
+                            Some extra information about the category or the provider can be obtained with the <ButtonInput class="btn-primary btn-sm" id="plugins-add-btn"
+                                                                                                                            name={<img className="img-fluid" src="icons\info.png" width="20"/>}
+                                                                                                                            tips={"Know more"} onClick={this.fctnull}/> button.
+                        </dd>
+                    </dl>
+                    <dl className="row">
+                        <dt className="col-sm-3">Comments your input</dt>
+                        <dd className="col-sm-9">
+                            Comments are for your own usage, you can use for remembering what each section is and for a nice export.
+                        </dd>
+                    </dl>
+                    <dl className="row">
+                        <dt className="col-sm-3">Export</dt>
+                        <dd className="col-sm-9">
+                            You can export your work into different format : <br/>
+                            <samp> HTML</samp> : This format can be used in any wordprocessing software (such as Microsoft Word or Libreoffice).<br/>
+                            <samp>HTML Source code</samp> and <samp>Markdown</samp> formats are also possible.<br/>
+                            Click on the  <ButtonInput class="btn-secondary"  id="btn-export" name="Copy to Clipboard" tips="Copy the output into your clipboard"
+                                                       onClick={this.fctnull}/> in order to copy your work into your clipboard. A simple <kbd>Paste</kbd> will transfer your work into any software.
+
+                        </dd>
+                    </dl>
+
+                </div>
+            </div>
+            </div>);
+    }
+
+    final_cost(){
+        return(
+        <div className="card" id="finalcost">
+            <div className="card-header ">
+                <div className="container row">
+                    <div className="col-1">
                     </div>
-                    <div className="card" id="finalcost">
-                        <div className="card-header ">
-                            <div className="container row">
-                                <div className="col-1">
-                                </div>
-                                <div className="col-1">
-                                     <img className="img-fluid" src="./icons/totalcost.png" width="100"/>
-                                </div>
-                                <div className="col-5 align-self-start" id="plugin-name">
-                                    <h3>Total Cost</h3>
-                                </div>
-                                <div id="plugin-cost" className="col-5  text-right ">
-                                    <CostOutput name={"Total Cost per year"} id={"ctotal"} value={tomoney(this.state.total)} tips="Total cost per year"/>
-                                </div>
-                            </div>
+                    <div className="col-1">
+                        {/*<img className="img-fluid" src="./icons/totalcost.png" width="100"/>*/}
+                    </div>
+                    <div className="col-5 align-self-start" id="plugin-name">
+                        <h3>Total Cost</h3>
+                    </div>
+                    <div id="plugin-cost" className="col-5  text-right ">
+                        <CostOutput name={"Total Cost per year"} id={"ctotal"} value={tomoney(this.state.total)} tips="Total cost per year"/>
+                    </div>
+                </div>
 
-                        </div>
-                        <div className="card-body">
-                            {/*<input type="submit" value="Send" className="btn btn-primary btn-block"/>*/}
-                            <pre id="output"></pre>
+            </div>
+        </div>);
+    }
 
+
+    page_head(){
+        return(
+            <div className="jumbotron jumbotron-fluid" id="page_head">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-auto">
+                            <img src="./icons/costcalc.png" width="100"/>
                         </div>
-                        <div className="card-footer">
-                            <div className="alert alert-danger" role="alert" id="infotxt">
-                                The values published on this service are only informative and cannot be used for exact calculation. If you see some mistake or would like to
-                                have another services please contact us.
-                            </div>
-                            <div id="service">
-                                <p>This service has been developed by the <a href="https://researchdata.epfl.ch">Resarch Data Management Team</a> of the <a href="https://library.epfl.ch">EPFL Library</a>  <br/>
-                                    This software is publish under CC0 and your are using <strong> Version beta 1.7</strong><br/>
-                                    Source code can be download <a href="https://c4science.ch/source/costcalc/">here</a></p>
-                                <p><small>Icons are from the Noun Project (Book by Randi NI, Storage by I Pitu, Database by Novalyi, data cloud by Vectors Market)</small></p>
-                            </div>
+                        <div className="col-auto">
+                            <h1 className="display-4"> Cost Calculator for Data Management</h1>
+                        </div>
+                        <div className="col">
+                            <p className="lead">
+                                Welcome to our cost calculator this tool will help researcher/professor to have an
+                                estimate of the cost of managing, storing and publishing data.
+                            </p>
+                            <p className="lead">
+                                Many providers are included in the service and you will be able to calculate a cost
+                                based on your needs. Total cost is calculated dynamically based on your inputs.
+                            </p>
+                            <p className="lead">
+                                We hope you will enjoy this tool and it will be useful for you.
+                            </p>
+                            <ButtonInput class="btn-info" id="head-howto" name="To Know More (HOWTO)" onClick={this.move2howto}/>
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         );
     }
+
+    move2howto(){
+        $('html,body').animate({
+                scrollTop: $("#howto").offset().top},
+            'slow');
+    }
+    page_foot(){
+        return(
+            <div id="page_foot" >
+                <div className="jumbotron jumbotron-fluid">
+                <div className="alert alert-danger" role="alert" id="infotxt">
+                    The values published on this service are only informative and cannot be used for exact calculation. If you see some mistake or would like to
+                    have another services please contact us.
+                </div>
+                <div id="service">
+                    <p>This service has been developed by the <a href="https://researchdata.epfl.ch">Resarch Data Management Team</a> of the <a href="https://library.epfl.ch">EPFL Library</a>  <br/>
+                        This software is publish under CC0 and your are using <strong> Version beta 2.1</strong><br/>
+                        Source code can be download <a href="https://c4science.ch/source/costcalc/">here</a></p>
+                    <p><small>Icons are from the Noun Project (Book by Randi NI, Storage by I Pitu, Database by Novalyi, data cloud by Vectors Market)</small></p>
+                </div>
+            </div>
+            </div>
+        );
+    }
+
+    fctnull(){}
 }
 
 
