@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32058667-6761-4492-a704-290762d93e35" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/costcalc_export.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/js/costcalc_export.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -57,11 +57,12 @@
     <session id="-1962752238">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
+          <entry key="project.closed" value="10" />
+          <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.4" value="4" />
           <entry key="project.open.time.5" value="4" />
-          <entry key="project.opened" value="10" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -69,14 +70,14 @@
           <entry key="css" value="101" />
           <entry key="html" value="589" />
           <entry key="js" value="7045" />
-          <entry key="jsx" value="8700" />
+          <entry key="jsx" value="8749" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="CSS" value="101" />
           <entry key="HTML" value="589" />
-          <entry key="JSX Harmony" value="8700" />
+          <entry key="JSX Harmony" value="8749" />
           <entry key="JavaScript" value="7045" />
         </counts>
       </usages-collector>
@@ -142,11 +143,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+            <state relative-caret-position="-99">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
             </state>
           </provider>
         </entry>
@@ -183,12 +184,13 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/costcalc_export.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="499">
-              <caret line="272" column="26" selection-start-line="272" selection-start-column="26" selection-end-line="272" selection-end-column="26" />
+            <state relative-caret-position="104">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
               <folding>
+                <element signature="n#!!block;n#constructor#0;n#ManageExport#0" />
                 <element signature="n#!!block;n#export_btn#0;n#ManageExport#0" />
                 <element signature="n#!!block;n#options_btn#0;n#ManageExport#0" />
                 <element signature="n#!!block;n#hide#0;n#ManageExport#0" />
@@ -284,8 +286,8 @@
         <option value="$PROJECT_DIR$/css/costcalc.css" />
         <option value="$PROJECT_DIR$/js/costcalc_main.jsx" />
         <option value="$PROJECT_DIR$/index-dev.html" />
-        <option value="$PROJECT_DIR$/js/costcalc_export.jsx" />
         <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/js/costcalc_export.jsx" />
       </list>
     </option>
   </component>
@@ -319,7 +321,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -331,6 +332,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -422,11 +424,12 @@
       <workItem from="1538753560735" duration="148000" />
       <workItem from="1538983049522" duration="788000" />
       <workItem from="1538993043104" duration="34000" />
+      <workItem from="1538993660872" duration="37000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="194849000" />
+    <option name="totallyTimeSpent" value="194886000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -441,8 +444,8 @@
     <frame x="0" y="23" width="1680" height="1027" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4935065" visible="true" weight="0.17842074" />
-      <window_info id="Structure" order="1" sideWeight="0.5064935" side_tool="true" visible="true" weight="0.17842074" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49188313" visible="true" weight="0.17842074" />
+      <window_info id="Structure" order="1" sideWeight="0.5081169" side_tool="true" visible="true" weight="0.17842074" />
       <window_info id="Favorites" order="2" sideWeight="0.50117373" side_tool="true" weight="0.2496329" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3284091" />
@@ -501,6 +504,13 @@
     <entry file="file://$PROJECT_DIR$/js/costcal_export.js" />
     <entry file="file://$PROJECT_DIR$/js/costcal_export.jsx" />
     <entry file="file://$PROJECT_DIR$/js/costcalc_main.js" />
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-99">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index-dev.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
@@ -548,9 +558,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/costcalc_export.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="499">
-          <caret line="272" column="26" selection-start-line="272" selection-start-column="26" selection-end-line="272" selection-end-column="26" />
+        <state relative-caret-position="104">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
           <folding>
+            <element signature="n#!!block;n#constructor#0;n#ManageExport#0" />
             <element signature="n#!!block;n#export_btn#0;n#ManageExport#0" />
             <element signature="n#!!block;n#options_btn#0;n#ManageExport#0" />
             <element signature="n#!!block;n#hide#0;n#ManageExport#0" />
@@ -561,13 +572,6 @@
             <element signature="n#!!block;n#makecol#0;n#ManageExport#0" />
             <element signature="n#!!block;n#htmltable#0;n#ManageExport#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
         </state>
       </provider>
     </entry>

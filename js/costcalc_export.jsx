@@ -1,5 +1,5 @@
 "use strict";
-
+// This code manages the export part of the engine
 class ManageExport extends React.Component {
     constructor(props) {
         super(props);
