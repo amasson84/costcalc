@@ -231,7 +231,7 @@ class ManageExport extends React.Component {
         var items=[];
         for(let i=0;i<data.length;i++){
             const row=Object.values(data[i]);
-            let children = this.makecol(row,'mark')
+            let children = this.makecol(row,'mark');
             items.push(<span key={i}>|{children}<br/></span>);
         }
         return items;
@@ -261,7 +261,20 @@ class ManageExport extends React.Component {
     read_options(Options){
         let output=[];
         for (let i = 0; i < Options.length; i++) {
-            output.push(<span key={i}><b>{Options[i].Name}</b> : <i>{Options[i].Value}</i> <br/> </span> );
+            switch(this.state.typexp) {
+                case 'html':
+                    output.push(<span key={i}><b>{Options[i].Name}</b> : <i>{Options[i].Value}</i> </span>);
+                    break;
+                case 'htmlsrc':
+                    output.push(<span key={i}>&lt;b&gt;{Options[i].Name}&lt;/b&gt; : &lt;i&gt;{Options[i].Value}&lt;/i&gt; </span>);
+                    break;
+                case 'mark':
+                    output.push(<span key={i}>__{Options[i].Name}__ : *{Options[i].Value}*  </span>);
+                    break;
+            }
+                    if(i< Options.length-1){
+                        output.push(<br/>)
+                    }
         }
         return output
     }
