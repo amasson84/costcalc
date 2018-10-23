@@ -15,10 +15,10 @@ The documentation of the project explains how to install it and configure it.
 ## Citation
 The project is hosted on Zenodo : [![DOI](https://zenodo.org/badge/152056755.svg)](https://zenodo.org/badge/latestdoi/152056755)
 
-The citation informations are here **TBD**
+The citation informations are in the __CITATION__ file and __CODEMETA.json__.
 
 ## License and Term of Usage
 
-This project is release under GNuv3 license see (LICENSE)[https://github.com/rdmepfl/costcalc/blob/master/LICENSE].
+This project is release under GNuv3 license see __LICENSE__.
 
-It's a work of the Research Data Management Team at EPFL Switzerland.
+It's a work of the Research Data Management Team at EPFL Library in Switzerland.
