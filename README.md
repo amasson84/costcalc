@@ -1,4 +1,6 @@
-# Cost Calculator
+Cost Calculator
+============
+(https://rdmepfl.github.io/costcalc/)
 
 ## Introduction
 
@@ -12,8 +14,15 @@ The structure is higly modulable and can be extended for different projects. All
 
 The documentation of the project explains how to install it and configure it.
 
+## Files/Folders
+
+* All the engine is stored in the **js** folder
+* __index-dev.html__ : Index file for development only
+* index.html : main index for production
+
+
 ## Citation
-The project is hosted on Zenodo : [![DOI](https://zenodo.org/badge/152056755.svg)](https://zenodo.org/badge/latestdoi/152056755)
+The project is hosted on Zenodo : [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1469034.svg)](https://doi.org/10.5281/zenodo.1469034)
 
 The citation informations are in the __CITATION__ file and __CODEMETA.json__.
 

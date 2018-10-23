@@ -11,5 +11,7 @@
     <orderEntry type="library" name="react.development" level="application" />
     <orderEntry type="library" name="react-dom.development" level="application" />
     <orderEntry type="library" name="JSXTransformer" level="application" />
+    <orderEntry type="library" name="react.production" level="application" />
+    <orderEntry type="library" name="react-dom.production" level="application" />
   </component>
 </module>
