@@ -12,9 +12,13 @@ The structure is higly modulable and can be extended for different projects. All
 
 The documentation of the project explains how to install it and configure it.
 
+## Citation
+The project is hosted on Zenodo : [![DOI](https://zenodo.org/badge/152056755.svg)](https://zenodo.org/badge/latestdoi/152056755)
+
+The citation informations are here **TBD**
 
 ## License and Term of Usage
 
-This project is release under **TBD** license. 
+This project is release under GNuv3 license see (LICENSE)[https://github.com/rdmepfl/costcalc/blob/master/LICENSE].
 
 It's a work of the Research Data Management Team at EPFL Switzerland.
