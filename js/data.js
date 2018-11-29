@@ -129,6 +129,7 @@ const C4science = {
     Url : [
         {Name:'C4Science Website',Url:'https://www.c4science.ch/'}
     ],
+    ExtraInfo:'C4Science is the repository recommended by EPFL for code repository',
     CatName:'Options',
     Cat:{
         'Free for text file':0,
@@ -222,6 +223,8 @@ const Figshare = {
         {Name:'Figshare website',Url:'https://figshare.com/'},
         {Name:'Figshare Pricing',Url:'https://www.g2crowd.com/products/figshare/pricing'}
     ],
+    ExtraInfo:'The costs of enabling access to research data under an SNSF grant are eligible. The  data archives (data repositories) have to meet the FAIR principles.',
+    ExtraInfoUrl:'http://www.snf.ch/SiteCollectionDocuments/snsf-general-implementation-regulations-for-the-funding-regulations-e.pdf#page=14',
     CatName:'Options',
     Cat:{
         'Free 1GB':0,
@@ -238,6 +241,9 @@ const Dryad = {
     Url : [
     {Name:'Dryad Website Pricing',Url:'https://Datadryad.org/pages/payment'}
 ],
+    ExtraInfo:'The costs of enabling access to research data under an SNSF grant are eligible. The  data archives (data repositories) have to meet the FAIR principles.',
+    ExtraInfoUrl:'http://www.snf.ch/SiteCollectionDocuments/snsf-general-implementation-regulations-for-the-funding-regulations-e.pdf#page=14',
+
     CatName:'Options',
     Cat:{
         'up to 20GB if DPC covered':0,

@@ -1329,8 +1329,13 @@ class Main extends React.Component {
                             <img src="./icons/costcalc.png" width="100"/>
                         </div>
                         <div className="col-auto">
-                            <h1 className="display-4"> EPFL Library <br/>Cost Calculator for Data Management</h1>
+                            <h1 className="display-5"> EPFL Library <br/>Cost Calculator for Data Management</h1>
                         </div>
+                        <div className="col-auto">
+                            <img src="./icons/logo.png" width="200"/>
+                        </div>
+                    </div>
+                    <div className="row">
                         <div className="col">
                             <p className="lead">
                                 Welcome to our cost calculator this tool will help researcher/professor to have an
@@ -1338,7 +1343,8 @@ class Main extends React.Component {
                             </p>
                             <p className="lead">
                                 Many providers are included in the service and you will be able to calculate a cost
-                                based on your needs. Total cost is calculated dynamically based on your inputs.
+                                based on your needs.
+                                <br/>Total cost is calculated dynamically based on your inputs.
                             </p>
                             <p className="lead">
                                 We hope you will enjoy this tool and it will be useful for you.
