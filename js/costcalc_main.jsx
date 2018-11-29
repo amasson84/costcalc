@@ -407,12 +407,15 @@ class AmountRatesCost extends React.Component {
         super(props);
         this.handleAmountChange = this.handleAmountChange.bind(this);
         this.handleRateChange = this.handleRateChange.bind(this);
-
         this.state={
             Amount : 1,
             SelectRate : 0 ,
-            Rate : this.props.data.Rates[Object.keys(this.props.data.Rates)[0]]
+            Rate : this.props.data.Rates[Object.keys(this.props.data.Rates)[0]],
+            Adaptive:false,
         };
+        if(typeof this.props.data.Adaptive!=='undefined' && this.props.data.Adaptive===true){
+            this.state.Adaptive=true;
+                }
         this.make_export();
 
     }
@@ -435,25 +438,50 @@ class AmountRatesCost extends React.Component {
         this.make_export();
     }
     render() {
+        let Amount_min;
+        let Amount_max;
+        let Amount_stp;
+        if(this.state.Adaptive){
+            Amount_min=this.props.data.AmountMin[this.state.SelectRate];
+            Amount_max=this.props.data.AmountMax[this.state.SelectRate];
+            Amount_stp=this.props.data.AmountStep[this.state.SelectRate];
+
+        }
+        else {
+            Amount_min=this.props.data.AmountMin;
+            Amount_max=this.props.data.AmountMax;
+            Amount_stp=this.props.data.AmountStep;
+        }
+        if(this.state.Amount>Amount_max){
+            this.state.Amount=Amount_max;
+        }
+        if(this.state.Amount<Amount_min){
+            this.state.Amount=Amount_min;
+        }
          return (
             <div className="row align-items-center">
                 <div className="col">
-                <AmountInput id={this.props.id} min={this.props.data.AmountMin} max={this.props.data.AmountMax}
-                             step={this.props.data.AmountStep} value={this.state.Amount} name={this.props.data.AmountName}
+                <AmountInput id={this.props.id} min={Amount_min} max={Amount_max}
+                             step={Amount_stp} value={this.state.Amount} name={this.props.data.AmountName}
                              unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} tips="Select the desired amount"/>
                 </div>
                 <div className="col-3">
                     <SelectorInput id={this.props.id+'-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)}
-                                   class="btn-secondary" selected={this.state.SelectRate} rate={this.state.rate} unit={this.props.data.RateUnit} onChange={this.handleRateChange} />
+                                   class="btn-secondary" selected={this.state.SelectRate} rate={this.state.rate}
+                                   unit={this.props.data.RateUnit} onChange={this.handleRateChange} />
                 </div>
             </div>
         );
     }
     makecost(amount,rate) {
-        if (amount<=this.props.data.AmountFree){
-            amount=0;
+        let free;
+        if(this.state.Adaptive){
+            free=this.props.data.AmountFree[this.state.SelectRate];
+        } else {
+            free=this.props.data.AmountFree;
         }
-        var total=amount*rate;
+
+        let total = (amount - free) * rate;
         total=tomoney(total);
         this.props.onCostChange(this.props.n,total);
         return total;
@@ -471,8 +499,12 @@ class CategoryAmountRatesCost extends React.Component {
             Cat : this.props.data.Cat[Object.keys(this.props.data.Cat)[0]],
             Amount : 1,
             SelectRate : 0 ,
-            Rate : this.props.data.Rates[Object.keys(this.props.data.Rates)[0]]
+            Rate : this.props.data.Rates[Object.keys(this.props.data.Rates)[0]],
+            Adaptive: false,
         };
+        if(typeof this.props.data.Adaptive!=='undefined' && this.props.data.Adaptive===true){
+            this.state.Adaptive=true;
+        }
         this.make_export();
 
 
@@ -503,6 +535,26 @@ class CategoryAmountRatesCost extends React.Component {
         this.make_export();
     }
     render() {
+        let Amount_min;
+        let Amount_max;
+        let Amount_stp;
+        if(this.state.Adaptive){
+            Amount_min=this.props.data.AmountMin[this.state.SelectRate];
+            Amount_max=this.props.data.AmountMax[this.state.SelectRate];
+            Amount_stp=this.props.data.AmountStep[this.state.SelectRate];
+
+        }
+        else {
+            Amount_min=this.props.data.AmountMin;
+            Amount_max=this.props.data.AmountMax;
+            Amount_stp=this.props.data.AmountStep;
+        }
+        if(this.state.Amount>Amount_max){
+            this.state.Amount=Amount_max;
+        }
+        if(this.state.Amount<Amount_min){
+            this.state.Amount=Amount_min;
+        }
         return (
             <div className="row align-items-center">
                 <div className="col-3">
@@ -511,7 +563,7 @@ class CategoryAmountRatesCost extends React.Component {
                 </div>
 
                 <div className="col-4">
-                <AmountInput id={this.props.id} min={this.props.data.AmountMin} max={this.props.data.AmountMax} step={this.props.data.AmountStep}
+                <AmountInput id={this.props.id} min={Amount_min} max={Amount_max} step={Amount_stp}
                              value={this.state.Amount} name={this.props.data.AmountName} unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} />
                 </div>
                 <div className="col-4">
@@ -522,10 +574,14 @@ class CategoryAmountRatesCost extends React.Component {
         );
     }
     makecost(cat,amount,rate) {
-        if (amount<=this.props.data.AmountFree){
-            amount=0;
+        let free;
+        if(this.state.Adaptive){
+            free=this.props.data.AmountFree[this.state.SelectRate];
+        } else {
+            free=this.props.data.AmountFree;
         }
-        var total=cat+amount*rate;
+
+        var total=cat+(amount-free)*rate;
         total=tomoney(total);
         this.props.onCostChange(this.props.n,total);
         return total;
@@ -1200,11 +1256,11 @@ class Main extends React.Component {
                     <dl className="row">
                         <dt className="col-sm-3">Add or Remove Line</dt>
                         <dd className="col-sm-9">
-                            <p>If you want to add a new provider use the <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>}
+                            <p>If you want to add a new provider use the <ButtonInput className="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>}
                                                                                       tips={"Add a new category"} onClick={this.fctnull}/> button.
                             </p>
                             <p>
-                                You can also remove a provider with <ButtonInput class="btn-danger btn-sm" id="plugins-add-btn"
+                                You can also remove a provider with <ButtonInput className="btn-danger btn-sm" id="plugins-add-btn"
                                                                                  name={<img className="img-fluid" src="icons\minus.png" width="20"/>}
                                                                                  tips={"Remove this line"} onClick={this.fctnull}/> button.
                             </p>
@@ -1213,7 +1269,7 @@ class Main extends React.Component {
                     <dl className="row">
                         <dt className="col-sm-3">To know more about</dt>
                         <dd className="col-sm-9">
-                            Some extra information about the category or the provider can be obtained with the <ButtonInput class="btn-primary btn-sm" id="plugins-add-btn"
+                            Some extra information about the category or the provider can be obtained with the <ButtonInput classname="btn-primary btn-sm" id="plugins-add-btn"
                                                                                                                             name={<img className="img-fluid" src="icons\info.png" width="20"/>}
                                                                                                                             tips={"Know more"} onClick={this.fctnull}/> button.
                         </dd>
@@ -1229,8 +1285,8 @@ class Main extends React.Component {
                         <dd className="col-sm-9">
                             You can export your work into different format : <br/>
                             <samp> HTML</samp> : This format can be used in any wordprocessing software (such as Microsoft Word or Libreoffice).<br/>
-                            <samp>HTML Source code</samp> and <samp>Markdown</samp> formats are also possible.<br/>
-                            Click on the  <ButtonInput class="btn-secondary"  id="btn-export" name="Copy to Clipboard" tips="Copy the output into your clipboard"
+                            <samp>HTML Source code</samp>, <samp>Markdown</samp>, and <samp>CSV</samp> formats are also possible.<br/>
+                            Click on the  <ButtonInput className="btn-secondary"  id="btn-export" name="Copy to Clipboard" tips="Copy the output into your clipboard"
                                                        onClick={this.fctnull}/> in order to copy your work into your clipboard. A simple <kbd>Paste</kbd> will transfer your work into any software.
 
                         </dd>
@@ -1287,8 +1343,8 @@ class Main extends React.Component {
                             <p className="lead">
                                 We hope you will enjoy this tool and it will be useful for you.
                             </p>
-                            <ButtonInput class="btn-info" id="head-howto" name="To Know More (HOWTO)" onClick={this.move2howto}/> &nbsp;
-                            <a  class="btn btn-danger" id="head-help" target="_blank" href={MainData.HelpUrl} >I need help with my DMP</a>
+                            <ButtonInput class="btn btn-primary" id="head-howto" name="To Know More (HOWTO)" onClick={this.move2howto}/> &nbsp;
+                            <a  className="btn btn-danger" id="head-help" target="_blank" href={MainData.HelpUrl} ><img src="./icons/help.png" width="20"/>&nbsp;I need help with my DMP</a>
                         </div>
                     </div>
                 </div>
