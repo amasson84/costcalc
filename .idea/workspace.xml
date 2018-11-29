@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32058667-6761-4492-a704-290762d93e35" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/costcalc_export.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/js/costcalc_export.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/costcalc_main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/js/costcalc_main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/js/data.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/data.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -16,141 +15,16 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-1435277962">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="4" />
-          <entry key="project.open.time.16" value="1" />
-          <entry key="project.open.time.4" value="1" />
-          <entry key="project.open.time.8" value="1" />
-          <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="4" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="back" value="1" />
-          <entry key="css" value="1" />
-          <entry key="html" value="3" />
-          <entry key="js" value="11" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="CSS" value="1" />
-          <entry key="HTML" value="3" />
-          <entry key="JavaScript" value="11" />
-          <entry key="PLAIN_TEXT" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="html" value="1223" />
-          <entry key="js" value="2620" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="HTML" value="1223" />
-          <entry key="JavaScript" value="2620" />
-        </counts>
-      </usages-collector>
-    </session>
-    <session id="-1962752238">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="12" />
-          <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.1" value="2" />
-          <entry key="project.open.time.4" value="6" />
-          <entry key="project.open.time.5" value="4" />
-          <entry key="project.opened" value="13" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="css" value="101" />
-          <entry key="html" value="589" />
-          <entry key="js" value="7068" />
-          <entry key="jsx" value="8990" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="CSS" value="101" />
-          <entry key="HTML" value="589" />
-          <entry key="JSX Harmony" value="8990" />
-          <entry key="JavaScript" value="7068" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="html" value="1" />
-          <entry key="js" value="4" />
-          <entry key="jsx" value="3" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="HTML" value="1" />
-          <entry key="JSX Harmony" value="3" />
-          <entry key="JavaScript" value="4" />
-        </counts>
-      </usages-collector>
-    </session>
-    <session id="2130354723">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="5" />
-          <entry key="project.open.time.10" value="1" />
-          <entry key="project.open.time.14" value="1" />
-          <entry key="project.open.time.17" value="1" />
-          <entry key="project.open.time.19" value="1" />
-          <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.20" value="1" />
-          <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="7" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="css" value="199" />
-          <entry key="html" value="101" />
-          <entry key="js" value="11107" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="CSS" value="199" />
-          <entry key="HTML" value="101" />
-          <entry key="JavaScript" value="11107" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="css" value="1" />
-          <entry key="js" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="CSS" value="1" />
-          <entry key="JavaScript" value="2" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FavoritesManager">
     <favorites_list name="costcalc" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="3" column="26" lean-forward="true" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
+            <state relative-caret-position="69">
+              <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -158,26 +32,24 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index-dev.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="416">
+            <state relative-caret-position="368">
               <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/costcalc_main.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="1266" column="68" selection-start-line="1266" selection-start-column="68" selection-end-line="1266" selection-end-column="68" />
+            <state relative-caret-position="475">
+              <caret line="565" column="39" lean-forward="true" selection-start-line="565" selection-start-column="39" selection-end-line="565" selection-end-column="39" />
               <folding>
                 <element signature="e#106#252#0" />
                 <element signature="e#281#365#0" />
                 <element signature="e#393#573#0" />
-                <element signature="e#692#858#0" />
                 <element signature="e#799#1680#0" />
                 <element signature="e#1705#1964#0" />
                 <element signature="e#2036#2942#0" />
-                <element signature="e#2944#4994#0" />
                 <element signature="e#4996#5933#0" />
                 <element signature="e#5935#6673#0" />
                 <element signature="e#6675#7055#0" />
@@ -189,24 +61,8 @@
                 <element signature="e#12656#12843#0" />
                 <element signature="e#12917#15208#0" />
                 <element signature="e#15210#18298#0" />
-                <element signature="e#18300#19748#0" />
                 <element signature="e#19750#20168#0" />
                 <element signature="e#20170#22878#0" />
-                <element signature="e#22949#29456#0" />
-                <element signature="e#25685#28454#0" />
-                <element signature="e#29458#33321#0" />
-                <element signature="e#33323#36138#0" />
-                <element signature="e#33952#34142#0" />
-                <element signature="e#34339#34456#0" />
-                <element signature="e#35165#35215#0" />
-                <element signature="e#35228#35303#0" />
-                <element signature="e#36140#38055#0" />
-                <element signature="e#38175#38466#0" />
-                <element signature="e#38496#38597#0" />
-                <element signature="e#38625#39028#0" />
-                <element signature="e#39563#44109#0" />
-                <element signature="e#44127#44980#0" />
-                <element signature="e#46597#46712#0" />
               </folding>
             </state>
           </provider>
@@ -215,11 +71,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/costcalc_export.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-757">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="455">
+              <caret line="64" column="51" selection-start-line="64" selection-start-column="51" selection-end-line="64" selection-end-column="51" />
               <folding>
                 <element signature="n#!!block;n#constructor#0;n#ManageExport#0" />
-                <element signature="n#!!block;n#export_btn#0;n#ManageExport#0" />
                 <element signature="n#!!block;n#options_btn#0;n#ManageExport#0" />
                 <element signature="n#!!block;n#hide#0;n#ManageExport#0" />
                 <element signature="n#!!block;n#make_copy#0;n#ManageExport#0" />
@@ -241,7 +96,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/css/costcalc.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2782">
+            <state relative-caret-position="2461">
               <caret line="107" column="19" selection-start-line="107" selection-start-column="19" selection-end-line="107" selection-end-column="19" />
             </state>
           </provider>
@@ -250,8 +105,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/data.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="345" column="25" selection-start-line="345" selection-start-column="25" selection-end-line="345" selection-end-column="25" />
+            <state relative-caret-position="1425">
+              <caret line="345" column="16" selection-start-line="345" selection-start-column="16" selection-end-line="345" selection-end-column="16" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -317,9 +172,9 @@
         <option value="$PROJECT_DIR$/js/costcalc_main.js" />
         <option value="$PROJECT_DIR$/css/costcalc.css" />
         <option value="$PROJECT_DIR$/index-dev.html" />
-        <option value="$PROJECT_DIR$/js/costcalc_export.jsx" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/data.js" />
+        <option value="$PROJECT_DIR$/js/costcalc_export.jsx" />
         <option value="$PROJECT_DIR$/js/costcalc_main.jsx" />
       </list>
     </option>
@@ -329,20 +184,13 @@
     <bower-package value="" />
     <bower.json value="" />
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
     <exe-path />
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="50" />
     <option name="y" value="23" />
     <option name="width" value="1680" />
     <option name="height" value="1027" />
@@ -355,7 +203,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -367,6 +214,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -377,7 +225,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/index.html" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -423,7 +271,7 @@
       <option name="SSL_CERT" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Unnamed" type="JavascriptDebugType" factoryName="JavaScript Debug" uri="http://localhost:63342/index.html?_ijt=guj9n9f47nlcpp7nsqo0ugkca2" useFirstLineBreakpoints="true">
+    <configuration name="Unnamed" type="JavascriptDebugType" uri="http://localhost:63342/costcalc/index.html?_ijt=guj9n9f47nlcpp7nsqo0ugkca2" useFirstLineBreakpoints="true">
       <method v="2" />
     </configuration>
   </component>
@@ -461,11 +309,12 @@
       <workItem from="1538993660872" duration="37000" />
       <workItem from="1540301753994" duration="575000" />
       <workItem from="1543480920205" duration="802000" />
+      <workItem from="1543488993157" duration="978000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="196263000" />
+    <option name="totallyTimeSpent" value="197241000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -477,11 +326,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="50" y="23" width="1680" height="1027" extended-state="0" />
+    <frame x="0" y="23" width="1680" height="1027" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.48966268" visible="true" weight="0.17842074" />
-      <window_info id="Structure" order="1" sideWeight="0.51033735" side_tool="true" visible="true" weight="0.17842074" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.48857453" visible="true" weight="0.17842074" />
+      <window_info id="Structure" order="1" sideWeight="0.51142544" side_tool="true" visible="true" weight="0.17842074" />
       <window_info id="Favorites" order="2" sideWeight="0.50117373" side_tool="true" weight="0.2496329" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3284091" />
@@ -504,9 +353,6 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/js/bootstrap.js">
       <provider selected="true" editor-type-id="text-editor" />
@@ -526,37 +372,33 @@
     <entry file="file://$PROJECT_DIR$/js/costcal_export.js" />
     <entry file="file://$PROJECT_DIR$/js/costcal_export.jsx" />
     <entry file="file://$PROJECT_DIR$/js/costcalc_main.js" />
-    <entry file="file://$PROJECT_DIR$/css/costcalc.css">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2782">
-          <caret line="107" column="19" selection-start-line="107" selection-start-column="19" selection-end-line="107" selection-end-column="19" />
+        <state relative-caret-position="69">
+          <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index-dev.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="416">
+        <state relative-caret-position="368">
           <caret line="16" column="25" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/data.js">
+    <entry file="file://$PROJECT_DIR$/css/costcalc.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="345" column="25" selection-start-line="345" selection-start-column="25" selection-end-line="345" selection-end-column="25" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state relative-caret-position="2461">
+          <caret line="107" column="19" selection-start-line="107" selection-start-column="19" selection-end-line="107" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/costcalc_export.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-757">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="455">
+          <caret line="64" column="51" selection-start-line="64" selection-start-column="51" selection-end-line="64" selection-end-column="51" />
           <folding>
             <element signature="n#!!block;n#constructor#0;n#ManageExport#0" />
-            <element signature="n#!!block;n#export_btn#0;n#ManageExport#0" />
             <element signature="n#!!block;n#options_btn#0;n#ManageExport#0" />
             <element signature="n#!!block;n#hide#0;n#ManageExport#0" />
             <element signature="n#!!block;n#make_copy#0;n#ManageExport#0" />
@@ -574,19 +416,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/data.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1425">
+          <caret line="345" column="16" selection-start-line="345" selection-start-column="16" selection-end-line="345" selection-end-column="16" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/costcalc_main.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="1266" column="68" selection-start-line="1266" selection-start-column="68" selection-end-line="1266" selection-end-column="68" />
+        <state relative-caret-position="475">
+          <caret line="565" column="39" lean-forward="true" selection-start-line="565" selection-start-column="39" selection-end-line="565" selection-end-column="39" />
           <folding>
             <element signature="e#106#252#0" />
             <element signature="e#281#365#0" />
             <element signature="e#393#573#0" />
-            <element signature="e#692#858#0" />
             <element signature="e#799#1680#0" />
             <element signature="e#1705#1964#0" />
             <element signature="e#2036#2942#0" />
-            <element signature="e#2944#4994#0" />
             <element signature="e#4996#5933#0" />
             <element signature="e#5935#6673#0" />
             <element signature="e#6675#7055#0" />
@@ -598,32 +448,9 @@
             <element signature="e#12656#12843#0" />
             <element signature="e#12917#15208#0" />
             <element signature="e#15210#18298#0" />
-            <element signature="e#18300#19748#0" />
             <element signature="e#19750#20168#0" />
             <element signature="e#20170#22878#0" />
-            <element signature="e#22949#29456#0" />
-            <element signature="e#25685#28454#0" />
-            <element signature="e#29458#33321#0" />
-            <element signature="e#33323#36138#0" />
-            <element signature="e#33952#34142#0" />
-            <element signature="e#34339#34456#0" />
-            <element signature="e#35165#35215#0" />
-            <element signature="e#35228#35303#0" />
-            <element signature="e#36140#38055#0" />
-            <element signature="e#38175#38466#0" />
-            <element signature="e#38496#38597#0" />
-            <element signature="e#38625#39028#0" />
-            <element signature="e#39563#44109#0" />
-            <element signature="e#44127#44980#0" />
-            <element signature="e#46597#46712#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="3" column="26" lean-forward="true" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
         </state>
       </provider>
     </entry>
