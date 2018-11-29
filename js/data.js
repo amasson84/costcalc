@@ -10,6 +10,7 @@ const NasEpfl =  {
         {Name:'VPSI-Website',Url:'https://support.epfl.ch/help/epfl?id=epfl_service_status&service=49a363acdb34c700ef64731b8c96191f'},
         {Name:'SV-IT Storage Website',Url:'https://sv-it.epfl.ch/stockage'}
     ],
+    ExtraInfo:"The first TB is free",
     AmountName: "Amount",
     AmountUnit: "TB",
     AmountMin : 1,
@@ -144,10 +145,12 @@ const Github = {
     ],
     AmountName: "Number of user",
     AmountUnit: "User(s)",
-    AmountMin : 1,
-    AmountMax : 100,
-    AmountStep : 1,
-    AmountFree:0,
+    Adaptive:true,
+
+    AmountMin : [1,1,5,10],
+    AmountMax : [100,1,100,100],
+    AmountStep : [1,1,1,1],
+    AmountFree:[0,0,0,0],
     AmountFreeCumulative:false,
     RateVar : true,
     RateName:'Plan',
@@ -167,12 +170,14 @@ const Bitbucket= {
     Url : [
         {Name:'Bitbucket Website Pricing',Url:'https://bitbucket.org/product/pricing'}
     ],
+
     AmountName: "Number of user",
     AmountUnit: "User(s)",
-    AmountMin : 1,
-    AmountMax : 100,
-    AmountStep : 1,
-    AmountFree:0,
+    Adaptive:true,
+    AmountMin : [1,5,5],
+    AmountMax : [5,100,100],
+    AmountStep : [1,1,1],
+    AmountFree:[0,0,0],
     AmountFreeCumulative:false,
     RateVar : true,
     RateName:'Plan',
@@ -239,15 +244,15 @@ const Dryad = {
         'up to 20GB if no  DPC covered':120
     },
     CatUnit:'CHF',
-    AmountName: "Extra - Storage",
+    AmountName: "Storage",
     AmountUnit: "GB",
-    AmountMin : 0,
+    AmountMin : 20,
     AmountMax : 100,
     AmountStep : 10,
-    AmountFree:0,
+    AmountFree:20,
     AmountFreeCumulative:false,
     RateVar : true,
-    RateName: 'ELN Storage',
+    RateName: 'Storage',
     Rates : {
     'Extra Storage': 50,
     },
@@ -347,6 +352,6 @@ const MainData={
     Updated:'29/11/2018',
     HelpUrl:'mailto:researchdata@epfl.ch',
     Currency:'CHF',
-    Version : 'v1.1',
+    Version : 'v1.2',
     Data:[storage,ELN,Database,repository]
 };
