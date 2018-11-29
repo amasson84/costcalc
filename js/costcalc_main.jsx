@@ -2,8 +2,6 @@
 // Functions Tools
 // ---------------------
 // ---------------------
-
-// Function loop for ReactJS object
 function Repeat(props) {
     let items = [];
     for (let i = 0; i < props.numTimes; i++) {
@@ -12,14 +10,12 @@ function Repeat(props) {
     return <div>{items}</div>;
 }
 
-//Convert a str value to numeric
 function tonumeric (value) {
     return parseFloat(
         value.toString().replace(/[^0-9\.]+/g, '')
     );
 }
 
-//Convert a numeric to moeney
 function tomoney(numeric) {
     if (typeof numeric == 'string') {
         numeric = parseFloat(numeric);
@@ -27,7 +23,7 @@ function tomoney(numeric) {
 
     return numeric.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + ' '+MainData.Currency;
 }
-//Return sum of an array
+
 function sum(obj) {
     const val=Object.values(obj);
     var total = 0;
@@ -36,7 +32,6 @@ function sum(obj) {
     }
     return total;
 }
-//Compare two objects return true if similar
 Object.compare = function (obj1, obj2) {
     //Loop through properties in object 1
     for (var p in obj1) {
@@ -64,8 +59,6 @@ Object.compare = function (obj1, obj2) {
     }
     return true;
 };
-
-//Return a random int
 function randomint(not){
     var rnd;
     do {
@@ -769,7 +762,27 @@ class ProviderPluginsSelector extends React.Component {
         this.setState({Name:txt});
         // this.props.handleCostChange(this.props.n,this.state.cost);//provoke export update on the parent
     }
+    // Manage extra display info for a selected provider
 
+    extrainfo(Cdata){
+        let  Extra_inf="";
+        let  Extra_infUrl="";
+        if ( typeof Cdata.ExtraInfoUrl !=='undefined' && Cdata.ExtraInfoUrl !==''){
+            Extra_infUrl=<p className="h6"><em><a href={Cdata.ExtraInfoUrl} target="_blank">To know more</a></em></p>;
+        }
+
+        if ( typeof Cdata.ExtraInfo !=='undefined' && Cdata.ExtraInfo !==''){
+            Extra_inf=
+                <div className="col-3">
+                    <div className="alert alert-info" role="alert">
+                        <img src="./icons/info2.png"  width="20"/> &nbsp;
+                        {Cdata.ExtraInfo}
+                        {Extra_infUrl}
+                    </div>
+                </div>;
+        }
+        return(Extra_inf);
+    }
     render() {
         const selected=this.state.selected;
         this.state.manualname=false;
@@ -777,6 +790,7 @@ class ProviderPluginsSelector extends React.Component {
         const Cmp=this.cmp2string(this.cmpdata(selected).Style);
         const Cdata=this.cmpdata(selected);
         const id=this.props.data.Name.replace(/\s/g,'')+this.props.n;
+
         return(
            <div id={"plugin"}>
 
@@ -802,10 +816,12 @@ class ProviderPluginsSelector extends React.Component {
                                         <MakeknowmoreInput key={selected} data={Cdata}  name="" n="0" />
                                     </div>
                                 </div>
+                                {this.extrainfo(Cdata)}
                                 <div className="col-4">
                                     <TxtInput type="text" id="module-comments" name="My Comments"
                                               placeholder="I can put a comment here..." onChange={this.handleCommentChange}/>
                                 </div>
+
                             </div>
 
                             <div id="component" className="container bg-light">
@@ -832,7 +848,7 @@ class ProviderPluginsSelector extends React.Component {
             }
         return out;
         }
-
+// return the correct style fct from the str input
     cmp2string(str){
         switch (str) {
             case "AmountRatesCost" : return AmountRatesCost;
@@ -919,6 +935,7 @@ class ModuleHeader  extends React.Component{
                  <div className="row">
                      {this.props.comments}
                  </div>
+
              </div>
 
              <div id="plugin-cost" className="col-2 align-self-end">
@@ -983,14 +1000,6 @@ class ManagePlugins extends React.Component{
         this.make_export()
     }
     make_export(){
-        // var out=[];
-        // for (var i = 0; i < this.state.export.length; i++) {
-        //     if((this.state.export[i]!==null)&&
-        //         (typeof this.state.export[i].data !== 'undefined')&&(typeof this.state.export[i].state !== 'undefined')){
-        //            out.push({data:this.state.export[i].data,state:this.state.export[i].state});
-        // }}
-        //
-        // this.props.export(out,this.props.n)
         if (this.state.export.length === this.give_n()) {
             this.props.export(this.state.export, this.props.n)
         }
@@ -1264,7 +1273,7 @@ class Main extends React.Component {
                             <img src="./icons/costcalc.png" width="100"/>
                         </div>
                         <div className="col-auto">
-                            <h1 className="display-4"> EPFL Library  Cost Calculator for Data Management</h1>
+                            <h1 className="display-4"> EPFL Library <br/>Cost Calculator for Data Management</h1>
                         </div>
                         <div className="col">
                             <p className="lead">
@@ -1278,7 +1287,8 @@ class Main extends React.Component {
                             <p className="lead">
                                 We hope you will enjoy this tool and it will be useful for you.
                             </p>
-                            <ButtonInput class="btn-info" id="head-howto" name="To Know More (HOWTO)" onClick={this.move2howto}/>
+                            <ButtonInput class="btn-info" id="head-howto" name="To Know More (HOWTO)" onClick={this.move2howto}/> &nbsp;
+                            <a  class="btn btn-danger" id="head-help" target="_blank" href={MainData.HelpUrl} >I need help with my DMP</a>
                         </div>
                     </div>
                 </div>
@@ -1297,13 +1307,14 @@ class Main extends React.Component {
                 <div className="jumbotron jumbotron-fluid">
                 <div className="alert alert-danger" role="alert" id="infotxt">
                     The values published on this service are only informative and cannot be used for exact calculation. If you see some mistake or would like to
-                    have another services please contact us. Last update {MainData.Updated}
+                    have another services please contact us.
+                    <br/><strong>Last Database Update : {MainData.Updated} </strong>
                 </div>
                 <div id="service">
                     <p>This service has been developed by the <a href="https://researchdata.epfl.ch">Resarch Data Management Team</a> of the <a href="https://library.epfl.ch">EPFL Library</a>  <br/>
-                        This software is publish under CC0 and your are using <strong> Version beta 2.1</strong><br/>
+                        This software is publish under CC0 and your are using <strong> Version {MainData.Version}</strong><br/>
                         Source code can be download <a href="https://c4science.ch/source/costcalc/">here</a></p>
-                    <p><small>Icons are from the Noun Project (Book by Randi NI, Storage by I Pitu, Database by Novalyi, data cloud by Vectors Market)</small></p>
+                    <p><small>Icons are from the Noun Project (Book by Randi NI, Storage by I Pitu, Database by Novalyi, data cloud by Vectors Market, Information by Gregor Cresnar)</small></p>
                 </div>
             </div>
             </div>

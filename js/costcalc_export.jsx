@@ -61,6 +61,10 @@ class ManageExport extends React.Component {
                     <ButtonInput class="btn-success" onClick={this.make_export} id="btn-export" name="Export Markdown" tips="Export in Markdown source code"
                                  n="mark"/>
                 </div>
+                <div className="col-auto">
+                    <ButtonInput class="btn-success" onClick={this.make_export} id="btn-warning" name="Export CSV" tips="Export in CSV source code"
+                                 n="csv"/>
+                </div>
             </div>
         )
     }
@@ -112,6 +116,8 @@ class ManageExport extends React.Component {
                 return this.htmlsrcout(hcol,data);
             case 'mark':
                 return this.markout(hcol,data);
+            case 'csv':
+                return this.csvout(hcol,data);
         }
     }
     make_export(typ){
@@ -177,7 +183,21 @@ class ManageExport extends React.Component {
             </div>
         );
     }
+    csvout(hcol,data){
+        const col=Array.from({length: hcol.length-1}, (v, k) => ",");
+        return(
+            <div id="htmlexport">
+                <pre><code>
+                    {this.makecol(hcol,'csv',true)}<br/>
 
+                    {this.csvtable(data)}
+
+                    {col} Total Cost ;{this.props.data.total};<br/>
+
+               </code></pre>
+            </div>
+        );
+    }
 
     makecol(cols,style,head){
         let children = [];
@@ -199,12 +219,19 @@ class ManageExport extends React.Component {
                     children.push(<span key={j}>&lt;td&gt; {cols[j]} &lt;/td&gt;</span>);
                 }
             }
-            return children;
+                return children;
             case 'mark':
                 for (let j = 0; j < cols.length; j++) {
                     children.push(<span key={j}> {cols[j]}|</span>);
                 }
+                return children
+            case 'csv':
+                for (let j = 0; j < cols.length; j++) {
+                    children.push(<span key={j}> {cols[j]},</span>);
+                }
                 return children;
+
+
         }
 
 }
@@ -233,6 +260,15 @@ class ManageExport extends React.Component {
             const row=Object.values(data[i]);
             let children = this.makecol(row,'mark');
             items.push(<span key={i}>|{children}<br/></span>);
+        }
+        return items;
+    }
+    csvtable(data){
+        var items=[];
+        for(let i=0;i<data.length;i++){
+            const row=Object.values(data[i]);
+            let children = this.makecol(row,'csv');
+            items.push(<span key={i}>{children}<br/></span>);
         }
         return items;
     }

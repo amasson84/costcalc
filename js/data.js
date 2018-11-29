@@ -46,6 +46,8 @@ const GoogleDriveEdu = {
     Style : 'CategoryCost',
     Provider : "Google Drive Educ",
     Name:'Online Storage',
+    ExtraInfo : "Google Storage is not recommanded as the data are stored outside of Switzerland",
+    ExtraInfoUrl :"https://support.epfl.ch//kb_view_customer.do?sysparm_article=KB0012829",
     Url : [
         {Name :'Google Education Page',Url:'https://edu.google.com/?modal_active=none'}
     ],
@@ -342,7 +344,9 @@ const repository={
 // ----------------------------------------------------
 
 const MainData={
-    Currency:'CHF',
     Updated:'29/11/2018',
+    HelpUrl:'mailto:researchdata@epfl.ch',
+    Currency:'CHF',
+    Version : 'Beta 2.4',
     Data:[storage,ELN,Database,repository]
 };
