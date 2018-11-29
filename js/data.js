@@ -343,5 +343,6 @@ const repository={
 
 const MainData={
     Currency:'CHF',
+    Updated:'29/11/2018',
     Data:[storage,ELN,Database,repository]
 };

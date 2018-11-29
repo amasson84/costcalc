@@ -2,6 +2,8 @@
 // Functions Tools
 // ---------------------
 // ---------------------
+
+// Function loop for ReactJS object
 function Repeat(props) {
     let items = [];
     for (let i = 0; i < props.numTimes; i++) {
@@ -10,12 +12,14 @@ function Repeat(props) {
     return <div>{items}</div>;
 }
 
+//Convert a str value to numeric
 function tonumeric (value) {
     return parseFloat(
         value.toString().replace(/[^0-9\.]+/g, '')
     );
 }
 
+//Convert a numeric to moeney
 function tomoney(numeric) {
     if (typeof numeric == 'string') {
         numeric = parseFloat(numeric);
@@ -23,7 +27,7 @@ function tomoney(numeric) {
 
     return numeric.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + ' '+MainData.Currency;
 }
-
+//Return sum of an array
 function sum(obj) {
     const val=Object.values(obj);
     var total = 0;
@@ -32,6 +36,7 @@ function sum(obj) {
     }
     return total;
 }
+//Compare two objects return true if similar
 Object.compare = function (obj1, obj2) {
     //Loop through properties in object 1
     for (var p in obj1) {
@@ -59,6 +64,8 @@ Object.compare = function (obj1, obj2) {
     }
     return true;
 };
+
+//Return a random int
 function randomint(not){
     var rnd;
     do {
@@ -1257,7 +1264,7 @@ class Main extends React.Component {
                             <img src="./icons/costcalc.png" width="100"/>
                         </div>
                         <div className="col-auto">
-                            <h1 className="display-4"> Cost Calculator for Data Management</h1>
+                            <h1 className="display-4"> EPFL Library  Cost Calculator for Data Management</h1>
                         </div>
                         <div className="col">
                             <p className="lead">
@@ -1290,7 +1297,7 @@ class Main extends React.Component {
                 <div className="jumbotron jumbotron-fluid">
                 <div className="alert alert-danger" role="alert" id="infotxt">
                     The values published on this service are only informative and cannot be used for exact calculation. If you see some mistake or would like to
-                    have another services please contact us.
+                    have another services please contact us. Last update {MainData.Updated}
                 </div>
                 <div id="service">
                     <p>This service has been developed by the <a href="https://researchdata.epfl.ch">Resarch Data Management Team</a> of the <a href="https://library.epfl.ch">EPFL Library</a>  <br/>
