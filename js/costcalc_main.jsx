@@ -1256,11 +1256,11 @@ class Main extends React.Component {
                     <dl className="row">
                         <dt className="col-sm-3">Add or Remove Line</dt>
                         <dd className="col-sm-9">
-                            <p>If you want to add a new provider use the <ButtonInput className="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>}
+                            <p>If you want to add a new provider use the <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>}
                                                                                       tips={"Add a new category"} onClick={this.fctnull}/> button.
                             </p>
                             <p>
-                                You can also remove a provider with <ButtonInput className="btn-danger btn-sm" id="plugins-add-btn"
+                                You can also remove a provider with <ButtonInput class="btn-danger btn-sm" id="plugins-add-btn"
                                                                                  name={<img className="img-fluid" src="icons\minus.png" width="20"/>}
                                                                                  tips={"Remove this line"} onClick={this.fctnull}/> button.
                             </p>
@@ -1269,7 +1269,7 @@ class Main extends React.Component {
                     <dl className="row">
                         <dt className="col-sm-3">To know more about</dt>
                         <dd className="col-sm-9">
-                            Some extra information about the category or the provider can be obtained with the <ButtonInput classname="btn-primary btn-sm" id="plugins-add-btn"
+                            Some extra information about the category or the provider can be obtained with the <ButtonInput class="btn-primary btn-sm" id="plugins-add-btn"
                                                                                                                             name={<img className="img-fluid" src="icons\info.png" width="20"/>}
                                                                                                                             tips={"Know more"} onClick={this.fctnull}/> button.
                         </dd>
@@ -1286,7 +1286,7 @@ class Main extends React.Component {
                             You can export your work into different format : <br/>
                             <samp> HTML</samp> : This format can be used in any wordprocessing software (such as Microsoft Word or Libreoffice).<br/>
                             <samp>HTML Source code</samp>, <samp>Markdown</samp>, and <samp>CSV</samp> formats are also possible.<br/>
-                            Click on the  <ButtonInput className="btn-secondary"  id="btn-export" name="Copy to Clipboard" tips="Copy the output into your clipboard"
+                            Click on the  <ButtonInput class="btn-secondary"  id="btn-export" name="Copy to Clipboard" tips="Copy the output into your clipboard"
                                                        onClick={this.fctnull}/> in order to copy your work into your clipboard. A simple <kbd>Paste</kbd> will transfer your work into any software.
 
                         </dd>
