@@ -347,6 +347,6 @@ const MainData={
     Updated:'29/11/2018',
     HelpUrl:'mailto:researchdata@epfl.ch',
     Currency:'CHF',
-    Version : 'Beta 2.4',
+    Version : 'v1.1',
     Data:[storage,ELN,Database,repository]
 };

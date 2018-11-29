@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32058667-6761-4492-a704-290762d93e35" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/js/costcalc_main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/js/costcalc_main.jsx" afterDir="false" />
+=======
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/js/data.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/data.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -247,11 +250,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/js/data.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="646">
+<<<<<<< Updated upstream
               <caret line="345" column="25" selection-start-line="345" selection-start-column="25" selection-end-line="345" selection-end-column="25" />
+=======
+              <caret line="349" column="19" selection-start-line="349" selection-start-column="19" selection-end-line="349" selection-end-column="19" />
+>>>>>>> Stashed changes
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -319,8 +326,13 @@
         <option value="$PROJECT_DIR$/index-dev.html" />
         <option value="$PROJECT_DIR$/js/costcalc_export.jsx" />
         <option value="$PROJECT_DIR$/index.html" />
+<<<<<<< Updated upstream
         <option value="$PROJECT_DIR$/js/data.js" />
+=======
+        <option value="$PROJECT_DIR$/js/costcalc_export.jsx" />
+>>>>>>> Stashed changes
         <option value="$PROJECT_DIR$/js/costcalc_main.jsx" />
+        <option value="$PROJECT_DIR$/js/data.js" />
       </list>
     </option>
   </component>
@@ -461,11 +473,19 @@
       <workItem from="1538993660872" duration="37000" />
       <workItem from="1540301753994" duration="575000" />
       <workItem from="1543480920205" duration="802000" />
+<<<<<<< Updated upstream
+=======
+      <workItem from="1543488993157" duration="1063000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< Updated upstream
     <option name="totallyTimeSpent" value="196263000" />
+=======
+    <option name="totallyTimeSpent" value="197326000" />
+>>>>>>> Stashed changes
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -550,6 +570,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/costcalc_main.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="565" column="39" lean-forward="true" selection-start-line="565" selection-start-column="39" selection-end-line="565" selection-end-column="39" />
+          <folding>
+            <element signature="e#106#252#0" />
+            <element signature="e#281#365#0" />
+            <element signature="e#393#573#0" />
+            <element signature="e#799#1680#0" />
+            <element signature="e#1705#1964#0" />
+            <element signature="e#2036#2942#0" />
+            <element signature="e#4996#5933#0" />
+            <element signature="e#5935#6673#0" />
+            <element signature="e#6675#7055#0" />
+            <element signature="e#7057#9007#0" />
+            <element signature="e#9009#9591#0" />
+            <element signature="e#9593#10677#0" />
+            <element signature="e#10679#11733#0" />
+            <element signature="e#11807#12628#0" />
+            <element signature="e#12656#12843#0" />
+            <element signature="e#12917#15208#0" />
+            <element signature="e#15210#18298#0" />
+            <element signature="e#19750#20168#0" />
+            <element signature="e#20170#22878#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/js/costcalc_export.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-757">
@@ -574,6 +622,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/js/costcalc_main.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="317">
@@ -616,10 +665,19 @@
             <element signature="e#39563#44109#0" />
             <element signature="e#44127#44980#0" />
             <element signature="e#46597#46712#0" />
+=======
+    <entry file="file://$PROJECT_DIR$/js/data.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="349" column="19" selection-start-line="349" selection-start-column="19" selection-end-line="349" selection-end-column="19" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+>>>>>>> Stashed changes
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="78">
@@ -627,6 +685,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> Stashed changes
   </component>
   <component name="masterDetails">
     <states>
