@@ -1229,7 +1229,7 @@ class Main extends React.Component {
                         <dd className="col-sm-9">
                             You can export your work into different format : <br/>
                             <samp> HTML</samp> : This format can be used in any wordprocessing software (such as Microsoft Word or Libreoffice).<br/>
-                            <samp>HTML Source code</samp>, <samp>Markdown</samp> and <samp>CSV</samp> formats are also possible.<br/>
+                            <samp>HTML Source code</samp> and <samp>Markdown</samp> formats are also possible.<br/>
                             Click on the  <ButtonInput class="btn-secondary"  id="btn-export" name="Copy to Clipboard" tips="Copy the output into your clipboard"
                                                        onClick={this.fctnull}/> in order to copy your work into your clipboard. A simple <kbd>Paste</kbd> will transfer your work into any software.
 
@@ -1288,7 +1288,7 @@ class Main extends React.Component {
                                 We hope you will enjoy this tool and it will be useful for you.
                             </p>
                             <ButtonInput class="btn-info" id="head-howto" name="To Know More (HOWTO)" onClick={this.move2howto}/> &nbsp;
-                            <a  class="btn btn-danger" id="head-help" target="_blank" href={MainData.HelpUrl} ><img src="./icons/help.png" width="20"/> &nbsp; I need help with my DMP</a>
+                            <a  class="btn btn-danger" id="head-help" target="_blank" href={MainData.HelpUrl} >I need help with my DMP</a>
                         </div>
                     </div>
                 </div>

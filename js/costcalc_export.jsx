@@ -62,7 +62,7 @@ class ManageExport extends React.Component {
                                  n="mark"/>
                 </div>
                 <div className="col-auto">
-                    <ButtonInput class="btn-warning" onClick={this.make_export} id="btn-export" name="Export CSV" tips="Export in CSV source code"
+                    <ButtonInput class="btn-success" onClick={this.make_export} id="btn-warning" name="Export CSV" tips="Export in CSV source code"
                                  n="csv"/>
                 </div>
             </div>
