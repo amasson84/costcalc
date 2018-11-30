@@ -12,6 +12,7 @@ const NasEpfl =  {
     ],
     ExtraInfo:"The first TB is free",
     ByYear:true,
+    Adaptive:false
     AmountName: "Amount",
     AmountUnit: "TB",
     AmountMin : 1,
@@ -19,7 +20,6 @@ const NasEpfl =  {
     AmountStep : 1,
     AmountFree:1,
     AmountFreeCumulative:false,
-    RateVar : true,
     RateName : 'Performance',
     Rates : {
         'Collaborative': 165,
@@ -80,6 +80,7 @@ const SLIMSEpfl =  {
         'Tenure Track Assistant Professor or Core Facility':1000
     },
     CatUnit:'CHF',
+    Adaptive:false,
     AmountName: "Storage",
     AmountUnit: "TB",
     AmountMin : 1,
@@ -87,7 +88,6 @@ const SLIMSEpfl =  {
     AmountStep : 1,
     AmountFree:0,
     AmountFreeCumulative:false,
-    RateVar : true,
     RateName: 'ELN Storage',
     Rates : {
         'Stored on EPFL Server': 165,
@@ -160,7 +160,6 @@ const Github = {
     AmountStep : [1,1,1,1],
     AmountFree:[0,0,0,0],
     AmountFreeCumulative:false,
-    RateVar : true,
     RateName:'Plan',
     Rates:{
         'OpenSource project':0,
@@ -188,7 +187,6 @@ const Bitbucket= {
     AmountStep : [1,1,1],
     AmountFree:[0,0,0],
     AmountFreeCumulative:false,
-    RateVar : true,
     RateName:'Plan',
     Rates:{
         'Free (up to 5 users)':0,
@@ -210,8 +208,8 @@ const Gitlab= {
     AmountMax : 100,
     AmountStep : 1,
     AmountFree:0,
+    Adaptive:false,
     AmountFreeCumulative:false,
-    RateVar : true,
     ByYear:true,
     RateName:'Plan',
     Rates:{
@@ -263,12 +261,12 @@ const Dryad = {
     CatUnit:'CHF',
     AmountName: "Storage",
     AmountUnit: "GB",
+    Adaptive:false,
     AmountMin : 20,
     AmountMax : 100,
     AmountStep : 10,
     AmountFree:20,
     AmountFreeCumulative:false,
-    RateVar : true,
     RateName: 'Storage',
     Rates : {
     'Extra Storage': 50,
@@ -309,7 +307,6 @@ const storage={
         {Name:'EPFL RDM',Url:'https://researchData.epfl.ch/work-with-Data/storage/'},
         {Name:'Comparison of file synchronization software',Url:'https://en.wikipedia.org/wiki/Comparison_of_file_synchronization_software'}
     ],
-    Intro :'',
     Data :[NoneSelected,
         NasEpfl,
         SwitchEpfl,
@@ -326,7 +323,6 @@ const ELN={
     Url : [
         {Name: 'EPFL RDM',Url:'https://researchData.epfl.ch/work-with-Data/active-Data-management/'}
     ],
-    Intro :'',
     Data :[NoneSelected,
         SLIMSEpfl,
         UserCostSelect,
@@ -337,7 +333,6 @@ const Database={
     Name : 'Database',
     Icon : 'database.png',
     Url : '',
-    Intro :'',
     Data :[NoneSelected,
         MysqlEpfl,
         UserCostSelect,
@@ -349,7 +344,6 @@ const datarepository={
         Url : [
             {Name:'EPFL RDM WebPage',Url:'https://researchData.epfl.ch/publish-preserve/'}
         ],
-        Intro :'',
         Data :[
             NoneSelected,
             Zenodo,
@@ -362,7 +356,6 @@ const coderepository={
     Name : 'Collaborative Repository',
     Icon : 'crepos.png',
     Url : '',
-    Intro :'',
     Data :[
         NoneSelected,
         C4science,

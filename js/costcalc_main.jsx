@@ -99,7 +99,7 @@ class AmountInput extends React.Component {
                 <label htmlFor={this.props.id}> {this.props.name} </label>
                 <input type="range" className="form-control-range" id={this.props.id} min={this.props.min} max={this.props.max}
                        step={this.props.step} value={value}  onChange={this.handleChange}/>
-                <small id="nas-amount-cost" className="form-text text-muted">Amount : {value} {this.props.unit} </small>
+                <small id="nas-amount-cost" className="form-text text-muted">{this.props.name} : {value} {this.props.unit} </small>
                 </span>
             </div>
         );
@@ -1401,7 +1401,7 @@ class Main extends React.Component {
                 </div>
                 <div id="service">
                     <p>This service has been developed by the <a href="https://researchdata.epfl.ch">Resarch Data Management Team</a> of the <a href="https://library.epfl.ch">EPFL Library</a>  <br/>
-                        This software is publish under CC0 and your are using <strong> Version {MainData.Version}</strong><br/>
+                        This software is publish under GPL-3.0-only license and your are using <strong> Version {MainData.Version}</strong><br/>
                         Source code can be download <a href="https://c4science.ch/source/costcalc/">here</a></p>
                     <p><small>Icons are from the Noun Project (Book by Randi NI, Storage by I Pitu, Database by Novalyi, data cloud by Vectors Market, Information and Next by Gregor Cresnar, Database by Creative Mahira)</small></p>
                 </div>

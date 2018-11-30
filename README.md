@@ -4,21 +4,31 @@ Cost Calculator
 
 ## Introduction
 
-Cost calculator is an online project for calculating cost of services. It's originaly designed for helping researcher for estimating the cost of managing data.
+Cost calculator is an online project for calculating cost of services. 
+It's originaly designed for helping researcher for estimating the cost of managing data.
+User can calculate the cost of the data life cycle directly from the interface. 
+
+Categories,Providers,Cost can be easily updated by just changing the **data.js** so it can be adapted for your own institution. 
 
 ## How to use it
 
-The structure is higly modulable and can be extended for different projects. All the information are stored on javascript and the system only uses javascript librairies making really easy to install and update.
+The structure is higly modulable and can be extended for different projects. 
+All the information are stored on javascript and the system only uses javascript 
+librairies making really easy to install and update.
+
+You don't need a specific webserver (but you can use one), just use your github repo 
+and create a pages link your cost calculator will be accessible
 
 ## Documentation
 
-The documentation of the project explains how to install it and configure it.
+The documentation of the project explains how to install it and configure it. See [Docs](./Docs)
 
 ## Files/Folders
 
 * All the engine is stored in the **js** folder
 * __index-dev.html__ : Index file for development only
 * index.html : main index for production
+* **docs** contains the documentation for changing the database of provider or the engine itself. 
 
 
 ## Citation
