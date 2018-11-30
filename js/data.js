@@ -11,6 +11,7 @@ const NasEpfl =  {
         {Name:'SV-IT Storage Website',Url:'https://sv-it.epfl.ch/stockage'}
     ],
     ExtraInfo:"The first TB is free",
+    ByYear:true,
     AmountName: "Amount",
     AmountUnit: "TB",
     AmountMin : 1,
@@ -33,6 +34,7 @@ const SwitchEpfl = {
     Style : 'CategoryCost',
     Provider : "Switch-EPFL",
     Name:'Online Storage',
+    ByYear:true,
     Url : [
         {Name:'Switch Website',Url:'https://drive.switch.ch/'}
     ],
@@ -47,6 +49,7 @@ const GoogleDriveEdu = {
     Style : 'CategoryCost',
     Provider : "Google Drive Educ",
     Name:'Online Storage',
+    ByYear:true,
     ExtraInfo : "Google Storage is not recommanded as the data are stored outside of Switzerland",
     ExtraInfoUrl :"https://support.epfl.ch//kb_view_customer.do?sysparm_article=KB0012829",
     Url : [
@@ -65,6 +68,7 @@ const SLIMSEpfl =  {
     Style:'CategoryAmountRatesCost',
     Provider : "EPFL-SV-IT",
     Name:'SLIMS',
+    ByYear:true,
     Url : [
         {Name:'SLIMS on SV-IT Website',Url:'https://sv-it.epfl.ch/lims'},
         {Name: 'Genohm (SLIMS Company)',Url:'https://www.genohm.com/'}
@@ -96,6 +100,7 @@ const MysqlEpfl = {
     Style : 'CategoryCost',
     Provider : "EPFL-VPSI",
     Name:'MySql',
+    ByYear:true,
     Url : [
         {Name:'EPFL VPSI ',Url:'https://support.epfl.ch/epfl?id=epfl_service_status&service=eb026fa0db34c700ef64731b8c96198e'}
     ],
@@ -111,6 +116,7 @@ const Zenodo = {
     Style : 'CategoryCost',
     Provider : "Zenodo-CERN",
     Name:'Zenodo',
+    ByYear:false,
     Url : [
         {Name:'Zenodo Website',Url:'https://www.zenodo.org/'},
         {Name:'About Zenodo',Url:'http://about.zenodo.org/'},
@@ -129,6 +135,7 @@ const C4science = {
     Url : [
         {Name:'C4Science Website',Url:'https://www.c4science.ch/'}
     ],
+    ByYear:true,
     ExtraInfo:'C4Science is the repository recommended by EPFL for code repository',
     CatName:'Options',
     Cat:{
@@ -147,7 +154,7 @@ const Github = {
     AmountName: "Number of user",
     AmountUnit: "User(s)",
     Adaptive:true,
-
+    ByYear:true,
     AmountMin : [1,1,5,10],
     AmountMax : [100,1,100,100],
     AmountStep : [1,1,1,1],
@@ -175,6 +182,7 @@ const Bitbucket= {
     AmountName: "Number of user",
     AmountUnit: "User(s)",
     Adaptive:true,
+    ByYear:true,
     AmountMin : [1,5,5],
     AmountMax : [5,100,100],
     AmountStep : [1,1,1],
@@ -204,6 +212,7 @@ const Gitlab= {
     AmountFree:0,
     AmountFreeCumulative:false,
     RateVar : true,
+    ByYear:true,
     RateName:'Plan',
     Rates:{
         'Core Self Hosted':0,
@@ -219,6 +228,7 @@ const Figshare = {
     Style : 'CategoryCost',
     Provider : "FigShare",
     Name:'Figshare',
+    ByYear:false,
     Url : [
         {Name:'Figshare website',Url:'https://figshare.com/'},
         {Name:'Figshare Pricing',Url:'https://www.g2crowd.com/products/figshare/pricing'}
@@ -241,6 +251,7 @@ const Dryad = {
     Url : [
     {Name:'Dryad Website Pricing',Url:'https://Datadryad.org/pages/payment'}
 ],
+    ByYear:false,
     ExtraInfo:'The costs of enabling access to research data under an SNSF grant are eligible. The  data archives (data repositories) have to meet the FAIR principles.',
     ExtraInfoUrl:'http://www.snf.ch/SiteCollectionDocuments/snsf-general-implementation-regulations-for-the-funding-regulations-e.pdf#page=14',
 
@@ -276,6 +287,7 @@ const NoneSelected={
     Provider:'None',
     Name:'Select a Provider',
     Url:'',
+    ByYear:false,
 
 };
 
@@ -284,6 +296,7 @@ const UserCostSelect={
     Provider:'Provide your own provider',
     Name:'',
     Url:'',
+    ByYear:false,
 };
 
 // Categories definition
@@ -293,7 +306,8 @@ const storage={
     Name : 'Active Storage',
     Icon : 'storage.png',
     Url : [
-        {Name:'EPFL RDM',Url:'https://researchData.epfl.ch/work-with-Data/storage/'}
+        {Name:'EPFL RDM',Url:'https://researchData.epfl.ch/work-with-Data/storage/'},
+        {Name:'Comparison of file synchronization software',Url:'https://en.wikipedia.org/wiki/Comparison_of_file_synchronization_software'}
     ],
     Intro :'',
     Data :[NoneSelected,
@@ -329,9 +343,9 @@ const Database={
         UserCostSelect,
     ]
 };
-const repository={
-        Name : 'Repository',
-        Icon : 'repos.png',
+const datarepository={
+        Name : 'Data Repository',
+        Icon : 'drepos.png',
         Url : [
             {Name:'EPFL RDM WebPage',Url:'https://researchData.epfl.ch/publish-preserve/'}
         ],
@@ -339,14 +353,24 @@ const repository={
         Data :[
             NoneSelected,
             Zenodo,
-            C4science,
-            Github,
-            Bitbucket,
-            Gitlab,
             Figshare,
             Dryad,
             UserCostSelect,
         ]
+};
+const coderepository={
+    Name : 'Collaborative Repository',
+    Icon : 'crepos.png',
+    Url : '',
+    Intro :'',
+    Data :[
+        NoneSelected,
+        C4science,
+        Github,
+        Bitbucket,
+        Gitlab,
+        UserCostSelect,
+    ]
 };
 
 
@@ -358,6 +382,7 @@ const MainData={
     Updated:'29/11/2018',
     HelpUrl:'mailto:researchdata@epfl.ch',
     Currency:'CHF',
-    Version : 'v1.2',
-    Data:[storage,ELN,Database,repository]
+    Version : 'v1.4',
+    DefaultDuration:1,
+    Data:[storage,ELN,Database,datarepository,coderepository]
 };

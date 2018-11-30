@@ -127,6 +127,9 @@ class ManageExport extends React.Component {
     }
 
     htmlout(hcol,data){
+        let disps='';
+        if(projectduration>1) disps='s';
+
         return(
             <div id="htmlexport" className="container">
                     <table className="table table-striped table-bordered" width="100%">
@@ -138,7 +141,9 @@ class ManageExport extends React.Component {
                         <tbody>
                             {this.htmltable(data)}
                             <tr className="table-info">
-                                <td colSpan={hcol.length-1} align="right"><strong>Total Cost</strong></td>
+                                <td>{projectname}</td>
+                                <td> {projectduration} year{disps}</td>
+                                <td colSpan={hcol.length-3} align="right"><strong>Total Cost</strong></td>
                                 <td align="center"><strong>{this.props.data.total}</strong></td>
                             </tr>
                         </tbody>
@@ -147,7 +152,8 @@ class ManageExport extends React.Component {
         );
     }
     htmlsrcout(hcol,data){
-
+        let disps='';
+        if(projectduration>1) disps='s';
         return(
             <div id="htmlexport">
                 <pre><code>
@@ -158,7 +164,10 @@ class ManageExport extends React.Component {
                     &lt;tbody&gt;<br/>
                     {this.htmlsrctable(data)}
                     &lt;tr &gt;<br/>
-                    &lt;td colSpan={hcol.length-1} align="right"&gt;&lt;strong&gt;Total Cost&lt;/strong&gt;&lt;/td&gt;&lt;td align="center"&gt;&lt;strong&gt;{this.props.data.total}&lt;/strong&gt;&lt;/td&gt;<br/>
+                    &lt;td&gt;{projectname}&lt;/td&gt;
+                    &lt;td&gt;{projectduration} year{disps}&lt;/td&gt;
+                    &lt;td colSpan={hcol.length-3} align="right"&gt;&lt;strong&gt;Total Cost&lt;/strong&gt;&lt;/td&gt;&lt;td align="center"&gt;&lt;strong&gt;
+                    {this.props.data.total}&lt;/strong&gt;&lt;/td&gt;<br/>
                 &lt;/tr&gt;<br/>
                 &lt;/tbody&gt;<br/>
                 &lt;/table&gt;<br/>
@@ -167,8 +176,10 @@ class ManageExport extends React.Component {
         );
     }
     markout(hcol,data){
+        let disps='';
+        if(projectduration>1) disps='s';
         const Head=Array.from({length: this.state.cols.length}, (v, k) => "---");
-        const col=Array.from({length: hcol.length-1}, (v, k) => "| ");
+        const col=Array.from({length: hcol.length-3}, (v, k) => "| ");
         return(
             <div id="htmlexport">
                 <pre><code>
@@ -177,14 +188,16 @@ class ManageExport extends React.Component {
 
                     {this.marktable(data)}
 
-                    {col} Total Cost |{this.props.data.total}|<br/>
+                    |{projectname}|{projectduration} year{disps}{col} Total Cost |{this.props.data.total}|<br/>
 
                </code></pre>
             </div>
         );
     }
     csvout(hcol,data){
-        const col=Array.from({length: hcol.length-1}, (v, k) => ",");
+        let disps='';
+        if(projectduration>1) disps='s';
+        const col=Array.from({length: hcol.length-3}, (v, k) => ",");
         return(
             <div id="htmlexport">
                 <pre><code>
@@ -192,7 +205,7 @@ class ManageExport extends React.Component {
 
                     {this.csvtable(data)}
 
-                    {col} Total Cost ;{this.props.data.total};<br/>
+                    {projectname},{projectduration} year{disps}{col} Total Cost ,{this.props.data.total},<br/>
 
                </code></pre>
             </div>
@@ -250,7 +263,7 @@ class ManageExport extends React.Component {
         for(let i=0;i<data.length;i++){
             const row=Object.values(data[i]);
             let children = this.makecol(row,'htmlsrc')
-            items.push(<span key={i}>&lt;tr&gt; {children} &lt;/tr&gt;<br/></span>);
+            items.push(<span key={i}>&lt;tr&gt; {children} &lt;/tr&gt;<br  key={i}/></span>);
         }
         return items;
     }
@@ -259,7 +272,7 @@ class ManageExport extends React.Component {
         for(let i=0;i<data.length;i++){
             const row=Object.values(data[i]);
             let children = this.makecol(row,'mark');
-            items.push(<span key={i}>|{children}<br/></span>);
+            items.push(<span key={i}>|{children}<br  key={i}/></span>);
         }
         return items;
     }
@@ -268,7 +281,7 @@ class ManageExport extends React.Component {
         for(let i=0;i<data.length;i++){
             const row=Object.values(data[i]);
             let children = this.makecol(row,'csv');
-            items.push(<span key={i}>{children}<br/></span>);
+            items.push(<span key={i}>{children}<br key={i}/></span>);
         }
         return items;
     }
@@ -309,7 +322,7 @@ class ManageExport extends React.Component {
                     break;
             }
                     if(i< Options.length-1){
-                        output.push(<br/>)
+                        output.push(<br key={i+1000}/>)
                     }
         }
         return output
