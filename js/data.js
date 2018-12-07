@@ -12,7 +12,7 @@ const NasEpfl =  {
     ],
     ExtraInfo:"The first TB is free",
     ByYear:true,
-    Adaptive:false
+    Adaptive:false,
     AmountName: "Amount",
     AmountUnit: "TB",
     AmountMin : 1,
@@ -377,5 +377,5 @@ const MainData={
     Currency:'CHF',
     Version : 'v1.4',
     DefaultDuration:1,
-    Data:[storage,ELN,Database,datarepository,coderepository]
+    Data:[storage,ELN,Database,datarepository,coderepository],
 };
