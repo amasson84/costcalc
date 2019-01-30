@@ -1176,34 +1176,34 @@ class PluginsMain extends React.Component {
             <div>
 
 
-        <div id="PluginsMain">
-                <div className="card">
-                    <div className="card-header text-white bg-dark">
-                        <div className="row">
-                            <div className="col-2 text-center">
-                                Line controls
-                            </div>
+                <div id="PluginsMain">
+                    <div className="card">
+                        <div className="card-header text-white bg-dark">
+                            <div className="row">
+                                <div className="col-2 text-center">
+                                    Line controls
+                                </div>
 
-                            <div className="col-3 text-center">
-                                Category
-                            </div>
-                            <div className="col-4 text-center">
-                                Provider information
-                            </div>
-                            <div className="col-2 text-center">
-                                Cost
+                                <div className="col-3 text-center">
+                                    Category
+                                </div>
+                                <div className="col-4 text-center">
+                                    Provider information
+                                </div>
+                                <div className="col-2 text-center">
+                                    Cost
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-            <div className="card">
-                <Repeat numTimes={this.props.data.length}>
-                    {(index) => <ManagePlugins data={this.props.data[index]} key={index}
-                                               export={this.make_exportplug} n={index} handleCostChange={this.handleCostChange}/>}
-                </Repeat>
-            </div>
-            </div>
-            </div>
+                        <div className="card ">
+                            <Repeat numTimes={this.props.data.length}>
+                                {(index) => <ManagePlugins data={this.props.data[index]} key={index}
+                                                           export={this.make_exportplug} n={index} handleCostChange={this.handleCostChange}/>}
+                            </Repeat>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
@@ -1370,7 +1370,7 @@ class Main extends React.Component {
                     <div className="row">
                         <div className="col">
                             <p className="lead">
-                                Welcome to our cost calculator this tool will help researcher/professor to have an
+                                Welcome to our cost calculator this tool will help researcher to have an
                                 estimate of the cost of managing, storing and publishing data.
                             </p>
                             <p className="lead">

@@ -16,7 +16,7 @@ const NasEpfl =  {
     AmountName: "Amount",
     AmountUnit: "TB",
     AmountMin : 1,
-    AmountMax : 100,
+    AmountMax : 500,
     AmountStep : 1,
     AmountFree:1,
     AmountFreeCumulative:false,
@@ -50,8 +50,9 @@ const GoogleDriveEdu = {
     Provider : "Google Drive Educ",
     Name:'Online Storage',
     ByYear:true,
-    ExtraInfo : "Google Storage is not recommanded as the data are stored outside of Switzerland",
-    ExtraInfoUrl :"https://support.epfl.ch//kb_view_customer.do?sysparm_article=KB0012829",
+    Adaptive:false,
+    ExtraInfo : "Google Storage is not recommended as the data are stored outside of Switzerland",
+    ExtraInfoUrl :"https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012829",
     Url : [
         {Name :'Google Education Page',Url:'https://edu.google.com/?modal_active=none'}
     ],
@@ -61,7 +62,49 @@ const GoogleDriveEdu = {
     },
     CatUnit:'CHF',
 };
-
+const Dropbox_perso = {
+    Style : 'CategoryCost',
+    Provider : "Dropbox Personnal",
+    Name:'Online Storage',
+    ByYear:true,
+    ExtraInfo : "Dropbox is not recommended as the data are stored outside of Switzerland",
+    ExtraInfoUrl :"https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012829",
+    Url : [
+        {Name :'Dropbox',Url:'https://www.dropbox.com/plans?trigger=nr'}
+    ],
+    CatName:'Plan',
+    Cat:{
+        'Personal Free 2Go':0,
+        'Personal Plus 1TB':112,
+        'Personal Pro 2TB':226,
+    },
+    CatUnit:'CHF',
+};
+const Dropbox_team = {
+    Style : 'AmountRatesCost',
+    Provider : "Dropbox for Team",
+    Name:'Online Storage',
+    ByYear:true,
+    ExtraInfo : "Dropbox is not recommended as the data are stored outside of Switzerland",
+    ExtraInfoUrl :"https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012829",
+    Url : [
+        {Name :'Dropbox',Url:'https://www.dropbox.com/plans?trigger=nr'}
+    ],
+    Adaptive:false,
+    AmountName: "Number of Users",
+    AmountUnit: "Users",
+    AmountMin : 1,
+    AmountMax : 500,
+    AmountStep : 1,
+    AmountFree:0,
+    AmountFreeCumulative:false,
+    RateName : 'Plan',
+    Rates : {
+        'Standard': 136,
+        'Advanced': 204,
+    },
+    RateUnit : "CHF / User"
+};
 
 // ELN
 const SLIMSEpfl =  {
@@ -95,12 +138,61 @@ const SLIMSEpfl =  {
     RateUnit : "CHF / TB"
 };
 
+const ELNEpfl = {
+    Style : 'CategoryCost',
+    Provider : "ELN-EPFL",
+    Name:'ELN',
+    ByYear:true,
+    Url : [
+        {Name:'ELN Website',Url:'https://eln.epfl.ch/'}
+    ],
+    CatName:'Options',
+    Cat:{
+        'Free for EPFL community':0,
+    },
+    CatUnit:'CHF',
+};
+
+const Rspace = {
+    Style : 'CategoryCost',
+    Provider : "Rspace community",
+    Name:'Rspace',
+    ByYear:true,
+    Url : [
+        {Name:'Rspace Website',Url:'https://www.researchspace.com/'}
+    ],
+    CatName:'Options',
+    Cat:{
+        'Cloud Based unlimited storage and user':0,
+    },
+    CatUnit:'CHF',
+};
+
+const Benchling = {
+    Style : 'CategoryCost',
+    Provider : "Benchling",
+    Name:'ELN',
+    ByYear:true,
+    ExtraInfo : "The first 10GB are free",
+    ExtraInfoUrl :"",
+    Url : [
+        {Name :'Benchling website',Url:'https://benchling.com/academic'}
+    ],
+    CatName:'Options',
+    Cat:{
+        'Cloud Based 10GB':0,
+    },
+    CatUnit:'CHF',
+};
+
+
 // Database
 const MysqlEpfl = {
     Style : 'CategoryCost',
     Provider : "EPFL-VPSI",
     Name:'MySql',
     ByYear:true,
+    Adaptive:false,
     Url : [
         {Name:'EPFL VPSI ',Url:'https://support.epfl.ch/epfl?id=epfl_service_status&service=eb026fa0db34c700ef64731b8c96198e'}
     ],
@@ -117,6 +209,7 @@ const Zenodo = {
     Provider : "Zenodo-CERN",
     Name:'Zenodo',
     ByYear:false,
+    Adaptive:false,
     Url : [
         {Name:'Zenodo Website',Url:'https://www.zenodo.org/'},
         {Name:'About Zenodo',Url:'http://about.zenodo.org/'},
@@ -136,6 +229,7 @@ const C4science = {
         {Name:'C4Science Website',Url:'https://www.c4science.ch/'}
     ],
     ByYear:true,
+    Adaptive:false,
     ExtraInfo:'C4Science is the repository recommended by EPFL for code repository',
     CatName:'Options',
     Cat:{
@@ -227,6 +321,7 @@ const Figshare = {
     Provider : "FigShare",
     Name:'Figshare',
     ByYear:false,
+    Adaptive:false,
     Url : [
         {Name:'Figshare website',Url:'https://figshare.com/'},
         {Name:'Figshare Pricing',Url:'https://www.g2crowd.com/products/figshare/pricing'}
@@ -274,9 +369,6 @@ const Dryad = {
     RateUnit : "CHF / GB"
 };
 
-
-
-
 // System variable definition
 // ----------------------------------------------------
 // ----------------------------------------------------
@@ -286,15 +378,15 @@ const NoneSelected={
     Name:'Select a Provider',
     Url:'',
     ByYear:false,
-
 };
 
 const UserCostSelect={
     Style : 'UserCost',
-    Provider:'Provide your own provider',
+    Provider:'Manual Provider',
     Name:'',
     Url:'',
     ByYear:false,
+
 };
 
 // Categories definition
@@ -311,9 +403,9 @@ const storage={
         NasEpfl,
         SwitchEpfl,
         GoogleDriveEdu,
+        Dropbox_perso,
+        Dropbox_team,
         UserCostSelect,
-
-
     ]
 
 };
@@ -325,6 +417,9 @@ const ELN={
     ],
     Data :[NoneSelected,
         SLIMSEpfl,
+        ELNEpfl,
+        Rspace,
+        Benchling,
         UserCostSelect,
     ]
 
@@ -372,10 +467,10 @@ const coderepository={
 // ----------------------------------------------------
 
 const MainData={
-    Updated:'29/11/2018',
+    Updated:'30/01/2019',
     HelpUrl:'mailto:researchdata@epfl.ch',
     Currency:'CHF',
-    Version : 'v1.4',
+    Version : 'v1.5',
     DefaultDuration:1,
     Data:[storage,ELN,Database,datarepository,coderepository],
 };
