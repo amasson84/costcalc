@@ -690,7 +690,8 @@ class UserCost extends React.Component {
 
     }
     handleCostChange(value){
-        if (isNaN(value)||value===''){
+        value=value.replace(/ /g, "");
+        if (isNaN(value)||value===''||typeof value == 'number'){
            this.setState({CostError: true});
            value=0;
         }else{
