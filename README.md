@@ -4,11 +4,10 @@ Cost Calculator
 
 ## Introduction
 
-Cost calculator is an online project for calculating cost of services. 
-It's originaly designed for helping researcher for estimating the cost of managing data.
-User can calculate the cost of the data life cycle directly from the interface. 
+The cost calculator is an online project for calculating the cost of services. It's originally designed for helping researcher for estimating the cost of managing data. The user can calculate the cost of the data life cycle directly from the interface.
 
-Categories,Providers,Cost can be easily updated by just changing the **data.js** so it can be adapted for your own institution. 
+Categories, Providers, Cost can be easily updated by just changing the **data.js** so it can be adapted for your own institution.
+
 
 ## How to use it
 
