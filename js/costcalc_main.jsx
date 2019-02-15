@@ -19,12 +19,18 @@ function tonumeric (value) {
     );
 }
 // Covert numeric to money string
-function tomoney(numeric) {
+function tomoney(numeric,currency) {
     if (typeof numeric == 'string') {
         numeric = parseFloat(numeric);
     }
-
-    return numeric.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + ' '+MainData.Currency;
+    let strcur='';
+    if(currency===undefined){
+        strcur=MainData.Currency;
+    }
+    else {
+        strcur=currency;
+    }
+    return numeric.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + ' '+strcur;
 }
 // return the sum of an array
 function sum(obj) {
@@ -129,7 +135,7 @@ class SelectorInput extends React.Component {
     }
     makerate(){
         if (this.props.rate!=null){
-            return( <small id="nas-amount-cost" className="form-text text-muted">Rate : {this.props.rate}  {this.props.unit}</small> );}
+            return( <small id="rate-amount-cost" className="form-text text-muted">Rate : {this.props.rate}  {this.props.unit}</small> );}
     }
     maketitle(title){
         const maxstr=20
@@ -880,11 +886,11 @@ class ProviderPluginsSelector extends React.Component {
                 <div className="card-header" id={id}>
                     <ModuleHeader id={id} data={this.props.data} selected={selected} Cdata={Cdata} n={this.props.n} Cost={this.state.cost}
                     comments={this.state.comments} handleAddPlugin={this.handleAddPlugin} handleRmvPlugin={this.handleRmvPlugin}
-                                  keys={this.state.keys} show_minus={this.props.show_minus} show_plus={this.state.show_plus}/>
+                                  keys={this.state.keys} show_minus={this.props.show_minus} show_plus={this.state.show_plus} conv={this.props.conv}/>
                 </div>
 
 
-                <div id={"collapse"+id} className="collapse" aria-labelledby={id} data-parent="#accordion">
+                <div id={"collapse"+id} className="collapse" aria-labelledby={id} data-parent="#accordionplugins">
                     <div className="card-body">
                         <div className="container">
 
@@ -981,6 +987,7 @@ class ModuleHeader  extends React.Component{
     render() {
         let minus='';
         let plus='';
+        let convout='';
         if (this.props.show_minus){
             minus=<ButtonInputWpop class="btn-danger btn-sm" id="plugins-add-btn"
                                    name={<img className="img-fluid" src="icons\minus.png" width="20"/>}
@@ -989,13 +996,15 @@ class ModuleHeader  extends React.Component{
         }
         if (this.props.show_plus){
            plus= <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>}
-                         onClick={this.handleAddPlugin} n={this.props.n} tips={"Add a new "+this.props.data.Name}/>
+                         onClick={this.handleAddPlugin} n={this.props.n} tips={"Add a new "+this.props.data.Name}/>;
+        }
+        if (this.props.conv.Enable) {
+            let value=Money.convert(tonumeric(this.props.Cost));
+                value=tomoney(value,this.props.conv.Cur);
+            convout=<CostOutput id="ccostconv" name="" value={value} tips="Converted cost for this provider"/>;
         }
 
-
  return(
-
-
      <div className="container">
          <div className="row align-items-center">
              <div className="col-1 align-self-start">
@@ -1038,7 +1047,8 @@ class ModuleHeader  extends React.Component{
              </div>
 
              <div id="plugin-cost" className="col-2 align-self-end">
-                 <CostOutput id="ccost" name="Cost" value={this.props.Cost} tips="Total cost for this provider"/>
+                 <CostOutput id="ccost" name="" value={this.props.Cost} tips="Total cost for this provider"/>
+                 {convout}
              </div>
              <div className="col-auto">
                  {this.byyear(this.props.Cdata.ByYear)}
@@ -1131,7 +1141,8 @@ class ManagePlugins extends React.Component{
                         {(index) => <ProviderPluginsSelector data={this.props.data} key={this.state.displayed[index]}
                                                  show_minus={show_minus} n={index}
                                                  handleCostChange={this.handleCostChange} handleAddPlugin={this.handleAddPlugin}
-                                                             handleRmvPlugin={this.handleRmvPlugin} export={this.make_exportplug}/>}
+                                                             handleRmvPlugin={this.handleRmvPlugin} export={this.make_exportplug}
+                                                             conv={this.props.conv}/>}
 
                     </Repeat>
                </div>
@@ -1198,10 +1209,13 @@ class PluginsMain extends React.Component {
                         </div>
 
                         <div className="card ">
+                            <div className="accordion" id="accordionplugins">
                             <Repeat numTimes={this.props.data.length}>
                                 {(index) => <ManagePlugins data={this.props.data[index]} key={index}
-                                                           export={this.make_exportplug} n={index} handleCostChange={this.handleCostChange}/>}
+                                                           export={this.make_exportplug} n={index} handleCostChange={this.handleCostChange}
+                                                           conv={this.props.conv}/>}
                             </Repeat>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1216,20 +1230,27 @@ class PluginsMain extends React.Component {
 // ---------------------
 class Main extends React.Component {
     constructor(props) {
+        Money_GetRates();
         super(props);
         this.handleCostChange = this.handleCostChange.bind(this);
         this.make_exportmain = this.make_exportmain.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDurationChange = this.handleDurationChange.bind(this);
+        this.handleConvMoneyChange = this.handleConvMoneyChange.bind(this);
+
         this.state= {
             total: 0,
             export: [],
             exportmain:[],
             name:'',
             duration:MainData.DefaultDuration,
+            conv:{Enable:false,Cur:''},
         };
         projectduration=this.state.duration;
         this.init=true;
+
+
+
     }
 
     handleCostChange(total) {
@@ -1265,7 +1286,9 @@ class Main extends React.Component {
         projectduration=d;
     }
 
-
+    handleConvMoneyChange(conv){
+        this.setState({conv:conv});
+    }
     render() {
 
         return(
@@ -1277,11 +1300,11 @@ class Main extends React.Component {
 
                     {this.project_info()}
 
-                    <PluginsMain TotalCost={this.handleCostChange} data={MainData.Data} export={this.make_exportmain}/>
+                    <PluginsMain TotalCost={this.handleCostChange} data={MainData.Data} export={this.make_exportmain} conv={this.state.conv}/>
 
-                    {this.final_cost()}
+                    {this.final_cost(this.state.conv)}
 
-                    <ManageExport data={this.state.exportmain}/>
+                    <ManageExport data={this.state.exportmain} conv={this.state.conv}/>
 
                     {this.howto()}
                 </div>
@@ -1291,6 +1314,7 @@ class Main extends React.Component {
 
         );
     }
+
 
     project_info(){
         return(
@@ -1318,6 +1342,9 @@ class Main extends React.Component {
                             <AmountInput id="project-duration" min="1" max="10" step="1" name="Project Duration" unit="year" tips="Select the duration of the project (in year)"
                                          value={this.state.duration} onChange={this.handleDurationChange}/>
                         </div>
+                        <div className="col-3">
+                            <CurrencySelect id="maincurrency" money={this.handleConvMoneyChange}/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1326,9 +1353,15 @@ class Main extends React.Component {
     }
 
     // Display the total cost
-    final_cost(){
+    final_cost(conv){
         let disps='';
         if(projectduration>1) disps='s';
+        let convout='';
+        if (conv.Enable) {
+            let value=Money.convert(this.state.total);
+            value=tomoney(value,conv.Cur);
+            convout=<CostOutput id="convctotal" name="" value={value} tips="Converted Total cost for the project"/>;
+        }
         return(
         <div className="card" id="finalcost">
             <div className="card bg-light  ">
@@ -1344,6 +1377,7 @@ class Main extends React.Component {
                     </div>
                     <div id="plugin-cost" className="col-5  text-right align-self-center">
                         <CostOutput name={"Total Cost"} id={"ctotal"} value={tomoney(this.state.total)} tips="Total cost for the project"/>
+                        {convout}
                     </div>
                     </div>
                 </div>
