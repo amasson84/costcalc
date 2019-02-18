@@ -63,9 +63,13 @@ html {
     padding-left: 0.1em;
     padding-right: 0.1em;
 }
-#ccost{
+.itemcost{
     text-align: center;
     font-size: large;
+}
+.txtbyyear{
+    text-align: center;
+    font-size: small;
 }
 #module-name{
     font-weight: bold;
@@ -93,10 +97,11 @@ html {
     text-align: center;
 }
 
-#ctotal{
+.costoutput{
     text-align: center;
-    font-size: $h2-font-size;
+    font-size:$h2-font-size;
     font-weight: bold;
+
 }
 #export-group{
     padding-top: 0.5em;

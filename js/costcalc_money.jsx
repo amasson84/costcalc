@@ -39,15 +39,8 @@ class CurrencySelect extends React.Component {
         this.setState({Cur: this.state.Selectable[select]});
         this.moneyset(select);
     }
-    // make_export(){
-    //     this.export=[
-    //         {Name:this.props.data.CurName,Value:Object.keys(this.props.data.Cur)[this.state.SelectCurt]},
-    //     ];
-    //     this.props.export(this.export);
-    // }
     componentDidUpdate(){
-     //   this.makecost(this.state.Cat);
-     //   this.make_export();
+
         if(this.state.prevselec!==this.state.SelectCur) {
             this.props.money({Enable: this.state.Enable, Cur: this.state.Cur});
             this.state.prevselec = this.state.SelectCur;
@@ -74,14 +67,16 @@ class CurrencySelect extends React.Component {
             return (null);
         }
     }
-    makecost(cat) {
-        var total=cat;
-        total=tomoney(total);
-        this.props.onCostChange(this.props.n,total);
-        return total;
-    }
+
 }
 
+// This function convert the input (ie numnber or string) to the converted currency
+function ConvCurrency(main_cur){
+    return tomoney(Money.convert(tonumeric(main_cur)),Money.settings.to);
+}
+
+
+// Init function for downloading the rate from Open Exchange Rates
 /**
  * @return {boolean}
  */

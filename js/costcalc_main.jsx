@@ -394,11 +394,12 @@ class CostOutput extends React.Component {
     }
 
     render() {
+        const classN="form-control "+this.props.class;
         return (
             <div className={"form-group row align-items-center"}>
                 <label htmlFor={this.props.id} className={"col-form-label"}>{this.props.name}</label>
                 <div className="col align-self-center">
-                    <input type={"text"} className={"form-control"} id={this.props.id} className={"form-control"}
+                    <input type={"text"} className={"form-control"} id={this.props.id} className={classN}
                        value={this.props.value} onChange={this.handleChange} readOnly data-toggle="tooltip" data-placement="top" title={this.props.tips}/>
                 </div>
             </div>
@@ -977,7 +978,7 @@ class ModuleHeader  extends React.Component{
     }
     byyear(by){
         if(by){
-            return(<span>{projectduration} years</span>);
+            return(<span className="txtbyyear">{projectduration} <br/> years</span>);
         }
         else {
             return(<span></span>);
@@ -999,9 +1000,7 @@ class ModuleHeader  extends React.Component{
                          onClick={this.handleAddPlugin} n={this.props.n} tips={"Add a new "+this.props.data.Name}/>;
         }
         if (this.props.conv.Enable) {
-            let value=Money.convert(tonumeric(this.props.Cost));
-                value=tomoney(value,this.props.conv.Cur);
-            convout=<CostOutput id="ccostconv" name="" value={value} tips="Converted cost for this provider"/>;
+            convout=<CostOutput id="ccostconv" class="itemcost" name="" value={ConvCurrency(this.props.Cost)} tips="Converted cost for this provider"/>;
         }
 
  return(
@@ -1047,7 +1046,7 @@ class ModuleHeader  extends React.Component{
              </div>
 
              <div id="plugin-cost" className="col-2 align-self-end">
-                 <CostOutput id="ccost" name="" value={this.props.Cost} tips="Total cost for this provider"/>
+                 <CostOutput id="ccost" class="itemcost" name="" value={this.props.Cost} tips="Total cost for this provider"/>
                  {convout}
              </div>
              <div className="col-auto">
@@ -1357,11 +1356,8 @@ class Main extends React.Component {
         let disps='';
         if(projectduration>1) disps='s';
         let convout='';
-        if (conv.Enable) {
-            let value=Money.convert(this.state.total);
-            value=tomoney(value,conv.Cur);
-            convout=<CostOutput id="convctotal" name="" value={value} tips="Converted Total cost for the project"/>;
-        }
+        if (conv.Enable) convout=<CostOutput id="convctotal"class="costoutput" name="Total Cost" value={ConvCurrency(this.state.total)} tips="Converted Total cost for the project"/>;
+
         return(
         <div className="card" id="finalcost">
             <div className="card bg-light  ">
@@ -1376,7 +1372,7 @@ class Main extends React.Component {
                         <h3>Total Cost for {projectduration} year{disps}</h3>
                     </div>
                     <div id="plugin-cost" className="col-5  text-right align-self-center">
-                        <CostOutput name={"Total Cost"} id={"ctotal"} value={tomoney(this.state.total)} tips="Total cost for the project"/>
+                        <CostOutput name="Total Cost" id="ctotal" class="costoutput" value={tomoney(this.state.total)} tips="Total cost for the project"/>
                         {convout}
                     </div>
                     </div>

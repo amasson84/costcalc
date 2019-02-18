@@ -472,7 +472,7 @@ const MainData={
     Currency:'CHF',
     OEXRApi:'cd8d785bdb6646b0a7e4c0eba5a74199',
     Conv:['EUR','USD','GBP'],
-    Version : 'v1.5',
+    Version : 'v2-beta',
     DefaultDuration:1,
     Data:[storage,ELN,Database,datarepository,coderepository],
 };
