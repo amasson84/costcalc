@@ -99,10 +99,14 @@ class AmountInput extends React.Component {
 
     render() {
         const value = this.props.value;
+        let label=null;
+        if(this.props.name!=null && this.props.name!==""){
+            label=<label htmlFor={this.props.id}> {this.props.name} </label>;
+        }
         return (
             <div className="col"   >
                 <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
-                <label htmlFor={this.props.id}> {this.props.name} </label>
+                    {label}
                 <input type="range" className="form-control-range" id={this.props.id} min={this.props.min} max={this.props.max}
                        step={this.props.step} value={value}  onChange={this.handleChange}/>
                 <small id="nas-amount-cost" className="form-text text-muted">{this.props.name} : {value} {this.props.unit} </small>
@@ -134,8 +138,8 @@ class SelectorInput extends React.Component {
         this.props.onChange(select.target.value);
     }
     makerate(){
-        if (this.props.rate!=null){
-            return( <small id="rate-amount-cost" className="form-text text-muted">Rate : {this.props.rate}  {this.props.unit}</small> );}
+        if (this.props.rate!=null && this.props.rate!==""){
+            return(<div className="row"> <small id="rate-amount-cost" className="form-text text-muted">Rate : {this.props.rate}  {this.props.unit}</small></div> );}
     }
     maketitle(title){
         const maxstr=20
@@ -145,15 +149,14 @@ class SelectorInput extends React.Component {
         return title;
     }
     render() {
+        let label=null;
+        if(this.props.name!=null && this.props.name!==""){
+            label= <div className="row"><label htmlFor={this.props.id}> {this.props.name} </label></div>;
+        }
         return (
 
             <div className="Container">
-
-                <div className="row">
-                    <label htmlFor={this.props.id}> {this.props.name} </label>
-                </div>
-
-
+                    {label}
                 <div className="row">
             <div className="btn-group">
 
@@ -170,9 +173,7 @@ class SelectorInput extends React.Component {
 
            </div>
             </div>
-            <div className="row">
                 {this.makerate()}
-            </div>
             </div>
         )
     }
@@ -362,14 +363,17 @@ class TxtInput extends React.Component {
     }
 
     render() {
+        let info=null ;
+        if(this.props.info != null && this.props.info !== "") info=<small id={this.props.id+"-info"} className="input-group-text">{this.props.info} </small>;
         return (
             <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
                 <label htmlFor={this.props.id}> {this.props.name} </label>
-                <div className="input-group">
+                <div className={"input-group "+this.props.className}>
                     <div className="input-group-prepend">
                         <span className="input-group-text" id="inputGroupPrepend2">{this.props.Prepend}</span>
                     </div>
                     <input type="text" className={"form-control "+this.props.class} id={this.props.id} placeholder={this.props.placeholder} onChange={this.handleChange} value={this.props.value} />
+                    {info}
                     <div className="invalid-feedback">
                         {this.props.InvalidMessage}
                     </div>
@@ -598,8 +602,9 @@ class CategoryAmountRatesCost extends React.Component {
         } else {
             free=this.props.data.AmountFree;
         }
-
         var total=cat+(amount-free)*rate;
+        if(this.props.data.ByYear) total=total*projectduration;
+
         total=tomoney(total);
         this.props.onCostChange(this.props.n,total);
         return total;
@@ -647,6 +652,8 @@ class CategoryCost extends React.Component {
     }
     makecost(cat) {
         var total=cat;
+        if(this.props.data.ByYear) total=total*projectduration;
+
         total=tomoney(total);
         this.props.onCostChange(this.props.n,total);
         return total;
@@ -682,9 +689,11 @@ class UserCost extends React.Component {
         this.handleProviderChange = this.handleProviderChange.bind(this);
         this.handleServiceChange = this.handleServiceChange.bind(this);
         this.handleYearChange = this.handleYearChange.bind(this);
+        this.handleConvMoneyChange = this.handleConvMoneyChange.bind(this);
+
         this.state={
             total:0,
-            CostError:false,
+            value:0,
             ProviderError:true,
             ServiceError:true,
             ByYear:false,
@@ -692,21 +701,19 @@ class UserCost extends React.Component {
         this.export=[];
 
     }
+
     handleYearChange(state){
         this.setState({ByYear: state});
-
+        this.props.handlebyYearChange(state);
+    }
+    makecost(byYear,amount){
+        let total=amount;
+        if(byYear) total=amount*projectduration;
+ //       this.setState({total:total});
+        this.props.onCostChange(this.props.n,tomoney(total));
     }
     handleCostChange(value){
-        value=value.replace(/ /g, "");
-        if (isNaN(value)||value===''||typeof value == 'number'){
-           this.setState({CostError: true});
-           value=0;
-        }else{
-            this.setState({CostError: false});
-        }
-        if(this.state.ByYear) value=value*projectduration;
-        this.setState({total:value});
-        this.props.onCostChange(this.props.n,tomoney(value));
+        this.setState({value:value});
     }
     handleProviderChange(txt){
         this.props.handleProviderChange(txt);
@@ -726,6 +733,15 @@ class UserCost extends React.Component {
             this.setState({ServiceError: false});
         }
     }
+    handleConvMoneyChange(conv){
+        this.setState({conv:conv});
+    }
+
+    componentDidUpdate(){
+        this.makecost(this.state.ByYear,this.state.value);
+      //  this.make_export();
+    }
+
     classtxt(error){
         if(error){
             return "is-invalid";
@@ -738,22 +754,27 @@ class UserCost extends React.Component {
         let Costname="Cost";
         if(this.state.ByYear) Costname="Cost by year";
         this.props.export(this.export);
-        return (<div className="row align-items-baseline">
-                <div className="col-3">
-                    <TxtInput id={this.props.id+'-input'}  name="Provider" placeholder="Put your provider here" tips="Add your own cost calculation here" onChange={this.handleProviderChange}
-                              class={this.classtxt(this.state.ProviderError)} Prepend="" InvalidMessage="Please provide a Provider"/>
+
+        return (
+            <div className="container">
+                <div className="row align-items-baseline">
+                    <div className="col-3">
+                        <TxtInput id={this.props.id+'-input'}  name="Provider" placeholder="Provider here" tips="Add your own cost calculation here" onChange={this.handleProviderChange}
+                                  class={this.classtxt(this.state.ProviderError)} Prepend="" InvalidMessage="Please provide a Provider"/>
+                    </div>
+                    <div className="col-3">
+                        <TxtInput id={this.props.id+'-input'}  name="Service" placeholder="Service here" tips="Add your own cost calculation here" onChange={this.handleServiceChange}
+                                  class={this.classtxt(this.state.ServiceError)} Prepend="" InvalidMessage="Please provide a Service"/>
+                    </div>
+                    <div className="col-5">
+                        <PluginsCurrencyChange id="UserCostcurrency" name={Costname} onCostChange={this.handleCostChange}/>
+                    </div>
                 </div>
-                <div className="col-3">
-                    <TxtInput id={this.props.id+'-input'}  name="Service" placeholder="Put your service here" tips="Add your own cost calculation here" onChange={this.handleServiceChange}
-                              class={this.classtxt(this.state.ServiceError)} Prepend="" InvalidMessage="Please provide a Service"/>
-                </div>
-                <div className="col-3">
-                   <TxtInput id={this.props.id+'-input'}  name={Costname} placeholder="Put your cost here" tips="Add your own cost calculation here" onChange={this.handleCostChange}
-                             class={this.classtxt(this.state.CostError)} Prepend={MainData.Currency} InvalidMessage="Please provide a correct numerical value" />
-                </div>
-                <div className="col-auto">
-                    <CheckboxInput id={this.props.id+'-input'} name="Charged by year"
-                                   tips="Check if the service is charged by year so the cost will be adapted for the project duration" onChange={this.handleYearChange}/>
+                <div className="row align-items-baseline">
+                    <div className="col-auto">
+                        <CheckboxInput id={this.props.id+'-input'} name="Charged by year"
+                                       tips="Check if the service is charged by year so the cost will be adapted for the project duration" onChange={this.handleYearChange}/>
+                    </div>
                 </div>
             </div>
         );
@@ -775,6 +796,7 @@ class ProviderPluginsSelector extends React.Component {
         this.handleRmvPlugin = this.handleRmvPlugin.bind(this);
         this.handleProviderChangetxt = this.handleProviderChangetxt.bind(this);
         this.handleServiceChangetxt = this.handleServiceChangetxt.bind(this);
+        this.handlebyYearChange = this.handlebyYearChange.bind(this);
         this.make_exportcmp = this.make_exportcmp.bind(this);
         this.make_export = this.make_export.bind(this);
         this.state={
@@ -786,6 +808,7 @@ class ProviderPluginsSelector extends React.Component {
             Provider:"",
             Name:"",
             manualname:false,
+            manbyyear:false,
             show_plus:false,
             exportcmp:"",
         };
@@ -841,17 +864,18 @@ class ProviderPluginsSelector extends React.Component {
     handleRmvPlugin(n){
         this.props.handleRmvPlugin(n);
     }
-
+// The 3 nexts function are for user input management
     handleProviderChangetxt(txt){
         this.setState({Provider:txt});
-        // this.props.handleCostChange(this.props.n,this.state.cost);//provoke export update on the parent
-
-
     }
     handleServiceChangetxt(txt){
         this.setState({Name:txt});
-        // this.props.handleCostChange(this.props.n,this.state.cost);//provoke export update on the parent
     }
+    handlebyYearChange(state){
+        this.setState({manbyyear:state});
+    }
+
+
     // Manage extra display info for a selected provider
 
     extrainfo(Cdata){
@@ -917,7 +941,7 @@ class ProviderPluginsSelector extends React.Component {
 
                             <div id="component" className="container bg-light">
                                 <Cmp data={Cdata} key={selected} id="component-settings" onCostChange={this.handleCostChange} n={this.props.n}
-                                handleProviderChange={this.handleProviderChangetxt} handleServiceChange={this.handleServiceChangetxt}
+                                handleProviderChange={this.handleProviderChangetxt} handleServiceChange={this.handleServiceChangetxt} handlebyYearChange={this.handlebyYearChange}
                                 export={this.make_exportcmp}/>
                             </div>
                         </div>
@@ -932,6 +956,7 @@ class ProviderPluginsSelector extends React.Component {
         let out=this.props.data.Data[select];
         if (this.state.manualname){
             out.Name=this.state.Name;
+            out.ByYear=this.state.manbyyear;
             if ( this.state.Provider ==='') {
                 this.state.keys[select] = 'Please provide a Provider';
             }else {
@@ -1299,7 +1324,7 @@ class Main extends React.Component {
 
                     {this.project_info()}
 
-                    <PluginsMain TotalCost={this.handleCostChange} data={MainData.Data} export={this.make_exportmain} conv={this.state.conv}/>
+                    <PluginsMain TotalCost={this.handleCostChange} data={MainData.Data} export={this.make_exportmain} conv={this.state.conv} />
 
                     {this.final_cost(this.state.conv)}
 
