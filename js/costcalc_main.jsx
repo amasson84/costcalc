@@ -19,12 +19,18 @@ function tonumeric (value) {
     );
 }
 // Covert numeric to money string
-function tomoney(numeric) {
+function tomoney(numeric,currency) {
     if (typeof numeric == 'string') {
         numeric = parseFloat(numeric);
     }
-
-    return numeric.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + ' '+MainData.Currency;
+    let strcur='';
+    if(currency===undefined){
+        strcur=MainData.Currency;
+    }
+    else {
+        strcur=currency;
+    }
+    return numeric.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + ' '+strcur;
 }
 // return the sum of an array
 function sum(obj) {
@@ -90,13 +96,26 @@ class AmountInput extends React.Component {
     handleChange(e) {
         this.props.onChange(e.target.value);
     }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    componentWillUnmount() {
+        $('[data-toggle="tooltip"]').tooltip('dispose');
+    }
     render() {
         const value = this.props.value;
+        let label=null;
+        if(this.props.name!=null && this.props.name!==""){
+            label=<label htmlFor={this.props.id}> {this.props.name} </label>;
+        }
         return (
             <div className="col"   >
                 <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
-                <label htmlFor={this.props.id}> {this.props.name} </label>
+                    {label}
                 <input type="range" className="form-control-range" id={this.props.id} min={this.props.min} max={this.props.max}
                        step={this.props.step} value={value}  onChange={this.handleChange}/>
                 <small id="nas-amount-cost" className="form-text text-muted">{this.props.name} : {value} {this.props.unit} </small>
@@ -128,8 +147,8 @@ class SelectorInput extends React.Component {
         this.props.onChange(select.target.value);
     }
     makerate(){
-        if (this.props.rate!=null){
-            return( <small id="nas-amount-cost" className="form-text text-muted">Rate : {this.props.rate}  {this.props.unit}</small> );}
+        if (this.props.rate!=null && this.props.rate!==""){
+            return(<div className="row"> <small id="rate-amount-cost" className="form-text text-muted">Rate : {this.props.rate}  {this.props.unit}</small></div> );}
     }
     maketitle(title){
         const maxstr=20
@@ -138,16 +157,25 @@ class SelectorInput extends React.Component {
         }
         return title;
     }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    componentWillUnmount() {
+        $('[data-toggle="tooltip"]').tooltip('dispose');
+    }
     render() {
+        let label=null;
+        if(this.props.name!=null && this.props.name!==""){
+            label= <div className="row"><label htmlFor={this.props.id}> {this.props.name} </label></div>;
+        }
         return (
 
             <div className="Container">
-
-                <div className="row">
-                    <label htmlFor={this.props.id}> {this.props.name} </label>
-                </div>
-
-
+                    {label}
                 <div className="row">
             <div className="btn-group">
 
@@ -164,9 +192,7 @@ class SelectorInput extends React.Component {
 
            </div>
             </div>
-            <div className="row">
                 {this.makerate()}
-            </div>
             </div>
         )
     }
@@ -176,6 +202,16 @@ class MakeknowmoreInput extends React.Component {
     constructor(props) {
         super(props);
         this.state={btnsize:20}
+    }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    componentWillUnmount() {
+        $('[data-toggle="tooltip"]').tooltip('dispose');
     }
     render() {
         const data = this.props.data;
@@ -231,7 +267,13 @@ class ButtonHrefInput extends React.Component {
     constructor(props) {
         super(props);
     }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
 
     render() {
@@ -256,10 +298,19 @@ class ButtonInputWpop extends React.Component {
         this.props.onClick(out);
 
     }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    componentWillUnmount() {
+        $('[data-toggle="tooltip"]').tooltip('dispose');
+    }
     render() {
         return (
-            <span>
+            <span  data-toggle="tooltip" data-placement="top" title={this.props.tips}>
                 <button type="button" className={"btn "+ this.props.class} id={this.props.id} data-toggle="modal" data-target={"#"+this.state.target}>
                     {this.props.name}
                 </button>
@@ -300,13 +351,23 @@ class ButtonInput extends React.Component {
         this.props.onClick(this.props.n);
 
     }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    componentWillUnmount() {
+        $('[data-toggle="tooltip"]').tooltip('dispose');
+    }
     render() {
         return (
             <span>
                 <button id={this.props.id} onClick={this.handleChange} type="button"
-                        className={"btn "+ this.props.class} data-toggle="tooltip" data-placement="top"
-                        title={this.props.tips}>{this.props.name}</button>
+                        className={"btn "+ this.props.class} data-toggle="tooltip" data-placement="top" title={this.props.tips}>
+                    {this.props.name}
+                </button>
             </span>
         );
     }
@@ -318,7 +379,16 @@ class MenuInput extends React.Component {
         this.state={listoptions:this.makelist(props.options)};
 
     }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    componentWillUnmount() {
+        $('[data-toggle="tooltip"]').tooltip('dispose');
+    }
     makelist(data){
         var listoptions=[];
         for (var i = 0; i < data.length; i++) {
@@ -354,16 +424,28 @@ class TxtInput extends React.Component {
     handleChange(e) {
         this.props.onChange(e.target.value);
     }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    componentWillUnmount() {
+        $('[data-toggle="tooltip"]').tooltip('dispose');
+    }
     render() {
+        let info=null ;
+        if(this.props.info != null && this.props.info !== "") info=<small id={this.props.id+"-info"} className="input-group-text">{this.props.info} </small>;
         return (
             <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
                 <label htmlFor={this.props.id}> {this.props.name} </label>
-                <div className="input-group">
+                <div className={"input-group "+this.props.className}>
                     <div className="input-group-prepend">
                         <span className="input-group-text" id="inputGroupPrepend2">{this.props.Prepend}</span>
                     </div>
                     <input type="text" className={"form-control "+this.props.class} id={this.props.id} placeholder={this.props.placeholder} onChange={this.handleChange} value={this.props.value} />
+                    {info}
                     <div className="invalid-feedback">
                         {this.props.InvalidMessage}
                     </div>
@@ -386,13 +468,20 @@ class CostOutput extends React.Component {
     handleChange() {
         this.props.onCostChange(this.props.display);
     }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
     render() {
+        const classN="form-control "+this.props.class;
         return (
             <div className={"form-group row align-items-center"}>
                 <label htmlFor={this.props.id} className={"col-form-label"}>{this.props.name}</label>
                 <div className="col align-self-center">
-                    <input type={"text"} className={"form-control"} id={this.props.id} className={"form-control"}
+                    <input type={"text"} className={"form-control"} id={this.props.id} className={classN}
                        value={this.props.value} onChange={this.handleChange} readOnly data-toggle="tooltip" data-placement="top" title={this.props.tips}/>
                 </div>
             </div>
@@ -591,8 +680,9 @@ class CategoryAmountRatesCost extends React.Component {
         } else {
             free=this.props.data.AmountFree;
         }
-
         var total=cat+(amount-free)*rate;
+        if(this.props.data.ByYear) total=total*projectduration;
+
         total=tomoney(total);
         this.props.onCostChange(this.props.n,total);
         return total;
@@ -640,6 +730,8 @@ class CategoryCost extends React.Component {
     }
     makecost(cat) {
         var total=cat;
+        if(this.props.data.ByYear) total=total*projectduration;
+
         total=tomoney(total);
         this.props.onCostChange(this.props.n,total);
         return total;
@@ -675,9 +767,11 @@ class UserCost extends React.Component {
         this.handleProviderChange = this.handleProviderChange.bind(this);
         this.handleServiceChange = this.handleServiceChange.bind(this);
         this.handleYearChange = this.handleYearChange.bind(this);
+        this.handleConvMoneyChange = this.handleConvMoneyChange.bind(this);
+
         this.state={
             total:0,
-            CostError:false,
+            value:0,
             ProviderError:true,
             ServiceError:true,
             ByYear:false,
@@ -685,21 +779,19 @@ class UserCost extends React.Component {
         this.export=[];
 
     }
+
     handleYearChange(state){
         this.setState({ByYear: state});
-
+        this.props.handlebyYearChange(state);
+    }
+    makecost(byYear,amount){
+        let total=amount;
+        if(byYear) total=amount*projectduration;
+ //       this.setState({total:total});
+        this.props.onCostChange(this.props.n,tomoney(total));
     }
     handleCostChange(value){
-        value=value.replace(/ /g, "");
-        if (isNaN(value)||value===''||typeof value == 'number'){
-           this.setState({CostError: true});
-           value=0;
-        }else{
-            this.setState({CostError: false});
-        }
-        if(this.state.ByYear) value=value*projectduration;
-        this.setState({total:value});
-        this.props.onCostChange(this.props.n,tomoney(value));
+        this.setState({value:value});
     }
     handleProviderChange(txt){
         this.props.handleProviderChange(txt);
@@ -719,6 +811,15 @@ class UserCost extends React.Component {
             this.setState({ServiceError: false});
         }
     }
+    handleConvMoneyChange(conv){
+        this.setState({conv:conv});
+    }
+
+    componentDidUpdate(){
+        this.makecost(this.state.ByYear,this.state.value);
+      //  this.make_export();
+    }
+
     classtxt(error){
         if(error){
             return "is-invalid";
@@ -731,22 +832,27 @@ class UserCost extends React.Component {
         let Costname="Cost";
         if(this.state.ByYear) Costname="Cost by year";
         this.props.export(this.export);
-        return (<div className="row align-items-baseline">
-                <div className="col-3">
-                    <TxtInput id={this.props.id+'-input'}  name="Provider" placeholder="Put your provider here" tips="Add your own cost calculation here" onChange={this.handleProviderChange}
-                              class={this.classtxt(this.state.ProviderError)} Prepend="" InvalidMessage="Please provide a Provider"/>
+
+        return (
+            <div className="container">
+                <div className="row align-items-baseline">
+                    <div className="col-3">
+                        <TxtInput id={this.props.id+'-input'}  name="Provider" placeholder="Provider here" tips="Add your own cost calculation here" onChange={this.handleProviderChange}
+                                  class={this.classtxt(this.state.ProviderError)} Prepend="" InvalidMessage="Please provide a Provider"/>
+                    </div>
+                    <div className="col-3">
+                        <TxtInput id={this.props.id+'-input'}  name="Service" placeholder="Service here" tips="Add your own cost calculation here" onChange={this.handleServiceChange}
+                                  class={this.classtxt(this.state.ServiceError)} Prepend="" InvalidMessage="Please provide a Service"/>
+                    </div>
+                    <div className="col-5">
+                        <PluginsCurrencyChange id="UserCostcurrency" name={Costname} onCostChange={this.handleCostChange}/>
+                    </div>
                 </div>
-                <div className="col-3">
-                    <TxtInput id={this.props.id+'-input'}  name="Service" placeholder="Put your service here" tips="Add your own cost calculation here" onChange={this.handleServiceChange}
-                              class={this.classtxt(this.state.ServiceError)} Prepend="" InvalidMessage="Please provide a Service"/>
-                </div>
-                <div className="col-3">
-                   <TxtInput id={this.props.id+'-input'}  name={Costname} placeholder="Put your cost here" tips="Add your own cost calculation here" onChange={this.handleCostChange}
-                             class={this.classtxt(this.state.CostError)} Prepend={MainData.Currency} InvalidMessage="Please provide a correct numerical value" />
-                </div>
-                <div className="col-auto">
-                    <CheckboxInput id={this.props.id+'-input'} name="Charged by year"
-                                   tips="Check if the service is charged by year so the cost will be adapted for the project duration" onChange={this.handleYearChange}/>
+                <div className="row align-items-baseline">
+                    <div className="col-auto">
+                        <CheckboxInput id={this.props.id+'-input'} name="Charged by year"
+                                       tips="Check if the service is charged by year so the cost will be adapted for the project duration" onChange={this.handleYearChange}/>
+                    </div>
                 </div>
             </div>
         );
@@ -768,6 +874,7 @@ class ProviderPluginsSelector extends React.Component {
         this.handleRmvPlugin = this.handleRmvPlugin.bind(this);
         this.handleProviderChangetxt = this.handleProviderChangetxt.bind(this);
         this.handleServiceChangetxt = this.handleServiceChangetxt.bind(this);
+        this.handlebyYearChange = this.handlebyYearChange.bind(this);
         this.make_exportcmp = this.make_exportcmp.bind(this);
         this.make_export = this.make_export.bind(this);
         this.state={
@@ -779,6 +886,7 @@ class ProviderPluginsSelector extends React.Component {
             Provider:"",
             Name:"",
             manualname:false,
+            manbyyear:false,
             show_plus:false,
             exportcmp:"",
         };
@@ -834,17 +942,18 @@ class ProviderPluginsSelector extends React.Component {
     handleRmvPlugin(n){
         this.props.handleRmvPlugin(n);
     }
-
+// The 3 nexts function are for user input management
     handleProviderChangetxt(txt){
         this.setState({Provider:txt});
-        // this.props.handleCostChange(this.props.n,this.state.cost);//provoke export update on the parent
-
-
     }
     handleServiceChangetxt(txt){
         this.setState({Name:txt});
-        // this.props.handleCostChange(this.props.n,this.state.cost);//provoke export update on the parent
     }
+    handlebyYearChange(state){
+        this.setState({manbyyear:state});
+    }
+
+
     // Manage extra display info for a selected provider
 
     extrainfo(Cdata){
@@ -880,11 +989,11 @@ class ProviderPluginsSelector extends React.Component {
                 <div className="card-header" id={id}>
                     <ModuleHeader id={id} data={this.props.data} selected={selected} Cdata={Cdata} n={this.props.n} Cost={this.state.cost}
                     comments={this.state.comments} handleAddPlugin={this.handleAddPlugin} handleRmvPlugin={this.handleRmvPlugin}
-                                  keys={this.state.keys} show_minus={this.props.show_minus} show_plus={this.state.show_plus}/>
+                                  keys={this.state.keys} show_minus={this.props.show_minus} show_plus={this.state.show_plus} conv={this.props.conv}/>
                 </div>
 
 
-                <div id={"collapse"+id} className="collapse" aria-labelledby={id} data-parent="#accordion">
+                <div id={"collapse"+id} className="collapse" aria-labelledby={id} data-parent="#accordionplugins">
                     <div className="card-body">
                         <div className="container">
 
@@ -910,7 +1019,7 @@ class ProviderPluginsSelector extends React.Component {
 
                             <div id="component" className="container bg-light">
                                 <Cmp data={Cdata} key={selected} id="component-settings" onCostChange={this.handleCostChange} n={this.props.n}
-                                handleProviderChange={this.handleProviderChangetxt} handleServiceChange={this.handleServiceChangetxt}
+                                handleProviderChange={this.handleProviderChangetxt} handleServiceChange={this.handleServiceChangetxt} handlebyYearChange={this.handlebyYearChange}
                                 export={this.make_exportcmp}/>
                             </div>
                         </div>
@@ -925,6 +1034,7 @@ class ProviderPluginsSelector extends React.Component {
         let out=this.props.data.Data[select];
         if (this.state.manualname){
             out.Name=this.state.Name;
+            out.ByYear=this.state.manbyyear;
             if ( this.state.Provider ==='') {
                 this.state.keys[select] = 'Please provide a Provider';
             }else {
@@ -971,7 +1081,7 @@ class ModuleHeader  extends React.Component{
     }
     byyear(by){
         if(by){
-            return(<span>{projectduration} years</span>);
+            return(<span className="txtbyyear">{projectduration} <br/> years</span>);
         }
         else {
             return(<span></span>);
@@ -979,23 +1089,24 @@ class ModuleHeader  extends React.Component{
 
     }
     render() {
-        let minus='';
-        let plus='';
+        let minus=null;
+        let plus=null;
+        let convout=null;
         if (this.props.show_minus){
             minus=<ButtonInputWpop class="btn-danger btn-sm" id="plugins-add-btn"
                                    name={<img className="img-fluid" src="icons\minus.png" width="20"/>}
-                                   onClick={this.handleRmvPlugin} n={this.props.n} tips={"Remove this line"}
+                                   onClick={this.handleRmvPlugin} n={this.props.n} tips="Remove this line"
                                     idp={this.props.id} info={this.props.data.Name}/>;
         }
         if (this.props.show_plus){
            plus= <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>}
-                         onClick={this.handleAddPlugin} n={this.props.n} tips={"Add a new "+this.props.data.Name}/>
+                         onClick={this.handleAddPlugin} n={this.props.n} tips={"Add a new "+this.props.data.Name}/>;
+        }
+        if (this.props.conv.Enable) {
+            convout=<CostOutput id="ccostconv" class="itemcost" name="" value={ConvCurrency(this.props.Cost)} tips="Converted cost for this provider"/>;
         }
 
-
  return(
-
-
      <div className="container">
          <div className="row align-items-center">
              <div className="col-1 align-self-start">
@@ -1038,7 +1149,8 @@ class ModuleHeader  extends React.Component{
              </div>
 
              <div id="plugin-cost" className="col-2 align-self-end">
-                 <CostOutput id="ccost" name="Cost" value={this.props.Cost} tips="Total cost for this provider"/>
+                 <CostOutput id="ccost" class="itemcost" name="" value={this.props.Cost} tips="Total cost for this provider"/>
+                 {convout}
              </div>
              <div className="col-auto">
                  {this.byyear(this.props.Cdata.ByYear)}
@@ -1131,7 +1243,8 @@ class ManagePlugins extends React.Component{
                         {(index) => <ProviderPluginsSelector data={this.props.data} key={this.state.displayed[index]}
                                                  show_minus={show_minus} n={index}
                                                  handleCostChange={this.handleCostChange} handleAddPlugin={this.handleAddPlugin}
-                                                             handleRmvPlugin={this.handleRmvPlugin} export={this.make_exportplug}/>}
+                                                             handleRmvPlugin={this.handleRmvPlugin} export={this.make_exportplug}
+                                                             conv={this.props.conv}/>}
 
                     </Repeat>
                </div>
@@ -1198,10 +1311,13 @@ class PluginsMain extends React.Component {
                         </div>
 
                         <div className="card ">
+                            <div className="accordion" id="accordionplugins">
                             <Repeat numTimes={this.props.data.length}>
                                 {(index) => <ManagePlugins data={this.props.data[index]} key={index}
-                                                           export={this.make_exportplug} n={index} handleCostChange={this.handleCostChange}/>}
+                                                           export={this.make_exportplug} n={index} handleCostChange={this.handleCostChange}
+                                                           conv={this.props.conv}/>}
                             </Repeat>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1216,20 +1332,27 @@ class PluginsMain extends React.Component {
 // ---------------------
 class Main extends React.Component {
     constructor(props) {
+        Money_GetRates();
         super(props);
         this.handleCostChange = this.handleCostChange.bind(this);
         this.make_exportmain = this.make_exportmain.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDurationChange = this.handleDurationChange.bind(this);
+        this.handleConvMoneyChange = this.handleConvMoneyChange.bind(this);
+
         this.state= {
             total: 0,
             export: [],
             exportmain:[],
             name:'',
             duration:MainData.DefaultDuration,
+            conv:{Enable:false,Cur:''},
         };
         projectduration=this.state.duration;
         this.init=true;
+
+
+
     }
 
     handleCostChange(total) {
@@ -1265,7 +1388,9 @@ class Main extends React.Component {
         projectduration=d;
     }
 
-
+    handleConvMoneyChange(conv){
+        this.setState({conv:conv});
+    }
     render() {
 
         return(
@@ -1277,11 +1402,11 @@ class Main extends React.Component {
 
                     {this.project_info()}
 
-                    <PluginsMain TotalCost={this.handleCostChange} data={MainData.Data} export={this.make_exportmain}/>
+                    <PluginsMain TotalCost={this.handleCostChange} data={MainData.Data} export={this.make_exportmain} conv={this.state.conv} />
 
-                    {this.final_cost()}
+                    {this.final_cost(this.state.conv)}
 
-                    <ManageExport data={this.state.exportmain}/>
+                    <ManageExport data={this.state.exportmain} conv={this.state.conv}/>
 
                     {this.howto()}
                 </div>
@@ -1291,6 +1416,7 @@ class Main extends React.Component {
 
         );
     }
+
 
     project_info(){
         return(
@@ -1318,6 +1444,9 @@ class Main extends React.Component {
                             <AmountInput id="project-duration" min="1" max="10" step="1" name="Project Duration" unit="year" tips="Select the duration of the project (in year)"
                                          value={this.state.duration} onChange={this.handleDurationChange}/>
                         </div>
+                        <div className="col-3">
+                            <CurrencySelect id="maincurrency" money={this.handleConvMoneyChange}/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1326,9 +1455,12 @@ class Main extends React.Component {
     }
 
     // Display the total cost
-    final_cost(){
+    final_cost(conv){
         let disps='';
         if(projectduration>1) disps='s';
+        let convout='';
+        if (conv.Enable) convout=<CostOutput id="convctotal"class="costoutput" name="Total Cost" value={ConvCurrency(this.state.total)} tips="Converted Total cost for the project"/>;
+
         return(
         <div className="card" id="finalcost">
             <div className="card bg-light  ">
@@ -1343,7 +1475,8 @@ class Main extends React.Component {
                         <h3>Total Cost for {projectduration} year{disps}</h3>
                     </div>
                     <div id="plugin-cost" className="col-5  text-right align-self-center">
-                        <CostOutput name={"Total Cost"} id={"ctotal"} value={tomoney(this.state.total)} tips="Total cost for the project"/>
+                        <CostOutput name="Total Cost" id="ctotal" class="costoutput" value={tomoney(this.state.total)} tips="Total cost for the project"/>
+                        {convout}
                     </div>
                     </div>
                 </div>
@@ -1420,6 +1553,16 @@ class Main extends React.Component {
                         <h2><img src="./icons/sliders.png" width="40"/> HOWTO</h2>
                     </div>
                     <div className="card-body">
+                        <dl className="row">
+                            <dt className="col-sm-3">Project Name and Duration</dt>
+                            <dd className="col-sm-9">
+                                <p>  The Project name is only use for you.</p>
+                                <p> <mark>Project Duration</mark> is used for subscription services charged by year : the yearly cost will be multiplied by the duration of the project.</p>
+                            </dd>
+                        </dl>
+
+
+
                         <dl className="row">
                             <dt className="col-sm-3">Categories</dt>
                             <dd className="col-sm-9">

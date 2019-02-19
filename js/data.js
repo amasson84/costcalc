@@ -470,7 +470,9 @@ const MainData={
     Updated:'30/01/2019',
     HelpUrl:'mailto:researchdata@epfl.ch',
     Currency:'CHF',
-    Version : 'v1.5',
+    OEXRApi:'cd8d785bdb6646b0a7e4c0eba5a74199',
+    Conv:['EUR','USD','GBP'],
+    Version : 'v2-beta',
     DefaultDuration:1,
     Data:[storage,ELN,Database,datarepository,coderepository],
 };

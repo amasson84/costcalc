@@ -7,18 +7,28 @@ class ManageExport extends React.Component {
         this.make_copy = this.make_copy.bind(this);
         this.rmvempty = this.rmvempty.bind(this);
         this.hide = this.hide.bind(this);
+        this.colsdef=["Category","Provider","Name","Comments","Options","Cost"];
+        this.colconv="Cost";
         this.state={
             output:'',
-            cols:["Category","Provider","Name","Comments","Options","Cost"],
             disp:false,
             rmvempty:false,
             typexp:"",
+            ConvEnable:this.props.conv.Enable,
+        };
+        this.cols=this.colsdef.slice(0);
+        this.colsconv=this.cols.slice(0);
+        this.colsconv.push(this.colconv);
 
-        }
 
     }
 
     render() {
+
+        if(this.props.conv.Enable){
+            this.cols=this.colsconv;
+        }else{
+            this.cols=this.colsdef;}
         let opt="";
         let output="";
         if (this.state.disp){
@@ -108,7 +118,7 @@ class ManageExport extends React.Component {
     }
     make_output(rdata){
         const data=this.read_export(rdata,this.state.typexp);
-        const hcol=this.state.cols;
+        const hcol=this.cols;
         switch(this.state.typexp){
             case 'html':
                 return this.htmlout(hcol,data);
@@ -128,8 +138,13 @@ class ManageExport extends React.Component {
 
     htmlout(hcol,data){
         let disps='';
+        let Convcol=null;
+        let movecol=3;
         if(projectduration>1) disps='s';
-
+        if(this.props.conv.Enable){
+            movecol=4;
+            Convcol=<td align="center"><strong>{ConvCurrency(this.props.data.total)}</strong></td>;
+        }
         return(
             <div id="htmlexport" className="container">
                     <table className="table table-striped table-bordered" width="100%">
@@ -143,8 +158,9 @@ class ManageExport extends React.Component {
                             <tr className="table-info">
                                 <td>{projectname}</td>
                                 <td> {projectduration} year{disps}</td>
-                                <td colSpan={hcol.length-3} align="right"><strong>Total Cost</strong></td>
+                                <td colSpan={hcol.length-movecol} align="right"><strong>Total Cost</strong></td>
                                 <td align="center"><strong>{this.props.data.total}</strong></td>
+                                {Convcol}
                             </tr>
                         </tbody>
                 </table>
@@ -178,7 +194,7 @@ class ManageExport extends React.Component {
     markout(hcol,data){
         let disps='';
         if(projectduration>1) disps='s';
-        const Head=Array.from({length: this.state.cols.length}, (v, k) => "---");
+        const Head=Array.from({length: this.cols.length}, (v, k) => "---");
         const col=Array.from({length: hcol.length-3}, (v, k) => "| ");
         return(
             <div id="htmlexport">
@@ -291,20 +307,22 @@ class ManageExport extends React.Component {
         for (let cat = 0; cat < rawexport.length; cat++) {
             const state = rawexport[cat];
             for (let mod = 0; mod < state.length; mod++) {
-                if((!this.state.rmvempty) || (state[mod].Provider!==''))
-                output.push(
-                    {
+                if((!this.state.rmvempty) || (state[mod].Provider!=='')){
+                    let tmp ={};
+                        tmp={
                         Category:state[mod].Category,
                         Provider: state[mod].Provider,
                         Name: state[mod].Name,
                         Comments: state[mod].Comments,
                         Options: this.read_options(state[mod].ExportCmp),
                         Cost: state[mod].Cost,
-                    }
-                );
+                    };
+                if(this.props.conv.Enable)  tmp["Cost2"]=ConvCurrency(state[mod].Cost);
+
+                    output.push(tmp);
 
 
-            }}
+            }}}
         return output;
     }
     read_options(Options){
