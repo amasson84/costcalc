@@ -467,6 +467,9 @@ const coderepository={
 // ----------------------------------------------------
 
 const MainData={
+    InstName:'EPFL Library',
+    InstLogo:'logo.png',
+    InstLogoWidth:200,
     Updated:'30/01/2019',
     HelpUrl:'mailto:researchdata@epfl.ch',
     Currency:'CHF',

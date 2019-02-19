@@ -1487,6 +1487,12 @@ class Main extends React.Component {
 
     // Define the head (top) of the page
     page_head(){
+        let helpbtn=null;
+        let imglogo=null;
+        if (MainData.HelpUrl!=null && MainData.HelpUrl!=="")
+            helpbtn=<a  className="btn btn-danger" id="head-help" target="_blank" href={MainData.HelpUrl} ><img src="./icons/help.png" width="20"/>&nbsp;I need help with my DMP</a>;
+        if  (MainData.InstLogo!=null && MainData.InstLogo!=="")
+            imglogo=<img src={"./icons/"+MainData.InstLogo} width={MainData.InstLogoWidth}/>;
         return(
             <div className="jumbotron jumbotron-fluid" id="page_head">
                 <div className="container">
@@ -1495,10 +1501,10 @@ class Main extends React.Component {
                             <img src="./icons/costcalc.png" width="100"/>
                         </div>
                         <div className="col-auto">
-                            <h1 className="display-5"> EPFL Library <br/>Cost Calculator for Data Management</h1>
+                            <h1 className="display-5"> {MainData.InstName} <br/>Cost Calculator for Data Management</h1>
                         </div>
                         <div className="col-auto">
-                            <img src="./icons/logo.png" width="200"/>
+                            {imglogo}
                         </div>
                     </div>
                     <div className="row">
@@ -1516,7 +1522,7 @@ class Main extends React.Component {
                                 We hope you will enjoy this tool and it will be useful for you.
                             </p>
                             <ButtonInput class="btn btn-primary" id="head-howto" name="To Know More (HOWTO)" onClick={this.move2howto}/> &nbsp;
-                            <a  className="btn btn-danger" id="head-help" target="_blank" href={MainData.HelpUrl} ><img src="./icons/help.png" width="20"/>&nbsp;I need help with my DMP</a>
+                            {helpbtn}
                         </div>
                     </div>
                 </div>
@@ -1546,6 +1552,15 @@ class Main extends React.Component {
 
     // Define the howto (user guide)
     howto(){
+        let curconv=null;
+        if(Money_Enable) curconv=
+            <dl className="row">
+                <dt className="col-sm-3">Change Currency</dt>
+                <dd className="col-sm-9">
+                    <p>If you need another currency than {MainData.Currency} you can add an extra currency by selecting in the <mark>Change Currency menu</mark></p>
+                    <p> Actual rate is automatically applied using <a href="https://openexchangerates.org/">openexchangerates</a></p>
+                </dd>
+            </dl>;
         return(
             <div id="howto">
                 <div className="card" >
@@ -1556,13 +1571,12 @@ class Main extends React.Component {
                         <dl className="row">
                             <dt className="col-sm-3">Project Name and Duration</dt>
                             <dd className="col-sm-9">
-                                <p>  The Project name is only use for you.</p>
+                                <p>  The Project name is only used for you.</p>
                                 <p> <mark>Project Duration</mark> is used for subscription services charged by year : the yearly cost will be multiplied by the duration of the project.</p>
                             </dd>
                         </dl>
 
-
-
+                        {curconv}
                         <dl className="row">
                             <dt className="col-sm-3">Categories</dt>
                             <dd className="col-sm-9">
@@ -1574,22 +1588,22 @@ class Main extends React.Component {
                             <dt className="col-sm-3">Providers</dt>
                             <dd className="col-sm-9">
                                 <p>
-                                    Providers can be chosen from the <mark>Select a provider box</mark>. You can then tune your setting for this provider to fit your needs.
+                                    Providers can be chosen from the <mark>Select a provider box</mark>. You can then tune your settings for this provider to fit your needs.
                                 </p>
 
                                 <p>
-                                    If the provider you want is not registered, you can add it manually with <mark>Provide your own provider</mark> and then enter your provider/service and cost.
+                                    If the provider you want is not present, you can add it manually with <mark>Provide your own provider</mark> and then enter your provider/service and cost.
                                 </p>
                             </dd>
                         </dl>
                         <dl className="row">
                             <dt className="col-sm-3">Add or Remove Line</dt>
                             <dd className="col-sm-9">
-                                <p>If you want to add a new provider use the <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>}
+                                <p>If you want to add a new line use the <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>}
                                                                                           tips={"Add a new category"} onClick={this.fctnull}/> button.
                                 </p>
                                 <p>
-                                    You can also remove a provider with <ButtonInput class="btn-danger btn-sm" id="plugins-add-btn"
+                                    You can also remove a line with <ButtonInput class="btn-danger btn-sm" id="plugins-add-btn"
                                                                                      name={<img className="img-fluid" src="icons\minus.png" width="20"/>}
                                                                                      tips={"Remove this line"} onClick={this.fctnull}/> button.
                                 </p>
@@ -1606,17 +1620,18 @@ class Main extends React.Component {
                         <dl className="row">
                             <dt className="col-sm-3">Comments your input</dt>
                             <dd className="col-sm-9">
-                                Comments are for your own usage, you can use for remembering what each section is and for a nice export.
+                                Comments are for your own usage, you can use it for remembering what each section is and for a nice export.
                             </dd>
                         </dl>
                         <dl className="row">
                             <dt className="col-sm-3">Export</dt>
                             <dd className="col-sm-9">
-                                You can export your work into different format : <br/>
+                                You can export your work into different formats : <br/>
                                 <samp> HTML</samp> : This format can be used in any wordprocessing software (such as Microsoft Word or Libreoffice).<br/>
                                 <samp>HTML Source code</samp>, <samp>Markdown</samp>, and <samp>CSV</samp> formats are also possible.<br/>
                                 Click on the  <ButtonInput class="btn-secondary"  id="btn-export" name="Copy to Clipboard" tips="Copy the output into your clipboard"
-                                                           onClick={this.fctnull}/> in order to copy your work into your clipboard. A simple <kbd>Paste</kbd> will transfer your work into any software.
+                                                           onClick={this.fctnull}/> in order to copy your work into your clipboard.
+                                A simple <kbd>Paste</kbd> will transfer your work into any software.
 
                             </dd>
                         </dl>
