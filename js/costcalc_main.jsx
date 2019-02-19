@@ -96,7 +96,16 @@ class AmountInput extends React.Component {
     handleChange(e) {
         this.props.onChange(e.target.value);
     }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    componentWillUnmount() {
+        $('[data-toggle="tooltip"]').tooltip('dispose');
+    }
     render() {
         const value = this.props.value;
         let label=null;
@@ -148,6 +157,16 @@ class SelectorInput extends React.Component {
         }
         return title;
     }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    componentWillUnmount() {
+        $('[data-toggle="tooltip"]').tooltip('dispose');
+    }
     render() {
         let label=null;
         if(this.props.name!=null && this.props.name!==""){
@@ -183,6 +202,16 @@ class MakeknowmoreInput extends React.Component {
     constructor(props) {
         super(props);
         this.state={btnsize:20}
+    }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    componentWillUnmount() {
+        $('[data-toggle="tooltip"]').tooltip('dispose');
     }
     render() {
         const data = this.props.data;
@@ -238,7 +267,13 @@ class ButtonHrefInput extends React.Component {
     constructor(props) {
         super(props);
     }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
 
     render() {
@@ -263,10 +298,19 @@ class ButtonInputWpop extends React.Component {
         this.props.onClick(out);
 
     }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    componentWillUnmount() {
+        $('[data-toggle="tooltip"]').tooltip('dispose');
+    }
     render() {
         return (
-            <span>
+            <span  data-toggle="tooltip" data-placement="top" title={this.props.tips}>
                 <button type="button" className={"btn "+ this.props.class} id={this.props.id} data-toggle="modal" data-target={"#"+this.state.target}>
                     {this.props.name}
                 </button>
@@ -307,13 +351,23 @@ class ButtonInput extends React.Component {
         this.props.onClick(this.props.n);
 
     }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    componentWillUnmount() {
+        $('[data-toggle="tooltip"]').tooltip('dispose');
+    }
     render() {
         return (
             <span>
                 <button id={this.props.id} onClick={this.handleChange} type="button"
-                        className={"btn "+ this.props.class} data-toggle="tooltip" data-placement="top"
-                        title={this.props.tips}>{this.props.name}</button>
+                        className={"btn "+ this.props.class} data-toggle="tooltip" data-placement="top" title={this.props.tips}>
+                    {this.props.name}
+                </button>
             </span>
         );
     }
@@ -325,7 +379,16 @@ class MenuInput extends React.Component {
         this.state={listoptions:this.makelist(props.options)};
 
     }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    componentWillUnmount() {
+        $('[data-toggle="tooltip"]').tooltip('dispose');
+    }
     makelist(data){
         var listoptions=[];
         for (var i = 0; i < data.length; i++) {
@@ -361,7 +424,16 @@ class TxtInput extends React.Component {
     handleChange(e) {
         this.props.onChange(e.target.value);
     }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    componentWillUnmount() {
+        $('[data-toggle="tooltip"]').tooltip('dispose');
+    }
     render() {
         let info=null ;
         if(this.props.info != null && this.props.info !== "") info=<small id={this.props.id+"-info"} className="input-group-text">{this.props.info} </small>;
@@ -396,7 +468,13 @@ class CostOutput extends React.Component {
     handleChange() {
         this.props.onCostChange(this.props.display);
     }
+    componentDidMount() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
 
+    componentDidUpdate() {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
     render() {
         const classN="form-control "+this.props.class;
         return (
@@ -1011,13 +1089,13 @@ class ModuleHeader  extends React.Component{
 
     }
     render() {
-        let minus='';
-        let plus='';
-        let convout='';
+        let minus=null;
+        let plus=null;
+        let convout=null;
         if (this.props.show_minus){
             minus=<ButtonInputWpop class="btn-danger btn-sm" id="plugins-add-btn"
                                    name={<img className="img-fluid" src="icons\minus.png" width="20"/>}
-                                   onClick={this.handleRmvPlugin} n={this.props.n} tips={"Remove this line"}
+                                   onClick={this.handleRmvPlugin} n={this.props.n} tips="Remove this line"
                                     idp={this.props.id} info={this.props.data.Name}/>;
         }
         if (this.props.show_plus){
@@ -1475,6 +1553,16 @@ class Main extends React.Component {
                         <h2><img src="./icons/sliders.png" width="40"/> HOWTO</h2>
                     </div>
                     <div className="card-body">
+                        <dl className="row">
+                            <dt className="col-sm-3">Project Name and Duration</dt>
+                            <dd className="col-sm-9">
+                                <p>  The Project name is only use for you.</p>
+                                <p> <mark>Project Duration</mark> is used for subscription services charged by year : the yearly cost will be multiplied by the duration of the project.</p>
+                            </dd>
+                        </dl>
+
+
+
                         <dl className="row">
                             <dt className="col-sm-3">Categories</dt>
                             <dd className="col-sm-9">

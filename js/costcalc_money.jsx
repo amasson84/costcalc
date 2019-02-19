@@ -58,7 +58,7 @@ class CurrencySelect extends React.Component {
                 return (
                     <SelectorInput id={this.props.id + '-currency'} name="Change Currency" options={this.state.Selectable}
                                    rate={rate} class="btn-secondary" selected={this.state.SelectCur}
-                                   onChange={this.handleCurChange}/>
+                                   onChange={this.handleCurChange} tips="You can display another currency, actual rate is automatically applied"/>
                 );
         } else {
             return (null);
