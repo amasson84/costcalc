@@ -11,9 +11,9 @@ Categories, Providers, Cost can be easily updated by just changing the **data.j
 
 ## How to use it
 
-The structure is higly modulable and can be extended for different projects. 
+The structure is highly modular and can be extended for different projects. 
 All the information are stored on javascript and the system only uses javascript 
-librairies making really easy to install and update.
+libraries making really easy to install and update.
 
 You don't need a specific webserver (but you can use one), just use your github repo 
 and create a pages link your cost calculator will be accessible
@@ -33,7 +33,7 @@ The documentation of the project explains how to install it and configure it. Se
 ## Citation
 The project is hosted on Zenodo : [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1469034.svg)](https://doi.org/10.5281/zenodo.1469034)
 
-The citation informations are in the __CITATION__ file and __CODEMETA.json__.
+The citation information are in the __CITATION__ file and __CODEMETA.json__.
 
 ## License and Term of Usage
 

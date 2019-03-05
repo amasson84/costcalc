@@ -137,10 +137,15 @@ Cost Calculator Documentation : data.js EXAMPLES
           
 # Maindata
     const MainData={
-        Updated:'29/11/2018',
+        InstName:'EPFL Library',
+        InstLogo:'logo.png',
+        InstLogoWidth:200,
+        Updated:'21/02/2019',
         HelpUrl:'mailto:researchdata@epfl.ch',
         Currency:'CHF',
-        Version : 'v1.4',
+        OEXRApi:'APIKEY',
+        Conv:['EUR','USD','GBP'],
+        Version : 'v2.0',
         DefaultDuration:1,
         Data:[storage,ELN,Database,datarepository,coderepository]
     };

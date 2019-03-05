@@ -67,7 +67,7 @@ The formula is _Cost = Amount * Rate_
 * AmountFreeCumulative (bool) : if true the free is not used when using the provider more than one times
 
 * RateName (str) : the rate name
-* Rates (obj) {keys : (rate)} keys: (str) the name of the rate, rate (number) : multiplicator/rate of the amount
+* Rates (obj) {keys : (rate)} keys: (str) the name of the rate, rate (number) : multiplication/rate of the amount
 * RateUnit (str) : Unit of the rate
 
 ### CategoryCost
@@ -108,8 +108,13 @@ The array contains the provider variable
 It contains few keys that can configure the cost calculator engine :
 ## Keys :
 * Updated (str) : the last update date
-* HelpUrl (str) : Url used in the help button
-* Currency (str) : currency display in the cost box
+* HelpUrl (str) : Url used in the help button can be a page a mailto:, if empty the help button is not displayed
+* InstName (str) : name of the institution display on the top 
+* InstLogo (str) : filename of the logo, the file should be in the **icons** folder, if empty no logo is displayed
+* InstLogoWidth (int) : width in pixels of the logo need to be specified if logo filename is specified
+* Currency (str) : currency display in the cost box, if using the currency conversion the name should be in the [List of Currencies](https://oxr.readme.io/docs/supported-currencies) 
+* OEXRApi (str) : your API key of [https://openexchangerates.org/](openexchangerates.org) if empty or wrong the currency conversion is disabled
+* Conv Array(str) : Array of money displayed for currency conversion [List of Currencies](https://oxr.readme.io/docs/supported-currencies) 
 * Version  (str) : version displayed
-* DefaultDuration (int) : Default Duration  
+* DefaultDuration (int) : Default Duration for project 
 * Data: (array) : contains the categories variable
