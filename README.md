@@ -25,9 +25,10 @@ The documentation of the project explains how to install it and configure it. Se
 ## Files/Folders
 
 * All the engine is stored in the **js** folder
-* __index-dev.html__ : Index file for development only
 * index.html : main index for production
-* **docs** contains the documentation for changing the database of provider or the engine itself. 
+* **docs** contains the documentation for changing the database of provider or the engine itself.
+* __index-dev.html__ : Index file for development only
+*  __index-pres.html__ : Index file for presentation only
 
 
 ## Citation
