@@ -64,7 +64,7 @@ const GoogleDriveEdu = {
 };
 const Dropbox_perso = {
     Style : 'CategoryCost',
-    Provider : "Dropbox Personnal",
+    Provider : "Dropbox Personal",
     Name:'Online Storage',
     ByYear:true,
     ExtraInfo : "Dropbox is not recommended as the data are stored outside of Switzerland",
