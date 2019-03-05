@@ -64,11 +64,11 @@ const GoogleDriveEdu = {
 };
 const Dropbox_perso = {
     Style : 'CategoryCost',
-    Provider : "Dropbox Personnal",
+    Provider : "Dropbox Personal",
     Name:'Online Storage',
     ByYear:true,
     ExtraInfo : "Dropbox is not recommended as the data are stored outside of Switzerland",
-    ExtraInfoUrl :"https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012829",
+    ExtraInfoUrl :"https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012882",
     Url : [
         {Name :'Dropbox',Url:'https://www.dropbox.com/plans?trigger=nr'}
     ],
@@ -86,7 +86,7 @@ const Dropbox_team = {
     Name:'Online Storage',
     ByYear:true,
     ExtraInfo : "Dropbox is not recommended as the data are stored outside of Switzerland",
-    ExtraInfoUrl :"https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012829",
+    ExtraInfoUrl :"https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012882",
     Url : [
         {Name :'Dropbox',Url:'https://www.dropbox.com/plans?trigger=nr'}
     ],
