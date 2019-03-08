@@ -115,10 +115,14 @@ class ManageExport extends React.Component {
         document.execCommand("copy");
         this.fnDeSelect()
         alert("Copied");
+        Stats.RecordEvent('Export',"clipboard",0);
     }
     make_output(rdata){
         const data=this.read_export(rdata,this.state.typexp);
         const hcol=this.cols;
+        //Generate a stat export
+        Stats.RecordEvent('Export',this.state.typexp,0);
+
         switch(this.state.typexp){
             case 'html':
                 return this.htmlout(hcol,data);

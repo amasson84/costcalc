@@ -910,6 +910,9 @@ class ProviderPluginsSelector extends React.Component {
         this.state.Name=this.props.data.Data[select].Name;
 
         this.props.handleCostChange(this.props.n,this.state.cost);
+        // Send a provider even when provider change
+        Stats.RecordEvent('Provider',this.state.Provider,0);
+
     }
     componentDidUpdate(){
         this.props.handleCostChange(this.props.n,this.state.cost);
@@ -1130,7 +1133,7 @@ class ModuleHeader  extends React.Component{
                      <div className="col-auto">
                                     <span data-toggle="tooltip" data-placement="top" title="Expand this..." >
                                         <button className="btn btn-outline-primary  dropdown-toggle" type="button" data-toggle="collapse" data-target={"#collapse"+this.props.id}
-                                                aria-expanded="false" aria-controls={"collapse"+this.props.id} id="btn-plugins" >
+                                                aria-expanded="false" aria-controls={"collapse"+this.props.id} id="btn-plugins" onClick={this.btnClick.bind(this)}>
                                             <span id={"plugin-number"}> {this.props.n+1}. </span> <span id={"plugin-name"}>{this.props.data.Name}</span>
                                         </button>
                                     </span>
@@ -1160,6 +1163,10 @@ class ModuleHeader  extends React.Component{
 
      </div>
  );
+    }
+    btnClick(){
+        // Send a category even when someone click on the category btn
+        Stats.RecordEvent('Category',this.props.data.Name,this.props.n);
     }
     makeinfo(keys,selected,Cdata){
         let name=Cdata.Name;
@@ -1339,6 +1346,7 @@ class Main extends React.Component {
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDurationChange = this.handleDurationChange.bind(this);
         this.handleConvMoneyChange = this.handleConvMoneyChange.bind(this);
+        this.btnClick=this.btnClick.bind(this);
 
         this.state= {
             total: 0,
@@ -1354,7 +1362,9 @@ class Main extends React.Component {
 
 
     }
-
+    componentDidUpdate(){
+        _paq.push(['enableLinkTracking']);
+    }
     handleCostChange(total) {
         if (this.state.total !== total){
             this.setState({total:total});
@@ -1369,19 +1379,15 @@ class Main extends React.Component {
             if(!Object.compare(tmp,this.state.exportmain.data)){
                 disp=true;
             }
-
-
         }
             if((this.init)||(disp)){
                 this.setState({exportmain: {data: tmp, total: tomoney(this.state.total)}});
                 this.init=false;
            }
-
     }
     handleNameChange(name){
         this.setState({name:name});
         projectname=name;
-
     }
     handleDurationChange(d){
         this.setState({duration:d});
@@ -1391,10 +1397,15 @@ class Main extends React.Component {
     handleConvMoneyChange(conv){
         this.setState({conv:conv});
     }
+    btnClick(name,value){
+        Stats.RecordEvent('Options',name,value);
+    }
     render() {
 
         return(
             <div id="main">
+                <PopupStats />
+
                 {this.page_head()}
 
                 <div id="plugins-body" className="container">
@@ -1413,7 +1424,6 @@ class Main extends React.Component {
 
                 {this.page_foot()}
             </div>
-
         );
     }
 
@@ -1490,7 +1500,9 @@ class Main extends React.Component {
         let helpbtn=null;
         let imglogo=null;
         if (MainData.HelpUrl!=null && MainData.HelpUrl!=="")
-            helpbtn=<a  className="btn btn-danger" id="head-help" target="_blank" href={MainData.HelpUrl} ><img src="./icons/help.png" width="20"/>&nbsp;I need help with my DMP</a>;
+            helpbtn=<a className="btn btn-danger" id="head-help" target="_blank" href={MainData.HelpUrl}
+                       onClick={() => this.btnClick("helpbtn",0)}>
+                            <img src="./icons/help.png" width="20"/>&nbsp;I need help with my DMP</a>;
         if  (MainData.InstLogo!=null && MainData.InstLogo!=="")
             imglogo=<img src={"./icons/"+MainData.InstLogo} width={MainData.InstLogoWidth}/>;
         return(
@@ -1643,9 +1655,8 @@ class Main extends React.Component {
 
     // Function use by the howto btn to move the page
     move2howto(){
-        $('html,body').animate({
-                scrollTop: $("#howto").offset().top},
-            'slow');
+        Stats.RecordEvent('Options',"howtobtn",0);
+        $('html,body').animate({scrollTop: $("#howto").offset().top},'slow');
     }
     fctnull(){}
 }
@@ -1655,10 +1666,8 @@ class Main extends React.Component {
 // ---------------------
 // ---------------------
 ReactDOM.render(<Main />,document.getElementById('root'));
-
-
-$(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-});
-
+// Display the stats popup after 10s
+if (Stats.Enable) {setTimeout(function(){$('#PopupStats').modal('show')}, 10000);}
+//Enable tooltip
+$('[data-toggle="tooltip"]').tooltip();
 

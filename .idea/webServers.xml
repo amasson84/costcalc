@@ -11,7 +11,7 @@
         </fileTransfer>
       </webServer>
       <webServer id="59e937d2-29b3-44c8-9206-23375a1c07c3" name="test local" url="http://localhost:63342">
-        <fileTransfer port="0" mountedRoot="$PROJECT_DIR$/../../costcalc" accessType="MOUNT" />
+        <fileTransfer port="0" mountedRoot="$PROJECT_DIR$" accessType="MOUNT" />
       </webServer>
     </option>
   </component>
