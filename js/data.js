@@ -448,7 +448,7 @@ const datarepository={
         ]
 };
 const coderepository={
-    Name : 'Collaborative Repository',
+    Name : 'Code Repository',
     Icon : 'crepos.png',
     Url : '',
     Data :[
@@ -470,7 +470,7 @@ const MainData={
     InstName:'EPFL Library',
     InstLogo:'logo.png',
     InstLogoWidth:200,
-    Updated:'05/03/2019',
+    Updated:'25/06/2019',
     HelpUrl:'mailto:researchdata@epfl.ch',
     Currency:'CHF',
     OEXRApi:'cd8d785bdb6646b0a7e4c0eba5a74199',

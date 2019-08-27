@@ -5,6 +5,7 @@
 @import "../bootstrap-4.3.1/scss/_mixins";
 
 $font-size-base: 1rem;
+
 #PluginsMain{
     padding-top: 0.5em;
     padding-bottom: 0.5em;
@@ -13,24 +14,22 @@ $font-size-base: 1rem;
 }
 
 #plugin-name{
-    responsive-font-size: $h6-font-size;
+    font-size: 0.9rem;
     font-weight: bold;
 }
 #plugin-number{
-   font-size: $h5-font-size;;
+    font-size: 0.9rem;
     text-decoration: none;
 }
 
 #plugin-info{
-    responsive-font-size: $h6-font-size;
+    font-size: 0.9rem;
     text-decoration: none;
-    text-align: center;
 }
 
 #plugin-cost{
      text-align: center;
-    font-size: $h3-font-size;
-    ;
+    font-size: 0.9rem;
  }
 #plugin-menu{
     padding-top: 0.5em;
@@ -51,11 +50,11 @@ $font-size-base: 1rem;
 }
 .itemcost{
     text-align: center;
-    font-size: $h3-font-size;;
+    font-size:  0.8rem;
 }
 .txtbyyear{
     text-align: center;
-    font-size: $h6-font-size;;
+    font-size:  0.8rem;
 
 }
 
@@ -103,7 +102,7 @@ $font-size-base: 1rem;
 
 }
 #howto{
-    font-size: $h5-font-size;
+    font-size: $h6-font-size;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
 }

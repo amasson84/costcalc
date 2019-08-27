@@ -1125,9 +1125,9 @@ class ModuleHeader  extends React.Component{
              <div  className=" col-1 align-self-start">
                  <img className="img-fluid" src={"icons/"+this.props.data.Icon} width="100"/>
              </div>
-             <div className="col-3 ">
-                 <div className="row align-items-end">
-                     <div className="col-auto">
+             <div className="col-3 text-center">
+                 {/*<div className="row align-items-end">*/}
+                 {/*    <div className="col-auto">*/}
                                     <span data-toggle="tooltip" data-placement="top" title="Expand this..." >
                                         <button className="btn btn-outline-primary  dropdown-toggle" type="button" data-toggle="collapse" data-target={"#collapse"+this.props.id}
                                                 aria-expanded="false" aria-controls={"collapse"+this.props.id} id="btn-plugins" >
@@ -1135,24 +1135,24 @@ class ModuleHeader  extends React.Component{
                                         </button>
                                     </span>
 
-                     </div>
-                 </div>
+                 {/*    </div>*/}
+                 {/*</div>*/}
              </div>
              <div id="plugin-info" className="col-4">
                  <div className="row">
                      {this.makeinfo(this.props.keys,this.props.selected,this.props.Cdata)}
                  </div>
-                 <div className="row">
+                 <div className="row text-center">
                      {this.props.comments}
                  </div>
 
              </div>
 
-             <div id="plugin-cost" className="col-2 align-self-end">
+             <div id="plugin-cost" className="col-2 ">
                  <CostOutput id="ccost" class="itemcost" name="" value={this.props.Cost} tips="Total cost for this provider"/>
                  {convout}
              </div>
-             <div className="col-auto">
+             <div className="col-1">
                  {this.byyear(this.props.Cdata.ByYear)}
              </div>
 
@@ -1306,6 +1306,9 @@ class PluginsMain extends React.Component {
                                 </div>
                                 <div className="col-2 text-center">
                                     Cost
+                                </div>
+                                <div className="col-1 text-center">
+
                                 </div>
                             </div>
                         </div>

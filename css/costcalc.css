@@ -5,21 +5,20 @@
   padding-right: 0em; }
 
 #plugin-name {
-  responsive-font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: bold; }
 
 #plugin-number {
-  font-size: 1.25rem;
+  font-size: 0.9rem;
   text-decoration: none; }
 
 #plugin-info {
-  responsive-font-size: 1rem;
-  text-decoration: none;
-  text-align: center; }
+  font-size: 0.9rem;
+  text-decoration: none; }
 
 #plugin-cost {
   text-align: center;
-  font-size: 1.75rem; }
+  font-size: 0.9rem; }
 
 #plugin-menu {
   padding-top: 0.5em;
@@ -40,11 +39,11 @@
 
 .itemcost {
   text-align: center;
-  font-size: 1.75rem; }
+  font-size: 0.8rem; }
 
 .txtbyyear {
   text-align: center;
-  font-size: 1rem; }
+  font-size: 0.8rem; }
 
 .ConvUser {
   margin: 5pt 5pt 5pt 5pt; }
@@ -83,7 +82,7 @@
   padding-bottom: 0.5em; }
 
 #howto {
-  font-size: 1.25rem;
+  font-size: 1rem;
   padding-top: 0.5em;
   padding-bottom: 0.5em; }
 
