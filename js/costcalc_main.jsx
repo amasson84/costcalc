@@ -218,12 +218,12 @@ class MakeknowmoreInput extends React.Component {
         if (((data.Url !== '') )) {
             // if (data.Url.length==1){
             //     return(
-            //         <ButtonHrefInput name={<img src="./icons/info.png" width={this.state.btnsize}/>} url={data.Url[0].Url}
+            //         <ButtonHrefInput name={<img src="./icon/info.png" width={this.state.btnsize}/>} url={data.Url[0].Url}
             //     id="btn-plugin-knowmore"
             // class="btn-primary btn-sm" tips={"Know more about " + data.Name}/>
             //     );
             // }else {
-            return (<MenuInput name={<img src="./icons/info.png"  width={this.state.btnsize}/>} options={data.Url}
+            return (<MenuInput name={<img src="./icon/info.png"  width={this.state.btnsize}/>} options={data.Url}
                                id="btn-plugin-knowmore"
                                class="btn-primary btn-sm" tips={"Know more about " + data.Name}/>);
         //}
@@ -967,7 +967,7 @@ class ProviderPluginsSelector extends React.Component {
             Extra_inf=
                 <div className="col-3 align-self-end">
                     <div className="alert alert-info" role="alert">
-                        <img src="./icons/info2.png"  width="20"/> &nbsp;
+                        <img src="./icon/info2.png"  width="20"/> &nbsp;
                         {Cdata.ExtraInfo}
                         {Extra_infUrl}
                     </div>
@@ -1094,12 +1094,12 @@ class ModuleHeader  extends React.Component{
         let convout=null;
         if (this.props.show_minus){
             minus=<ButtonInputWpop class="btn-danger btn-sm" id="plugins-add-btn"
-                                   name={<img className="img-fluid" src="icons\minus.png" width="20"/>}
+                                   name={<img className="img-fluid" src="icon\minus.png" width="20"/>}
                                    onClick={this.handleRmvPlugin} n={this.props.n} tips="Remove this line"
                                     idp={this.props.id} info={this.props.data.Name}/>;
         }
         if (this.props.show_plus){
-           plus= <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>}
+           plus= <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icon\plus.png" width="20"/>}
                          onClick={this.handleAddPlugin} n={this.props.n} tips={"Add a new "+this.props.data.Name}/>;
         }
         if (this.props.conv.Enable) {
@@ -1123,7 +1123,7 @@ class ModuleHeader  extends React.Component{
                  </div>
             </div>
              <div  className=" col-1 align-self-start">
-                 <img className="img-fluid" src={"icons/"+this.props.data.Icon} width="100"/>
+                 <img className="img-fluid" src={"icon/"+this.props.data.Icon} width="100"/>
              </div>
              <div className="col-3 text-center">
                  {/*<div className="row align-items-end">*/}
@@ -1426,11 +1426,11 @@ class Main extends React.Component {
         <div id="ProjectInfo">
             <div className="card-header">
 
-                        <img src="./icons/uset.png" width="40" />
+                        <img src="./icon/uset.png" width="40" />
 
-                        <img src="./icons/uset.png" width="40" />
+                        <img src="./icon/uset.png" width="40" />
 
-                        <img src="./icons/uset.png" width="40" />
+                        <img src="./icon/uset.png" width="40" />
 
 
 
@@ -1472,7 +1472,7 @@ class Main extends React.Component {
                     <div className="col-1">
                     </div>
                     <div className="col-1">
-                        {/*<img className="img-fluid" src="./icons/totalcost.png" width="100"/>*/}
+                        {/*<img className="img-fluid" src="./icon/totalcost.png" width="100"/>*/}
                     </div>
                     <div className="col-5 " id="plugin-name">
                         <h3>Total Cost for {projectduration} year{disps}</h3>
@@ -1493,15 +1493,15 @@ class Main extends React.Component {
         let helpbtn=null;
         let imglogo=null;
         if (MainData.HelpUrl!=null && MainData.HelpUrl!=="")
-            helpbtn=<a  className="btn btn-danger" id="head-help" target="_blank" href={MainData.HelpUrl} ><img src="./icons/help.png" width="20"/>&nbsp;I need help with my DMP</a>;
+            helpbtn=<a  className="btn btn-danger" id="head-help" target="_blank" href={MainData.HelpUrl} ><img src="./icon/help.png" width="20"/>&nbsp;I need help with my DMP</a>;
         if  (MainData.InstLogo!=null && MainData.InstLogo!=="")
-            imglogo=<img src={"./icons/"+MainData.InstLogo} width={MainData.InstLogoWidth}/>;
+            imglogo=<img src={"./icon/"+MainData.InstLogo} width={MainData.InstLogoWidth}/>;
         return(
             <div className="jumbotron jumbotron-fluid" id="page_head">
                 <div className="container">
                     <div className="row">
                         <div className="col-auto">
-                            <img src="./icons/costcalc.png" width="100"/>
+                            <img src="./icon/costcalc.png" width="100"/>
                         </div>
                         <div className="col-auto">
                             <h1 className="display-5"> {MainData.InstName} <br/>Cost Calculator for Data Management</h1>
@@ -1568,7 +1568,7 @@ class Main extends React.Component {
             <div id="howto">
                 <div className="card" >
                     <div className="card-header ">
-                        <h2><img src="./icons/sliders.png" width="40"/> HOWTO</h2>
+                        <h2><img src="./icon/sliders.png" width="40"/> HOWTO</h2>
                     </div>
                     <div className="card-body">
                         <dl className="row">
@@ -1602,12 +1602,12 @@ class Main extends React.Component {
                         <dl className="row">
                             <dt className="col-sm-3">Add or Remove Line</dt>
                             <dd className="col-sm-9">
-                                <p>If you want to add a new line use the <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icons\plus.png" width="20"/>}
+                                <p>If you want to add a new line use the <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icon\plus.png" width="20"/>}
                                                                                           tips={"Add a new category"} onClick={this.fctnull}/> button.
                                 </p>
                                 <p>
                                     You can also remove a line with <ButtonInput class="btn-danger btn-sm" id="plugins-add-btn"
-                                                                                     name={<img className="img-fluid" src="icons\minus.png" width="20"/>}
+                                                                                     name={<img className="img-fluid" src="icon\minus.png" width="20"/>}
                                                                                      tips={"Remove this line"} onClick={this.fctnull}/> button.
                                 </p>
                             </dd>
@@ -1616,7 +1616,7 @@ class Main extends React.Component {
                             <dt className="col-sm-3">To know more about</dt>
                             <dd className="col-sm-9">
                                 Some extra information about the category or the provider can be obtained with the <ButtonInput class="btn-primary btn-sm" id="plugins-add-btn"
-                                                                                                                                name={<img className="img-fluid" src="icons\info.png" width="20"/>}
+                                                                                                                                name={<img className="img-fluid" src="icon\info.png" width="20"/>}
                                                                                                                                 tips={"Know more"} onClick={this.fctnull}/> button.
                             </dd>
                         </dl>

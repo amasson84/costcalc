@@ -2,17 +2,10 @@
 <project version="4">
   <component name="PublishConfigData" serverName="test local">
     <serverData>
-      <paths name="amasson (project level)">
+      <paths name="epfl (costcalc.epfl.ch)">
         <serverdata>
           <mappings>
             <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="test local">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

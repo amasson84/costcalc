@@ -2,16 +2,16 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="85da660e-e5cc-40ab-96cf-16c701e7bfa5" name="amasson (project level)" url="https://amasson.ch/epfl">
-        <fileTransfer host="192.168.1.20" port="22" rootFolder="/amasson/html/epfl" accessType="SFTP">
-          <advancedOptions>
-            <advancedOptions dataProtectionLevel="Private" shareSSLContext="true" />
-          </advancedOptions>
-          <option name="port" value="22" />
-        </fileTransfer>
-      </webServer>
       <webServer id="59e937d2-29b3-44c8-9206-23375a1c07c3" name="test local" url="http://localhost:63342">
-        <fileTransfer port="0" mountedRoot="$PROJECT_DIR$/../../costcalc" accessType="MOUNT" />
+        <fileTransfer port="0" mountedRoot="$PROJECT_DIR$" accessType="MOUNT" />
+      </webServer>
+      <webServer id="779514aa-e348-4258-b178-3c0a85f3a0dd" name="epfl (costcalc.epfl.ch)" url="https://costcalc.epfl.ch">
+        <fileTransfer host="costcalc.epfl.ch" port="21" rootFolder="/htdocs" accessType="FTPS">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
       </webServer>
     </option>
   </component>
