@@ -475,7 +475,12 @@ const MainData={
     Currency:'CHF',
     OEXRApi:'cd8d785bdb6646b0a7e4c0eba5a74199',
     Conv:['EUR','USD','GBP'],
-    Version : 'v2.1',
+    UseStats:true,
+    StatsEngine:'matomo',
+    StatsURL:'costcalc.epfl.ch/matomo/',
+    StatsID:'1',
+    StatsContact:'mailto:researchdata@epfl.ch',
+    Version : 'v2.0',
     DefaultDuration:1,
     Data:[storage,ELN,Database,datarepository,coderepository],
 };
