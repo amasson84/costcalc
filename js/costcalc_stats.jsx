@@ -93,7 +93,7 @@ class PopupStats extends React.Component {
                         <div className="modal-header bg-light">
 
                             <h5 className="modal-title " id="PopupStatsValidationTitle">
-                                <img src="./icons/stats.png" width="50px"/>
+                                <img src="./icon/stats.png" width="50px"/>
                                 We need you to improve this tool
                             </h5>
                         </div>

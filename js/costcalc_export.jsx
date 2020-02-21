@@ -142,9 +142,10 @@ class ManageExport extends React.Component {
 
     htmlout(hcol,data){
         let disps='';
-        let Convcol=null;
-        let movecol=3;
+
         if(projectduration>1) disps='s';
+        let movecol=3;
+        let Convcol=null;
         if(this.props.conv.Enable){
             movecol=4;
             Convcol=<td align="center"><strong>{ConvCurrency(this.props.data.total)}</strong></td>;
@@ -174,6 +175,12 @@ class ManageExport extends React.Component {
     htmlsrcout(hcol,data){
         let disps='';
         if(projectduration>1) disps='s';
+        let movecol=3;
+        let Convcol=null;
+        if(this.props.conv.Enable){
+            movecol=4;
+            Convcol=<span>&lt;td align="center"&gt; &lt;strong&gt;{ConvCurrency(this.props.data.total)}&lt;/strong&gt;&lt;/td&gt;</span>;
+        }
         return(
             <div id="htmlexport">
                 <pre><code>
@@ -186,8 +193,10 @@ class ManageExport extends React.Component {
                     &lt;tr &gt;<br/>
                     &lt;td&gt;{projectname}&lt;/td&gt;
                     &lt;td&gt;{projectduration} year{disps}&lt;/td&gt;
-                    &lt;td colSpan={hcol.length-3} align="right"&gt;&lt;strong&gt;Total Cost&lt;/strong&gt;&lt;/td&gt;&lt;td align="center"&gt;&lt;strong&gt;
-                    {this.props.data.total}&lt;/strong&gt;&lt;/td&gt;<br/>
+                    &lt;td colSpan={hcol.length-movecol} align="right"&gt;&lt;strong&gt;Total Cost&lt;/strong&gt;&lt;/td&gt;&lt;td align="center"&gt;&lt;strong&gt;
+                    {this.props.data.total}&lt;/strong&gt;&lt;/td&gt;
+                    {Convcol}
+                    <br/>
                 &lt;/tr&gt;<br/>
                 &lt;/tbody&gt;<br/>
                 &lt;/table&gt;<br/>
@@ -199,7 +208,14 @@ class ManageExport extends React.Component {
         let disps='';
         if(projectduration>1) disps='s';
         const Head=Array.from({length: this.cols.length}, (v, k) => "---");
-        const col=Array.from({length: hcol.length-3}, (v, k) => "| ");
+        let movecol=3;
+        let Convcol=null;
+        if(this.props.conv.Enable){
+            movecol=4;
+            Convcol=<span>{ConvCurrency(this.props.data.total)}|</span>;
+        }
+        const col=Array.from({length: hcol.length-movecol}, (v, k) => "| ");
+
         return(
             <div id="htmlexport">
                 <pre><code>
@@ -208,7 +224,7 @@ class ManageExport extends React.Component {
 
                     {this.marktable(data)}
 
-                    |{projectname}|{projectduration} year{disps}{col} Total Cost |{this.props.data.total}|<br/>
+                    |{projectname}|{projectduration} year{disps}{col} Total Cost |{this.props.data.total}|{Convcol}<br/>
 
                </code></pre>
             </div>
@@ -217,7 +233,14 @@ class ManageExport extends React.Component {
     csvout(hcol,data){
         let disps='';
         if(projectduration>1) disps='s';
-        const col=Array.from({length: hcol.length-3}, (v, k) => ",");
+        let movecol=3;
+        let Convcol=null;
+        if(this.props.conv.Enable) {
+            movecol = 4;
+            Convcol = <span>{ConvCurrency(this.props.data.total)},</span>;
+        }
+        const col=Array.from({length: hcol.length-movecol}, (v, k) => ",");
+
         return(
             <div id="htmlexport">
                 <pre><code>
@@ -225,7 +248,7 @@ class ManageExport extends React.Component {
 
                     {this.csvtable(data)}
 
-                    {projectname},{projectduration} year{disps}{col} Total Cost ,{this.props.data.total},<br/>
+                    {projectname},{projectduration} year{disps}{col} Total Cost ,{this.props.data.total},{Convcol}<br/>
 
                </code></pre>
             </div>
@@ -257,7 +280,7 @@ class ManageExport extends React.Component {
                 for (let j = 0; j < cols.length; j++) {
                     children.push(<span key={j}> {cols[j]}|</span>);
                 }
-                return children
+                return children;
             case 'csv':
                 for (let j = 0; j < cols.length; j++) {
                     children.push(<span key={j}> {cols[j]},</span>);
@@ -341,6 +364,9 @@ class ManageExport extends React.Component {
                     break;
                 case 'mark':
                     output.push(<span key={i}>__{Options[i].Name}__ : *{Options[i].Value}*  </span>);
+                    break;
+                case 'csv':
+                    output.push(<span key={i}>{Options[i].Name} : {Options[i].Value}  </span>);
                     break;
             }
                     if(i< Options.length-1){

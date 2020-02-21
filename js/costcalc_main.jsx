@@ -1206,6 +1206,7 @@ class ManagePlugins extends React.Component{
         tmp.splice(n.n,1);
         this.setState({displayed:tmp});
         this.handleCostChange(n.n,0);
+        this.state.export.splice(n.n,1);
     }
     handleAddPlugin(n){
         var tmp=this.state.displayed;
@@ -1505,7 +1506,7 @@ class Main extends React.Component {
         if (MainData.HelpUrl!=null && MainData.HelpUrl!=="")
             helpbtn=<a className="btn btn-danger" id="head-help" target="_blank" href={MainData.HelpUrl}
                        onClick={() => this.btnClick("helpbtn",0)}>
-                            <img src="./icons/help.png" width="20"/>&nbsp;I need help with my DMP</a>;
+                            <img src="./icon/help.png" width="20"/>&nbsp;I need help with my DMP</a>;
         if  (MainData.InstLogo!=null && MainData.InstLogo!=="")
             imglogo=<img src={"./icon/"+MainData.InstLogo} width={MainData.InstLogoWidth}/>;
         return(
