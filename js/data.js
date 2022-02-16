@@ -4,10 +4,10 @@
 // Storage
 const NasEpfl =  {
     Style: "AmountRatesCost",
-    Provider : "EPFL-VPSI",
+    Provider : "EPFL-VPO-DSI",
     Name:'NAS',
     Url : [
-        {Name:'VPSI-Website',Url:'https://support.epfl.ch/help/epfl?id=epfl_service_status&service=49a363acdb34c700ef64731b8c96191f'},
+        {Name:'DSI-Website',Url:'https://support.epfl.ch/help/epfl?id=epfl_service_status&service=49a363acdb34c700ef64731b8c96191f'},
         {Name:'SV-IT Storage Website',Url:'https://sv-it.epfl.ch/stockage'}
     ],
     ExtraInfo:"The first TB is free",
@@ -189,12 +189,12 @@ const Benchling = {
 // Database
 const MysqlEpfl = {
     Style : 'CategoryCost',
-    Provider : "EPFL-VPSI",
+    Provider : "EPFL-VPO-DSI",
     Name:'MySql',
     ByYear:true,
     Adaptive:false,
     Url : [
-        {Name:'EPFL VPSI ',Url:'https://support.epfl.ch/epfl?id=epfl_service_status&service=eb026fa0db34c700ef64731b8c96198e'}
+        {Name:'EPFL DSI ',Url:'https://support.epfl.ch/epfl?id=epfl_service_status&service=eb026fa0db34c700ef64731b8c96198e'}
     ],
     CatName:'Options',
     Cat:{
@@ -369,6 +369,24 @@ const Dryad = {
     RateUnit : "CHF / GB"
 };
 
+const Acoua = {
+    Style : 'CategoryCost',
+    Provider : "EPFL",
+    Name:'ACOUA (Academic Output Archive)',
+    ByYear:false,
+    Adaptive:false,
+    Url : [
+        {Name:'About ACOUA',Url:'https://www.epfl.ch/campus/library/acoua-support/'},
+        {Name:'ACOUA (access limited to EPFL network)',Url:'http://acoua.epfl.ch'},
+    ],
+    ExtraInfo:'The ACOUA service is exclusively designed for EPFL researchers.',
+    CatName:'Options',
+    Cat:{
+        'Costs covered by DSI':0,
+    },
+    CatUnit:'CHF',
+};
+
 // System variable definition
 // ----------------------------------------------------
 // ----------------------------------------------------
@@ -396,7 +414,7 @@ const storage={
     Name : 'Active Storage',
     Icon : 'storage.png',
     Url : [
-        {Name:'EPFL RDM',Url:'https://researchData.epfl.ch/work-with-Data/storage/'},
+        {Name:'EPFL RDM software information',Url:'https://www.epfl.ch/campus/library/services-researchers/rdm-software/'},
         {Name:'Comparison of file synchronization software',Url:'https://en.wikipedia.org/wiki/Comparison_of_file_synchronization_software'}
     ],
     Data :[NoneSelected,
@@ -413,7 +431,7 @@ const ELN={
     Name : 'Electronic LabBook',
     Icon : 'eln.png',
     Url : [
-        {Name: 'EPFL RDM',Url:'https://researchData.epfl.ch/work-with-Data/active-Data-management/'}
+        {Name: 'EPFL RDM software information',Url:'https://www.epfl.ch/campus/library/services-researchers/rdm-software/'}
     ],
     Data :[NoneSelected,
         SLIMSEpfl,
@@ -437,7 +455,7 @@ const datarepository={
         Name : 'Data Repository',
         Icon : 'drepos.png',
         Url : [
-            {Name:'EPFL RDM WebPage',Url:'https://researchData.epfl.ch/publish-preserve/'}
+            {Name:'EPFL RDM software information',Url:'https://www.epfl.ch/campus/library/services-researchers/rdm-software/'}
         ],
         Data :[
             NoneSelected,
@@ -460,7 +478,16 @@ const coderepository={
         UserCostSelect,
     ]
 };
-
+const longermarchive={
+    Name : 'Long-term Archive',
+    Icon : 'archive.png',
+    Url : '',
+    Data :[
+        NoneSelected,
+        Acoua,
+        UserCostSelect,
+    ]
+};
 
 // Combine Categories
 // ----------------------------------------------------
@@ -470,7 +497,7 @@ const MainData={
     InstName:'EPFL Library',
     InstLogo:'logo.png',
     InstLogoWidth:200,
-    Updated:'25/06/2019',
+    Updated:'2022-02-20',
     HelpUrl:'mailto:researchdata@epfl.ch',
     Currency:'CHF',
     OEXRApi:'cd8d785bdb6646b0a7e4c0eba5a74199',
@@ -480,7 +507,7 @@ const MainData={
     StatsURL:'costcalc.epfl.ch/matomo/',
     StatsID:'1',
     StatsContact:'mailto:researchdata@epfl.ch',
-    Version : 'v2.0',
+    Version : 'v2.1',
     DefaultDuration:1,
-    Data:[storage,ELN,Database,datarepository,coderepository],
+    Data:[storage,ELN,Database,datarepository,coderepository,longermarchive],
 };
