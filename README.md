@@ -1,6 +1,6 @@
 Cost Calculator
 ============
-(https://rdmepfl.github.io/costcalc/)
+(https://costcalc.epfl.ch)
 
 ## Introduction
 
