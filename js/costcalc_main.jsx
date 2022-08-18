@@ -1526,8 +1526,8 @@ class Main extends React.Component {
                     <div className="row">
                         <div className="col">
                             <p className="lead">
-                                Welcome to our cost calculator this tool will help researcher to have an
-                                estimate of the cost of managing, storing and publishing data.
+                                Welcome to our cost calculator. This tool will help researchers to 
+                                estimate the cost of managing, storing and publishing data.
                             </p>
                             <p className="lead">
                                 Many providers are included in the service and you will be able to calculate a cost
