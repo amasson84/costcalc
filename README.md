@@ -18,6 +18,8 @@ libraries making really easy to install and update.
 You don't need a specific webserver (but you can use one), just use your github repo 
 and create a pages link your cost calculator will be accessible
 
+For local use, you need a mini web server such as https://www.npmjs.com/package/http-server
+
 ## Documentation
 
 The documentation of the project explains how to install it and configure it. See [Docs](./Docs)
