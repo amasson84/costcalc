@@ -8,7 +8,7 @@ const NasEpfl =  {
     Name:'NAS',
     Url : [
         {Name:'DSI-Website',Url:'https://support.epfl.ch/help/epfl?id=epfl_service_status&service=49a363acdb34c700ef64731b8c96191f'},
-        {Name:'SV-IT Storage Website',Url:'https://sv-it.epfl.ch/stockage'}
+        {Name:'SV-IT Storage Website',Url:'https://www.epfl.ch/schools/sv/it/374-2/infrastructures/'}
     ],
     ExtraInfo:"The first TB is free",
     ByYear:true,
@@ -32,7 +32,7 @@ const NasEpfl =  {
 
 const SwitchEpfl = {
     Style : 'CategoryCost',
-    Provider : "Switch-EPFL",
+    Provider : "Switch",
     Name:'Online Storage',
     ByYear:true,
     Url : [
@@ -47,18 +47,18 @@ const SwitchEpfl = {
 
 const GoogleDriveEdu = {
     Style : 'CategoryCost',
-    Provider : "Google Drive Educ",
+    Provider : "Google Workspace",
     Name:'Online Storage',
     ByYear:true,
     Adaptive:false,
     ExtraInfo : "Google Storage is not recommended as the data are stored outside of Switzerland",
-    ExtraInfoUrl :"https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012829",
+    ExtraInfoUrl :"https://support.epfl.ch/epfl?id=epfl_service_status&service=b1c22728db34c700ef64731b8c9619ad",
     Url : [
-        {Name :'Google Education Page',Url:'https://edu.google.com/?modal_active=none'}
+        {Name :'Google Education Page',Url:'https://edu.google.com/intl/en_ALL/'}
     ],
     CatName:'Options',
     Cat:{
-        'Cloud Based illimited':0,
+        'Cloud Based unlimited':0,
     },
     CatUnit:'CHF',
 };
@@ -67,7 +67,7 @@ const Dropbox_perso = {
     Provider : "Dropbox Personal",
     Name:'Online Storage',
     ByYear:true,
-    ExtraInfo : "Dropbox is not recommended as the data are stored outside of Switzerland",
+    ExtraInfo : "Dropbox must not be used for confidential data as the data are stored outside of Switzerland",
     ExtraInfoUrl :"https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012882",
     Url : [
         {Name :'Dropbox',Url:'https://www.dropbox.com/plans?trigger=nr'}
@@ -75,17 +75,16 @@ const Dropbox_perso = {
     CatName:'Plan',
     Cat:{
         'Personal Free 2Go':0,
-        'Personal Plus 1TB':112,
-        'Personal Pro 2TB':226,
+        'Personal Plus 2TB':120,
     },
-    CatUnit:'CHF',
+    CatUnit:'USD',
 };
 const Dropbox_team = {
     Style : 'AmountRatesCost',
     Provider : "Dropbox for Team",
     Name:'Online Storage',
     ByYear:true,
-    ExtraInfo : "Dropbox is not recommended as the data are stored outside of Switzerland",
+    ExtraInfo : "Dropbox must not be used for confidential data as the data are stored outside of Switzerland",
     ExtraInfoUrl :"https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012882",
     Url : [
         {Name :'Dropbox',Url:'https://www.dropbox.com/plans?trigger=nr'}
@@ -113,7 +112,7 @@ const SLIMSEpfl =  {
     Name:'SLIMS',
     ByYear:true,
     Url : [
-        {Name:'SLIMS on SV-IT Website',Url:'https://sv-it.epfl.ch/lims'},
+        {Name:'SLIMS on SV-IT Website',Url:'https://www.epfl.ch/schools/sv/it/374-2/applications/eln-lims/'},
         {Name: 'Genohm (SLIMS Company)',Url:'https://www.genohm.com/'}
     ],
     CatName:'PI Status',
@@ -231,6 +230,23 @@ const C4science = {
     ByYear:true,
     Adaptive:false,
     ExtraInfo:'C4Science is the repository recommended by EPFL for code repository',
+    CatName:'Options',
+    Cat:{
+        'Free for text file':0,
+    },
+    CatUnit:'CHF',
+};
+
+const GitlabEPFL = {
+    Style : 'CategoryCost',
+    Provider : "EPFL-VPO-DSI",
+    Name:'Gitlab EPFL',
+    Url : [
+        {Name:'Gitlab EPFL',Url:'https://gitlab.epfl.ch/'}
+    ],
+    ByYear:true,
+    Adaptive:false,
+    ExtraInfo:'A Gitlab server is operated by DSI staff at EPFL',
     CatName:'Options',
     Cat:{
         'Free for text file':0,
@@ -472,6 +488,7 @@ const coderepository={
     Data :[
         NoneSelected,
         C4science,
+        GitlabEPFL,
         Github,
         Bitbucket,
         Gitlab,
