@@ -2,18 +2,22 @@
 // ----------------------------------------------------
 // ----------------------------------------------------
 // Storage
+
 const NasEpfl = {
-  Style: "AmountRatesCost",
-  Provider: "EPFL-VPO-DSI",
+  Style: 'AmountRatesCost',
+  Provider: 'EPFL-VPO-DSI',
   Name: 'NAS2023',
   Url: [
-    { Name: 'DSI-Website', Url: 'https://support.epfl.ch/help/epfl?id=epfl_service_status&service=49a363acdb34c700ef64731b8c96191f' },
+    {
+      Name: 'DSI-Website',
+      Url: 'https://support.epfl.ch/help/epfl?id=epfl_service_status&service=49a363acdb34c700ef64731b8c96191f'
+    }
   ],
-  ExtraInfo: "",
+  ExtraInfo: '',
   ByYear: true,
   Adaptive: false,
-  AmountName: "Amount",
-  AmountUnit: "TB",
+  AmountName: 'Amount',
+  AmountUnit: 'TB',
   AmountMin: 0,
   AmountMax: 1,
   AmountStep: 1,
@@ -23,21 +27,24 @@ const NasEpfl = {
   Rates: {
     'Standard': 80
   },
-  RateUnit: "CHF / TB"
+  RateUnit: 'CHF / TB'
 };
 
 const RcpEpfl = {
-  Style: "AmountRatesCost",
-  Provider: "EPFL-VPA-RCP",
+  Style: 'AmountRatesCost',
+  Provider: 'EPFL-VPA-RCP',
   Name: 'Collaborative Storage – NAS-RCP',
   Url: [
-    { Name: 'Service description', Url: 'https://www.epfl.ch/research/facilities/rcp/collaborative-storage-nas-rcp-service-description/' },
+    {
+      Name: 'Service description',
+      Url: 'https://www.epfl.ch/research/facilities/rcp/collaborative-storage-nas-rcp-service-description/'
+    }
   ],
-  ExtraInfo: "",
+  ExtraInfo: '',
   ByYear: true,
   Adaptive: false,
-  AmountName: "Amount",
-  AmountUnit: "TB",
+  AmountName: 'Amount',
+  AmountUnit: 'TB',
   AmountMin: 0,
   AmountMax: 25,
   AmountStep: 1,
@@ -47,38 +54,43 @@ const RcpEpfl = {
   Rates: {
     'Standard': 40
   },
-  RateUnit: "CHF / TB"
+  RateUnit: 'CHF / TB'
 };
-
 
 const SwitchEpfl = {
   Style: 'CategoryCost',
-  Provider: "Switch",
+  Provider: 'Switch',
   Name: 'Online Storage',
   ByYear: true,
   Url: [
-    { Name: 'Switch Website', Url: 'https://drive.switch.ch/' }
+    {
+      Name: 'Switch Website',
+      Url: 'https://drive.switch.ch/'
+    }
   ],
   CatName: 'Options',
   Cat: {
-    'Cloud Based max 50GB': 0,
+    'Cloud Based max 50GB': 0
   },
-  CatUnit: 'CHF',
+  CatUnit: 'CHF'
 };
 
 const GoogleDriveEdu = {
   Style: 'CategoryCost',
-  Provider: "Google Workspace",
+  Provider: 'Google Workspace',
   Name: 'Online Storage',
   ByYear: true,
   Adaptive: false,
-  ExtraInfo: "Google Storage is not recommended as the data are stored outside of Switzerland",
-  ExtraInfoUrl: "https://support.epfl.ch/epfl?id=epfl_service_status&service=b1c22728db34c700ef64731b8c9619ad",
+  ExtraInfo: 'Google Storage is not recommended as the data are stored outside of Switzerland',
+  ExtraInfoUrl: 'https://support.epfl.ch/epfl?id=epfl_service_status&service=b1c22728db34c700ef64731b8c9619ad',
   Url: [
-    { Name: 'Google Education Page', Url: 'https://edu.google.com/intl/en_ALL/' }
+    {
+      Name: 'Google Education Page',
+      Url: 'https://edu.google.com/intl/en_ALL/'
+    }
   ],
-  AmountName: "Amount",
-  AmountUnit: "GB",
+  AmountName: 'Amount',
+  AmountUnit: 'GB',
   AmountMin: 0,
   AmountMax: 20,
   AmountStep: 1,
@@ -86,41 +98,44 @@ const GoogleDriveEdu = {
   CatName: 'Options',
   Cat: {
     'Individual 20GB': 0,
-    'Group 50GB': 0,
+    'Group 50GB': 0
   },
-  CatUnit: 'CHF',
+  CatUnit: 'CHF'
 };
 
-const Dropbox_perso = {
+const DropboxPerso = {
   Style: 'CategoryCost',
-  Provider: "Dropbox Personal",
+  Provider: 'Dropbox Personal',
   Name: 'Online Storage',
   ByYear: true,
-  ExtraInfo: "Dropbox must not be used for confidential data as the data are stored outside of Switzerland",
-  ExtraInfoUrl: "https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012882",
+  ExtraInfo: 'Dropbox must not be used for confidential data as the data are stored outside of Switzerland',
+  ExtraInfoUrl: 'https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012882',
   Url: [
     { Name: 'Dropbox', Url: 'https://www.dropbox.com/plans?trigger=nr' }
   ],
   CatName: 'Plan',
   Cat: {
     'Personal Free 2Go': 0,
-    'Personal Plus 2TB': 120,
+    'Personal Plus 2TB': 120
   },
-  CatUnit: 'USD',
+  CatUnit: 'USD'
 };
-const Dropbox_team = {
+const DropboxTeam = {
   Style: 'AmountRatesCost',
-  Provider: "Dropbox for Team",
+  Provider: 'Dropbox for Team',
   Name: 'Online Storage',
   ByYear: true,
-  ExtraInfo: "Dropbox must not be used for confidential data as the data are stored outside of Switzerland",
-  ExtraInfoUrl: "https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012882",
+  ExtraInfo: 'Dropbox must not be used for confidential data as the data are stored outside of Switzerland',
+  ExtraInfoUrl: 'https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012882',
   Url: [
-    { Name: 'Dropbox', Url: 'https://www.dropbox.com/plans?trigger=nr' }
+    {
+      Name: 'Dropbox',
+      Url: 'https://www.dropbox.com/plans?trigger=nr'
+    }
   ],
   Adaptive: false,
-  AmountName: "Number of Users",
-  AmountUnit: "Users",
+  AmountName: 'Number of Users',
+  AmountUnit: 'Users',
   AmountMin: 1,
   AmountMax: 500,
   AmountStep: 1,
@@ -129,15 +144,15 @@ const Dropbox_team = {
   RateName: 'Plan',
   Rates: {
     'Standard': 136,
-    'Advanced': 204,
+    'Advanced': 204
   },
-  RateUnit: "CHF / User"
+  RateUnit: 'CHF / User'
 };
 
 // ELN
 const SLIMSEpfl = {
   Style: 'CategoryAmountRatesCost',
-  Provider: "EPFL-SV-IT",
+  Provider: 'EPFL-SV-IT',
   Name: 'SLIMS',
   ByYear: true,
   Url: [
@@ -152,8 +167,8 @@ const SLIMSEpfl = {
   },
   CatUnit: 'CHF',
   Adaptive: false,
-  AmountName: "Storage",
-  AmountUnit: "TB",
+  AmountName: 'Storage',
+  AmountUnit: 'TB',
   AmountMin: 1,
   AmountMax: 100,
   AmountStep: 1,
@@ -161,14 +176,14 @@ const SLIMSEpfl = {
   AmountFreeCumulative: false,
   RateName: 'ELN Storage',
   Rates: {
-    'Stored on EPFL Server': 165,
+    'Stored on EPFL Server': 165
   },
-  RateUnit: "CHF / TB"
+  RateUnit: 'CHF / TB'
 };
 
 const ELNEpfl = {
   Style: 'CategoryCost',
-  Provider: "ELN-EPFL",
+  Provider: 'ELN-EPFL',
   Name: 'ELN',
   ByYear: true,
   Url: [
@@ -176,14 +191,14 @@ const ELNEpfl = {
   ],
   CatName: 'Options',
   Cat: {
-    'Free for EPFL community': 0,
+    'Free for EPFL community': 0
   },
-  CatUnit: 'CHF',
+  CatUnit: 'CHF'
 };
 
 const Rspace = {
   Style: 'CategoryCost',
-  Provider: "Rspace community",
+  Provider: 'Rspace community',
   Name: 'Rspace',
   ByYear: true,
   Url: [
@@ -191,33 +206,32 @@ const Rspace = {
   ],
   CatName: 'Options',
   Cat: {
-    'Cloud Based unlimited storage and user': 0,
+    'Cloud Based unlimited storage and user': 0
   },
-  CatUnit: 'CHF',
+  CatUnit: 'CHF'
 };
 
 const Benchling = {
   Style: 'CategoryCost',
-  Provider: "Benchling",
+  Provider: 'Benchling',
   Name: 'ELN',
   ByYear: true,
-  ExtraInfo: "The first 10GB are free",
-  ExtraInfoUrl: "",
+  ExtraInfo: 'The first 10GB are free',
+  ExtraInfoUrl: '',
   Url: [
     { Name: 'Benchling website', Url: 'https://benchling.com/academic' }
   ],
   CatName: 'Options',
   Cat: {
-    'Cloud Based 10GB': 0,
+    'Cloud Based 10GB': 0
   },
-  CatUnit: 'CHF',
+  CatUnit: 'CHF'
 };
-
 
 // Database
 const MysqlEpfl = {
   Style: 'CategoryCost',
-  Provider: "EPFL-VPO-DSI",
+  Provider: 'EPFL-VPO-DSI',
   Name: 'MySql',
   ByYear: true,
   Adaptive: false,
@@ -226,32 +240,32 @@ const MysqlEpfl = {
   ],
   CatName: 'Options',
   Cat: {
-    'MySQL max 2GB': 0,
+    'MySQL max 2GB': 0
   },
-  CatUnit: 'CHF',
+  CatUnit: 'CHF'
 };
 
 // Repository
 const Zenodo = {
   Style: 'CategoryCost',
-  Provider: "Zenodo-CERN",
+  Provider: 'Zenodo-CERN',
   Name: 'Zenodo',
   ByYear: false,
   Adaptive: false,
   Url: [
     { Name: 'Zenodo Website', Url: 'https://www.zenodo.org/' },
-    { Name: 'About Zenodo', Url: 'http://about.zenodo.org/' },
+    { Name: 'About Zenodo', Url: 'http://about.zenodo.org/' }
   ],
   CatName: 'Options',
   Cat: {
-    'Max 50GB per Dataset': 0,
+    'Max 50GB per Dataset': 0
   },
-  CatUnit: 'CHF',
+  CatUnit: 'CHF'
 };
 
 const C4science = {
   Style: 'CategoryCost',
-  Provider: "EPFL-SCITAS",
+  Provider: 'EPFL-SCITAS',
   Name: 'C4Science',
   Url: [
     { Name: 'C4Science Website', Url: 'https://www.c4science.ch/' }
@@ -261,14 +275,14 @@ const C4science = {
   ExtraInfo: 'C4Science is the repository recommended by EPFL for code repository',
   CatName: 'Options',
   Cat: {
-    'Free for text file': 0,
+    'Free for text file': 0
   },
-  CatUnit: 'CHF',
+  CatUnit: 'CHF'
 };
 
 const GitlabEPFL = {
   Style: 'CategoryCost',
-  Provider: "EPFL-VPO-DSI",
+  Provider: 'EPFL-VPO-DSI',
   Name: 'Gitlab EPFL',
   Url: [
     { Name: 'Gitlab EPFL', Url: 'https://gitlab.epfl.ch/' }
@@ -278,20 +292,20 @@ const GitlabEPFL = {
   ExtraInfo: 'A Gitlab server is operated by DSI staff at EPFL',
   CatName: 'Options',
   Cat: {
-    'Free for text file': 0,
+    'Free for text file': 0
   },
-  CatUnit: 'CHF',
+  CatUnit: 'CHF'
 };
 
 const Github = {
-  Style: "AmountRatesCost",
-  Provider: "GitHub",
+  Style: 'AmountRatesCost',
+  Provider: 'GitHub',
   Name: 'GitHub',
   Url: [
     { Name: 'Github Website Pricing', Url: 'https://github.com/pricing' }
   ],
-  AmountName: "Number of user",
-  AmountUnit: "User(s)",
+  AmountName: 'Number of user',
+  AmountUnit: 'User(s)',
   Adaptive: true,
   ByYear: true,
   AmountMin: [1, 1, 5, 10],
@@ -306,19 +320,19 @@ const Github = {
     'Team (min 5 users)': 104.9,
     'Business Cloud': 244.7
   },
-  RateUnit: 'CHF / Users',
+  RateUnit: 'CHF / Users'
 };
 
 const Bitbucket = {
-  Style: "AmountRatesCost",
-  Provider: "Bitbucket",
+  Style: 'AmountRatesCost',
+  Provider: 'Bitbucket',
   Name: 'BitBucket',
   Url: [
     { Name: 'Bitbucket Website Pricing', Url: 'https://bitbucket.org/product/pricing' }
   ],
 
-  AmountName: "Number of user",
-  AmountUnit: "User(s)",
+  AmountName: 'Number of user',
+  AmountUnit: 'User(s)',
   Adaptive: true,
   ByYear: true,
   AmountMin: [1, 5, 5],
@@ -330,19 +344,20 @@ const Bitbucket = {
   Rates: {
     'Free (up to 5 users)': 0,
     'Standard for growing teams (min 5 users)': 24,
-    'Premium for large teams (min 5 users)': 60,
+    'Premium for large teams (min 5 users)': 60
   },
-  RateUnit: 'CHF / Users',
+  RateUnit: 'CHF / Users'
 };
+
 const Gitlab = {
-  Style: "AmountRatesCost",
-  Provider: "Gitlab",
+  Style: 'AmountRatesCost',
+  Provider: 'Gitlab',
   Name: 'Gitlab',
   Url: [
     { Name: 'Gitlab Website Pricing', Url: 'https://about.gitlab.com/pricing/' }
   ],
-  AmountName: "Number of user",
-  AmountUnit: "User(s)",
+  AmountName: 'Number of user',
+  AmountUnit: 'User(s)',
   AmountMin: 1,
   AmountMax: 100,
   AmountStep: 1,
@@ -359,11 +374,12 @@ const Gitlab = {
     'Premium Self Hosted': 228,
     'Silver Cloud Based': 228
   },
-  RateUnit: 'CHF / Users',
+  RateUnit: 'CHF / Users'
 };
+
 const Figshare = {
   Style: 'CategoryCost',
-  Provider: "FigShare",
+  Provider: 'FigShare',
   Name: 'Figshare',
   ByYear: false,
   Adaptive: false,
@@ -380,11 +396,12 @@ const Figshare = {
     '15GB': 132,
     '20GB': 180
   },
-  CatUnit: 'CHF',
+  CatUnit: 'CHF'
 };
+
 const Dryad = {
   Style: 'CategoryAmountRatesCost',
-  Provider: "Dryad",
+  Provider: 'Dryad',
   Name: 'Dyrad',
   Url: [
     { Name: 'Dryad Website Pricing', Url: 'https://Datadryad.org/pages/payment' }
@@ -399,8 +416,8 @@ const Dryad = {
     'up to 20GB if no  DPC covered': 120
   },
   CatUnit: 'CHF',
-  AmountName: "Storage",
-  AmountUnit: "GB",
+  AmountName: 'Storage',
+  AmountUnit: 'GB',
   Adaptive: false,
   AmountMin: 20,
   AmountMax: 100,
@@ -409,27 +426,27 @@ const Dryad = {
   AmountFreeCumulative: false,
   RateName: 'Storage',
   Rates: {
-    'Extra Storage': 50,
+    'Extra Storage': 50
   },
-  RateUnit: "CHF / GB"
+  RateUnit: 'CHF / GB'
 };
 
 const Acoua = {
   Style: 'CategoryCost',
-  Provider: "EPFL",
+  Provider: 'EPFL',
   Name: 'ACOUA (Academic Output Archive)',
   ByYear: false,
   Adaptive: false,
   Url: [
     { Name: 'About ACOUA', Url: 'https://www.epfl.ch/campus/library/acoua-support/' },
-    { Name: 'ACOUA (access limited to EPFL network)', Url: 'http://acoua.epfl.ch' },
+    { Name: 'ACOUA (access limited to EPFL network)', Url: 'http://acoua.epfl.ch' }
   ],
   ExtraInfo: 'The ACOUA service is exclusively designed for EPFL researchers.',
   CatName: 'Options',
   Cat: {
-    'Costs covered by DSI': 0,
+    'Costs covered by DSI': 0
   },
-  CatUnit: 'CHF',
+  CatUnit: 'CHF'
 };
 
 // System variable definition
@@ -440,7 +457,7 @@ const NoneSelected = {
   Provider: 'None',
   Name: 'Select a Provider',
   Url: '',
-  ByYear: false,
+  ByYear: false
 };
 
 const UserCostSelect = {
@@ -448,8 +465,7 @@ const UserCostSelect = {
   Provider: 'Manual Provider',
   Name: '',
   Url: '',
-  ByYear: false,
-
+  ByYear: false
 };
 
 // Categories definition
@@ -467,12 +483,13 @@ const storage = {
     RcpEpfl,
     SwitchEpfl,
     GoogleDriveEdu,
-    Dropbox_perso,
-    Dropbox_team,
-    UserCostSelect,
+    DropboxPerso,
+    DropboxTeam,
+    UserCostSelect
   ]
 
 };
+
 const ELN = {
   Name: 'Electronic LabBook',
   Icon: 'eln.png',
@@ -484,7 +501,7 @@ const ELN = {
     ELNEpfl,
     Rspace,
     Benchling,
-    UserCostSelect,
+    UserCostSelect
   ]
 
 };
@@ -494,9 +511,10 @@ const Database = {
   Url: '',
   Data: [NoneSelected,
     MysqlEpfl,
-    UserCostSelect,
+    UserCostSelect
   ]
 };
+
 const datarepository = {
   Name: 'Data Repository',
   Icon: 'drepos.png',
@@ -508,9 +526,10 @@ const datarepository = {
     Zenodo,
     Figshare,
     Dryad,
-    UserCostSelect,
+    UserCostSelect
   ]
 };
+
 const coderepository = {
   Name: 'Code Repository',
   Icon: 'crepos.png',
@@ -522,9 +541,10 @@ const coderepository = {
     Github,
     Bitbucket,
     Gitlab,
-    UserCostSelect,
+    UserCostSelect
   ]
 };
+
 const longermarchive = {
   Name: 'Long-term Archive',
   Icon: 'archive.png',
@@ -532,7 +552,7 @@ const longermarchive = {
   Data: [
     NoneSelected,
     Acoua,
-    UserCostSelect,
+    UserCostSelect
   ]
 };
 
@@ -556,5 +576,5 @@ const MainData = {
   StatsContact: 'mailto:researchdata@epfl.ch',
   Version: 'v2.1',
   DefaultDuration: 1,
-  Data: [storage, ELN, Database, datarepository, coderepository, longermarchive],
+  Data: [storage, ELN, Database, datarepository, coderepository, longermarchive]
 };

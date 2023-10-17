@@ -1,6 +1,6 @@
-"use strict";
-var projectname='';
-var projectduration=0;
+'use strict';
+var projectname = '';
+var projectduration = 0;
 // Functions Tools
 // ---------------------
 // ---------------------
@@ -23,8 +23,8 @@ function tomoney(numeric,currency) {
     if (typeof numeric == 'string') {
         numeric = parseFloat(numeric);
     }
-    let strcur='';
-    if(currency===undefined){
+    let strcur = '';
+    if (currency===undefined){
         strcur=MainData.Currency;
     }
     else {
