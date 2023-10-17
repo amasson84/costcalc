@@ -25,10 +25,10 @@ const NasEpfl = {
   AmountFreeCumulative: false,
   RateName: 'Performance',
   Rates: {
-    'Standard': 80
+    Standard: 80
   },
   RateUnit: 'CHF / TB'
-};
+}
 
 const RcpEpfl = {
   Style: 'AmountRatesCost',
@@ -52,10 +52,10 @@ const RcpEpfl = {
   AmountFreeCumulative: false,
   RateName: 'Performance',
   Rates: {
-    'Standard': 40
+    Standard: 40
   },
   RateUnit: 'CHF / TB'
-};
+}
 
 const SwitchEpfl = {
   Style: 'CategoryCost',
@@ -73,7 +73,7 @@ const SwitchEpfl = {
     'Cloud Based max 50GB': 0
   },
   CatUnit: 'CHF'
-};
+}
 
 const GoogleDriveEdu = {
   Style: 'CategoryCost',
@@ -101,7 +101,7 @@ const GoogleDriveEdu = {
     'Group 50GB': 0
   },
   CatUnit: 'CHF'
-};
+}
 
 const DropboxPerso = {
   Style: 'CategoryCost',
@@ -119,7 +119,7 @@ const DropboxPerso = {
     'Personal Plus 2TB': 120
   },
   CatUnit: 'USD'
-};
+}
 const DropboxTeam = {
   Style: 'AmountRatesCost',
   Provider: 'Dropbox for Team',
@@ -143,11 +143,11 @@ const DropboxTeam = {
   AmountFreeCumulative: false,
   RateName: 'Plan',
   Rates: {
-    'Standard': 136,
-    'Advanced': 204
+    Standard: 136,
+    Advanced: 204
   },
   RateUnit: 'CHF / User'
-};
+}
 
 // ELN
 const SLIMSEpfl = {
@@ -179,7 +179,7 @@ const SLIMSEpfl = {
     'Stored on EPFL Server': 165
   },
   RateUnit: 'CHF / TB'
-};
+}
 
 const ELNEpfl = {
   Style: 'CategoryCost',
@@ -194,7 +194,7 @@ const ELNEpfl = {
     'Free for EPFL community': 0
   },
   CatUnit: 'CHF'
-};
+}
 
 const Rspace = {
   Style: 'CategoryCost',
@@ -209,7 +209,7 @@ const Rspace = {
     'Cloud Based unlimited storage and user': 0
   },
   CatUnit: 'CHF'
-};
+}
 
 const Benchling = {
   Style: 'CategoryCost',
@@ -226,7 +226,7 @@ const Benchling = {
     'Cloud Based 10GB': 0
   },
   CatUnit: 'CHF'
-};
+}
 
 // Database
 const MysqlEpfl = {
@@ -243,7 +243,7 @@ const MysqlEpfl = {
     'MySQL max 2GB': 0
   },
   CatUnit: 'CHF'
-};
+}
 
 // Repository
 const Zenodo = {
@@ -261,7 +261,7 @@ const Zenodo = {
     'Max 50GB per Dataset': 0
   },
   CatUnit: 'CHF'
-};
+}
 
 const C4science = {
   Style: 'CategoryCost',
@@ -278,7 +278,7 @@ const C4science = {
     'Free for text file': 0
   },
   CatUnit: 'CHF'
-};
+}
 
 const GitlabEPFL = {
   Style: 'CategoryCost',
@@ -295,7 +295,7 @@ const GitlabEPFL = {
     'Free for text file': 0
   },
   CatUnit: 'CHF'
-};
+}
 
 const Github = {
   Style: 'AmountRatesCost',
@@ -321,7 +321,7 @@ const Github = {
     'Business Cloud': 244.7
   },
   RateUnit: 'CHF / Users'
-};
+}
 
 const Bitbucket = {
   Style: 'AmountRatesCost',
@@ -347,7 +347,7 @@ const Bitbucket = {
     'Premium for large teams (min 5 users)': 60
   },
   RateUnit: 'CHF / Users'
-};
+}
 
 const Gitlab = {
   Style: 'AmountRatesCost',
@@ -375,7 +375,7 @@ const Gitlab = {
     'Silver Cloud Based': 228
   },
   RateUnit: 'CHF / Users'
-};
+}
 
 const Figshare = {
   Style: 'CategoryCost',
@@ -397,7 +397,7 @@ const Figshare = {
     '20GB': 180
   },
   CatUnit: 'CHF'
-};
+}
 
 const Dryad = {
   Style: 'CategoryAmountRatesCost',
@@ -429,7 +429,7 @@ const Dryad = {
     'Extra Storage': 50
   },
   RateUnit: 'CHF / GB'
-};
+}
 
 const Acoua = {
   Style: 'CategoryCost',
@@ -447,7 +447,7 @@ const Acoua = {
     'Costs covered by DSI': 0
   },
   CatUnit: 'CHF'
-};
+}
 
 // System variable definition
 // ----------------------------------------------------
@@ -458,7 +458,7 @@ const NoneSelected = {
   Name: 'Select a Provider',
   Url: '',
   ByYear: false
-};
+}
 
 const UserCostSelect = {
   Style: 'UserCost',
@@ -466,7 +466,7 @@ const UserCostSelect = {
   Name: '',
   Url: '',
   ByYear: false
-};
+}
 
 // Categories definition
 // ----------------------------------------------------
@@ -488,7 +488,7 @@ const storage = {
     UserCostSelect
   ]
 
-};
+}
 
 const ELN = {
   Name: 'Electronic LabBook',
@@ -504,7 +504,7 @@ const ELN = {
     UserCostSelect
   ]
 
-};
+}
 const Database = {
   Name: 'Database',
   Icon: 'database.png',
@@ -513,7 +513,7 @@ const Database = {
     MysqlEpfl,
     UserCostSelect
   ]
-};
+}
 
 const datarepository = {
   Name: 'Data Repository',
@@ -528,7 +528,7 @@ const datarepository = {
     Dryad,
     UserCostSelect
   ]
-};
+}
 
 const coderepository = {
   Name: 'Code Repository',
@@ -543,7 +543,7 @@ const coderepository = {
     Gitlab,
     UserCostSelect
   ]
-};
+}
 
 const longermarchive = {
   Name: 'Long-term Archive',
@@ -554,7 +554,7 @@ const longermarchive = {
     Acoua,
     UserCostSelect
   ]
-};
+}
 
 // Combine Categories
 // ----------------------------------------------------
@@ -577,4 +577,4 @@ const MainData = {
   Version: 'v2.1',
   DefaultDuration: 1,
   Data: [storage, ELN, Database, datarepository, coderepository, longermarchive]
-};
+}

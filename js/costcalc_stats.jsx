@@ -1,91 +1,85 @@
-"use strict";
-var _paq = window._paq || [];
+'use strict'
+const _paq = window._paq || []
 
-var Stats = {
+const Stats = {
 
-    Enable: false,
-    Engine: '',
+  Enable: false,
+  Engine: '',
 
+  StatsInitMatomo: function (PIWIK_URL, IDSITE) {
+    // accurately measure the time spent on the last pageview of a visit
+    _paq.push(['enableHeartBeatTimer'])
+    _paq.push(['setGenerationTimeMs', 0])
+    _paq.push(['setDocumentTitle', 'MainPage'])
+    // require user consent before processing data
+    _paq.push(['requireConsent'])
+    _paq.push(['trackPageView'])
+    _paq.push(['enableLinkTracking'])
+    const u = 'https://' + PIWIK_URL + '/'
+    _paq.push(['setTrackerUrl', u + 'piwik.php'])
+    _paq.push(['setSiteId', IDSITE])
+    const d = document; const g = d.createElement('script'); const s = d.getElementsByTagName('script')[0]
+    g.type = 'text/javascript'
+    g.async = true
+    g.defer = true
+    g.src = u + 'piwik.js'
+    s.parentNode.insertBefore(g, s)
+  },
 
-    StatsInitMatomo: function (PIWIK_URL, IDSITE) {
+  InitStat: function () {
+    const engine = MainData.StatsEngine
+    const enable = MainData.UseStats
+    if (enable) {
+      this.Enable = true
+      this.Engine = engine
+      switch (engine) {
+        case 'matomo':
+          this.StatsInitMatomo(MainData.StatsURL, MainData.StatsID)
+          break
+      }
+    }
+  },
 
-// accurately measure the time spent on the last pageview of a visit
-        _paq.push(['enableHeartBeatTimer']);
-        _paq.push(['setGenerationTimeMs', 0]);
-        _paq.push(['setDocumentTitle', 'MainPage']);
-        // require user consent before processing data
-        _paq.push(['requireConsent']);
-        _paq.push(['trackPageView']);
-        _paq.push(['enableLinkTracking']);
-        const u = "https://" + PIWIK_URL + "/";
-        _paq.push(['setTrackerUrl', u + 'piwik.php']);
-        _paq.push(['setSiteId', IDSITE]);
-        const d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
-        g.type = 'text/javascript';
-        g.async = true;
-        g.defer = true;
-        g.src = u + 'piwik.js';
-        s.parentNode.insertBefore(g, s);
+  RecordEvent: function (action, name, value) {
+    if (this.Enable) {
+      switch (this.Engine) {
+        case 'matomo':
+          _paq.push(['trackEvent', action, name, value])
+          break
+      }
+    }
+  },
 
-    },
+  ConsentOn: function () {
+    console.log('Statistics Enabled')
+    if (this.Enable) {
+      switch (this.Engine) {
+        case 'matomo':
+          _paq.push(['rememberConsentGiven'])
+          break
+      }
+    }
+  },
+  ConsentOff: function () {
+    console.log('Statistics Disabled')
+    if (this.Enable) {
+      switch (this.Engine) {
+        case 'matomo':
+          _paq.push(['forgetConsentGiven'])
+          break
+      }
+    }
+  }
 
-    InitStat: function () {
-        const engine = MainData.StatsEngine;
-        const enable = MainData.UseStats;
-        if (enable) {
-            this.Enable = true;
-            this.Engine = engine;
-            switch (engine) {
-                case "matomo":
-                    this.StatsInitMatomo(MainData.StatsURL, MainData.StatsID);
-                    break;
-
-            }
-        }
-    },
-
-    RecordEvent: function(action,name,value){
-        if (this.Enable) {
-            switch (this.Engine) {
-                case "matomo":
-                   _paq.push(['trackEvent', action, name, value]);
-                    break;
-            }
-        }
-    },
-
-    ConsentOn: function(){
-        console.log("Statistics Enabled");
-        if (this.Enable) {
-            switch (this.Engine) {
-                case "matomo":
-                    _paq.push(['rememberConsentGiven']);
-                    break;
-            }
-        }
-
-    },
-    ConsentOff: function(){
-        console.log("Statistics Disabled");
-        if (this.Enable) {
-            switch (this.Engine) {
-                case "matomo":
-                    _paq.push(['forgetConsentGiven']);
-                    break;
-            }
-        }
-    },
-
-};
+}
 
 class PopupStats extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor (props) {
+    super(props)
+  }
 
-    }
-
-    render() {
-        return (
+  render () {
+    return (
             <div className="modal fade" id="PopupStats" tabIndex="-1" role="dialog"
                  aria-labelledby="PopupStatsValidation" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
@@ -115,11 +109,11 @@ class PopupStats extends React.Component {
                     </div>
                 </div>
             </div>
-        );
-    }
+    )
+  }
 
-    knowmore() {
-        return (
+  knowmore () {
+    return (
             <div className="accordion" id="Statskm">
                 <div className="card">
                     <div className="card-header" id="headingOne">
@@ -200,22 +194,19 @@ class PopupStats extends React.Component {
                     </div>
                 </div>
             </div>
-        )
-    }
+    )
+  }
 
-    KmTools() {
-        switch (Stats.Engine) {
-            case "matomo":
-                return(<div>
+  KmTools () {
+    switch (Stats.Engine) {
+      case 'matomo':
+        return (<div>
                     <p>We are using a self-hosted version of <a href="https://matomo.org/">Matomo</a></p>
                     <p>The data are only stored on our servers at {MainData.StatsURL}</p>
                     <p className="font-weight-bold">The data are only for research purpose and will not be shared my any 3rd party.</p>
-                </div>);
-
-        }
+                </div>)
     }
-
+  }
 }
 
-
-Stats.InitStat();
+Stats.InitStat()
