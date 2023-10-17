@@ -1,188 +1,198 @@
-'use strict';
-var projectname = '';
-var projectduration = 0;
+'use strict'
+let projectname = ''
+let projectduration = 0
+
 // Functions Tools
 // ---------------------
 // ---------------------
-//function loop for react js
-function Repeat(props) {
-    let items = [];
-    for (let i = 0; i < props.numTimes; i++) {
-        items.push(props.children(i));
-    }
-    return <div>{items}</div>;
+// function loop for react js
+function Repeat (props) {
+  const items = []
+  for (let i = 0; i < props.numTimes; i++) {
+    items.push(props.children(i))
+  }
+  return <div>{items}</div>
 }
-//convert string to numeric
+// convert string to numeric
 function tonumeric (value) {
-    return parseFloat(
-        value.toString().replace(/[^0-9\.]+/g, '')
-    );
+  return parseFloat(
+    value.toString().replace(/[^0-9\.]+/g, '')
+  )
 }
 // Covert numeric to money string
-function tomoney(numeric,currency) {
-    if (typeof numeric == 'string') {
-        numeric = parseFloat(numeric);
-    }
-    let strcur = '';
-    if (currency===undefined){
-        strcur=MainData.Currency;
-    }
-    else {
-        strcur=currency;
-    }
-    return numeric.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + ' '+strcur;
+function tomoney (numeric, currency) {
+  if (typeof numeric === 'string') {
+    numeric = parseFloat(numeric)
+  }
+  let strcur = ''
+  if (currency === undefined) {
+    strcur = MainData.Currency
+  } else {
+    strcur = currency
+  }
+  return numeric.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + ' ' + strcur
 }
 // return the sum of an array
-function sum(obj) {
-    const val=Object.values(obj);
-    var total = 0;
-    for (var i = 0; i < val.length; i++) {
-        total = total + tonumeric(val[i]);
-    }
-    return total;
+function sum (obj) {
+  const val = Object.values(obj)
+  let total = 0
+  for (let i = 0; i < val.length; i++) {
+    total = total + tonumeric(val[i])
+  }
+  return total
 }
 // Comapare two obj return true is similar
 Object.compare = function (obj1, obj2) {
-    //Loop through properties in object 1
-    for (var p in obj1) {
-        //Check property exists on both objects
-        if (obj1.hasOwnProperty(p) !== obj2.hasOwnProperty(p)) return false;
+  // Loop through properties in object 1
+  for (var p in obj1) {
+    // Check property exists on both objects
+    if (obj1.hasOwnProperty(p) !== obj2.hasOwnProperty(p)) return false
 
-        switch (typeof (obj1[p])) {
-            //Deep compare objects
-            case 'object':
-                if (!Object.compare(obj1[p], obj2[p])) return false;
-                break;
-            //Compare function code
-            case 'function':
-                if (typeof (obj2[p]) == 'undefined' || (p != 'compare' && obj1[p].toString() != obj2[p].toString())) return false;
-                break;
-            //Compare values
-            default:
-                if (obj1[p] != obj2[p]) return false;
-        }
+    switch (typeof (obj1[p])) {
+      // Deep compare objects
+      case 'object':
+        if (!Object.compare(obj1[p], obj2[p])) return false
+        break
+        // Compare function code
+      case 'function':
+        if (typeof (obj2[p]) === 'undefined' || (p != 'compare' && obj1[p].toString() != obj2[p].toString())) return false
+        break
+        // Compare values
+      default:
+        if (obj1[p] != obj2[p]) return false
     }
+  }
 
-    //Check object 2 for any extra properties
-    for (var p in obj2) {
-        if (typeof (obj1[p]) == 'undefined') return false;
-    }
-    return true;
-};
+  // Check object 2 for any extra properties
+  for (var p in obj2) {
+    if (typeof (obj1[p]) === 'undefined') return false
+  }
+  return true
+}
 // Generate a random int
-function randomint(not){
-    var rnd;
-    do {
-        rnd=Math.floor(Math.random() * 100);
-        var cont=false;
-        for (let i = 0; i < not.length ; i++) {
-            if (not[i]===rnd){
-                cont=true;
-            }
-        }
-    } while(cont);
-    return rnd;
+function randomint (not) {
+  let rnd
+  do {
+    rnd = Math.floor(Math.random() * 100)
+    var cont = false
+    for (let i = 0; i < not.length; i++) {
+      if (not[i] === rnd) {
+        cont = true
+      }
+    }
+  } while (cont)
+  return rnd
 }
 // Inputs Definition
 // ---------------------
 // ---------------------
 // Display the amount selector
 class AmountInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-    }
+  constructor (props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+  }
 
-    handleChange(e) {
-        this.props.onChange(e.target.value);
-    }
-    componentDidMount() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
+  handleChange (e) {
+    this.props.onChange(e.target.value)
+  }
 
-    componentDidUpdate() {
-        $('[data-toggle="tooltip"]').tooltip();
+  componentDidMount () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
+
+  componentDidUpdate () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
+
+  componentWillUnmount () {
+    $('[data-toggle="tooltip"]').tooltip('dispose')
+  }
+
+  render () {
+    const value = this.props.value
+    let label = null
+    if (this.props.name != null && this.props.name !== '') {
+      label = <label htmlFor={this.props.id}> {this.props.name} </label>
     }
-    componentWillUnmount() {
-        $('[data-toggle="tooltip"]').tooltip('dispose');
-    }
-    render() {
-        const value = this.props.value;
-        let label=null;
-        if(this.props.name!=null && this.props.name!==""){
-            label=<label htmlFor={this.props.id}> {this.props.name} </label>;
-        }
-        return (
-            <div className="col"   >
+    return (
+            <div className="col">
                 <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
                     {label}
                 <input type="range" className="form-control-range" id={this.props.id} min={this.props.min} max={this.props.max}
-                       step={this.props.step} value={value}  onChange={this.handleChange}/>
+                       step={this.props.step} value={value} onChange={this.handleChange}/>
                 <small id="nas-amount-cost" className="form-text text-muted">{this.props.name} : {value} {this.props.unit} </small>
                 </span>
             </div>
-        );
-    }
+    )
+  }
 }
 // Display a select input box
 class SelectorInput extends React.Component {
-    constructor(props) {
-        super(props);
-        // this.state={listoptions:this.makelist(props.options)};
-        this.handleChange = this.handleChange.bind(this);
+  constructor (props) {
+    super(props)
+    // this.state={listoptions:this.makelist(props.options)};
+    this.handleChange = this.handleChange.bind(this)
+  }
 
-    }
-    rate(i){
-        return i;
-    }
-    makelist(data){
-        var listoptions=[];
+  rate (i) {
+    return i
+  }
 
-        for (var i = 0; i < data.length; i++) {
-            listoptions.push(<button className="dropdown-item btn-success " type="button" key={i}  value={this.rate(i)} onClick={this.handleChange}>{data[i]}</button>);
-        }
-        return listoptions;
-    }
-    handleChange(select) {
-        this.props.onChange(select.target.value);
-    }
-    makerate(){
-        if (this.props.rate!=null && this.props.rate!==""){
-            return(<div className="row"> <small id="rate-amount-cost" className="form-text text-muted">Rate : {this.props.rate}  {this.props.unit}</small></div> );}
-    }
-    maketitle(title){
-        const maxstr=20
-        if (title.length>maxstr){
-            title=title.substr(0,maxstr)+"...";
-        }
-        return title;
-    }
-    componentDidMount() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
+  makelist (data) {
+    const listoptions = []
 
-    componentDidUpdate() {
-        $('[data-toggle="tooltip"]').tooltip();
+    for (let i = 0; i < data.length; i++) {
+      listoptions.push(<button className="dropdown-item btn-success " type="button" key={i} value={this.rate(i)} onClick={this.handleChange}>{data[i]}</button>)
     }
-    componentWillUnmount() {
-        $('[data-toggle="tooltip"]').tooltip('dispose');
+    return listoptions
+  }
+
+  handleChange (select) {
+    this.props.onChange(select.target.value)
+  }
+
+  makerate () {
+    if (this.props.rate != null && this.props.rate !== '') {
+      return (<div className="row"> <small id="rate-amount-cost" className="form-text text-muted">Rate : {this.props.rate}  {this.props.unit}</small></div>)
     }
-    render() {
-        let label=null;
-        if(this.props.name!=null && this.props.name!==""){
-            label= <div className="row"><label htmlFor={this.props.id}> {this.props.name} </label></div>;
-        }
-        return (
+  }
+
+  maketitle (title) {
+    const maxstr = 20
+    if (title.length > maxstr) {
+      title = title.substr(0, maxstr) + '...'
+    }
+    return title
+  }
+
+  componentDidMount () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
+
+  componentDidUpdate () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
+
+  componentWillUnmount () {
+    $('[data-toggle="tooltip"]').tooltip('dispose')
+  }
+
+  render () {
+    let label = null
+    if (this.props.name != null && this.props.name !== '') {
+      label = <div className="row"><label htmlFor={this.props.id}> {this.props.name} </label></div>
+    }
+    return (
 
             <div className="Container">
                     {label}
                 <div className="row">
             <div className="btn-group">
 
-
-                <a className={"btn "+this.props.class+" dropdown-toggle"} href="#" role="button" id={this.props.id} data-toggle="dropdown"
+                <a className={'btn ' + this.props.class + ' dropdown-toggle'} href="#" role="button" id={this.props.id} data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false" >
-            <span  data-toggle="tooltip" data-placement="top" title={this.props.tips}>
+            <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
                     {this.maketitle(this.props.options[this.props.selected])}
             </span>
                 </a>
@@ -194,124 +204,121 @@ class SelectorInput extends React.Component {
             </div>
                 {this.makerate()}
             </div>
-        )
-    }
+    )
+  }
 }
 // Make the read more button
 class MakeknowmoreInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state={btnsize:20}
-    }
-    componentDidMount() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
+  constructor (props) {
+    super(props)
+    this.state = { btnsize: 20 }
+  }
 
-    componentDidUpdate() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
-    componentWillUnmount() {
-        $('[data-toggle="tooltip"]').tooltip('dispose');
-    }
-    render() {
-        const data = this.props.data;
-        if (((data.Url !== '') )) {
-            // if (data.Url.length==1){
-            //     return(
-            //         <ButtonHrefInput name={<img src="./icon/info.png" width={this.state.btnsize}/>} url={data.Url[0].Url}
-            //     id="btn-plugin-knowmore"
-            // class="btn-primary btn-sm" tips={"Know more about " + data.Name}/>
-            //     );
-            // }else {
-            return (<MenuInput name={<img src="./icon/info.png"  width={this.state.btnsize}/>} options={data.Url}
+  componentDidMount () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
+
+  componentDidUpdate () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
+
+  componentWillUnmount () {
+    $('[data-toggle="tooltip"]').tooltip('dispose')
+  }
+
+  render () {
+    const data = this.props.data
+    if (((data.Url !== ''))) {
+      // if (data.Url.length==1){
+      //     return(
+      //         <ButtonHrefInput name={<img src="./icon/info.png" width={this.state.btnsize}/>} url={data.Url[0].Url}
+      //     id="btn-plugin-knowmore"
+      // class="btn-primary btn-sm" tips={"Know more about " + data.Name}/>
+      //     );
+      // }else {
+      return (<MenuInput name={<img src="./icon/info.png" width={this.state.btnsize}/>} options={data.Url}
                                id="btn-plugin-knowmore"
-                               class="btn-primary btn-sm" tips={"Read more about " + data.Name  + " solutions"}/>);
-        //}
-        }
-        else{
-            return null
-        }
-
+                               class="btn-primary btn-sm" tips={'Read more about ' + data.Name + ' solutions'}/>)
+      // }
+    } else {
+      return null
     }
+  }
 }
 
 // Display a checkbox
 class CheckboxInput extends React.Component {
+  constructor (props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+    this.state = { checked: this.props.defaults }
+  }
 
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.state={checked:this.props.defaults};
-    }
+  handleChange () {
+    this.setState({ checked: !this.state.checked })
+    this.props.onChange(!this.state.checked)
+  }
 
-    handleChange() {
-
-        this.setState({checked: !this.state.checked});
-        this.props.onChange(!this.state.checked);
-
-    }
-
-    render() {
-        return (
+  render () {
+    return (
             <div className="form-check">
-                <input className="form-check-input" type="checkbox"  id={this.props.id} onChange={this.handleChange}
+                <input className="form-check-input" type="checkbox" id={this.props.id} onChange={this.handleChange}
                        defaultChecked={this.state.checked}/>
                     <label className="form-check-label" htmlFor={this.props.id}>{this.props.name}</label>
             </div>
-        );
-    }
+    )
+  }
 }
 // Display a btn with link
 class ButtonHrefInput extends React.Component {
+  constructor (props) {
+    super(props)
+  }
 
-    constructor(props) {
-        super(props);
-    }
-    componentDidMount() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
+  componentDidMount () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
 
-    componentDidUpdate() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
+  componentDidUpdate () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
 
-
-    render() {
-        return (
-            <a id={this.props.id} href={this.props.url} type="button" className="btn btn-primary" data-toggle="tooltip" data-placement="top" title={this.props.tips}  aria-disabled="true" target="_blank">{this.props.name}</a>
-        );
-    }
+  render () {
+    return (
+            <a id={this.props.id} href={this.props.url} type="button" className="btn btn-primary" data-toggle="tooltip" data-placement="top" title={this.props.tips} aria-disabled="true" target="_blank" rel="noreferrer">{this.props.name}</a>
+    )
+  }
 }
 
 // Button with validation popup
 class ButtonInputWpop extends React.Component {
+  constructor (props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+    this.state = { target: 'Modal' + this.props.idp }
+  }
 
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-        this.state={target:"Modal"+this.props.idp};
+  handleChange () {
+    const out = { n: this.props.n, target: this.state.target }
+    this.props.onClick(out)
+  }
 
-    }
+  componentDidMount () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
 
-    handleChange() {
-        const out={n:this.props.n,target:this.state.target};
-        this.props.onClick(out);
+  componentDidUpdate () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
 
-    }
-    componentDidMount() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
+  componentWillUnmount () {
+    $('[data-toggle="tooltip"]').tooltip('dispose')
+  }
 
-    componentDidUpdate() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
-    componentWillUnmount() {
-        $('[data-toggle="tooltip"]').tooltip('dispose');
-    }
-    render() {
-        return (
-            <span  data-toggle="tooltip" data-placement="top" title={this.props.tips}>
-                <button type="button" className={"btn "+ this.props.class} id={this.props.id} data-toggle="modal" data-target={"#"+this.state.target}>
+  render () {
+    return (
+            <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
+                <button type="button" className={'btn ' + this.props.class} id={this.props.id} data-toggle="modal" data-target={'#' + this.state.target}>
                     {this.props.name}
                 </button>
 
@@ -335,73 +342,75 @@ class ButtonInputWpop extends React.Component {
                     </div>
                 </div>
             </span>
-        );
-    }
+    )
+  }
 }
 // Display a button
 class ButtonInput extends React.Component {
+  constructor (props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+  }
 
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-    }
+  handleChange () {
+    this.props.onClick(this.props.n)
+  }
 
-    handleChange() {
+  componentDidMount () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
 
-        this.props.onClick(this.props.n);
+  componentDidUpdate () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
 
-    }
-    componentDidMount() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
+  componentWillUnmount () {
+    $('[data-toggle="tooltip"]').tooltip('dispose')
+  }
 
-    componentDidUpdate() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
-    componentWillUnmount() {
-        $('[data-toggle="tooltip"]').tooltip('dispose');
-    }
-    render() {
-        return (
+  render () {
+    return (
             <span>
                 <button id={this.props.id} onClick={this.handleChange} type="button"
-                        className={"btn "+ this.props.class} data-toggle="tooltip" data-placement="top" title={this.props.tips}>
+                        className={'btn ' + this.props.class} data-toggle="tooltip" data-placement="top" title={this.props.tips}>
                     {this.props.name}
                 </button>
             </span>
-        );
-    }
+    )
+  }
 }
 // Display a menu
 class MenuInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state={listoptions:this.makelist(props.options)};
+  constructor (props) {
+    super(props)
+    this.state = { listoptions: this.makelist(props.options) }
+  }
 
-    }
-    componentDidMount() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
+  componentDidMount () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
 
-    componentDidUpdate() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
-    componentWillUnmount() {
-        $('[data-toggle="tooltip"]').tooltip('dispose');
-    }
-    makelist(data){
-        var listoptions=[];
-        for (var i = 0; i < data.length; i++) {
-            listoptions.push(<a className="dropdown-item" href={data[i].Url} key={data[i].Name} target="_blank">{data[i].Name}</a>);
-        }
-        return listoptions;
-    }
+  componentDidUpdate () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
 
-    render() {
-        return (
+  componentWillUnmount () {
+    $('[data-toggle="tooltip"]').tooltip('dispose')
+  }
+
+  makelist (data) {
+    const listoptions = []
+    for (let i = 0; i < data.length; i++) {
+      listoptions.push(<a className="dropdown-item" href={data[i].Url} key={data[i].Name} target="_blank" rel="noreferrer">{data[i].Name}</a>)
+    }
+    return listoptions
+  }
+
+  render () {
+    return (
 
             <div className="btn-group">
-                <a className={"btn "+this.props.class+" btn-sm dropdown-toggle"} href="#" role="button" id={this.props.id} data-toggle="dropdown"
+                <a className={'btn ' + this.props.class + ' btn-sm dropdown-toggle'} href="#" role="button" id={this.props.id} data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false" >
                      <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
                     {this.props.name}
@@ -411,48 +420,51 @@ class MenuInput extends React.Component {
                     {this.state.listoptions}
                </div>
             </div>
-        );
-    }
+    )
+  }
 }
 // Text input box
 class TxtInput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-    }
+  constructor (props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+  }
 
-    handleChange(e) {
-        this.props.onChange(e.target.value);
-    }
-    componentDidMount() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
+  handleChange (e) {
+    this.props.onChange(e.target.value)
+  }
 
-    componentDidUpdate() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
-    componentWillUnmount() {
-        $('[data-toggle="tooltip"]').tooltip('dispose');
-    }
-    render() {
-        let info=null ;
-        if(this.props.info != null && this.props.info !== "") info=<small id={this.props.id+"-info"} className="input-group-text">{this.props.info} </small>;
-        return (
+  componentDidMount () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
+
+  componentDidUpdate () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
+
+  componentWillUnmount () {
+    $('[data-toggle="tooltip"]').tooltip('dispose')
+  }
+
+  render () {
+    let info = null
+    if (this.props.info != null && this.props.info !== '') info = <small id={this.props.id + '-info'} className="input-group-text">{this.props.info} </small>
+    return (
             <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
                 <label htmlFor={this.props.id}> {this.props.name} </label>
-                <div className={"input-group "+this.props.className}>
+                <div className={'input-group ' + this.props.className}>
                     <div className="input-group-prepend">
                         <span className="input-group-text" id="inputGroupPrepend2">{this.props.Prepend}</span>
                     </div>
-                    <input type="text" className={"form-control "+this.props.class} id={this.props.id} placeholder={this.props.placeholder} onChange={this.handleChange} value={this.props.value} />
+                    <input type="text" className={'form-control ' + this.props.class} id={this.props.id} placeholder={this.props.placeholder} onChange={this.handleChange} value={this.props.value} />
                     {info}
                     <div className="invalid-feedback">
                         {this.props.InvalidMessage}
                     </div>
                 </div>
             </span>
-        );
-    }
+    )
+  }
 }
 
 // Outputs definition
@@ -460,104 +472,108 @@ class TxtInput extends React.Component {
 // ---------------------
 // Display the cost output box
 class CostOutput extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-    }
+  constructor (props) {
+    super(props)
+    this.handleChange = this.handleChange.bind(this)
+  }
 
-    handleChange() {
-        this.props.onCostChange(this.props.display);
-    }
-    componentDidMount() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
+  handleChange () {
+    this.props.onCostChange(this.props.display)
+  }
 
-    componentDidUpdate() {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
-    render() {
-        const classN="form-control "+this.props.class;
-        return (
-            <div className={"form-group row align-items-center"}>
-                <label htmlFor={this.props.id} className={"col-form-label"}>{this.props.name}</label>
+  componentDidMount () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
+
+  componentDidUpdate () {
+    $('[data-toggle="tooltip"]').tooltip()
+  }
+
+  render () {
+    const classN = 'form-control ' + this.props.class
+    return (
+            <div className={'form-group row align-items-center'}>
+                <label htmlFor={this.props.id} className={'col-form-label'}>{this.props.name}</label>
                 <div className="col align-self-center">
-                    <input type={"text"} className={"form-control"} id={this.props.id} className={classN}
+                    <input type={'text'} className={'form-control'} id={this.props.id} className={classN}
                        value={this.props.value} onChange={this.handleChange} readOnly data-toggle="tooltip" data-placement="top" title={this.props.tips}/>
                 </div>
             </div>
-        );
-    }
+    )
+  }
 }
 // Display a text box for display
-function Textoutput(props){
-    return(
+function Textoutput (props) {
+  return (
         <div className="alert alert-primary" role="alert" data-toggle="tooltip" data-placement="top" title="Expand this...">
             {props.text}
         </div>
-    );
+  )
 }
 
 // Plugins definition
 // ---------------------
 // ---------------------
 class AmountRatesCost extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleAmountChange = this.handleAmountChange.bind(this);
-        this.handleRateChange = this.handleRateChange.bind(this);
-        this.state={
-            Amount : 1,
-            SelectRate : 0 ,
-            Rate : this.props.data.Rates[Object.keys(this.props.data.Rates)[0]],
-            Adaptive:false,
-
-        };
-        if(typeof this.props.data.Adaptive!=='undefined' && this.props.data.Adaptive===true){
-            this.state.Adaptive=true;
-                }
-        this.make_export();
+  constructor (props) {
+    super(props)
+    this.handleAmountChange = this.handleAmountChange.bind(this)
+    this.handleRateChange = this.handleRateChange.bind(this)
+    this.state = {
+      Amount: 1,
+      SelectRate: 0,
+      Rate: this.props.data.Rates[Object.keys(this.props.data.Rates)[0]],
+      Adaptive: false
 
     }
-    handleAmountChange(amount) {
-        this.setState({Amount: amount});
+    if (typeof this.props.data.Adaptive !== 'undefined' && this.props.data.Adaptive === true) {
+      this.state.Adaptive = true
     }
-    handleRateChange(select) {
-        this.setState({SelectRate: select});
-        this.setState({Rate: this.props.data.Rates[Object.keys(this.props.data.Rates)[select]]});
-    }
-    make_export(){
-        this.export=[
-            {Name:"Amount",Value:this.state.Amount+" "+this.props.data.AmountUnit},
-            {Name:this.props.data.RateName,Value:Object.keys(this.props.data.Rates)[this.state.SelectRate]}
-        ];
-        this.props.export(this.export);
-    }
-    componentDidUpdate(){
-        this.makecost(this.state.Amount,this.state.Rate);
-        this.make_export();
-    }
-    render() {
-        let Amount_min;
-        let Amount_max;
-        let Amount_stp;
-        if(this.state.Adaptive){
-            Amount_min=this.props.data.AmountMin[this.state.SelectRate];
-            Amount_max=this.props.data.AmountMax[this.state.SelectRate];
-            Amount_stp=this.props.data.AmountStep[this.state.SelectRate];
+    this.make_export()
+  }
 
-        }
-        else {
-            Amount_min=this.props.data.AmountMin;
-            Amount_max=this.props.data.AmountMax;
-            Amount_stp=this.props.data.AmountStep;
-        }
-        if(this.state.Amount>Amount_max){
-            this.state.Amount=Amount_max;
-        }
-        if(this.state.Amount<Amount_min){
-            this.state.Amount=Amount_min;
-        }
-         return (
+  handleAmountChange (amount) {
+    this.setState({ Amount: amount })
+  }
+
+  handleRateChange (select) {
+    this.setState({ SelectRate: select })
+    this.setState({ Rate: this.props.data.Rates[Object.keys(this.props.data.Rates)[select]] })
+  }
+
+  make_export () {
+    this.export = [
+      { Name: 'Amount', Value: this.state.Amount + ' ' + this.props.data.AmountUnit },
+      { Name: this.props.data.RateName, Value: Object.keys(this.props.data.Rates)[this.state.SelectRate] }
+    ]
+    this.props.export(this.export)
+  }
+
+  componentDidUpdate () {
+    this.makecost(this.state.Amount, this.state.Rate)
+    this.make_export()
+  }
+
+  render () {
+    let Amount_min
+    let Amount_max
+    let Amount_stp
+    if (this.state.Adaptive) {
+      Amount_min = this.props.data.AmountMin[this.state.SelectRate]
+      Amount_max = this.props.data.AmountMax[this.state.SelectRate]
+      Amount_stp = this.props.data.AmountStep[this.state.SelectRate]
+    } else {
+      Amount_min = this.props.data.AmountMin
+      Amount_max = this.props.data.AmountMax
+      Amount_stp = this.props.data.AmountStep
+    }
+    if (this.state.Amount > Amount_max) {
+      this.state.Amount = Amount_max
+    }
+    if (this.state.Amount < Amount_min) {
+      this.state.Amount = Amount_min
+    }
+    return (
             <div className="row align-items-center">
                 <div className="col">
                 <AmountInput id={this.props.id} min={Amount_min} max={Amount_max}
@@ -565,100 +581,101 @@ class AmountRatesCost extends React.Component {
                              unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} tips="Select the desired amount"/>
                 </div>
                 <div className="col-3">
-                    <SelectorInput id={this.props.id+'-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)}
+                    <SelectorInput id={this.props.id + '-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)}
                                    class="btn-secondary" selected={this.state.SelectRate} rate={this.state.Rate}
                                    unit={this.props.data.RateUnit} onChange={this.handleRateChange} />
                 </div>
             </div>
-        );
-    }
-    makecost(amount,rate) {
-        let free;
-        if(this.state.Adaptive){
-            free=this.props.data.AmountFree[this.state.SelectRate];
-        } else {
-            free=this.props.data.AmountFree;
-        }
+    )
+  }
 
-        let total = (amount - free) * rate;
-        if(this.props.data.ByYear) total=total*projectduration;
-        total=tomoney(total);
-        this.props.onCostChange(this.props.n,total);
-        return total;
+  makecost (amount, rate) {
+    let free
+    if (this.state.Adaptive) {
+      free = this.props.data.AmountFree[this.state.SelectRate]
+    } else {
+      free = this.props.data.AmountFree
     }
-    }
+
+    let total = (amount - free) * rate
+    if (this.props.data.ByYear) total = total * projectduration
+    total = tomoney(total)
+    this.props.onCostChange(this.props.n, total)
+    return total
+  }
+}
 
 class CategoryAmountRatesCost extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleCatChange = this.handleCatChange.bind(this);
-        this.handleAmountChange = this.handleAmountChange.bind(this);
-        this.handleRateChange = this.handleRateChange.bind(this);
-        this.state={
-            SelectCat : 0,
-            Cat : this.props.data.Cat[Object.keys(this.props.data.Cat)[0]],
-            Amount : 1,
-            SelectRate : 0 ,
-            Rate : this.props.data.Rates[Object.keys(this.props.data.Rates)[0]],
-            Adaptive: false,
-        };
-        if(typeof this.props.data.Adaptive!=='undefined' && this.props.data.Adaptive===true){
-            this.state.Adaptive=true;
-        }
-        this.make_export();
+  constructor (props) {
+    super(props)
+    this.handleCatChange = this.handleCatChange.bind(this)
+    this.handleAmountChange = this.handleAmountChange.bind(this)
+    this.handleRateChange = this.handleRateChange.bind(this)
+    this.state = {
+      SelectCat: 0,
+      Cat: this.props.data.Cat[Object.keys(this.props.data.Cat)[0]],
+      Amount: 1,
+      SelectRate: 0,
+      Rate: this.props.data.Rates[Object.keys(this.props.data.Rates)[0]],
+      Adaptive: false
+    }
+    if (typeof this.props.data.Adaptive !== 'undefined' && this.props.data.Adaptive === true) {
+      this.state.Adaptive = true
+    }
+    this.make_export()
+  }
 
+  handleAmountChange (amount) {
+    this.setState({ Amount: amount })
+  }
 
+  handleRateChange (select) {
+    this.setState({ SelectRate: select })
+    this.setState({ Rate: this.props.data.Rates[Object.keys(this.props.data.Rates)[select]] })
+  }
 
-    }
-    handleAmountChange(amount) {
-        this.setState({Amount: amount});
-    }
-    handleRateChange(select) {
-        this.setState({SelectRate: select});
-        this.setState({Rate: this.props.data.Rates[Object.keys(this.props.data.Rates)[select]]});
-    }
+  handleCatChange (select) {
+    this.setState({ SelectCat: select })
+    this.setState({ Cat: this.props.data.Cat[Object.keys(this.props.data.Cat)[select]] })
+  }
 
-    handleCatChange(select) {
-        this.setState({SelectCat: select});
-        this.setState({Cat: this.props.data.Cat[Object.keys(this.props.data.Cat)[select]]});
-    }
-    make_export(){
-        this.export=[
-            {Name:this.props.data.CatName,Value:Object.keys(this.props.data.Cat)[this.state.SelectCat]},
-            {Name:"Amount",Value:this.state.Amount+" "+this.props.data.AmountUnit},
-            {Name:this.props.data.RateName,Value:Object.keys(this.props.data.Rates)[this.state.SelectRate]}
-        ];
-        this.props.export(this.export);
-    }
-    componentDidUpdate(){
-        this.makecost(this.state.Cat,this.state.Amount,this.state.Rate);
-        this.make_export();
-    }
-    render() {
-        let Amount_min;
-        let Amount_max;
-        let Amount_stp;
-        if(this.state.Adaptive){
-            Amount_min=this.props.data.AmountMin[this.state.SelectRate];
-            Amount_max=this.props.data.AmountMax[this.state.SelectRate];
-            Amount_stp=this.props.data.AmountStep[this.state.SelectRate];
+  make_export () {
+    this.export = [
+      { Name: this.props.data.CatName, Value: Object.keys(this.props.data.Cat)[this.state.SelectCat] },
+      { Name: 'Amount', Value: this.state.Amount + ' ' + this.props.data.AmountUnit },
+      { Name: this.props.data.RateName, Value: Object.keys(this.props.data.Rates)[this.state.SelectRate] }
+    ]
+    this.props.export(this.export)
+  }
 
-        }
-        else {
-            Amount_min=this.props.data.AmountMin;
-            Amount_max=this.props.data.AmountMax;
-            Amount_stp=this.props.data.AmountStep;
-        }
-        if(this.state.Amount>Amount_max){
-            this.state.Amount=Amount_max;
-        }
-        if(this.state.Amount<Amount_min){
-            this.state.Amount=Amount_min;
-        }
-        return (
+  componentDidUpdate () {
+    this.makecost(this.state.Cat, this.state.Amount, this.state.Rate)
+    this.make_export()
+  }
+
+  render () {
+    let Amount_min
+    let Amount_max
+    let Amount_stp
+    if (this.state.Adaptive) {
+      Amount_min = this.props.data.AmountMin[this.state.SelectRate]
+      Amount_max = this.props.data.AmountMax[this.state.SelectRate]
+      Amount_stp = this.props.data.AmountStep[this.state.SelectRate]
+    } else {
+      Amount_min = this.props.data.AmountMin
+      Amount_max = this.props.data.AmountMax
+      Amount_stp = this.props.data.AmountStep
+    }
+    if (this.state.Amount > Amount_max) {
+      this.state.Amount = Amount_max
+    }
+    if (this.state.Amount < Amount_min) {
+      this.state.Amount = Amount_min
+    }
+    return (
             <div className="row align-items-center">
                 <div className="col-3">
-                     <SelectorInput id={this.props.id+'-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={this.state.Cat}
+                     <SelectorInput id={this.props.id + '-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={this.state.Cat}
                                     class="btn-secondary" selected={this.state.SelectCat} unit={this.props.data.CatUnit} onChange={this.handleCatChange} />
                 </div>
 
@@ -667,181 +684,183 @@ class CategoryAmountRatesCost extends React.Component {
                              value={this.state.Amount} name={this.props.data.AmountName} unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} />
                 </div>
                 <div className="col-4">
-                    <SelectorInput id={this.props.id+'-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)} rate={this.state.Rate}
+                    <SelectorInput id={this.props.id + '-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)} rate={this.state.Rate}
                                    class="btn-secondary" selected={this.state.SelectRate} unit={this.props.data.RateUnit} onChange={this.handleRateChange} />
                 </div>
             </div>
-        );
-    }
-    makecost(cat,amount,rate) {
-        let free;
-        if(this.state.Adaptive){
-            free=this.props.data.AmountFree[this.state.SelectRate];
-        } else {
-            free=this.props.data.AmountFree;
-        }
-        var total=cat+(amount-free)*rate;
-        if(this.props.data.ByYear) total=total*projectduration;
+    )
+  }
 
-        total=tomoney(total);
-        this.props.onCostChange(this.props.n,total);
-        return total;
+  makecost (cat, amount, rate) {
+    let free
+    if (this.state.Adaptive) {
+      free = this.props.data.AmountFree[this.state.SelectRate]
+    } else {
+      free = this.props.data.AmountFree
     }
+    let total = cat + (amount - free) * rate
+    if (this.props.data.ByYear) total = total * projectduration
+
+    total = tomoney(total)
+    this.props.onCostChange(this.props.n, total)
+    return total
+  }
 }
 
 class CategoryCost extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleCatChange = this.handleCatChange.bind(this);
+  constructor (props) {
+    super(props)
+    this.handleCatChange = this.handleCatChange.bind(this)
 
-        this.state={SelectCat : 0,
-            Cat : this.props.data.Cat[Object.keys(this.props.data.Cat)[0]]
-        };
-        this.make_export();
-
+    this.state = {
+      SelectCat: 0,
+      Cat: this.props.data.Cat[Object.keys(this.props.data.Cat)[0]]
     }
+    this.make_export()
+  }
 
+  handleCatChange (select) {
+    this.setState({ SelectCat: select })
+    this.setState({ Cat: this.props.data.Cat[Object.keys(this.props.data.Cat)[select]] })
+  }
 
-    handleCatChange(select) {
-        this.setState({SelectCat: select});
-        this.setState({Cat: this.props.data.Cat[Object.keys(this.props.data.Cat)[select]]});
-    }
-    make_export(){
-        this.export=[
-            {Name:this.props.data.CatName,Value:Object.keys(this.props.data.Cat)[this.state.SelectCat]},
-        ];
-        this.props.export(this.export);
-    }
-    componentDidUpdate(){
-        this.makecost(this.state.Cat);
-        this.make_export();
-    }
-    render() {
+  make_export () {
+    this.export = [
+      { Name: this.props.data.CatName, Value: Object.keys(this.props.data.Cat)[this.state.SelectCat] }
+    ]
+    this.props.export(this.export)
+  }
 
-        return (
+  componentDidUpdate () {
+    this.makecost(this.state.Cat)
+    this.make_export()
+  }
+
+  render () {
+    return (
             <div className="row align-items-center">
                 <div className="col-4">
-                    <SelectorInput id={this.props.id+'-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={this.state.Cat}
+                    <SelectorInput id={this.props.id + '-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={this.state.Cat}
                                    class="btn-secondary" selected={this.state.SelectCat} unit={this.props.data.CatUnit} onChange={this.handleCatChange} />
 
                 </div>
             </div>
-        );
-    }
-    makecost(cat) {
-        var total=cat;
-        if(this.props.data.ByYear) total=total*projectduration;
+    )
+  }
 
-        total=tomoney(total);
-        this.props.onCostChange(this.props.n,total);
-        return total;
-    }
+  makecost (cat) {
+    let total = cat
+    if (this.props.data.ByYear) total = total * projectduration
+
+    total = tomoney(total)
+    this.props.onCostChange(this.props.n, total)
+    return total
+  }
 }
 
 class NoneSelect extends React.Component {
-    constructor(props) {
-        super(props);
-        this.export=[]
+  constructor (props) {
+    super(props)
+    this.export = []
+  }
 
-    }
+  render () {
+    const Cost = tomoney(0)
+    this.props.onCostChange(this.props.n, Cost)
+    this.props.export(this.export)
 
-
-    render() {
-        const Cost=tomoney(0);
-        this.props.onCostChange(this.props.n,Cost);
-        this.props.export(this.export);
-
-        return (<div className="alert alert-info" id="infotxt">
+    return (<div className="alert alert-info" id="infotxt">
                 Please select a provider in the list.
 
             </div>
-        );
-    }
-
+    )
+  }
 }
 
 class UserCost extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleCostChange = this.handleCostChange.bind(this);
-        this.handleProviderChange = this.handleProviderChange.bind(this);
-        this.handleServiceChange = this.handleServiceChange.bind(this);
-        this.handleYearChange = this.handleYearChange.bind(this);
-        this.handleConvMoneyChange = this.handleConvMoneyChange.bind(this);
+  constructor (props) {
+    super(props)
+    this.handleCostChange = this.handleCostChange.bind(this)
+    this.handleProviderChange = this.handleProviderChange.bind(this)
+    this.handleServiceChange = this.handleServiceChange.bind(this)
+    this.handleYearChange = this.handleYearChange.bind(this)
+    this.handleConvMoneyChange = this.handleConvMoneyChange.bind(this)
 
-        this.state={
-            total:0,
-            value:0,
-            ProviderError:true,
-            ServiceError:true,
-            ByYear:false,
-        };
-        this.export=[];
+    this.state = {
+      total: 0,
+      value: 0,
+      ProviderError: true,
+      ServiceError: true,
+      ByYear: false
+    }
+    this.export = []
+  }
 
-    }
+  handleYearChange (state) {
+    this.setState({ ByYear: state })
+    this.props.handlebyYearChange(state)
+  }
 
-    handleYearChange(state){
-        this.setState({ByYear: state});
-        this.props.handlebyYearChange(state);
-    }
-    makecost(byYear,amount){
-        let total=amount;
-        if(byYear) total=amount*projectduration;
- //       this.setState({total:total});
-        this.props.onCostChange(this.props.n,tomoney(total));
-    }
-    handleCostChange(value){
-        this.setState({value:value});
-    }
-    handleProviderChange(txt){
-        this.props.handleProviderChange(txt);
-        if(txt ===''){
-            this.setState({ProviderError: true});
-        }
-        else {
-            this.setState({ProviderError: false});
-        }
-    }
-    handleServiceChange(txt){
-        this.props.handleServiceChange(txt);
-        if(txt ===''){
-            this.setState({ServiceError: true});
-        }
-        else {
-            this.setState({ServiceError: false});
-        }
-    }
-    handleConvMoneyChange(conv){
-        this.setState({conv:conv});
-    }
+  makecost (byYear, amount) {
+    let total = amount
+    if (byYear) total = amount * projectduration
+    //       this.setState({total:total});
+    this.props.onCostChange(this.props.n, tomoney(total))
+  }
 
-    componentDidUpdate(){
-        this.makecost(this.state.ByYear,this.state.value);
-      //  this.make_export();
-    }
+  handleCostChange (value) {
+    this.setState({ value })
+  }
 
-    classtxt(error){
-        if(error){
-            return "is-invalid";
-        }
-        else {
-            return "is-valid";
-        }
+  handleProviderChange (txt) {
+    this.props.handleProviderChange(txt)
+    if (txt === '') {
+      this.setState({ ProviderError: true })
+    } else {
+      this.setState({ ProviderError: false })
     }
-    render() {
-        let Costname="Cost";
-        if(this.state.ByYear) Costname="Cost by year";
-        this.props.export(this.export);
+  }
 
-        return (
+  handleServiceChange (txt) {
+    this.props.handleServiceChange(txt)
+    if (txt === '') {
+      this.setState({ ServiceError: true })
+    } else {
+      this.setState({ ServiceError: false })
+    }
+  }
+
+  handleConvMoneyChange (conv) {
+    this.setState({ conv })
+  }
+
+  componentDidUpdate () {
+    this.makecost(this.state.ByYear, this.state.value)
+    //  this.make_export();
+  }
+
+  classtxt (error) {
+    if (error) {
+      return 'is-invalid'
+    } else {
+      return 'is-valid'
+    }
+  }
+
+  render () {
+    let Costname = 'Cost'
+    if (this.state.ByYear) Costname = 'Cost by year'
+    this.props.export(this.export)
+
+    return (
             <div className="container">
                 <div className="row align-items-baseline">
                     <div className="col-3">
-                        <TxtInput id={this.props.id+'-input'}  name="Provider" placeholder="Provider here" tips="Add your own cost calculation here" onChange={this.handleProviderChange}
+                        <TxtInput id={this.props.id + '-input'} name="Provider" placeholder="Provider here" tips="Add your own cost calculation here" onChange={this.handleProviderChange}
                                   class={this.classtxt(this.state.ProviderError)} Prepend="" InvalidMessage="Please provide a Provider"/>
                     </div>
                     <div className="col-3">
-                        <TxtInput id={this.props.id+'-input'}  name="Service" placeholder="Service here" tips="Add your own cost calculation here" onChange={this.handleServiceChange}
+                        <TxtInput id={this.props.id + '-input'} name="Service" placeholder="Service here" tips="Add your own cost calculation here" onChange={this.handleServiceChange}
                                   class={this.classtxt(this.state.ServiceError)} Prepend="" InvalidMessage="Please provide a Service"/>
                     </div>
                     <div className="col-5">
@@ -850,14 +869,13 @@ class UserCost extends React.Component {
                 </div>
                 <div className="row align-items-baseline">
                     <div className="col-auto">
-                        <CheckboxInput id={this.props.id+'-input'} name="Charged by year"
+                        <CheckboxInput id={this.props.id + '-input'} name="Charged by year"
                                        tips="Check if the service is charged by year so the cost will be adapted for the project duration" onChange={this.handleYearChange}/>
                     </div>
                 </div>
             </div>
-        );
-    }
-
+    )
+  }
 }
 
 // Combine plugins
@@ -865,129 +883,134 @@ class UserCost extends React.Component {
 // ---------------------
 // Manages what's display inside a plugin : provider selector, select the components...
 class ProviderPluginsSelector extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleCostChange = this.handleCostChange.bind(this);
-        this.handleProviderChange = this.handleProviderChange.bind(this);
-        this.handleCommentChange = this.handleCommentChange.bind(this);
-        this.handleAddPlugin = this.handleAddPlugin.bind(this);
-        this.handleRmvPlugin = this.handleRmvPlugin.bind(this);
-        this.handleProviderChangetxt = this.handleProviderChangetxt.bind(this);
-        this.handleServiceChangetxt = this.handleServiceChangetxt.bind(this);
-        this.handlebyYearChange = this.handlebyYearChange.bind(this);
-        this.make_exportcmp = this.make_exportcmp.bind(this);
-        this.make_export = this.make_export.bind(this);
-        this.state={
-            selected:0,
-            keys:this.ProvidersName(props.data),
-            n:1,
-            cost:0,
-            comments:"",
-            Provider:"",
-            Name:"",
-            manualname:false,
-            manbyyear:false,
-            show_plus:false,
-            exportcmp:"",
-        };
+  constructor (props) {
+    super(props)
+    this.handleCostChange = this.handleCostChange.bind(this)
+    this.handleProviderChange = this.handleProviderChange.bind(this)
+    this.handleCommentChange = this.handleCommentChange.bind(this)
+    this.handleAddPlugin = this.handleAddPlugin.bind(this)
+    this.handleRmvPlugin = this.handleRmvPlugin.bind(this)
+    this.handleProviderChangetxt = this.handleProviderChangetxt.bind(this)
+    this.handleServiceChangetxt = this.handleServiceChangetxt.bind(this)
+    this.handlebyYearChange = this.handlebyYearChange.bind(this)
+    this.make_exportcmp = this.make_exportcmp.bind(this)
+    this.make_export = this.make_export.bind(this)
+    this.state = {
+      selected: 0,
+      keys: this.ProvidersName(props.data),
+      n: 1,
+      cost: 0,
+      comments: '',
+      Provider: '',
+      Name: '',
+      manualname: false,
+      manbyyear: false,
+      show_plus: false,
+      exportcmp: ''
+    }
+  }
+
+  handleCostChange (n, e) {
+    if (this.state.cost !== e) {
+      this.setState({ cost: e })
+      this.props.handleCostChange(n, e)
+    }
+  }
+
+  handleProviderChange (select) {
+    this.setState({ selected: select })
+    if (select > 0) {
+      this.setState({ show_plus: true })
+    } else {
+      this.setState({ show_plus: false })
+    }
+    this.state.Provider = this.props.data.Data[select].Provider
+    this.state.Name = this.props.data.Data[select].Name
+
+    this.props.handleCostChange(this.props.n, this.state.cost)
+    // Send a provider even when provider change
+    Stats.RecordEvent('Provider', this.state.Provider, 0)
+  }
+
+  componentDidUpdate () {
+    this.props.handleCostChange(this.props.n, this.state.cost)
+    this.make_export()
+  }
+
+  make_exportcmp (data) {
+    this.state.exportcmp = data
+  }
+
+  make_export () {
+    const out = {
+      Category: this.props.data.Name,
+      Provider: this.state.Provider,
+      Name: this.state.Name,
+      Comments: this.state.comments,
+      ExportCmp: this.state.exportcmp,
+      Cost: this.state.cost
     }
 
-    handleCostChange(n,e) {
-        if (this.state.cost !== e ) {
-            this.setState({cost: e});
-        this.props.handleCostChange(n,e);
-        }
-    }
-    handleProviderChange(select){
+    this.props.export(out, this.props.n)
+  }
 
-        this.setState({selected:select});
-        if (select>0){
-            this.setState({show_plus:true});
-        }else {
-            this.setState({show_plus:false});
-        }
-        this.state.Provider=this.props.data.Data[select].Provider;
-        this.state.Name=this.props.data.Data[select].Name;
+  handleCommentChange (com) {
+    this.setState({ comments: com })
+  }
 
-        this.props.handleCostChange(this.props.n,this.state.cost);
-        // Send a provider even when provider change
-        Stats.RecordEvent('Provider',this.state.Provider,0);
+  handleAddPlugin (n) {
+    this.props.handleAddPlugin(n)
+  }
 
-    }
-    componentDidUpdate(){
-        this.props.handleCostChange(this.props.n,this.state.cost);
-        this.make_export();
+  handleRmvPlugin (n) {
+    this.props.handleRmvPlugin(n)
+  }
 
-    }
-    make_exportcmp(data){
-        this.state.exportcmp=data
-    }
-    make_export(){
-        const out={
-            Category:this.props.data.Name,
-            Provider:this.state.Provider,
-            Name:this.state.Name,
-            Comments:this.state.comments,
-            ExportCmp:this.state.exportcmp,
-            Cost:this.state.cost,
-        };
+  // The 3 nexts function are for user input management
+  handleProviderChangetxt (txt) {
+    this.setState({ Provider: txt })
+  }
 
-        this.props.export(out,this.props.n)
-    }
-    handleCommentChange(com){
+  handleServiceChangetxt (txt) {
+    this.setState({ Name: txt })
+  }
 
-        this.setState({comments:com});
+  handlebyYearChange (state) {
+    this.setState({ manbyyear: state })
+  }
 
-    }
-    handleAddPlugin(n){
-        this.props.handleAddPlugin(n);
-    }
-    handleRmvPlugin(n){
-        this.props.handleRmvPlugin(n);
-    }
-// The 3 nexts function are for user input management
-    handleProviderChangetxt(txt){
-        this.setState({Provider:txt});
-    }
-    handleServiceChangetxt(txt){
-        this.setState({Name:txt});
-    }
-    handlebyYearChange(state){
-        this.setState({manbyyear:state});
+  // Manage extra display info for a selected provider
+
+  extrainfo (Cdata) {
+    let Extra_inf = ''
+    let Extra_infUrl = ''
+    if (typeof Cdata.ExtraInfoUrl !== 'undefined' && Cdata.ExtraInfoUrl !== '') {
+      Extra_infUrl = <p className="h6"><em><a href={Cdata.ExtraInfoUrl} target="_blank" rel="noreferrer">To know more</a></em></p>
     }
 
-
-    // Manage extra display info for a selected provider
-
-    extrainfo(Cdata){
-        let  Extra_inf="";
-        let  Extra_infUrl="";
-        if ( typeof Cdata.ExtraInfoUrl !=='undefined' && Cdata.ExtraInfoUrl !==''){
-            Extra_infUrl=<p className="h6"><em><a href={Cdata.ExtraInfoUrl} target="_blank">To know more</a></em></p>;
-        }
-
-        if ( typeof Cdata.ExtraInfo !=='undefined' && Cdata.ExtraInfo !==''){
-            Extra_inf=
+    if (typeof Cdata.ExtraInfo !== 'undefined' && Cdata.ExtraInfo !== '') {
+      Extra_inf =
                 <div className="col-3 align-self-end">
                     <div className="alert alert-info" role="alert">
-                        <img src="./icon/info2.png"  width="20"/> &nbsp;
+                        <img src="./icon/info2.png" width="20"/> &nbsp;
                         {Cdata.ExtraInfo}
                         {Extra_infUrl}
                     </div>
-                </div>;
-        }
-        return(Extra_inf);
+                </div>
     }
-    render() {
-        const selected=this.state.selected;
-        this.state.manualname=false;
-        this.state.keys=this.ProvidersName(this.props.data);
-        const Cmp=this.cmp2string(this.cmpdata(selected).Style);
-        const Cdata=this.cmpdata(selected);
-        const id=this.props.data.Name.replace(/\s/g,'')+this.props.n;
+    return (Extra_inf)
+  }
 
-        return(
-           <div id={"plugin"}>
+  render () {
+    const selected = this.state.selected
+    this.state.manualname = false
+    this.state.keys = this.ProvidersName(this.props.data)
+    const Cmp = this.cmp2string(this.cmpdata(selected).Style)
+    const Cdata = this.cmpdata(selected)
+    const id = this.props.data.Name.replace(/\s/g, '') + this.props.n
+
+    return (
+           <div id={'plugin'}>
 
                 <div className="card-header" id={id}>
                     <ModuleHeader id={id} data={this.props.data} selected={selected} Cdata={Cdata} n={this.props.n} Cost={this.state.cost}
@@ -995,8 +1018,7 @@ class ProviderPluginsSelector extends React.Component {
                                   keys={this.state.keys} show_minus={this.props.show_minus} show_plus={this.state.show_plus} conv={this.props.conv}/>
                 </div>
 
-
-                <div id={"collapse"+id} className="collapse" aria-labelledby={id} data-parent="#accordionplugins">
+                <div id={'collapse' + id} className="collapse" aria-labelledby={id} data-parent="#accordionplugins">
                     <div className="card-body">
                         <div className="container">
 
@@ -1009,7 +1031,7 @@ class ProviderPluginsSelector extends React.Component {
                                 </div>
                                 <div className="col-auto align-self-end">
                                     <div id="plugin-knowmore" >
-                                        <MakeknowmoreInput key={selected} data={Cdata}  name="" n="0" />
+                                        <MakeknowmoreInput key={selected} data={Cdata} name="" n="0" />
                                     </div>
                                 </div>
                                         {this.extrainfo(Cdata)}
@@ -1029,87 +1051,88 @@ class ProviderPluginsSelector extends React.Component {
                     </div>
                 </div>
             </div>
-        );
+    )
+  }
+
+  cmpdata (select) {
+    const out = this.props.data.Data[select]
+    if (this.state.manualname) {
+      out.Name = this.state.Name
+      out.ByYear = this.state.manbyyear
+      if (this.state.Provider === '') {
+        this.state.keys[select] = 'Please provide a Provider'
+      } else {
+        this.state.keys[select] = this.state.Provider
+      }
     }
+    return out
+  }
 
-
-    cmpdata(select){
-        let out=this.props.data.Data[select];
-        if (this.state.manualname){
-            out.Name=this.state.Name;
-            out.ByYear=this.state.manbyyear;
-            if ( this.state.Provider ==='') {
-                this.state.keys[select] = 'Please provide a Provider';
-            }else {
-                this.state.keys[select]=this.state.Provider;
-            }
-            }
-        return out;
-        }
-// return the correct style fct from the str input
-    cmp2string(str){
-        switch (str) {
-            case "AmountRatesCost" : return AmountRatesCost;
-            case "CategoryCost" : return CategoryCost;
-            case "CategoryAmountRatesCost" : return CategoryAmountRatesCost;
-            case "NoneSelect":return NoneSelect;
-            case "UserCost":{this.state.manualname=true;  return UserCost;}
-
-        }
+  // return the correct style fct from the str input
+  cmp2string (str) {
+    switch (str) {
+      case 'AmountRatesCost' : return AmountRatesCost
+      case 'CategoryCost' : return CategoryCost
+      case 'CategoryAmountRatesCost' : return CategoryAmountRatesCost
+      case 'NoneSelect':return NoneSelect
+      case 'UserCost':{ this.state.manualname = true; return UserCost }
     }
-    ProvidersName(main){
-        const data = main.Data;
+  }
 
-        var providers=[];
-        for (var i = 0; i < data.length; i++) {
-            providers.push(data[i].Provider);
-        }
-        return providers;
+  ProvidersName (main) {
+    const data = main.Data
+
+    const providers = []
+    for (let i = 0; i < data.length; i++) {
+      providers.push(data[i].Provider)
     }
-
+    return providers
+  }
 }
 
 // Displays the header of a plugin (button +- name cost ...)
-class ModuleHeader  extends React.Component{
-    constructor(props) {
-        super(props);
-        this.handleAddPlugin = this.handleAddPlugin.bind(this);
-        this.handleRmvPlugin = this.handleRmvPlugin.bind(this);
-    }
-    handleAddPlugin(n){
-        this.props.handleAddPlugin(n);
-    }
-    handleRmvPlugin(n){
-        this.props.handleRmvPlugin(n);
-    }
-    byyear(by){
-        if(by){
-            return(<span className="txtbyyear">{projectduration} <br/> years</span>);
-        }
-        else {
-            return(<span></span>);
-        }
+class ModuleHeader extends React.Component {
+  constructor (props) {
+    super(props)
+    this.handleAddPlugin = this.handleAddPlugin.bind(this)
+    this.handleRmvPlugin = this.handleRmvPlugin.bind(this)
+  }
 
+  handleAddPlugin (n) {
+    this.props.handleAddPlugin(n)
+  }
+
+  handleRmvPlugin (n) {
+    this.props.handleRmvPlugin(n)
+  }
+
+  byyear (by) {
+    if (by) {
+      return (<span className="txtbyyear">{projectduration} <br/> years</span>)
+    } else {
+      return (<span></span>)
     }
-    render() {
-        let minus=null;
-        let plus=null;
-        let convout=null;
-        if (this.props.show_minus){
-            minus=<ButtonInputWpop class="btn-danger btn-sm" id="plugins-add-btn"
+  }
+
+  render () {
+    let minus = null
+    let plus = null
+    let convout = null
+    if (this.props.show_minus) {
+      minus = <ButtonInputWpop class="btn-danger btn-sm" id="plugins-add-btn"
                                    name={<img className="img-fluid" src="icon\minus.png" width="20"/>}
                                    onClick={this.handleRmvPlugin} n={this.props.n} tips="Remove this line"
-                                    idp={this.props.id} info={this.props.data.Name}/>;
-        }
-        if (this.props.show_plus){
-           plus= <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icon\plus.png" width="20"/>}
-                         onClick={this.handleAddPlugin} n={this.props.n} tips={"Add a new "+this.props.data.Name}/>;
-        }
-        if (this.props.conv.Enable) {
-            convout=<CostOutput id="ccostconv" class="itemcost" name="" value={ConvCurrency(this.props.Cost)} tips="Converted cost for this provider"/>;
-        }
+                                    idp={this.props.id} info={this.props.data.Name}/>
+    }
+    if (this.props.show_plus) {
+      plus = <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icon\plus.png" width="20"/>}
+                         onClick={this.handleAddPlugin} n={this.props.n} tips={'Add a new ' + this.props.data.Name}/>
+    }
+    if (this.props.conv.Enable) {
+      convout = <CostOutput id="ccostconv" class="itemcost" name="" value={ConvCurrency(this.props.Cost)} tips="Converted cost for this provider"/>
+    }
 
- return(
+    return (
      <div className="container">
          <div className="row align-items-center">
              <div className="col-1 align-self-start">
@@ -1125,25 +1148,25 @@ class ModuleHeader  extends React.Component{
                      <MakeknowmoreInput data={this.props.data} n={this.props.n}/>
                  </div>
             </div>
-             <div  className=" col-1 align-self-start">
-                 <img className="img-fluid" src={"icon/"+this.props.data.Icon} width="100"/>
+             <div className=" col-1 align-self-start">
+                 <img className="img-fluid" src={'icon/' + this.props.data.Icon} width="100"/>
              </div>
              <div className="col-3 text-center">
-                 {/*<div className="row align-items-end">*/}
-                 {/*    <div className="col-auto">*/}
+                 {/* <div className="row align-items-end"> */}
+                 {/*    <div className="col-auto"> */}
                                     <span data-toggle="tooltip" data-placement="top" title="Expand this..." >
-                                        <button className="btn btn-outline-primary  dropdown-toggle" type="button" data-toggle="collapse" data-target={"#collapse"+this.props.id}
-                                                aria-expanded="false" aria-controls={"collapse"+this.props.id} id="btn-plugins" onClick={this.btnClick.bind(this)}>
-                                            <span id={"plugin-number"}> {this.props.n+1}. </span> <span id={"plugin-name"}>{this.props.data.Name}</span>
+                                        <button className="btn btn-outline-primary  dropdown-toggle" type="button" data-toggle="collapse" data-target={'#collapse' + this.props.id}
+                                                aria-expanded="false" aria-controls={'collapse' + this.props.id} id="btn-plugins" onClick={this.btnClick.bind(this)}>
+                                            <span id={'plugin-number'}> {this.props.n + 1}. </span> <span id={'plugin-name'}>{this.props.data.Name}</span>
                                         </button>
                                     </span>
 
-                 {/*    </div>*/}
-                 {/*</div>*/}
+                 {/*    </div> */}
+                 {/* </div> */}
              </div>
              <div id="plugin-info" className="col-4">
                  <div className="row">
-                     {this.makeinfo(this.props.keys,this.props.selected,this.props.Cdata)}
+                     {this.makeinfo(this.props.keys, this.props.selected, this.props.Cdata)}
                  </div>
                  <div className="row text-center">
                      {this.props.comments}
@@ -1162,90 +1185,97 @@ class ModuleHeader  extends React.Component{
          </div>
 
      </div>
- );
+    )
+  }
+
+  btnClick () {
+    // Send a category even when someone click on the category btn
+    Stats.RecordEvent('Category', this.props.data.Name, this.props.n)
+  }
+
+  makeinfo (keys, selected, Cdata) {
+    let name = Cdata.Name
+    if (name === '' && keys[selected] === '') {
+      name = 'Please provide a Provider'
+      return (<span id="module-name">{name}</span>)
+    } else if (keys[selected] === 'None') {
+      return (<span id="module-name">{name}</span>)
+    } else {
+      return (<span><span id="module-provider">{keys[selected]} : </span>  <span id="module-name">{name}</span></span>)
     }
-    btnClick(){
-        // Send a category even when someone click on the category btn
-        Stats.RecordEvent('Category',this.props.data.Name,this.props.n);
-    }
-    makeinfo(keys,selected,Cdata){
-        let name=Cdata.Name;
-        if ( name ===''&&keys[selected]===''){
-            name='Please provide a Provider';
-            return  (<span id="module-name">{name}</span>);
-        }else if(keys[selected]==='None'){
-            return  (<span id="module-name">{name}</span>);
-        }else{
-            return  (<span><span id="module-provider">{keys[selected]} : </span>  <span id="module-name">{name}</span></span>);
-        }
-    }
+  }
 }
 
-//displays one kind plugin it manages the add and removes option
-class ManagePlugins extends React.Component{
-    constructor(props) {
-        super(props);
-        this.handleCostChange = this.handleCostChange.bind(this);
-        this.handleAddPlugin = this.handleAddPlugin.bind(this);
-        this.handleRmvPlugin = this.handleRmvPlugin.bind(this);
-        this.make_exportplug=this.make_exportplug.bind(this);
-        this.make_export = this.make_export.bind(this);
+// displays one kind plugin it manages the add and removes option
+class ManagePlugins extends React.Component {
+  constructor (props) {
+    super(props)
+    this.handleCostChange = this.handleCostChange.bind(this)
+    this.handleAddPlugin = this.handleAddPlugin.bind(this)
+    this.handleRmvPlugin = this.handleRmvPlugin.bind(this)
+    this.make_exportplug = this.make_exportplug.bind(this)
+    this.make_export = this.make_export.bind(this)
 
-        this.state={
-            displayed:[],
-            varsum:{},
-            plugins:[],
-            export:[],
-        };
-        this.state.displayed.push(randomint(this.state.displayed));
+    this.state = {
+      displayed: [],
+      varsum: {},
+      plugins: [],
+      export: []
     }
-    handleRmvPlugin(n){
+    this.state.displayed.push(randomint(this.state.displayed))
+  }
 
-        $('#'+n.target).modal('hide');
-        var tmp=this.state.displayed;
-        tmp.splice(n.n,1);
-        this.setState({displayed:tmp});
-        this.handleCostChange(n.n,0);
-        this.state.export.splice(n.n,1);
-    }
-    handleAddPlugin(n){
-        var tmp=this.state.displayed;
-        tmp.splice(n+1,0,randomint(this.state.displayed));
-        this.setState({displayed:tmp});
-    }
-    handleCostChange(n,cost) {
+  handleRmvPlugin (n) {
+    $('#' + n.target).modal('hide')
+    const tmp = this.state.displayed
+    tmp.splice(n.n, 1)
+    this.setState({ displayed: tmp })
+    this.handleCostChange(n.n, 0)
+    this.state.export.splice(n.n, 1)
+  }
 
-        this.state.varsum[n]=cost;
-        this.props.handleCostChange(this.props.n,sum(this.state.varsum));
-    }
-    make_exportplug(data,n) {
-        this.state.export[n] = data;
-        this.make_export()
-    }
-    make_export(){
-        if (this.state.export.length === this.give_n()) {
-            this.props.export(this.state.export, this.props.n)
-        }
-    }
+  handleAddPlugin (n) {
+    const tmp = this.state.displayed
+    tmp.splice(n + 1, 0, randomint(this.state.displayed))
+    this.setState({ displayed: tmp })
+  }
 
-    give_id(index){
-        return this.state.displayed[index]
-    }
-    give_n(){
-        const disp=this.state.displayed;
-        return disp.length
-    }
-    componentDidUpdate(){
-        this.make_export();
-    }
+  handleCostChange (n, cost) {
+    this.state.varsum[n] = cost
+    this.props.handleCostChange(this.props.n, sum(this.state.varsum))
+  }
 
-    render() {
-        let show_minus = false;
-        if (this.give_n()>1) {
-            show_minus=true;
-        }
-        this.make_export();
-           return(
+  make_exportplug (data, n) {
+    this.state.export[n] = data
+    this.make_export()
+  }
+
+  make_export () {
+    if (this.state.export.length === this.give_n()) {
+      this.props.export(this.state.export, this.props.n)
+    }
+  }
+
+  give_id (index) {
+    return this.state.displayed[index]
+  }
+
+  give_n () {
+    const disp = this.state.displayed
+    return disp.length
+  }
+
+  componentDidUpdate () {
+    this.make_export()
+  }
+
+  render () {
+    let show_minus = false
+    if (this.give_n() > 1) {
+      show_minus = true
+    }
+    this.make_export()
+    return (
                <div>
                     <Repeat numTimes={this.give_n()}>
                         {(index) => <ProviderPluginsSelector data={this.props.data} key={this.state.displayed[index]}
@@ -1257,46 +1287,43 @@ class ManagePlugins extends React.Component{
                     </Repeat>
                </div>
 
-           );}
-
+    )
+  }
 }
 // displays all the plugins defined in the Maindata
 class PluginsMain extends React.Component {
-    constructor(props) {
-        super(props);
-        this.handleCostChange = this.handleCostChange.bind(this);
+  constructor (props) {
+    super(props)
+    this.handleCostChange = this.handleCostChange.bind(this)
 
-        this.make_exportplug=this.make_exportplug.bind(this);
-        this.make_export = this.make_export.bind(this);
+    this.make_exportplug = this.make_exportplug.bind(this)
+    this.make_export = this.make_export.bind(this)
 
-        this.state={
-            varsum:{},
-            export:[],
-        };
+    this.state = {
+      varsum: {},
+      export: []
     }
+  }
 
+  handleCostChange (name, e) {
+    this.state.varsum[name] = e
+    this.props.TotalCost(sum(this.state.varsum))
+  }
 
-    handleCostChange(name,e) {
-        this.state.varsum[name]=e;
-        this.props.TotalCost(sum(this.state.varsum));
+  make_exportplug (data, n) {
+    this.state.export[n] = data
+    this.make_export()
+  }
 
+  make_export () {
+    if (this.state.export.length === this.props.data.length) {
+      this.props.export(this.state.export)
     }
-    make_exportplug(data,n) {
-        this.state.export[n] = data;
-        this.make_export();
-    }
+  }
 
-    make_export(){
-            if (this.state.export.length === this.props.data.length) {
-                this.props.export(this.state.export);
-
-            }
-    }
-    render() {
-
-        return(
+  render () {
+    return (
             <div>
-
 
                 <div id="PluginsMain">
                     <div className="card">
@@ -1333,87 +1360,86 @@ class PluginsMain extends React.Component {
                     </div>
                 </div>
             </div>
-        );
-    }
-
+    )
+  }
 }
 
 // MAIN
 // ---------------------
 // ---------------------
 class Main extends React.Component {
-    constructor(props) {
-        Money_GetRates();
-        super(props);
-        this.handleCostChange = this.handleCostChange.bind(this);
-        this.make_exportmain = this.make_exportmain.bind(this);
-        this.handleNameChange = this.handleNameChange.bind(this);
-        this.handleDurationChange = this.handleDurationChange.bind(this);
-        this.handleConvMoneyChange = this.handleConvMoneyChange.bind(this);
-        this.btnClick=this.btnClick.bind(this);
+  constructor (props) {
+    Money_GetRates()
+    super(props)
+    this.handleCostChange = this.handleCostChange.bind(this)
+    this.make_exportmain = this.make_exportmain.bind(this)
+    this.handleNameChange = this.handleNameChange.bind(this)
+    this.handleDurationChange = this.handleDurationChange.bind(this)
+    this.handleConvMoneyChange = this.handleConvMoneyChange.bind(this)
+    this.btnClick = this.btnClick.bind(this)
 
-        this.state= {
-            total: 0,
-            export: [],
-            exportmain:[],
-            name:'',
-            duration:MainData.DefaultDuration,
-            conv:{Enable:false,Cur:''},
-        };
-        projectduration=this.state.duration;
-        this.init=true;
+    this.state = {
+      total: 0,
+      export: [],
+      exportmain: [],
+      name: '',
+      duration: MainData.DefaultDuration,
+      conv: { Enable: false, Cur: '' }
+    }
+    projectduration = this.state.duration
+    this.init = true
+  }
 
+  componentDidUpdate () {
+    _paq.push(['enableLinkTracking'])
+  }
 
+  handleCostChange (total) {
+    if (this.state.total !== total) {
+      this.setState({ total })
+    }
+  }
 
+  make_exportmain (idata) {
+    const tmp = JSON.parse(JSON.stringify(idata))
+    let disp = false
+    if (!this.init) {
+      if (!Object.compare(tmp, this.state.exportmain.data)) {
+        disp = true
+      }
     }
-    componentDidUpdate(){
-        _paq.push(['enableLinkTracking']);
+    if ((this.init) || (disp)) {
+      this.setState({ exportmain: { data: tmp, total: tomoney(this.state.total) } })
+      this.init = false
     }
-    handleCostChange(total) {
-        if (this.state.total !== total){
-            this.setState({total:total});
-        }
+  }
 
-    }
-    make_exportmain(idata) {
+  handleNameChange (name) {
+    this.setState({ name })
+    projectname = name
+  }
 
-        const tmp=JSON.parse(JSON.stringify(idata));
-        let disp=false;
-        if(!this.init){
-            if(!Object.compare(tmp,this.state.exportmain.data)){
-                disp=true;
-            }
-        }
-            if((this.init)||(disp)){
-                this.setState({exportmain: {data: tmp, total: tomoney(this.state.total)}});
-                this.init=false;
-           }
-    }
-    handleNameChange(name){
-        this.setState({name:name});
-        projectname=name;
-    }
-    handleDurationChange(d){
-        this.setState({duration:d});
-        projectduration=d;
-    }
+  handleDurationChange (d) {
+    this.setState({ duration: d })
+    projectduration = d
+  }
 
-    handleConvMoneyChange(conv){
-        this.setState({conv:conv});
-    }
-    btnClick(name,value){
-        Stats.RecordEvent('Options',name,value);
-    }
-    render() {
+  handleConvMoneyChange (conv) {
+    this.setState({ conv })
+  }
 
-        return(
+  btnClick (name, value) {
+    Stats.RecordEvent('Options', name, value)
+  }
+
+  render () {
+    return (
             <div id="main">
                 <PopupStats />
 
                 {this.page_head()}
 
                 <div id="plugins-body" className="container">
-
 
                     {this.project_info()}
 
@@ -1428,12 +1454,11 @@ class Main extends React.Component {
 
                 {this.page_foot()}
             </div>
-        );
-    }
+    )
+  }
 
-
-    project_info(){
-        return(
+  project_info () {
+    return (
         <div id="ProjectInfo">
             <div className="card-header">
 
@@ -1442,8 +1467,6 @@ class Main extends React.Component {
                         <img src="./icon/uset.png" width="40" />
 
                         <img src="./icon/uset.png" width="40" />
-
-
 
             </div>
 
@@ -1465,17 +1488,17 @@ class Main extends React.Component {
                 </div>
             </div>
         </div>
-        );
-    }
+    )
+  }
 
-    // Display the total cost
-    final_cost(conv){
-        let disps='';
-        if(projectduration>1) disps='s';
-        let convout='';
-        if (conv.Enable) convout=<CostOutput id="convctotal"class="costoutput" name="Total Cost" value={ConvCurrency(this.state.total)} tips="Converted Total cost for the project"/>;
+  // Display the total cost
+  final_cost (conv) {
+    let disps = ''
+    if (projectduration > 1) disps = 's'
+    let convout = ''
+    if (conv.Enable) convout = <CostOutput id="convctotal" class="costoutput" name="Total Cost" value={ConvCurrency(this.state.total)} tips="Converted Total cost for the project"/>
 
-        return(
+    return (
         <div className="card" id="finalcost">
             <div className="card bg-light  ">
                 <div className="container">
@@ -1483,7 +1506,7 @@ class Main extends React.Component {
                     <div className="col-1">
                     </div>
                     <div className="col-1">
-                        {/*<img className="img-fluid" src="./icon/totalcost.png" width="100"/>*/}
+                        { /* <img className="img-fluid" src="./icon/totalcost.png" width="100"/> */ }
                     </div>
                     <div className="col-5 " id="plugin-name">
                         <h3>Total Cost for {projectduration} year{disps}</h3>
@@ -1496,20 +1519,20 @@ class Main extends React.Component {
                 </div>
 
             </div>
-        </div>);
-    }
+        </div>)
+  }
 
-    // Define the head (top) of the page
-    page_head(){
-        let helpbtn=null;
-        let imglogo=null;
-        if (MainData.HelpUrl!=null && MainData.HelpUrl!=="")
-            helpbtn=<a className="btn btn-danger" id="head-help" target="_blank" href={MainData.HelpUrl}
-                       onClick={() => this.btnClick("helpbtn",0)}>
-                            <img src="./icon/help.png" width="20"/>&nbsp;I need help with my DMP</a>;
-        if  (MainData.InstLogo!=null && MainData.InstLogo!=="")
-            imglogo=<img src={"./icon/"+MainData.InstLogo} width={MainData.InstLogoWidth}/>;
-        return(
+  // Define the head (top) of the page
+  page_head () {
+    let helpbtn = null
+    let imglogo = null
+    if (MainData.HelpUrl != null && MainData.HelpUrl !== '') {
+      helpbtn = <a className="btn btn-danger" id="head-help" target="_blank" href={MainData.HelpUrl}
+                       onClick={() => this.btnClick('helpbtn', 0)} rel="noreferrer">
+                            <img src="./icon/help.png" width="20"/>&nbsp;I need help with my DMP</a>
+    }
+    if (MainData.InstLogo != null && MainData.InstLogo !== '') { imglogo = <img src={'./icon/' + MainData.InstLogo} width={MainData.InstLogoWidth}/> }
+    return (
             <div className="jumbotron jumbotron-fluid" id="page_head">
                 <div className="container">
                     <div className="row">
@@ -1526,7 +1549,7 @@ class Main extends React.Component {
                     <div className="row">
                         <div className="col">
                             <p className="lead">
-                                Welcome to our cost calculator. This tool will help researchers to 
+                                Welcome to our cost calculator. This tool will help researchers to
                                 estimate the cost of managing, storing and publishing data.
                             </p>
                             <p className="lead">
@@ -1543,11 +1566,12 @@ class Main extends React.Component {
                     </div>
                 </div>
             </div>
-        );
-    }
-    //Define the foot (bottom) of the page
-    page_foot(){
-        return(
+    )
+  }
+
+  // Define the foot (bottom) of the page
+  page_foot () {
+    return (
             <div id="page_foot" >
                 <div className="jumbotron jumbotron-fluid">
                 <div className="alert alert-danger" role="alert" id="infotxt">
@@ -1563,21 +1587,23 @@ class Main extends React.Component {
                 </div>
             </div>
             </div>
-        );
-    }
+    )
+  }
 
-    // Define the howto (user guide)
-    howto(){
-        let curconv=null;
-        if(Money_Enable) curconv=
+  // Define the howto (user guide)
+  howto () {
+    let curconv = null
+    if (MoneyEnable) {
+      curconv =
             <dl className="row">
                 <dt className="col-sm-3">Change Currency</dt>
                 <dd className="col-sm-9">
                     <p>If you need another currency than {MainData.Currency} you can add an extra currency by selecting in the <mark>Change Currency menu</mark></p>
                     <p> Actual rate is automatically applied using <a href="https://openexchangerates.org/">openexchangerates</a></p>
                 </dd>
-            </dl>;
-        return(
+            </dl>
+    }
+    return (
             <div id="howto">
                 <div className="card" >
                     <div className="card-header ">
@@ -1616,12 +1642,12 @@ class Main extends React.Component {
                             <dt className="col-sm-3">Add or Remove Line</dt>
                             <dd className="col-sm-9">
                                 <p>If you want to add a new line use the <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icon\plus.png" width="20"/>}
-                                                                                          tips={"Add a new category"} onClick={this.fctnull}/> button.
+                                                                                          tips={'Add a new category'} onClick={this.fctnull}/> button.
                                 </p>
                                 <p>
                                     You can also remove a line with <ButtonInput class="btn-danger btn-sm" id="plugins-add-btn"
                                                                                      name={<img className="img-fluid" src="icon\minus.png" width="20"/>}
-                                                                                     tips={"Remove this line"} onClick={this.fctnull}/> button.
+                                                                                     tips={'Remove this line'} onClick={this.fctnull}/> button.
                                 </p>
                             </dd>
                         </dl>
@@ -1630,7 +1656,7 @@ class Main extends React.Component {
                             <dd className="col-sm-9">
                                 Some extra information about the category or the provider can be obtained with the <ButtonInput class="btn-primary btn-sm" id="plugins-add-btn"
                                                                                                                                 name={<img className="img-fluid" src="icon\info.png" width="20"/>}
-                                                                                                                                tips={"Know more"} onClick={this.fctnull}/> button.
+                                                                                                                                tips={'Know more'} onClick={this.fctnull}/> button.
                             </dd>
                         </dl>
                         <dl className="row">
@@ -1645,7 +1671,7 @@ class Main extends React.Component {
                                 You can export your work into different formats : <br/>
                                 <samp> HTML</samp> : This format can be used in any wordprocessing software (such as Microsoft Word or Libreoffice).<br/>
                                 <samp>HTML Source code</samp>, <samp>Markdown</samp>, and <samp>CSV</samp> formats are also possible.<br/>
-                                Click on the  <ButtonInput class="btn-secondary"  id="btn-export" name="Copy to Clipboard" tips="Copy the output into your clipboard"
+                                Click on the  <ButtonInput class="btn-secondary" id="btn-export" name="Copy to Clipboard" tips="Copy the output into your clipboard"
                                                            onClick={this.fctnull}/> in order to copy your work into your clipboard.
                                 A simple <kbd>Paste</kbd> will transfer your work into any software.
 
@@ -1654,24 +1680,23 @@ class Main extends React.Component {
 
                     </div>
                 </div>
-            </div>);
-    }
+            </div>)
+  }
 
-    // Function use by the howto btn to move the page
-    move2howto(){
-        Stats.RecordEvent('Options',"howtobtn",0);
-        $('html,body').animate({scrollTop: $("#howto").offset().top},'slow');
-    }
-    fctnull(){}
+  // Function use by the howto btn to move the page
+  move2howto () {
+    Stats.RecordEvent('Options', 'howtobtn', 0)
+    $('html,body').animate({ scrollTop: $('#howto').offset().top }, 'slow')
+  }
+
+  fctnull () {}
 }
 
-
-//Main Declaration
+// Main Declaration
 // ---------------------
 // ---------------------
-ReactDOM.render(<Main />,document.getElementById('root'));
+ReactDOM.render(<Main />, document.getElementById('root'))
 // Display the stats popup after 10s
-if (Stats.Enable) {setTimeout(function(){$('#PopupStats').modal('show')}, 10000);}
-//Enable tooltip
-$('[data-toggle="tooltip"]').tooltip();
-
+if (Stats.Enable) { setTimeout(function () { $('#PopupStats').modal('show') }, 10000) }
+// Enable tooltip
+$('[data-toggle="tooltip"]').tooltip()
