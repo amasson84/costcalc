@@ -197,7 +197,7 @@ class SelectorInput extends React.Component {
         )
     }
 }
-// Make the know more button
+// Make the read more button
 class MakeknowmoreInput extends React.Component {
     constructor(props) {
         super(props);
@@ -225,7 +225,7 @@ class MakeknowmoreInput extends React.Component {
             // }else {
             return (<MenuInput name={<img src="./icon/info.png"  width={this.state.btnsize}/>} options={data.Url}
                                id="btn-plugin-knowmore"
-                               class="btn-primary btn-sm" tips={"Know more about " + data.Name}/>);
+                               class="btn-primary btn-sm" tips={"Read more about " + data.Name  + " solutions"}/>);
         //}
         }
         else{
