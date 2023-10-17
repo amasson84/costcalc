@@ -5,26 +5,47 @@
 const NasEpfl =  {
     Style: "AmountRatesCost",
     Provider : "EPFL-VPO-DSI",
-    Name:'NAS',
+    Name:'NAS2023',
     Url : [
         {Name:'DSI-Website',Url:'https://support.epfl.ch/help/epfl?id=epfl_service_status&service=49a363acdb34c700ef64731b8c96191f'},
-        {Name:'SV-IT Storage Website',Url:'https://www.epfl.ch/schools/sv/it/374-2/infrastructures/'}
     ],
-    ExtraInfo:"The first TB is free",
+    ExtraInfo:"",
     ByYear:true,
     Adaptive:false,
     AmountName: "Amount",
     AmountUnit: "TB",
-    AmountMin : 1,
-    AmountMax : 500,
+    AmountMin : 0,
+    AmountMax : 1,
     AmountStep : 1,
     AmountFree:1,
     AmountFreeCumulative:false,
     RateName : 'Performance',
     Rates : {
-        'Collaborative': 165,
-        'On-line archive': 110,
-        'Raw': 55
+        'Standard': 80
+    },
+    RateUnit : "CHF / TB"
+};
+
+const RcpEpfl =  {
+    Style: "AmountRatesCost",
+    Provider : "EPFL-VPA-RCP",
+    Name:'Collaborative Storage – NAS-RCP',
+    Url : [
+        {Name:'Service description',Url:'https://www.epfl.ch/research/facilities/rcp/collaborative-storage-nas-rcp-service-description/'},
+    ],
+    ExtraInfo:"",
+    ByYear:true,
+    Adaptive:false,
+    AmountName: "Amount",
+    AmountUnit: "TB",
+    AmountMin : 0,
+    AmountMax : 25,
+    AmountStep : 1,
+    AmountFree:0,
+    AmountFreeCumulative:false,
+    RateName : 'Performance',
+    Rates : {
+        'Standard': 40
     },
     RateUnit : "CHF / TB"
 };
@@ -435,6 +456,7 @@ const storage={
     ],
     Data :[NoneSelected,
         NasEpfl,
+        RcpEpfl,
         SwitchEpfl,
         GoogleDriveEdu,
         Dropbox_perso,
