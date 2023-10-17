@@ -77,12 +77,20 @@ const GoogleDriveEdu = {
     Url : [
         {Name :'Google Education Page',Url:'https://edu.google.com/intl/en_ALL/'}
     ],
+    AmountName: "Amount",
+    AmountUnit: "GB",
+    AmountMin : 0,
+    AmountMax : 20,
+    AmountStep : 1,
+    AmountFree : 0 ,
     CatName:'Options',
     Cat:{
-        'Cloud Based unlimited':0,
+        'Individual 20GB' : 0,
+        'Group 50GB' : 0,
     },
     CatUnit:'CHF',
 };
+
 const Dropbox_perso = {
     Style : 'CategoryCost',
     Provider : "Dropbox Personal",
