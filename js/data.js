@@ -75,6 +75,51 @@ const SwitchEpfl = {
   CatUnit: 'CHF'
 }
 
+const MsPersonalEpfl = {
+  Style: 'CategoryCost',
+  Provider: 'Microsoft/EPFL',
+  Name: 'Microsoft M365 OneDrive',
+  ByYear: true,
+  Url: [
+    {
+      Name: 'Service description',
+      Url: 'https://support.epfl.ch/epfl?id=epfl_kb_article_view&sysparm_article=KB0017390&sys_kb_id=44ce400f97b729142f9976971153af0c'
+    }
+  ],
+  CatName: 'Options',
+  Cat: {
+    'Individual storage 1TB': 0
+  },
+  CatUnit: 'CHF'
+}
+
+const MsSharedEpfl = {
+  Style: 'AmountRatesCost',
+  Provider: 'Microsoft/EPFL',
+  Name: 'Microsoft M365 ShareDrive',
+  Url: [
+    {
+      Name: 'Service description',
+      Url: 'https://support.epfl.ch/epfl?id=epfl_kb_article_view&sysparm_article=KB0017390&sys_kb_id=44ce400f97b729142f9976971153af0c'
+    }
+  ],
+  ByYear: true,
+  Adaptive: false,
+  AmountName: 'Amount',
+  AmountUnit: 'TB',
+  AmountMin: 0,
+  AmountMax: 25,
+  AmountStep: 1,
+  AmountFree: 1,
+  ByYear: true,
+  RateName: 'Standard',
+  Rates: {
+    Standard: 0
+  },
+  RateUnit: 'CHF',
+  AmountFreeCumulative: false
+}
+
 const GoogleDriveEdu = {
   Style: 'CategoryCost',
   Provider: 'Google Workspace',
@@ -120,6 +165,7 @@ const DropboxPerso = {
   },
   CatUnit: 'USD'
 }
+
 const DropboxTeam = {
   Style: 'AmountRatesCost',
   Provider: 'Dropbox for Team',
@@ -481,6 +527,8 @@ const storage = {
   Data: [NoneSelected,
     NasEpfl,
     RcpEpfl,
+    MsPersonalEpfl,
+    MsSharedEpfl,
     SwitchEpfl,
     GoogleDriveEdu,
     DropboxPerso,
