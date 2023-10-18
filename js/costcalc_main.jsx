@@ -1369,7 +1369,7 @@ class PluginsMain extends React.Component {
 // ---------------------
 class Main extends React.Component {
   constructor (props) {
-    Money_GetRates()
+    MoneyGetRates()
     super(props)
     this.handleCostChange = this.handleCostChange.bind(this)
     this.make_exportmain = this.make_exportmain.bind(this)

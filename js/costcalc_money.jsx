@@ -170,7 +170,7 @@ function ConvCurrency (main_cur) {
 /**
  * @return {boolean}
  */
-function Money_GetRates () {
+function MoneyGetRates () {
   // Load exchange rates data via AJAX:
   if (MainData.OEXRApi !== '') {
     const com = $.ajax({
