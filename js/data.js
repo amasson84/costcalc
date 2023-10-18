@@ -111,7 +111,6 @@ const MsSharedEpfl = {
   AmountMax: 25,
   AmountStep: 1,
   AmountFree: 1,
-  ByYear: true,
   RateName: 'Standard',
   Rates: {
     Standard: 0
