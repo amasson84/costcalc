@@ -1007,12 +1007,12 @@ class ProviderPluginsSelector extends React.Component {
     const id = this.props.data.Name.replace(/\s/g, '') + this.props.n
 
     return (
-           <div id={'plugin'}>
+            <div id={'plugin'}>
 
               <div className="card-header" id={id}>
-                  <ModuleHeader id={id} data={this.props.data} selected={selected} Cdata={Cdata} n={this.props.n} Cost={this.state.cost}
-                                comments={this.state.comments} handleAddPlugin={this.handleAddPlugin} handleRmvPlugin={this.handleRmvPlugin}
-                                keys={this.state.keys} showMinus={this.props.showMinus} showPlus={this.state.showPlus} conv={this.props.conv}/>
+                <ModuleHeader id={id} data={this.props.data} selected={selected} Cdata={Cdata} n={this.props.n} Cost={this.state.cost}
+                              comments={this.state.comments} handleAddPlugin={this.handleAddPlugin} handleRmvPlugin={this.handleRmvPlugin}
+                              keys={this.state.keys} showMinus={this.props.showMinus} showPlus={this.state.showPlus} conv={this.props.conv}/>
               </div>
 
               <div id={'collapse' + id} className="collapse" aria-labelledby={id} data-parent="#accordionplugins">
@@ -1022,8 +1022,8 @@ class ProviderPluginsSelector extends React.Component {
                     <div className="row ">
                       <div className="col-auto align-self-end">
                         <div id="provider-selector" >
-                         <SelectorInput id="providerselect" name="Select a provider" selected={selected} options={this.state.keys}
-                                        class="btn-primary lg-btn" onChange={this.handleProviderChange} tips="Select a provider"/>
+                          <SelectorInput id="providerselect" name="Select a provider" selected={selected} options={this.state.keys}
+                                         class="btn-primary lg-btn" onChange={this.handleProviderChange} tips="Select a provider"/>
                         </div>
                       </div>
                       <div className="col-auto align-self-end">
@@ -1071,8 +1071,8 @@ class ProviderPluginsSelector extends React.Component {
       case 'AmountRatesCost' : return AmountRatesCost
       case 'CategoryCost' : return CategoryCost
       case 'CategoryAmountRatesCost' : return CategoryAmountRatesCost
-      case 'NoneSelect':return NoneSelect
-      case 'UserCost':{ this.state.manualname = true; return UserCost }
+      case 'NoneSelect' : return NoneSelect
+      case 'UserCost' : { this.setState({ manualname: true }); return UserCost }
     }
   }
 
