@@ -566,10 +566,10 @@ class AmountRatesCost extends React.Component {
       AmountStep = this.props.data.AmountStep
     }
     if (this.state.Amount > AmountMax) {
-      this.state.Amount = AmountMax
+      this.setState({ Amount: AmountMax })
     }
     if (this.state.Amount < AmountMin) {
-      this.state.Amount = AmountMin
+      this.setState({ Amount: AmountMin })
     }
     return (
             <div className="row align-items-center">
@@ -665,10 +665,10 @@ class CategoryAmountRatesCost extends React.Component {
       AmountStep = this.props.data.AmountStep
     }
     if (this.state.Amount > AmountMax) {
-      this.state.Amount = AmountMax
+      this.setState({ Amount: AmountMax })
     }
     if (this.state.Amount < AmountMin) {
-      this.state.Amount = AmountMin
+      this.setState({ Amount: AmountMin })
     }
     return (
             <div className="row align-items-center">
@@ -922,9 +922,8 @@ class ProviderPluginsSelector extends React.Component {
     } else {
       this.setState({ showPlus: false })
     }
-    this.state.Provider = this.props.data.Data[select].Provider
-    this.state.Name = this.props.data.Data[select].Name
-
+    this.setState({ Provider: this.props.data.Data[select].Provider })
+    this.setState({ Name: this.props.data.Data[select].Name })
     this.props.handleCostChange(this.props.n, this.state.cost)
     // Send a provider even when provider change
     Stats.RecordEvent('Provider', this.state.Provider, 0)

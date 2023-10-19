@@ -37,20 +37,20 @@ class ManageExport extends React.Component {
 
     return (
             <div id="export-group">
-                <div className="card">
-                    <div className="card-header">
-                        {this.export_btn()}
-                    </div>
-                    <div className="card-body">
-                        <div id="export-output" >
-                            {output}
-
-                        </div>
-                    </div>
-                    <div className="card-footer">
-                        {opt}
-                    </div>
+              <div className="card">
+                <div className="card-header">
+                  {this.export_btn()}
                 </div>
+                <div className="card-body">
+                  <div id="export-output" >
+                    {output}
+
+                  </div>
+                </div>
+                <div className="card-footer">
+                  {opt}
+                </div>
+              </div>
             </div>
     )
   }
@@ -58,22 +58,22 @@ class ManageExport extends React.Component {
   export_btn () {
     return (
             <div className="row" id="export-btn">
-                <div className="col-auto">
-                    <ButtonInput class="btn-primary" onClick={this.make_export} id="btn-export" name="Export HTML" tips="Export in HTML, can also be used into Word"
-                                 n="html"/>
-                </div>
-                <div className="col-auto">
-                    <ButtonInput class="btn-secondary" onClick={this.make_export} id="btn-export" name="Export HTML Source" tips="Export in HTML source code"
-                                 n="htmlsrc"/>
-                </div>
-                <div className="col-auto">
-                    <ButtonInput class="btn-success" onClick={this.make_export} id="btn-export" name="Export Markdown" tips="Export in Markdown source code"
-                                 n="mark"/>
-                </div>
-                <div className="col-auto">
-                    <ButtonInput class="btn-warning" onClick={this.make_export} id="btn-warning" name="Export CSV" tips="Export in CSV source code"
-                                 n="csv"/>
-                </div>
+              <div className="col-auto">
+                <ButtonInput class="btn-primary" onClick={this.make_export} id="btn-export" name="Export HTML" tips="Export in HTML, can also be used into Word"
+                             n="html"/>
+              </div>
+              <div className="col-auto">
+                <ButtonInput class="btn-secondary" onClick={this.make_export} id="btn-export" name="Export HTML Source" tips="Export in HTML source code"
+                             n="htmlsrc"/>
+              </div>
+              <div className="col-auto">
+                <ButtonInput class="btn-success" onClick={this.make_export} id="btn-export" name="Export Markdown" tips="Export in Markdown source code"
+                             n="mark"/>
+              </div>
+              <div className="col-auto">
+                <ButtonInput class="btn-warning" onClick={this.make_export} id="btn-warning" name="Export CSV" tips="Export in CSV source code"
+                             n="csv"/>
+              </div>
             </div>
     )
   }
@@ -87,18 +87,18 @@ class ManageExport extends React.Component {
     }
     return (
             <div className="row">
-                <div className="col-auto">
-                    <ButtonInput class="btn-secondary" onClick={this.make_copy} id="btn-export" name="Copy to Clipboard" tips="Copy the output into your clipboard"
-                         n="mark"/>
-                </div>
-                <div className="col-auto">
-                    <ButtonInput class="btn-primary" onClick={this.rmvempty} id="btn-export" name={Namermv} tips="Remove line(s) that don't have a provider"
-                                 n="mark"/>
-                </div>
-                <div className="col-auto">
-                    <ButtonInput class="btn-dark" onClick={this.hide} id="btn-export" name="Hide Export" tips="Hide export"
-                                 n="mark"/>
-                </div>
+              <div className="col-auto">
+                  <ButtonInput class="btn-secondary" onClick={this.make_copy} id="btn-export" name="Copy to Clipboard" tips="Copy the output into your clipboard"
+                               n="mark"/>
+              </div>
+              <div className="col-auto">
+                <ButtonInput class="btn-primary" onClick={this.rmvempty} id="btn-export" name={Namermv} tips="Remove line(s) that don't have a provider"
+                             n="mark"/>
+              </div>
+              <div className="col-auto">
+                <ButtonInput class="btn-dark" onClick={this.hide} id="btn-export" name="Hide Export" tips="Hide export"
+                             n="mark"/>
+              </div>
             </div>
     )
   }
@@ -155,23 +155,23 @@ class ManageExport extends React.Component {
     }
     return (
             <div id="htmlexport" className="container">
-                    <table className="table table-striped table-bordered" width="100%">
-                        <thead className="thead-dark">
-                            <tr>
-                                {this.makecol(hcol, 'html', true)}
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {this.htmltable(data)}
-                            <tr className="table-info">
-                                <td>{projectname}</td>
-                                <td> {projectduration} year{disps}</td>
-                                <td colSpan={hcol.length - movecol} align="right"><strong>Total Cost</strong></td>
-                                <td align="center"><strong>{this.props.data.total}</strong></td>
-                                {Convcol}
-                            </tr>
-                        </tbody>
-                </table>
+              <table className="table table-striped table-bordered" width="100%">
+                <thead className="thead-dark">
+                  <tr>
+                    {this.makecol(hcol, 'html', true)}
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.htmltable(data)}
+                  <tr className="table-info">
+                    <td>{projectname}</td>
+                    <td> {projectduration} year{disps}</td>
+                    <td colSpan={hcol.length - movecol} align="right"><strong>Total Cost</strong></td>
+                    <td align="center"><strong>{this.props.data.total}</strong></td>
+                    {Convcol}
+                  </tr>
+                </tbody>
+              </table>
             </div>
     )
   }
@@ -187,24 +187,24 @@ class ManageExport extends React.Component {
     }
     return (
             <div id="htmlexport">
-                <pre><code>
-                    &lt;table&gt;<br/>
-                    &lt;thead&gt;<br/>
-                    {this.makecol(hcol, 'htmlsrc', true)}
-                    &lt;/thead&gt;<br/>
-                    &lt;tbody&gt;<br/>
-                    {this.htmlsrctable(data)}
-                    &lt;tr &gt;<br/>
-                    &lt;td&gt;{projectname}&lt;/td&gt;
-                    &lt;td&gt;{projectduration} year{disps}&lt;/td&gt;
-                    &lt;td colSpan={hcol.length - movecol} align="right"&gt;&lt;strong&gt;Total Cost&lt;/strong&gt;&lt;/td&gt;&lt;td align="center"&gt;&lt;strong&gt;
-                    {this.props.data.total}&lt;/strong&gt;&lt;/td&gt;
-                    {Convcol}
-                    <br/>
+              <pre><code>
+                &lt;table&gt;<br/>
+                &lt;thead&gt;<br/>
+                {this.makecol(hcol, 'htmlsrc', true)}
+                &lt;/thead&gt;<br/>
+                &lt;tbody&gt;<br/>
+                {this.htmlsrctable(data)}
+                &lt;tr &gt;<br/>
+                &lt;td&gt;{projectname}&lt;/td&gt;
+                &lt;td&gt;{projectduration} year{disps}&lt;/td&gt;
+                &lt;td colSpan={hcol.length - movecol} align="right"&gt;&lt;strong&gt;Total Cost&lt;/strong&gt;&lt;/td&gt;&lt;td align="center"&gt;&lt;strong&gt;
+                {this.props.data.total}&lt;/strong&gt;&lt;/td&gt;
+                {Convcol}
+                <br/>
                 &lt;/tr&gt;<br/>
                 &lt;/tbody&gt;<br/>
                 &lt;/table&gt;<br/>
-               </code></pre>
+              </code></pre>
             </div>
     )
   }
@@ -223,13 +223,13 @@ class ManageExport extends React.Component {
 
     return (
             <div id="htmlexport">
-                <pre><code>
-                    |{this.makecol(hcol, 'mark', true)}<br/>
-                    |{this.makecol(Head, 'mark')}<br/>
+              <pre><code>
+                |{this.makecol(hcol, 'mark', true)}<br/>
+                |{this.makecol(Head, 'mark')}<br/>
 
-                    {this.marktable(data)}
+                {this.marktable(data)}
 
-                    |{projectname}|{projectduration} year{disps}{col} Total Cost |{this.props.data.total}|{Convcol}<br/>
+                |{projectname}|{projectduration} year{disps}{col} Total Cost |{this.props.data.total}|{Convcol}<br/>
 
                </code></pre>
             </div>
@@ -249,14 +249,14 @@ class ManageExport extends React.Component {
 
     return (
             <div id="htmlexport">
-                <pre><code>
-                    {this.makecol(hcol, 'csv', true)}<br/>
+              <pre><code>
+                {this.makecol(hcol, 'csv', true)}<br/>
 
-                    {this.csvtable(data)}
+                {this.csvtable(data)}
 
-                    {projectname},{projectduration} year{disps}{col} Total Cost ,{this.props.data.total},{Convcol}<br/>
+                {projectname},{projectduration} year{disps}{col} Total Cost ,{this.props.data.total},{Convcol}<br/>
 
-               </code></pre>
+              </code></pre>
             </div>
     )
   }
