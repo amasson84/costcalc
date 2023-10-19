@@ -119,12 +119,12 @@ class AmountInput extends React.Component {
     }
     return (
             <div className="col">
-                <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
-                    {label}
+              <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
+                {label}
                 <input type="range" className="form-control-range" id={this.props.id} min={this.props.min} max={this.props.max}
                        step={this.props.step} value={value} onChange={this.handleChange}/>
                 <small id="nas-amount-cost" className="form-text text-muted">{this.props.name} : {value} {this.props.unit} </small>
-                </span>
+              </span>
             </div>
     )
   }
@@ -186,23 +186,20 @@ class SelectorInput extends React.Component {
       label = <div className="row"><label htmlFor={this.props.id}> {this.props.name} </label></div>
     }
     return (
-
             <div className="Container">
-                    {label}
-                <div className="row">
-            <div className="btn-group">
-
-                <a className={'btn ' + this.props.class + ' dropdown-toggle'} href="#" role="button" id={this.props.id} data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false" >
-            <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
-                    {this.maketitle(this.props.options[this.props.selected])}
-            </span>
-                </a>
-                    <div className="dropdown-menu" aria-labelledby={this.props.id}>
-                      {this.makelist(this.props.options)}
-                    </div>
-
-           </div>
+              {label}
+              <div className="row">
+                <div className="btn-group">
+                  <a className={'btn ' + this.props.class + ' dropdown-toggle'} href="#" role="button" id={this.props.id} data-toggle="dropdown"
+                     aria-haspopup="true" aria-expanded="false" >
+                    <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
+                      {this.maketitle(this.props.options[this.props.selected])}
+                    </span>
+                  </a>
+                <div className="dropdown-menu" aria-labelledby={this.props.id}>
+                  {this.makelist(this.props.options)}
+              </div>
+             </div>
             </div>
                 {this.makerate()}
             </div>
@@ -320,29 +317,29 @@ class ButtonInputWpop extends React.Component {
   render () {
     return (
             <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
-                <button type="button" className={'btn ' + this.props.class} id={this.props.id} data-toggle="modal" data-target={'#' + this.state.target}>
-                    {this.props.name}
-                </button>
+              <button type="button" className={'btn ' + this.props.class} id={this.props.id} data-toggle="modal" data-target={'#' + this.state.target}>
+                {this.props.name}
+              </button>
 
-                <div className = "modal fade" id = {this.state.target} tabIndex = "-1" role = "dialog" >
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title" >Are you sure you want to suppress this line ?</h5>
-                                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div className="modal-body">
-                                You are removing a item. Please confirm you want to suppress : {this.props.info}
-                            </div>
-                            <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="button" className="btn btn-danger" onClick={this.handleChange}>Yes I want to remove it</button>
-                            </div>
-                        </div>
+              <div className = "modal fade" id = {this.state.target} tabIndex = "-1" role = "dialog" >
+                <div className="modal-dialog" role="document">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title" >Are you sure you want to suppress this line ?</h5>
+                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
                     </div>
+                    <div className="modal-body">
+                      You are removing a item. Please confirm you want to suppress : {this.props.info}
+                    </div>
+                    <div className="modal-footer">
+                      <button type="button" className="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                      <button type="button" className="btn btn-danger" onClick={this.handleChange}>Yes I want to remove it</button>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </span>
     )
   }
@@ -373,10 +370,10 @@ class ButtonInput extends React.Component {
   render () {
     return (
             <span>
-                <button id={this.props.id} onClick={this.handleChange} type="button"
-                        className={'btn ' + this.props.class} data-toggle="tooltip" data-placement="top" title={this.props.tips}>
-                    {this.props.name}
-                </button>
+              <button id={this.props.id} onClick={this.handleChange} type="button"
+                      className={'btn ' + this.props.class} data-toggle="tooltip" data-placement="top" title={this.props.tips}>
+                {this.props.name}
+              </button>
             </span>
     )
   }
@@ -410,17 +407,16 @@ class MenuInput extends React.Component {
 
   render () {
     return (
-
             <div className="btn-group">
-                <a className={'btn ' + this.props.class + ' btn-sm dropdown-toggle'} href="#" role="button" id={this.props.id} data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false" >
-                     <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
+              <a className={'btn ' + this.props.class + ' btn-sm dropdown-toggle'} href="#" role="button" id={this.props.id} data-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false" >
+                <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
                     {this.props.name}
-                     </span>
-                </a>
-                <div className="dropdown-menu" aria-labelledby={this.props.id}>
-                    {this.state.listoptions}
-               </div>
+                </span>
+              </a>
+              <div className="dropdown-menu" aria-labelledby={this.props.id}>
+                {this.state.listoptions}
+              </div>
             </div>
     )
   }
@@ -453,17 +449,17 @@ class TxtInput extends React.Component {
     if (this.props.info != null && this.props.info !== '') info = <small id={this.props.id + '-info'} className="input-group-text">{this.props.info} </small>
     return (
             <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
-                <label htmlFor={this.props.id}> {this.props.name} </label>
-                <div className={'input-group ' + this.props.className}>
-                    <div className="input-group-prepend">
-                        <span className="input-group-text" id="inputGroupPrepend2">{this.props.Prepend}</span>
-                    </div>
-                    <input type="text" className={'form-control ' + this.props.class} id={this.props.id} placeholder={this.props.placeholder} onChange={this.handleChange} value={this.props.value} />
-                    {info}
-                    <div className="invalid-feedback">
-                        {this.props.InvalidMessage}
-                    </div>
+              <label htmlFor={this.props.id}> {this.props.name} </label>
+              <div className={'input-group ' + this.props.className}>
+                <div className="input-group-prepend">
+                  <span className="input-group-text" id="inputGroupPrepend2">{this.props.Prepend}</span>
                 </div>
+                <input type="text" className={'form-control ' + this.props.class} id={this.props.id} placeholder={this.props.placeholder} onChange={this.handleChange} value={this.props.value} />
+                  {info}
+                <div className="invalid-feedback">
+                  {this.props.InvalidMessage}
+                </div>
+              </div>
             </span>
     )
   }
@@ -495,11 +491,11 @@ class CostOutput extends React.Component {
     const classN = 'form-control ' + this.props.class
     return (
             <div className={'form-group row align-items-center'}>
-                <label htmlFor={this.props.id} className={'col-form-label'}>{this.props.name}</label>
-                <div className="col align-self-center">
-                    <input type={'text'} className={'form-control'} id={this.props.id} className={classN}
+              <label htmlFor={this.props.id} className={'col-form-label'}>{this.props.name}</label>
+              <div className="col align-self-center">
+                <input type={'text'} className={'form-control'} id={this.props.id} className={classN}
                        value={this.props.value} onChange={this.handleChange} readOnly data-toggle="tooltip" data-placement="top" title={this.props.tips}/>
-                </div>
+              </div>
             </div>
     )
   }
@@ -577,16 +573,16 @@ class AmountRatesCost extends React.Component {
     }
     return (
             <div className="row align-items-center">
-                <div className="col">
+              <div className="col">
                 <AmountInput id={this.props.id} min={AmountMin} max={AmountMax}
                              step={AmountStep} value={this.state.Amount} name={this.props.data.AmountName}
                              unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} tips="Select the desired amount"/>
-                </div>
-                <div className="col-3">
-                    <SelectorInput id={this.props.id + '-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)}
-                                   class="btn-secondary" selected={this.state.SelectRate} rate={this.state.Rate}
-                                   unit={this.props.data.RateUnit} onChange={this.handleRateChange} />
-                </div>
+              </div>
+              <div className="col-3">
+                <SelectorInput id={this.props.id + '-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)}
+                               class="btn-secondary" selected={this.state.SelectRate} rate={this.state.Rate}
+                               unit={this.props.data.RateUnit} onChange={this.handleRateChange} />
+              </div>
             </div>
     )
   }
@@ -676,19 +672,19 @@ class CategoryAmountRatesCost extends React.Component {
     }
     return (
             <div className="row align-items-center">
-                <div className="col-3">
-                     <SelectorInput id={this.props.id + '-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={this.state.Cat}
-                                    class="btn-secondary" selected={this.state.SelectCat} unit={this.props.data.CatUnit} onChange={this.handleCatChange} />
-                </div>
+              <div className="col-3">
+                <SelectorInput id={this.props.id + '-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={this.state.Cat}
+                               class="btn-secondary" selected={this.state.SelectCat} unit={this.props.data.CatUnit} onChange={this.handleCatChange} />
+              </div>
 
-                <div className="col-4">
+              <div className="col-4">
                 <AmountInput id={this.props.id} min={AmountMin} max={AmountMax} step={AmountStep}
                              value={this.state.Amount} name={this.props.data.AmountName} unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} />
-                </div>
-                <div className="col-4">
-                    <SelectorInput id={this.props.id + '-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)} rate={this.state.Rate}
+              </div>
+              <div className="col-4">
+                <SelectorInput id={this.props.id + '-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)} rate={this.state.Rate}
                                    class="btn-secondary" selected={this.state.SelectRate} unit={this.props.data.RateUnit} onChange={this.handleRateChange} />
-                </div>
+              </div>
             </div>
     )
   }
