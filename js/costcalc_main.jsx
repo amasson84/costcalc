@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 let projectname = ''
 let projectduration = 0
@@ -45,7 +45,7 @@ function sum (obj) {
 // Comapare two obj return true is similar
 Object.compare = function (obj1, obj2) {
   // Loop through properties in object 1
-  for (let p in obj1) {
+  for (const p in obj1) {
     // Check property exists on both objects
     if (obj1.hasOwnProperty(p) !== obj2.hasOwnProperty(p)) return false
 
@@ -65,7 +65,7 @@ Object.compare = function (obj1, obj2) {
   }
 
   // Check object 2 for any extra properties
-  for (let p in obj2) {
+  for (const p in obj2) {
     if (typeof (obj1[p]) === 'undefined') return false
   }
   return true
@@ -1331,15 +1331,15 @@ class PluginsMain extends React.Component {
                       <div className="col-3 text-center">
                         Category
                       </div>
-                      
+
                       <div className="col-4 text-center">
                         Provider information
                       </div>
-                      
+
                       <div className="col-2 text-center">
                         Cost
                       </div>
-                      
+
                       <div className="col-1 text-center">
 
                       </div>
@@ -1633,7 +1633,7 @@ class Main extends React.Component {
                       </p>
                     </dd>
                   </dl>
-                        
+
                   <dl className="row">
                     <dt className="col-sm-3">Add or Remove Line</dt>
                     <dd className="col-sm-9">
