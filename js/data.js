@@ -77,13 +77,13 @@ const SwitchEpfl = {
 
 const MsPersonalEpfl = {
   Style: 'CategoryCost',
-  Provider: 'Microsoft/EPFL',
+  Provider: 'Microsoft OneDrive',
   Name: 'Microsoft M365 OneDrive',
   ByYear: true,
   Url: [
     {
       Name: 'Service description',
-      Url: 'https://support.epfl.ch/epfl?id=epfl_kb_article_view&sysparm_article=KB0017390&sys_kb_id=44ce400f97b729142f9976971153af0c'
+      Url: 'https://support.epfl.ch/epfl?id=epfl_kb_article_view&sysparm_article=KB0017390&sys_kb_id=44ce400f97b729142f9976971153af0c#mcetoc_1h4lngro134'
     }
   ],
   CatName: 'Options',
@@ -95,12 +95,12 @@ const MsPersonalEpfl = {
 
 const MsSharedEpfl = {
   Style: 'AmountRatesCost',
-  Provider: 'Microsoft/EPFL',
-  Name: 'Microsoft M365 ShareDrive',
+  Provider: 'Microsoft SharePoint',
+  Name: 'Microsoft M365 SharePoint',
   Url: [
     {
       Name: 'Service description',
-      Url: 'https://support.epfl.ch/epfl?id=epfl_kb_article_view&sysparm_article=KB0017390&sys_kb_id=44ce400f97b729142f9976971153af0c'
+      Url: 'https://support.epfl.ch/epfl?id=epfl_kb_article_view&sysparm_article=KB0017390&sys_kb_id=44ce400f97b729142f9976971153af0c#mcetoc_1h4lngro137'
     }
   ],
   ByYear: true,
@@ -433,7 +433,7 @@ const Figshare = {
     { Name: 'Figshare Pricing', Url: 'https://www.g2crowd.com/products/figshare/pricing' }
   ],
   ExtraInfo: 'The costs of enabling access to research data under an SNSF grant are eligible. The  data archives (data repositories) have to meet the FAIR principles.',
-  ExtraInfoUrl: 'http://www.snf.ch/SiteCollectionDocuments/snsf-general-implementation-regulations-for-the-funding-regulations-e.pdf#page=14',
+  ExtraInfoUrl: 'http://www.snf.ch/SiteCollectionDocuments/snsf-general-implementation-regulations-for-the-funding-regulations-e.pdf#page=15',
   CatName: 'Options',
   Cat: {
     'Free 1GB': 0,
@@ -449,29 +449,29 @@ const Dryad = {
   Provider: 'Dryad',
   Name: 'Dyrad',
   Url: [
-    { Name: 'Dryad Website Pricing', Url: 'https://Datadryad.org/pages/payment' }
+    { Name: 'Dryad Website Pricing', Url: 'https://datadryad.org/stash/requirements#cost' }
   ],
   ByYear: false,
   ExtraInfo: 'The costs of enabling access to research data under an SNSF grant are eligible. The  data archives (data repositories) have to meet the FAIR principles.',
-  ExtraInfoUrl: 'http://www.snf.ch/SiteCollectionDocuments/snsf-general-implementation-regulations-for-the-funding-regulations-e.pdf#page=14',
+  ExtraInfoUrl: 'http://www.snf.ch/SiteCollectionDocuments/snsf-general-implementation-regulations-for-the-funding-regulations-e.pdf#page=15',
 
   CatName: 'Options',
   Cat: {
-    'up to 20GB if DPC covered': 0,
-    'up to 20GB if no  DPC covered': 120
+    'up to 50GB if DPC covered': 0,
+    'up to 50GB if no  DPC covered': 150
   },
   CatUnit: 'CHF',
   AmountName: 'Storage',
   AmountUnit: 'GB',
   Adaptive: false,
-  AmountMin: 20,
-  AmountMax: 100,
+  AmountMin: 50,
+  AmountMax: 300,
   AmountStep: 10,
-  AmountFree: 20,
+  AmountFree: 50,
   AmountFreeCumulative: false,
   RateName: 'Storage',
   Rates: {
-    'Extra Storage': 50
+    'Extra Storage': 5
   },
   RateUnit: 'CHF / GB'
 }
@@ -489,7 +489,7 @@ const Acoua = {
   ExtraInfo: 'The ACOUA service is exclusively designed for EPFL researchers.',
   CatName: 'Options',
   Cat: {
-    'Costs covered by DSI': 0
+    'Costs covered by EPFL-DSI': 0
   },
   CatUnit: 'CHF'
 }
