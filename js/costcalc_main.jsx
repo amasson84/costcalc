@@ -15,13 +15,13 @@ function Repeat (props) {
   return <div>{items}</div>
 }
 // convert string to numeric
-function tonumeric (value) {
+function toNumeric (value) {
   return parseFloat(
     value.toString().replace(/[^0-9\.]+/g, '')
   )
 }
 // Covert numeric to money string
-function tomoney (numeric, currency) {
+function toMoney (numeric, currency) {
   if (typeof numeric === 'string') {
     numeric = parseFloat(numeric)
   }
@@ -38,7 +38,7 @@ function sum (obj) {
   const val = Object.values(obj)
   let total = 0
   for (let i = 0; i < val.length; i++) {
-    total = total + tonumeric(val[i])
+    total = total + toNumeric(val[i])
   }
   return total
 }
@@ -71,7 +71,7 @@ Object.compare = function (obj1, obj2) {
   return true
 }
 // Generate a random int
-function randomint (not) {
+function randomInt (not) {
   let rnd
   let cont
   do {
@@ -504,7 +504,7 @@ class CostOutput extends React.Component {
 function Textoutput (props) {
   return (
         <div className="alert alert-primary" role="alert" data-toggle="tooltip" data-placement="top" title="Expand this...">
-            {props.text}
+          {props.text}
         </div>
   )
 }
@@ -548,7 +548,7 @@ class AmountRatesCost extends React.Component {
   }
 
   componentDidUpdate () {
-    this.makecost(this.state.Amount, this.state.Rate)
+    this.makeCost(this.state.Amount, this.state.Rate)
     this.makeExport()
   }
 
@@ -587,7 +587,7 @@ class AmountRatesCost extends React.Component {
     )
   }
 
-  makecost (amount, rate) {
+  makeCost (amount, rate) {
     let free
     if (this.state.Adaptive) {
       free = this.props.data.AmountFree[this.state.SelectRate]
@@ -597,7 +597,7 @@ class AmountRatesCost extends React.Component {
 
     let total = (amount - free) * rate
     if (this.props.data.ByYear) total = total * projectduration
-    total = tomoney(total)
+    total = toMoney(total)
     this.props.onCostChange(this.props.n, total)
     return total
   }
@@ -647,7 +647,7 @@ class CategoryAmountRatesCost extends React.Component {
   }
 
   componentDidUpdate () {
-    this.makecost(this.state.Cat, this.state.Amount, this.state.Rate)
+    this.makeCost(this.state.Cat, this.state.Amount, this.state.Rate)
     this.makeExport()
   }
 
@@ -689,7 +689,7 @@ class CategoryAmountRatesCost extends React.Component {
     )
   }
 
-  makecost (cat, amount, rate) {
+  makeCost (cat, amount, rate) {
     let free
     if (this.state.Adaptive) {
       free = this.props.data.AmountFree[this.state.SelectRate]
@@ -699,7 +699,7 @@ class CategoryAmountRatesCost extends React.Component {
     let total = cat + (amount - free) * rate
     if (this.props.data.ByYear) total = total * projectduration
 
-    total = tomoney(total)
+    total = toMoney(total)
     this.props.onCostChange(this.props.n, total)
     return total
   }
@@ -730,7 +730,7 @@ class CategoryCost extends React.Component {
   }
 
   componentDidUpdate () {
-    this.makecost(this.state.Cat)
+    this.makeCost(this.state.Cat)
     this.makeExport()
   }
 
@@ -746,11 +746,11 @@ class CategoryCost extends React.Component {
     )
   }
 
-  makecost (cat) {
+  makeCost (cat) {
     let total = cat
     if (this.props.data.ByYear) total = total * projectduration
 
-    total = tomoney(total)
+    total = toMoney(total)
     this.props.onCostChange(this.props.n, total)
     return total
   }
@@ -763,7 +763,7 @@ class NoneSelect extends React.Component {
   }
 
   render () {
-    const Cost = tomoney(0)
+    const Cost = toMoney(0)
     this.props.onCostChange(this.props.n, Cost)
     this.props.export(this.export)
 
@@ -799,11 +799,11 @@ class UserCost extends React.Component {
     this.props.handlebyYearChange(state)
   }
 
-  makecost (byYear, amount) {
+  makeCost (byYear, amount) {
     let total = amount
     if (byYear) total = amount * projectduration
     //       this.setState({total:total});
-    this.props.onCostChange(this.props.n, tomoney(total))
+    this.props.onCostChange(this.props.n, toMoney(total))
   }
 
   handleCostChange (value) {
@@ -833,7 +833,7 @@ class UserCost extends React.Component {
   }
 
   componentDidUpdate () {
-    this.makecost(this.state.ByYear, this.state.value)
+    this.makeCost(this.state.ByYear, this.state.value)
     //  this.makeExport();
   }
 
@@ -1219,7 +1219,7 @@ class ManagePlugins extends React.Component {
       plugins: [],
       export: []
     }
-    this.state.displayed.push(randomint(this.state.displayed))
+    this.state.displayed.push(randomInt(this.state.displayed))
   }
 
   handleRmvPlugin (n) {
@@ -1233,7 +1233,7 @@ class ManagePlugins extends React.Component {
 
   handleAddPlugin (n) {
     const tmp = this.state.displayed
-    tmp.splice(n + 1, 0, randomint(this.state.displayed))
+    tmp.splice(n + 1, 0, randomInt(this.state.displayed))
     this.setState({ displayed: tmp })
   }
 
@@ -1248,16 +1248,16 @@ class ManagePlugins extends React.Component {
   }
 
   makeExport () {
-    if (this.state.export.length === this.give_n()) {
+    if (this.state.export.length === this.giveN()) {
       this.props.export(this.state.export, this.props.n)
     }
   }
 
-  give_id (index) {
+  giveId (index) {
     return this.state.displayed[index]
   }
 
-  give_n () {
+  giveN () {
     const disp = this.state.displayed
     return disp.length
   }
@@ -1268,13 +1268,13 @@ class ManagePlugins extends React.Component {
 
   render () {
     let showMinus = false
-    if (this.give_n() > 1) {
+    if (this.giveN() > 1) {
       showMinus = true
     }
     this.makeExport()
     return (
                <div>
-                    <Repeat numTimes={this.give_n()}>
+                    <Repeat numTimes={this.giveN()}>
                         {(index) => <ProviderPluginsSelector data={this.props.data} key={this.state.displayed[index]}
                                                  showMinus={showMinus} n={index}
                                                  handleCostChange={this.handleCostChange} handleAddPlugin={this.handleAddPlugin}
@@ -1321,41 +1321,43 @@ class PluginsMain extends React.Component {
   render () {
     return (
             <div>
+              <div id="PluginsMain">
+                <div className="card">
+                  <div className="card-header text-white bg-dark">
+                    <div className="row">
+                      <div className="col-2 text-center">
+                        Line controls
+                      </div>
 
-                <div id="PluginsMain">
-                    <div className="card">
-                        <div className="card-header text-white bg-dark">
-                            <div className="row">
-                                <div className="col-2 text-center">
-                                    Line controls
-                                </div>
+                      <div className="col-3 text-center">
+                        Category
+                      </div>
+                      
+                      <div className="col-4 text-center">
+                        Provider information
+                      </div>
+                      
+                      <div className="col-2 text-center">
+                        Cost
+                      </div>
+                      
+                      <div className="col-1 text-center">
 
-                                <div className="col-3 text-center">
-                                    Category
-                                </div>
-                                <div className="col-4 text-center">
-                                    Provider information
-                                </div>
-                                <div className="col-2 text-center">
-                                    Cost
-                                </div>
-                                <div className="col-1 text-center">
-
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="card ">
-                            <div className="accordion" id="accordionplugins">
-                            <Repeat numTimes={this.props.data.length}>
-                                {(index) => <ManagePlugins data={this.props.data[index]} key={index}
-                                                           export={this.makeExportplug} n={index} handleCostChange={this.handleCostChange}
-                                                           conv={this.props.conv}/>}
-                            </Repeat>
-                            </div>
-                        </div>
+                      </div>
                     </div>
+                  </div>
+
+                  <div className="card ">
+                    <div className="accordion" id="accordionplugins">
+                      <Repeat numTimes={this.props.data.length}>
+                        {(index) => <ManagePlugins data={this.props.data[index]} key={index}
+                                                   export={this.makeExportplug} n={index} handleCostChange={this.handleCostChange}
+                                                   conv={this.props.conv}/>}
+                      </Repeat>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
     )
   }
@@ -1406,7 +1408,7 @@ class Main extends React.Component {
       }
     }
     if ((this.init) || (disp)) {
-      this.setState({ exportmain: { data: tmp, total: tomoney(this.state.total) } })
+      this.setState({ exportmain: { data: tmp, total: toMoney(this.state.total) } })
       this.init = false
     }
   }
@@ -1432,59 +1434,55 @@ class Main extends React.Component {
   render () {
     return (
             <div id="main">
-                <PopupStats />
-
+              <PopupStats />
                 {this.page_head()}
-
                 <div id="plugins-body" className="container">
 
-                    {this.project_info()}
+                  {this.project_info()}
 
-                    <PluginsMain TotalCost={this.handleCostChange} data={MainData.Data} export={this.makeExportmain} conv={this.state.conv} />
+                  <PluginsMain TotalCost={this.handleCostChange} data={MainData.Data} export={this.makeExportmain} conv={this.state.conv} />
 
-                    {this.final_cost(this.state.conv)}
+                  {this.final_cost(this.state.conv)}
 
-                    <ManageExport data={this.state.exportmain} conv={this.state.conv}/>
+                  <ManageExport data={this.state.exportmain} conv={this.state.conv}/>
 
-                    {this.howto()}
+                  {this.howto()}
                 </div>
 
-                {this.page_foot()}
+              {this.page_foot()}
             </div>
     )
   }
 
   project_info () {
     return (
-        <div id="ProjectInfo">
-            <div className="card-header">
+            <div id="ProjectInfo">
 
-                        <img src="./icon/uset.png" width="40" />
+              <div className="card-header">
+                <img src="./icon/uset.png" width="40" />
+                <img src="./icon/uset.png" width="40" />
+                <img src="./icon/uset.png" width="40" />
+              </div>
 
-                        <img src="./icon/uset.png" width="40" />
-
-                        <img src="./icon/uset.png" width="40" />
-
-            </div>
-
-            <div className="card">
+              <div className="card">
                 <div className="container">
-                    <div className="row">
-                        <div className="col-4">
-                            <TxtInput type="text" id="user-projectname" name="Project Name"
-                                      placeholder="My project name" onChange={this.handleNameChange}/>
-                        </div>
-                        <div className="col-3">
-                            <AmountInput id="project-duration" min="1" max="10" step="1" name="Project Duration" unit="year" tips="Select the duration of the project (in year)"
-                                         value={this.state.duration} onChange={this.handleDurationChange}/>
-                        </div>
-                        <div className="col-3">
-                            <CurrencySelect id="maincurrency" money={this.handleConvMoneyChange}/>
-                        </div>
+                  <div className="row">
+                    <div className="col-4">
+                      <TxtInput type="text" id="user-projectname" name="Project Name"
+                                placeholder="My project name" onChange={this.handleNameChange}/>
                     </div>
+                    <div className="col-3">
+                      <AmountInput id="project-duration" min="1" max="10" step="1" name="Project Duration" unit="year" tips="Select the duration of the project (in year)"
+                                   value={this.state.duration} onChange={this.handleDurationChange}/>
+                    </div>
+                    <div className="col-3">
+                      <CurrencySelect id="maincurrency" money={this.handleConvMoneyChange}/>
+                    </div>
+                  </div>
                 </div>
+              </div>
+
             </div>
-        </div>
     )
   }
 
@@ -1496,27 +1494,27 @@ class Main extends React.Component {
     if (conv.Enable) convout = <CostOutput id="convctotal" class="costoutput" name="Total Cost" value={ConvCurrency(this.state.total)} tips="Converted Total cost for the project"/>
 
     return (
-        <div className="card" id="finalcost">
-            <div className="card bg-light  ">
+            <div className="card" id="finalcost">
+
+              <div className="card bg-light  ">
                 <div className="container">
-                    <div className="row align-items-center">
+                  <div className="row align-items-center">
                     <div className="col-1">
                     </div>
                     <div className="col-1">
-                        { /* <img className="img-fluid" src="./icon/totalcost.png" width="100"/> */ }
+                      { /* <img className="img-fluid" src="./icon/totalcost.png" width="100"/> */ }
                     </div>
                     <div className="col-5 " id="plugin-name">
-                        <h3>Total Cost for {projectduration} year{disps}</h3>
+                      <h3>Total Cost for {projectduration} year{disps}</h3>
                     </div>
                     <div id="plugin-cost" className="col-5  text-right align-self-center">
-                        <CostOutput name="Total Cost" id="ctotal" class="costoutput" value={tomoney(this.state.total)} tips="Total cost for the project"/>
+                      <CostOutput name="Total Cost" id="ctotal" class="costoutput" value={toMoney(this.state.total)} tips="Total cost for the project"/>
                         {convout}
                     </div>
-                    </div>
+                  </div>
                 </div>
-
-            </div>
-        </div>)
+              </div>
+            </div>)
   }
 
   // Define the head (top) of the page
@@ -1531,37 +1529,37 @@ class Main extends React.Component {
     if (MainData.InstLogo != null && MainData.InstLogo !== '') { imglogo = <img src={'./icon/' + MainData.InstLogo} width={MainData.InstLogoWidth}/> }
     return (
             <div className="jumbotron jumbotron-fluid" id="page_head">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-auto">
-                            <img src="./icon/costcalc.png" width="100"/>
-                        </div>
-                        <div className="col-auto">
-                            <h1 className="display-5"> {MainData.InstName} <br/>Cost Calculator for Data Management</h1>
-                        </div>
-                        <div className="col-auto">
-                            {imglogo}
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col">
-                            <p className="lead">
-                                Welcome to our cost calculator. This tool will help researchers to
-                                estimate the cost of managing, storing and publishing data.
-                            </p>
-                            <p className="lead">
-                                Many providers are included in the service and you will be able to calculate a cost
-                                based on your needs.
-                                <br/>Total cost is calculated dynamically based on your inputs.
-                            </p>
-                            <p className="lead">
-                                We hope you will enjoy this tool and it will be useful for you.
-                            </p>
-                            <ButtonInput class="btn btn-primary" id="head-howto" name="To Know More (HOWTO)" onClick={this.move2howto}/> &nbsp;
-                            {helpbtn}
-                        </div>
-                    </div>
+              <div className="container">
+                <div className="row">
+                  <div className="col-auto">
+                    <img src="./icon/costcalc.png" width="100"/>
+                  </div>
+                  <div className="col-auto">
+                    <h1 className="display-5"> {MainData.InstName} <br/>Cost Calculator for Data Management</h1>
+                  </div>
+                  <div className="col-auto">
+                    {imglogo}
+                  </div>
                 </div>
+                <div className="row">
+                  <div className="col">
+                    <p className="lead">
+                      Welcome to our cost calculator. This tool will help researchers to
+                      estimate the cost of managing, storing and publishing data.
+                    </p>
+                    <p className="lead">
+                      Many providers are included in the service and you will be able to calculate a cost
+                      based on your needs.
+                      <br/>Total cost is calculated dynamically based on your inputs.
+                    </p>
+                    <p className="lead">
+                      We hope you will enjoy this tool and it will be useful for you.
+                    </p>
+                    <ButtonInput class="btn btn-primary" id="head-howto" name="To Know More (HOWTO)" onClick={this.move2howto}/> &nbsp;
+                      {helpbtn}
+                  </div>
+                </div>
+              </div>
             </div>
     )
   }
@@ -1570,19 +1568,19 @@ class Main extends React.Component {
   page_foot () {
     return (
             <div id="page_foot" >
-                <div className="jumbotron jumbotron-fluid">
+              <div className="jumbotron jumbotron-fluid">
                 <div className="alert alert-danger" role="alert" id="infotxt">
-                    The values published on this service are only informative and cannot be used for exact calculation. If you see some mistake or would like to
-                    have another services please contact us.
-                    <br/><strong>Last Database Update : {MainData.Updated} </strong>
+                  The values published on this service are only informative and cannot be used for exact calculation. If you see some mistake or would like to
+                  have another services please contact us.
+                  <br/><strong>Last Database Update : {MainData.Updated} </strong>
                 </div>
                 <div id="service">
-                    <p>This service has been developed by the <a href="https://researchdata.epfl.ch">Resarch Data Management Team</a> of the <a href="https://library.epfl.ch">EPFL Library</a>  <br/>
-                        This software is publish under GPL-3.0-only license and your are using <strong> Version {MainData.Version}</strong><br/>
-                        Source code can be download <a href="https://c4science.ch/source/costcalc/">here</a></p>
-                    <p><small>Icons are from the Noun Project (Book by Randi NI, Storage by I Pitu, Database by Novalyi, data cloud by Vectors Market, Information and Next by Gregor Cresnar, Database by Creative Mahira, Archive by dp indo)</small></p>
+                  <p>This service has been developed by the <a href="https://researchdata.epfl.ch">Resarch Data Management Team</a> of the <a href="https://library.epfl.ch">EPFL Library</a>  <br/>
+                     This software is publish under GPL-3.0-only license and your are using <strong> Version {MainData.Version}</strong><br/>
+                     Source code can be download <a href="https://c4science.ch/source/costcalc/">here</a></p>
+                  <p><small>Icons are from the Noun Project (Book by Randi NI, Storage by I Pitu, Database by Novalyi, data cloud by Vectors Market, Information and Next by Gregor Cresnar, Database by Creative Mahira, Archive by dp indo)</small></p>
                 </div>
-            </div>
+              </div>
             </div>
     )
   }
@@ -1592,91 +1590,96 @@ class Main extends React.Component {
     let curconv = null
     if (MoneyEnable) {
       curconv =
-            <dl className="row">
+              <dl className="row">
                 <dt className="col-sm-3">Change Currency</dt>
                 <dd className="col-sm-9">
-                    <p>If you need another currency than {MainData.Currency} you can add an extra currency by selecting in the <mark>Change Currency menu</mark></p>
-                    <p> Actual rate is automatically applied using <a href="https://openexchangerates.org/">openexchangerates</a></p>
+                  <p>If you need another currency than {MainData.Currency} you can add an extra currency by selecting in the <mark>Change Currency menu</mark></p>
+                  <p> Actual rate is automatically applied using <a href="https://openexchangerates.org/">openexchangerates</a></p>
                 </dd>
-            </dl>
+              </dl>
     }
     return (
             <div id="howto">
-                <div className="card" >
-                    <div className="card-header ">
-                        <h2><img src="./icon/sliders.png" width="40"/> HOWTO</h2>
-                    </div>
-                    <div className="card-body">
-                        <dl className="row">
-                            <dt className="col-sm-3">Project Name and Duration</dt>
-                            <dd className="col-sm-9">
-                                <p>  The Project name is only used for you.</p>
-                                <p> <mark>Project Duration</mark> is used for subscription services charged by year : the yearly cost will be multiplied by the duration of the project.</p>
-                            </dd>
-                        </dl>
-
-                        {curconv}
-                        <dl className="row">
-                            <dt className="col-sm-3">Categories</dt>
-                            <dd className="col-sm-9">
-                                This tool is divided by categories (for example Activate storage). Click
-                                on the category name, and it will expand.
-                            </dd>
-                        </dl>
-                        <dl className="row">
-                            <dt className="col-sm-3">Providers</dt>
-                            <dd className="col-sm-9">
-                                <p>
-                                    Providers can be chosen from the <mark>Select a provider box</mark>. You can then tune your settings for this provider to fit your needs.
-                                </p>
-
-                                <p>
-                                    If the provider you want is not present, you can add it manually with <mark>Provide your own provider</mark> and then enter your provider/service and cost.
-                                </p>
-                            </dd>
-                        </dl>
-                        <dl className="row">
-                            <dt className="col-sm-3">Add or Remove Line</dt>
-                            <dd className="col-sm-9">
-                                <p>If you want to add a new line use the <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icon\plus.png" width="20"/>}
-                                                                                          tips={'Add a new category'} onClick={this.fctnull}/> button.
-                                </p>
-                                <p>
-                                    You can also remove a line with <ButtonInput class="btn-danger btn-sm" id="plugins-add-btn"
-                                                                                     name={<img className="img-fluid" src="icon\minus.png" width="20"/>}
-                                                                                     tips={'Remove this line'} onClick={this.fctnull}/> button.
-                                </p>
-                            </dd>
-                        </dl>
-                        <dl className="row">
-                            <dt className="col-sm-3">To know more about</dt>
-                            <dd className="col-sm-9">
-                                Some extra information about the category or the provider can be obtained with the <ButtonInput class="btn-primary btn-sm" id="plugins-add-btn"
-                                                                                                                                name={<img className="img-fluid" src="icon\info.png" width="20"/>}
-                                                                                                                                tips={'Know more'} onClick={this.fctnull}/> button.
-                            </dd>
-                        </dl>
-                        <dl className="row">
-                            <dt className="col-sm-3">Comments your input</dt>
-                            <dd className="col-sm-9">
-                                Comments are for your own usage, you can use it for remembering what each section is and for a nice export.
-                            </dd>
-                        </dl>
-                        <dl className="row">
-                            <dt className="col-sm-3">Export</dt>
-                            <dd className="col-sm-9">
-                                You can export your work into different formats : <br/>
-                                <samp> HTML</samp> : This format can be used in any wordprocessing software (such as Microsoft Word or Libreoffice).<br/>
-                                <samp>HTML Source code</samp>, <samp>Markdown</samp>, and <samp>CSV</samp> formats are also possible.<br/>
-                                Click on the  <ButtonInput class="btn-secondary" id="btn-export" name="Copy to Clipboard" tips="Copy the output into your clipboard"
-                                                           onClick={this.fctnull}/> in order to copy your work into your clipboard.
-                                A simple <kbd>Paste</kbd> will transfer your work into any software.
-
-                            </dd>
-                        </dl>
-
-                    </div>
+              <div className="card" >
+                <div className="card-header ">
+                  <h2><img src="./icon/sliders.png" width="40"/> HOWTO</h2>
                 </div>
+                <div className="card-body">
+                  <dl className="row">
+                    <dt className="col-sm-3">Project Name and Duration</dt>
+                    <dd className="col-sm-9">
+                      <p>  The Project name is only used for you.</p>
+                      <p> <mark>Project Duration</mark> is used for subscription services charged by year : the yearly cost will be multiplied by the duration of the project.</p>
+                    </dd>
+                  </dl>
+
+                  {curconv}
+                  <dl className="row">
+                    <dt className="col-sm-3">Categories</dt>
+                    <dd className="col-sm-9">
+                      This tool is divided by categories (for example Activate storage). Click
+                      on the category name, and it will expand.
+                    </dd>
+                  </dl>
+
+                  <dl className="row">
+                    <dt className="col-sm-3">Providers</dt>
+                    <dd className="col-sm-9">
+                      <p>
+                        Providers can be chosen from the <mark>Select a provider box</mark>. You can then tune your settings for this provider to fit your needs.
+                      </p>
+
+                      <p>
+                        If the provider you want is not present, you can add it manually with <mark>Provide your own provider</mark> and then enter your provider/service and cost.
+                      </p>
+                    </dd>
+                  </dl>
+                        
+                  <dl className="row">
+                    <dt className="col-sm-3">Add or Remove Line</dt>
+                    <dd className="col-sm-9">
+                      <p>If you want to add a new line use the <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icon\plus.png" width="20"/>}
+                                                                            tips={'Add a new category'} onClick={this.fctnull}/> button.
+                      </p>
+                      <p>
+                        You can also remove a line with <ButtonInput class="btn-danger btn-sm" id="plugins-add-btn"
+                                                                     name={<img className="img-fluid" src="icon\minus.png" width="20"/>}
+                                                                     tips={'Remove this line'} onClick={this.fctnull}/> button.
+                      </p>
+                    </dd>
+                  </dl>
+
+                  <dl className="row">
+                    <dt className="col-sm-3">To know more about</dt>
+                    <dd className="col-sm-9">
+                      Some extra information about the category or the provider can be obtained with the <ButtonInput class="btn-primary btn-sm" id="plugins-add-btn"
+                                                                                                                      name={<img className="img-fluid" src="icon\info.png" width="20"/>}
+                                                                                                                      tips={'Know more'} onClick={this.fctnull}/> button.
+                    </dd>
+                  </dl>
+
+                  <dl className="row">
+                    <dt className="col-sm-3">Comments your input</dt>
+                    <dd className="col-sm-9">
+                      Comments are for your own usage, you can use it for remembering what each section is and for a nice export.
+                    </dd>
+                  </dl>
+
+                  <dl className="row">
+                    <dt className="col-sm-3">Export</dt>
+                    <dd className="col-sm-9">
+                      You can export your work into different formats : <br/>
+                      <samp> HTML</samp> : This format can be used in any wordprocessing software (such as Microsoft Word or Libreoffice).<br/>
+                      <samp>HTML Source code</samp>, <samp>Markdown</samp>, and <samp>CSV</samp> formats are also possible.<br/>
+                      Click on the  <ButtonInput class="btn-secondary" id="btn-export" name="Copy to Clipboard" tips="Copy the output into your clipboard"
+                                                 onClick={this.fctnull}/> in order to copy your work into your clipboard.
+                      A simple <kbd>Paste</kbd> will transfer your work into any software.
+
+                    </dd>
+                  </dl>
+
+                </div>
+              </div>
             </div>)
   }
 
