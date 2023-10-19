@@ -1,4 +1,5 @@
-'use strict'
+'use strict';
+
 let projectname = ''
 let projectduration = 0
 
@@ -44,7 +45,7 @@ function sum (obj) {
 // Comapare two obj return true is similar
 Object.compare = function (obj1, obj2) {
   // Loop through properties in object 1
-  for (var p in obj1) {
+  for (let p in obj1) {
     // Check property exists on both objects
     if (obj1.hasOwnProperty(p) !== obj2.hasOwnProperty(p)) return false
 
@@ -64,7 +65,7 @@ Object.compare = function (obj1, obj2) {
   }
 
   // Check object 2 for any extra properties
-  for (var p in obj2) {
+  for (let p in obj2) {
     if (typeof (obj1[p]) === 'undefined') return false
   }
   return true
@@ -72,9 +73,10 @@ Object.compare = function (obj1, obj2) {
 // Generate a random int
 function randomint (not) {
   let rnd
+  let cont
   do {
     rnd = Math.floor(Math.random() * 100)
-    var cont = false
+    cont = false
     for (let i = 0; i < not.length; i++) {
       if (not[i] === rnd) {
         cont = true
@@ -529,7 +531,7 @@ class AmountRatesCost extends React.Component {
     if (typeof this.props.data.Adaptive !== 'undefined' && this.props.data.Adaptive === true) {
       this.state.Adaptive = true
     }
-    this.make_export()
+    this.makeExport()
   }
 
   handleAmountChange (amount) {
@@ -541,7 +543,7 @@ class AmountRatesCost extends React.Component {
     this.setState({ Rate: this.props.data.Rates[Object.keys(this.props.data.Rates)[select]] })
   }
 
-  make_export () {
+  makeExport () {
     this.export = [
       { Name: 'Amount', Value: this.state.Amount + ' ' + this.props.data.AmountUnit },
       { Name: this.props.data.RateName, Value: Object.keys(this.props.data.Rates)[this.state.SelectRate] }
@@ -551,33 +553,33 @@ class AmountRatesCost extends React.Component {
 
   componentDidUpdate () {
     this.makecost(this.state.Amount, this.state.Rate)
-    this.make_export()
+    this.makeExport()
   }
 
   render () {
-    let Amount_min
-    let Amount_max
-    let Amount_stp
+    let AmountMin
+    let AmountMax
+    let AmountStep
     if (this.state.Adaptive) {
-      Amount_min = this.props.data.AmountMin[this.state.SelectRate]
-      Amount_max = this.props.data.AmountMax[this.state.SelectRate]
-      Amount_stp = this.props.data.AmountStep[this.state.SelectRate]
+      AmountMin = this.props.data.AmountMin[this.state.SelectRate]
+      AmountMax = this.props.data.AmountMax[this.state.SelectRate]
+      AmountStep = this.props.data.AmountStep[this.state.SelectRate]
     } else {
-      Amount_min = this.props.data.AmountMin
-      Amount_max = this.props.data.AmountMax
-      Amount_stp = this.props.data.AmountStep
+      AmountMin = this.props.data.AmountMin
+      AmountMax = this.props.data.AmountMax
+      AmountStep = this.props.data.AmountStep
     }
-    if (this.state.Amount > Amount_max) {
-      this.state.Amount = Amount_max
+    if (this.state.Amount > AmountMax) {
+      this.state.Amount = AmountMax
     }
-    if (this.state.Amount < Amount_min) {
-      this.state.Amount = Amount_min
+    if (this.state.Amount < AmountMin) {
+      this.state.Amount = AmountMin
     }
     return (
             <div className="row align-items-center">
                 <div className="col">
-                <AmountInput id={this.props.id} min={Amount_min} max={Amount_max}
-                             step={Amount_stp} value={this.state.Amount} name={this.props.data.AmountName}
+                <AmountInput id={this.props.id} min={AmountMin} max={AmountMax}
+                             step={AmountStep} value={this.state.Amount} name={this.props.data.AmountName}
                              unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} tips="Select the desired amount"/>
                 </div>
                 <div className="col-3">
@@ -622,7 +624,7 @@ class CategoryAmountRatesCost extends React.Component {
     if (typeof this.props.data.Adaptive !== 'undefined' && this.props.data.Adaptive === true) {
       this.state.Adaptive = true
     }
-    this.make_export()
+    this.makeExport()
   }
 
   handleAmountChange (amount) {
@@ -639,7 +641,7 @@ class CategoryAmountRatesCost extends React.Component {
     this.setState({ Cat: this.props.data.Cat[Object.keys(this.props.data.Cat)[select]] })
   }
 
-  make_export () {
+  makeExport () {
     this.export = [
       { Name: this.props.data.CatName, Value: Object.keys(this.props.data.Cat)[this.state.SelectCat] },
       { Name: 'Amount', Value: this.state.Amount + ' ' + this.props.data.AmountUnit },
@@ -650,27 +652,27 @@ class CategoryAmountRatesCost extends React.Component {
 
   componentDidUpdate () {
     this.makecost(this.state.Cat, this.state.Amount, this.state.Rate)
-    this.make_export()
+    this.makeExport()
   }
 
   render () {
-    let Amount_min
-    let Amount_max
-    let Amount_stp
+    let AmountMin
+    let AmountMax
+    let AmountStep
     if (this.state.Adaptive) {
-      Amount_min = this.props.data.AmountMin[this.state.SelectRate]
-      Amount_max = this.props.data.AmountMax[this.state.SelectRate]
-      Amount_stp = this.props.data.AmountStep[this.state.SelectRate]
+      AmountMin = this.props.data.AmountMin[this.state.SelectRate]
+      AmountMax = this.props.data.AmountMax[this.state.SelectRate]
+      AmountStep = this.props.data.AmountStep[this.state.SelectRate]
     } else {
-      Amount_min = this.props.data.AmountMin
-      Amount_max = this.props.data.AmountMax
-      Amount_stp = this.props.data.AmountStep
+      AmountMin = this.props.data.AmountMin
+      AmountMax = this.props.data.AmountMax
+      AmountStep = this.props.data.AmountStep
     }
-    if (this.state.Amount > Amount_max) {
-      this.state.Amount = Amount_max
+    if (this.state.Amount > AmountMax) {
+      this.state.Amount = AmountMax
     }
-    if (this.state.Amount < Amount_min) {
-      this.state.Amount = Amount_min
+    if (this.state.Amount < AmountMin) {
+      this.state.Amount = AmountMin
     }
     return (
             <div className="row align-items-center">
@@ -680,7 +682,7 @@ class CategoryAmountRatesCost extends React.Component {
                 </div>
 
                 <div className="col-4">
-                <AmountInput id={this.props.id} min={Amount_min} max={Amount_max} step={Amount_stp}
+                <AmountInput id={this.props.id} min={AmountMin} max={AmountMax} step={AmountStep}
                              value={this.state.Amount} name={this.props.data.AmountName} unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} />
                 </div>
                 <div className="col-4">
@@ -716,7 +718,7 @@ class CategoryCost extends React.Component {
       SelectCat: 0,
       Cat: this.props.data.Cat[Object.keys(this.props.data.Cat)[0]]
     }
-    this.make_export()
+    this.makeExport()
   }
 
   handleCatChange (select) {
@@ -724,7 +726,7 @@ class CategoryCost extends React.Component {
     this.setState({ Cat: this.props.data.Cat[Object.keys(this.props.data.Cat)[select]] })
   }
 
-  make_export () {
+  makeExport () {
     this.export = [
       { Name: this.props.data.CatName, Value: Object.keys(this.props.data.Cat)[this.state.SelectCat] }
     ]
@@ -733,7 +735,7 @@ class CategoryCost extends React.Component {
 
   componentDidUpdate () {
     this.makecost(this.state.Cat)
-    this.make_export()
+    this.makeExport()
   }
 
   render () {
@@ -836,7 +838,7 @@ class UserCost extends React.Component {
 
   componentDidUpdate () {
     this.makecost(this.state.ByYear, this.state.value)
-    //  this.make_export();
+    //  this.makeExport();
   }
 
   classtxt (error) {
@@ -854,25 +856,25 @@ class UserCost extends React.Component {
 
     return (
             <div className="container">
-                <div className="row align-items-baseline">
-                    <div className="col-3">
-                        <TxtInput id={this.props.id + '-input'} name="Provider" placeholder="Provider here" tips="Add your own cost calculation here" onChange={this.handleProviderChange}
-                                  class={this.classtxt(this.state.ProviderError)} Prepend="" InvalidMessage="Please provide a Provider"/>
-                    </div>
-                    <div className="col-3">
-                        <TxtInput id={this.props.id + '-input'} name="Service" placeholder="Service here" tips="Add your own cost calculation here" onChange={this.handleServiceChange}
-                                  class={this.classtxt(this.state.ServiceError)} Prepend="" InvalidMessage="Please provide a Service"/>
-                    </div>
-                    <div className="col-5">
-                        <PluginsCurrencyChange id="UserCostcurrency" name={Costname} onCostChange={this.handleCostChange}/>
-                    </div>
+              <div className="row align-items-baseline">
+                <div className="col-3">
+                  <TxtInput id={this.props.id + '-input'} name="Provider" placeholder="Provider here" tips="Add your own cost calculation here" onChange={this.handleProviderChange}
+                            class={this.classtxt(this.state.ProviderError)} Prepend="" InvalidMessage="Please provide a Provider"/>
                 </div>
-                <div className="row align-items-baseline">
-                    <div className="col-auto">
-                        <CheckboxInput id={this.props.id + '-input'} name="Charged by year"
-                                       tips="Check if the service is charged by year so the cost will be adapted for the project duration" onChange={this.handleYearChange}/>
-                    </div>
+                <div className="col-3">
+                  <TxtInput id={this.props.id + '-input'} name="Service" placeholder="Service here" tips="Add your own cost calculation here" onChange={this.handleServiceChange}
+                            class={this.classtxt(this.state.ServiceError)} Prepend="" InvalidMessage="Please provide a Service"/>
                 </div>
+                <div className="col-5">
+                  <PluginsCurrencyChange id="UserCostcurrency" name={Costname} onCostChange={this.handleCostChange}/>
+                </div>
+              </div>
+              <div className="row align-items-baseline">
+                <div className="col-auto">
+                  <CheckboxInput id={this.props.id + '-input'} name="Charged by year"
+                                 tips="Check if the service is charged by year so the cost will be adapted for the project duration" onChange={this.handleYearChange}/>
+                </div>
+              </div>
             </div>
     )
   }
@@ -893,8 +895,8 @@ class ProviderPluginsSelector extends React.Component {
     this.handleProviderChangetxt = this.handleProviderChangetxt.bind(this)
     this.handleServiceChangetxt = this.handleServiceChangetxt.bind(this)
     this.handlebyYearChange = this.handlebyYearChange.bind(this)
-    this.make_exportcmp = this.make_exportcmp.bind(this)
-    this.make_export = this.make_export.bind(this)
+    this.makeExportcmp = this.makeExportcmp.bind(this)
+    this.makeExport = this.makeExport.bind(this)
     this.state = {
       selected: 0,
       keys: this.ProvidersName(props.data),
@@ -905,7 +907,7 @@ class ProviderPluginsSelector extends React.Component {
       Name: '',
       manualname: false,
       manbyyear: false,
-      show_plus: false,
+      showPlus: false,
       exportcmp: ''
     }
   }
@@ -920,9 +922,9 @@ class ProviderPluginsSelector extends React.Component {
   handleProviderChange (select) {
     this.setState({ selected: select })
     if (select > 0) {
-      this.setState({ show_plus: true })
+      this.setState({ showPlus: true })
     } else {
-      this.setState({ show_plus: false })
+      this.setState({ showPlus: false })
     }
     this.state.Provider = this.props.data.Data[select].Provider
     this.state.Name = this.props.data.Data[select].Name
@@ -934,14 +936,14 @@ class ProviderPluginsSelector extends React.Component {
 
   componentDidUpdate () {
     this.props.handleCostChange(this.props.n, this.state.cost)
-    this.make_export()
+    this.makeExport()
   }
 
-  make_exportcmp (data) {
+  makeExportcmp (data) {
     this.state.exportcmp = data
   }
 
-  make_export () {
+  makeExport () {
     const out = {
       Category: this.props.data.Name,
       Provider: this.state.Provider,
@@ -982,23 +984,23 @@ class ProviderPluginsSelector extends React.Component {
   // Manage extra display info for a selected provider
 
   extrainfo (Cdata) {
-    let Extra_inf = ''
-    let Extra_infUrl = ''
+    let ExtraInf = ''
+    let ExtraInfUrl = ''
     if (typeof Cdata.ExtraInfoUrl !== 'undefined' && Cdata.ExtraInfoUrl !== '') {
-      Extra_infUrl = <p className="h6"><em><a href={Cdata.ExtraInfoUrl} target="_blank" rel="noreferrer">To know more</a></em></p>
+      ExtraInfUrl = <p className="h6"><em><a href={Cdata.ExtraInfoUrl} target="_blank" rel="noreferrer">To know more</a></em></p>
     }
 
     if (typeof Cdata.ExtraInfo !== 'undefined' && Cdata.ExtraInfo !== '') {
-      Extra_inf =
+      ExtraInf =
                 <div className="col-3 align-self-end">
-                    <div className="alert alert-info" role="alert">
-                        <img src="./icon/info2.png" width="20"/> &nbsp;
-                        {Cdata.ExtraInfo}
-                        {Extra_infUrl}
-                    </div>
+                  <div className="alert alert-info" role="alert">
+                    <img src="./icon/info2.png" width="20"/> &nbsp;
+                      {Cdata.ExtraInfo}
+                      {ExtraInfUrl}
+                  </div>
                 </div>
     }
-    return (Extra_inf)
+    return (ExtraInf)
   }
 
   render () {
@@ -1012,44 +1014,44 @@ class ProviderPluginsSelector extends React.Component {
     return (
            <div id={'plugin'}>
 
-                <div className="card-header" id={id}>
-                    <ModuleHeader id={id} data={this.props.data} selected={selected} Cdata={Cdata} n={this.props.n} Cost={this.state.cost}
-                    comments={this.state.comments} handleAddPlugin={this.handleAddPlugin} handleRmvPlugin={this.handleRmvPlugin}
-                                  keys={this.state.keys} show_minus={this.props.show_minus} show_plus={this.state.show_plus} conv={this.props.conv}/>
-                </div>
+              <div className="card-header" id={id}>
+                  <ModuleHeader id={id} data={this.props.data} selected={selected} Cdata={Cdata} n={this.props.n} Cost={this.state.cost}
+                                comments={this.state.comments} handleAddPlugin={this.handleAddPlugin} handleRmvPlugin={this.handleRmvPlugin}
+                                keys={this.state.keys} showMinus={this.props.showMinus} showPlus={this.state.showPlus} conv={this.props.conv}/>
+              </div>
 
-                <div id={'collapse' + id} className="collapse" aria-labelledby={id} data-parent="#accordionplugins">
-                    <div className="card-body">
-                        <div className="container">
+              <div id={'collapse' + id} className="collapse" aria-labelledby={id} data-parent="#accordionplugins">
+                <div className="card-body">
+                  <div className="container">
 
-                            <div className="row ">
-                                <div className="col-auto align-self-end">
-                                    <div id="provider-selector" >
-                                         <SelectorInput id="providerselect" name="Select a provider" selected={selected} options={this.state.keys}
-                                                   class="btn-primary lg-btn" onChange={this.handleProviderChange} tips="Select a provider"/>
-                                    </div>
-                                </div>
-                                <div className="col-auto align-self-end">
-                                    <div id="plugin-knowmore" >
-                                        <MakeknowmoreInput key={selected} data={Cdata} name="" n="0" />
-                                    </div>
-                                </div>
-                                        {this.extrainfo(Cdata)}
-                                <div className="col-4 align-self-end">
-                                    <TxtInput type="text" id="module-comments" name="My Comments"
-                                              placeholder="I can put a comment here..." onChange={this.handleCommentChange}/>
-                                </div>
-
-                            </div>
-
-                            <div id="component" className="container bg-light">
-                                <Cmp data={Cdata} key={selected} id="component-settings" onCostChange={this.handleCostChange} n={this.props.n}
-                                handleProviderChange={this.handleProviderChangetxt} handleServiceChange={this.handleServiceChangetxt} handlebyYearChange={this.handlebyYearChange}
-                                export={this.make_exportcmp}/>
-                            </div>
+                    <div className="row ">
+                      <div className="col-auto align-self-end">
+                        <div id="provider-selector" >
+                         <SelectorInput id="providerselect" name="Select a provider" selected={selected} options={this.state.keys}
+                                        class="btn-primary lg-btn" onChange={this.handleProviderChange} tips="Select a provider"/>
                         </div>
+                      </div>
+                      <div className="col-auto align-self-end">
+                        <div id="plugin-knowmore" >
+                          <MakeknowmoreInput key={selected} data={Cdata} name="" n="0" />
+                        </div>
+                      </div>
+                      {this.extrainfo(Cdata)}
+                      <div className="col-4 align-self-end">
+                        <TxtInput type="text" id="module-comments" name="My Comments"
+                                  placeholder="I can put a comment here..." onChange={this.handleCommentChange}/>
+                      </div>
+
                     </div>
+
+                    <div id="component" className="container bg-light">
+                      <Cmp data={Cdata} key={selected} id="component-settings" onCostChange={this.handleCostChange} n={this.props.n}
+                           handleProviderChange={this.handleProviderChangetxt} handleServiceChange={this.handleServiceChangetxt} handlebyYearChange={this.handlebyYearChange}
+                           export={this.makeExportcmp}/>
+                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
     )
   }
@@ -1118,13 +1120,13 @@ class ModuleHeader extends React.Component {
     let minus = null
     let plus = null
     let convout = null
-    if (this.props.show_minus) {
+    if (this.props.showMinus) {
       minus = <ButtonInputWpop class="btn-danger btn-sm" id="plugins-add-btn"
                                    name={<img className="img-fluid" src="icon\minus.png" width="20"/>}
                                    onClick={this.handleRmvPlugin} n={this.props.n} tips="Remove this line"
                                     idp={this.props.id} info={this.props.data.Name}/>
     }
-    if (this.props.show_plus) {
+    if (this.props.showPlus) {
       plus = <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icon\plus.png" width="20"/>}
                          onClick={this.handleAddPlugin} n={this.props.n} tips={'Add a new ' + this.props.data.Name}/>
     }
@@ -1133,56 +1135,55 @@ class ModuleHeader extends React.Component {
     }
 
     return (
-     <div className="container">
-         <div className="row align-items-center">
-             <div className="col-1 align-self-start">
-                 <div className="row">
-                 <div className="col-6" id="plugin-add">
-                     {plus}
-                 </div>
-                 <div className="col-6" id="plugin-add">
-                     {minus}
-                 </div>
-                 </div>
-                 <div id="plugin-knowmore">
-                     <MakeknowmoreInput data={this.props.data} n={this.props.n}/>
-                 </div>
+      <div className="container">
+        <div className="row align-items-center">
+          <div className="col-1 align-self-start">
+             <div className="row">
+              <div className="col-6" id="plugin-add">
+                {plus}
+              </div>
+              <div className="col-6" id="plugin-add">
+                {minus}
+              </div>
             </div>
-             <div className=" col-1 align-self-start">
-                 <img className="img-fluid" src={'icon/' + this.props.data.Icon} width="100"/>
-             </div>
-             <div className="col-3 text-center">
-                 {/* <div className="row align-items-end"> */}
-                 {/*    <div className="col-auto"> */}
-                                    <span data-toggle="tooltip" data-placement="top" title="Expand this..." >
-                                        <button className="btn btn-outline-primary  dropdown-toggle" type="button" data-toggle="collapse" data-target={'#collapse' + this.props.id}
-                                                aria-expanded="false" aria-controls={'collapse' + this.props.id} id="btn-plugins" onClick={this.btnClick.bind(this)}>
-                                            <span id={'plugin-number'}> {this.props.n + 1}. </span> <span id={'plugin-name'}>{this.props.data.Name}</span>
-                                        </button>
-                                    </span>
+            <div id="plugin-knowmore">
+              <MakeknowmoreInput data={this.props.data} n={this.props.n}/>
+            </div>
+          </div>
+          <div className=" col-1 align-self-start">
+            <img className="img-fluid" src={'icon/' + this.props.data.Icon} width="100"/>
+          </div>
+          <div className="col-3 text-center">
+            {/* <div className="row align-items-end"> */}
+            {/*    <div className="col-auto"> */}
+            <span data-toggle="tooltip" data-placement="top" title="Expand this..." >
+              <button className="btn btn-outline-primary  dropdown-toggle" type="button" data-toggle="collapse" data-target={'#collapse' + this.props.id}
+                      aria-expanded="false" aria-controls={'collapse' + this.props.id} id="btn-plugins" onClick={this.btnClick.bind(this)}>
+                <span id={'plugin-number'}> {this.props.n + 1}. </span> <span id={'plugin-name'}>{this.props.data.Name}</span>
+              </button>
+            </span>
+            {/*    </div> */}
+            {/* </div> */}
+          </div>
+          <div id="plugin-info" className="col-4">
+            <div className="row">
+              {this.makeinfo(this.props.keys, this.props.selected, this.props.Cdata)}
+            </div>
+            <div className="row text-center">
+              {this.props.comments}
+            </div>
 
-                 {/*    </div> */}
-                 {/* </div> */}
-             </div>
-             <div id="plugin-info" className="col-4">
-                 <div className="row">
-                     {this.makeinfo(this.props.keys, this.props.selected, this.props.Cdata)}
-                 </div>
-                 <div className="row text-center">
-                     {this.props.comments}
-                 </div>
+          </div>
 
-             </div>
+          <div id="plugin-cost" className="col-2 ">
+            <CostOutput id="ccost" class="itemcost" name="" value={this.props.Cost} tips="Total cost for this provider"/>
+              {convout}
+          </div>
+          <div className="col-1">
+            {this.byyear(this.props.Cdata.ByYear)}
+          </div>
 
-             <div id="plugin-cost" className="col-2 ">
-                 <CostOutput id="ccost" class="itemcost" name="" value={this.props.Cost} tips="Total cost for this provider"/>
-                 {convout}
-             </div>
-             <div className="col-1">
-                 {this.byyear(this.props.Cdata.ByYear)}
-             </div>
-
-         </div>
+        </div>
 
      </div>
     )
@@ -1213,8 +1214,8 @@ class ManagePlugins extends React.Component {
     this.handleCostChange = this.handleCostChange.bind(this)
     this.handleAddPlugin = this.handleAddPlugin.bind(this)
     this.handleRmvPlugin = this.handleRmvPlugin.bind(this)
-    this.make_exportplug = this.make_exportplug.bind(this)
-    this.make_export = this.make_export.bind(this)
+    this.makeExportplug = this.makeExportplug.bind(this)
+    this.makeExport = this.makeExport.bind(this)
 
     this.state = {
       displayed: [],
@@ -1245,12 +1246,12 @@ class ManagePlugins extends React.Component {
     this.props.handleCostChange(this.props.n, sum(this.state.varsum))
   }
 
-  make_exportplug (data, n) {
+  makeExportplug (data, n) {
     this.state.export[n] = data
-    this.make_export()
+    this.makeExport()
   }
 
-  make_export () {
+  makeExport () {
     if (this.state.export.length === this.give_n()) {
       this.props.export(this.state.export, this.props.n)
     }
@@ -1266,22 +1267,22 @@ class ManagePlugins extends React.Component {
   }
 
   componentDidUpdate () {
-    this.make_export()
+    this.makeExport()
   }
 
   render () {
-    let show_minus = false
+    let showMinus = false
     if (this.give_n() > 1) {
-      show_minus = true
+      showMinus = true
     }
-    this.make_export()
+    this.makeExport()
     return (
                <div>
                     <Repeat numTimes={this.give_n()}>
                         {(index) => <ProviderPluginsSelector data={this.props.data} key={this.state.displayed[index]}
-                                                 show_minus={show_minus} n={index}
+                                                 showMinus={showMinus} n={index}
                                                  handleCostChange={this.handleCostChange} handleAddPlugin={this.handleAddPlugin}
-                                                             handleRmvPlugin={this.handleRmvPlugin} export={this.make_exportplug}
+                                                             handleRmvPlugin={this.handleRmvPlugin} export={this.makeExportplug}
                                                              conv={this.props.conv}/>}
 
                     </Repeat>
@@ -1296,8 +1297,8 @@ class PluginsMain extends React.Component {
     super(props)
     this.handleCostChange = this.handleCostChange.bind(this)
 
-    this.make_exportplug = this.make_exportplug.bind(this)
-    this.make_export = this.make_export.bind(this)
+    this.makeExportplug = this.makeExportplug.bind(this)
+    this.makeExport = this.makeExport.bind(this)
 
     this.state = {
       varsum: {},
@@ -1310,12 +1311,12 @@ class PluginsMain extends React.Component {
     this.props.TotalCost(sum(this.state.varsum))
   }
 
-  make_exportplug (data, n) {
+  makeExportplug (data, n) {
     this.state.export[n] = data
-    this.make_export()
+    this.makeExport()
   }
 
-  make_export () {
+  makeExport () {
     if (this.state.export.length === this.props.data.length) {
       this.props.export(this.state.export)
     }
@@ -1352,7 +1353,7 @@ class PluginsMain extends React.Component {
                             <div className="accordion" id="accordionplugins">
                             <Repeat numTimes={this.props.data.length}>
                                 {(index) => <ManagePlugins data={this.props.data[index]} key={index}
-                                                           export={this.make_exportplug} n={index} handleCostChange={this.handleCostChange}
+                                                           export={this.makeExportplug} n={index} handleCostChange={this.handleCostChange}
                                                            conv={this.props.conv}/>}
                             </Repeat>
                             </div>
@@ -1372,7 +1373,7 @@ class Main extends React.Component {
     MoneyGetRates()
     super(props)
     this.handleCostChange = this.handleCostChange.bind(this)
-    this.make_exportmain = this.make_exportmain.bind(this)
+    this.makeExportmain = this.makeExportmain.bind(this)
     this.handleNameChange = this.handleNameChange.bind(this)
     this.handleDurationChange = this.handleDurationChange.bind(this)
     this.handleConvMoneyChange = this.handleConvMoneyChange.bind(this)
@@ -1400,7 +1401,7 @@ class Main extends React.Component {
     }
   }
 
-  make_exportmain (idata) {
+  makeExportmain (idata) {
     const tmp = JSON.parse(JSON.stringify(idata))
     let disp = false
     if (!this.init) {
@@ -1443,7 +1444,7 @@ class Main extends React.Component {
 
                     {this.project_info()}
 
-                    <PluginsMain TotalCost={this.handleCostChange} data={MainData.Data} export={this.make_exportmain} conv={this.state.conv} />
+                    <PluginsMain TotalCost={this.handleCostChange} data={MainData.Data} export={this.makeExportmain} conv={this.state.conv} />
 
                     {this.final_cost(this.state.conv)}
 

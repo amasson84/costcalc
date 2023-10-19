@@ -1,4 +1,5 @@
-'use strict'
+'use strict';
+
 // Money is the http://openexchangerates.github.io/money.js/#playground Lib
 const Money = fx.noConflict()
 //  Become true if money conv is configured and connected correctly

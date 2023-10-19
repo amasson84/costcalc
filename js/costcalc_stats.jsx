@@ -1,4 +1,5 @@
-'use strict'
+'use strict';
+
 const _paq = window._paq || []
 
 const Stats = {
