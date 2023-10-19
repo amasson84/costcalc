@@ -412,36 +412,44 @@ const Gitlab = {
   ByYear: true,
   RateName: 'Plan',
   Rates: {
-    'Core Self Hosted': 0,
-    'Free Cloud Based': 0,
-    'Starter Self Hosted': 48,
-    'Bronze Cloud based': 48,
-    'Premium Self Hosted': 228,
-    'Silver Cloud Based': 228
+    'Standard': 875
   },
-  RateUnit: 'CHF / Users'
+  RateUnit: 'CHF / GB'
 }
 
 const Figshare = {
-  Style: 'CategoryCost',
+  Style: 'CategoryAmountRatesCost',
   Provider: 'FigShare',
   Name: 'Figshare',
   ByYear: false,
-  Adaptive: false,
+  Adaptive: true,
   Url: [
     { Name: 'Figshare website', Url: 'https://figshare.com/' },
-    { Name: 'Figshare Pricing', Url: 'https://www.g2crowd.com/products/figshare/pricing' }
+    { Name: 'Figshare Pricing', Url: 'https://www.g2.com/products/figshare/pricing' },
+    { Name: 'Figshare+ Pricing', Url: 'https://knowledge.figshare.com/plus#pricing' }
   ],
   ExtraInfo: 'The costs of enabling access to research data under an SNSF grant are eligible. The  data archives (data repositories) have to meet the FAIR principles.',
   ExtraInfoUrl: 'http://www.snf.ch/SiteCollectionDocuments/snsf-general-implementation-regulations-for-the-funding-regulations-e.pdf#page=15',
-  CatName: 'Options',
+  CatName: 'Maximum volume',
   Cat: {
-    'Free 1GB': 0,
-    '10GB': 96,
-    '15GB': 132,
-    '20GB': 180
+    '20 GB': 0,
+    '100 GB': 450,
+    'over 100 GB': 875
   },
-  CatUnit: 'CHF'
+  CatUnit: 'USD',
+  AmountName: 'Storage',
+  AmountUnit: 'GB',
+  Adaptive: false,
+  AmountMin: 0,
+  AmountMax: 5000,
+  AmountStep: 250,
+  AmountFree: 250,
+  AmountFreeCumulative: true,
+  RateName: 'Storage',
+  Rates: {
+    'Storage over 250 GB': 3.75
+  },
+  RateUnit: 'CHF / GB'
 }
 
 const Dryad = {
@@ -454,7 +462,6 @@ const Dryad = {
   ByYear: false,
   ExtraInfo: 'The costs of enabling access to research data under an SNSF grant are eligible. The  data archives (data repositories) have to meet the FAIR principles.',
   ExtraInfoUrl: 'http://www.snf.ch/SiteCollectionDocuments/snsf-general-implementation-regulations-for-the-funding-regulations-e.pdf#page=15',
-
   CatName: 'Options',
   Cat: {
     'up to 50GB if DPC covered': 0,
