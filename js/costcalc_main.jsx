@@ -609,12 +609,14 @@ class CategoryAmountRatesCost extends React.Component {
     this.handleCatChange = this.handleCatChange.bind(this)
     this.handleAmountChange = this.handleAmountChange.bind(this)
     this.handleRateChange = this.handleRateChange.bind(this)
+    console.log('in constructor', this.props.data.Rates)
     this.state = {
       SelectCat: 0,
       Cat: this.props.data.Cat[Object.keys(this.props.data.Cat)[0]],
-      Amount: 1,
+      Amount: 0,
       SelectRate: 0,
       Rate: this.props.data.Rates[Object.keys(this.props.data.Rates)[0]],
+      Free: 0,
       Adaptive: false
     }
     if (typeof this.props.data.Adaptive !== 'undefined' && this.props.data.Adaptive === true) {
@@ -647,7 +649,7 @@ class CategoryAmountRatesCost extends React.Component {
   }
 
   componentDidUpdate () {
-    this.makeCost(this.state.Cat, this.state.Amount, this.state.Rate)
+    this.makeCost(this.state.Cat, this.state.Amount, this.state.Rate, this.state.Free)
     this.makeExport()
   }
 
@@ -655,14 +657,18 @@ class CategoryAmountRatesCost extends React.Component {
     let AmountMin
     let AmountMax
     let AmountStep
+    let AmountFree
     if (this.state.Adaptive) {
+      console.log('this.props.data.AmountMin', this.props.data.AmountMin, ' selected rate', this.state.SelectRate)
       AmountMin = this.props.data.AmountMin[this.state.SelectRate]
       AmountMax = this.props.data.AmountMax[this.state.SelectRate]
       AmountStep = this.props.data.AmountStep[this.state.SelectRate]
+      AmountFree = this.props.data.AmountFree[this.state.SelectRate]
     } else {
       AmountMin = this.props.data.AmountMin
       AmountMax = this.props.data.AmountMax
       AmountStep = this.props.data.AmountStep
+      AmountFree = this.props.data.AmountFree
     }
     if (this.state.Amount > AmountMax) {
       this.setState({ Amount: AmountMax })
@@ -670,6 +676,7 @@ class CategoryAmountRatesCost extends React.Component {
     if (this.state.Amount < AmountMin) {
       this.setState({ Amount: AmountMin })
     }
+    console.log('in render()', AmountMin, AmountMax, AmountStep, AmountFree)
     return (
             <div className="row align-items-center">
               <div className="col-3">
@@ -689,13 +696,15 @@ class CategoryAmountRatesCost extends React.Component {
     )
   }
 
-  makeCost (cat, amount, rate) {
+  makeCost (cat, amount, rate, free) {
+    /*
     let free
     if (this.state.Adaptive) {
+      console.log('this.props.data.AmounFree', this.props.data.AmountFree, ' selected rate', this.state.SelectRate)
       free = this.props.data.AmountFree[this.state.SelectRate]
     } else {
       free = this.props.data.AmountFree
-    }
+    }*/
     let total = cat + (amount - free) * rate
     console.log(cat, '+ (', amount, '-',free,')*', rate, ' = ', total)
     if (this.props.data.ByYear) total = total * projectduration

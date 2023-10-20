@@ -439,14 +439,32 @@ const Figshare = {
   CatUnit: 'USD',
   AmountName: 'Storage',
   AmountUnit: 'GB',
-  Adaptive: false,
-  AmountMin: 0,
-  AmountMax: 5000,
-  AmountStep: 250,
-  AmountFree: 0,
+  Adaptive: true,
+  AmountMin: {
+    0: 0,
+    4.5: 20,
+    3.5: 250
+  },
+  AmountMax: {
+    0: 20,
+    4.5: 100,
+    3.5: 5000
+  },
+  AmountStep: {
+    0: 1,
+    4.5: 100,
+    3.5: 250
+  },
+  AmountFree: {
+    0: 20,
+    4.5: 0,
+    3.5: 0
+  },
   AmountFreeCumulative: true,
   RateName: 'Storage',
   Rates: {
+    'Storage up to 20 GB': 0,
+    'Storage from 20 to 100 GB': 4.5,
     'Storage over 250 GB': 3.5
   },
   RateUnit: 'CHF / GB'
