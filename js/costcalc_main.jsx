@@ -697,6 +697,7 @@ class CategoryAmountRatesCost extends React.Component {
       free = this.props.data.AmountFree
     }
     let total = cat + (amount - free) * rate
+    console.log(cat, '+ (', amount, '-',free,')*', rate, ' = ', total)
     if (this.props.data.ByYear) total = total * projectduration
 
     total = toMoney(total)
