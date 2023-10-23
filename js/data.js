@@ -221,7 +221,7 @@ const SLIMSEpfl = {
   AmountFreeCumulative: false,
   RateName: 'ELN Storage',
   Rates: {
-    'Stored on EPFL Server': 165
+    'Stored on EPFL Server': 45
   },
   RateUnit: 'CHF / TB'
 }
