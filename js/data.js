@@ -376,7 +376,7 @@ const Bitbucket = {
     { Name: 'Bitbucket Website Pricing', Url: 'https://bitbucket.org/product/pricing' }
   ],
 
-  AmountName: 'Number of user',
+  AmountName: 'Number of users',
   AmountUnit: 'User(s)',
   Adaptive: true,
   ByYear: true,
@@ -393,6 +393,8 @@ const Bitbucket = {
   },
   RateUnit: 'CHF / Users'
 }
+
+
 
 const Gitlab = {
   Style: 'AmountRatesCost',
@@ -420,56 +422,30 @@ const Gitlab = {
 }
 
 const Figshare = {
-  Style: 'CategoryAmountRatesCost',
-  Provider: 'FigShare',
+  Style: 'AmountRatesCost',
+  Provider: 'Figshare',
   Name: 'Figshare',
-  ByYear: false,
-  Adaptive: true,
   Url: [
     { Name: 'Figshare website', Url: 'https://figshare.com/' },
     { Name: 'Figshare Pricing', Url: 'https://www.g2.com/products/figshare/pricing' },
     { Name: 'Figshare+ Pricing', Url: 'https://knowledge.figshare.com/plus#pricing' }
   ],
-  ExtraInfo: 'The costs of enabling access to research data under an SNSF grant are eligible. The  data archives (data repositories) have to meet the FAIR principles.',
-  ExtraInfoUrl: 'http://www.snf.ch/SiteCollectionDocuments/snsf-general-implementation-regulations-for-the-funding-regulations-e.pdf#page=15',
-  CatName: 'Maximum volume',
-  Cat: {
-    '20 GB: free': 0,
-    '100 GB: flat rate': 450,
-    'over 100 GB': 0
-  },
-  CatUnit: 'USD',
-  AmountName: 'Storage',
+  AmountName: 'Volume',
   AmountUnit: 'GB',
   Adaptive: true,
-  AmountMin: {
-    0: 0,
-    1: 20,
-    2: 250
-  },
-  AmountMax: {
-    0: 20,
-    1: 100,
-    2: 5000
-  },
-  AmountStep: {
-    0: 1,
-    1: 1,
-    2: 250
-  },
-  AmountFree: {
-    0: 20,
-    1: 0,
-    2: 0
-  },
-  AmountFreeCumulative: true,
-  RateName: 'Storage',
+  ByYear: true,
+  AmountMin: [1, 100, 250],
+  AmountMax: [20, 100, 5000],
+  AmountStep: [1, 79, 250],
+  AmountFree: [0, 0, 0],
+  AmountFreeCumulative: false,
+  RateName: 'Plan',
   Rates: {
-    'Storage up to 20 GB': 0,
-    'Storage from 20 to 100 GB': 0,
-    'Storage over 250 GB': 3.5
+    'Free (up to 20 GB)': 0,
+    '21-100 GB (flat rate)': 4.5,
+    'Over 100 GB': 3.5
   },
-  RateUnit: 'CHF / GB'
+  RateUnit: 'USD / GB'
 }
 
 const Dryad = {
