@@ -317,7 +317,7 @@ const C4science = {
   ],
   ByYear: true,
   Adaptive: false,
-  ExtraInfo: 'C4Science is the repository recommended by EPFL for code repository',
+  ExtraInfo: 'C4Science is a code repository and collaboration platform created by SCITAS at EPFL, accessible to all swissuniversities members.',
   CatName: 'Options',
   Cat: {
     'Free for text file': 0
@@ -353,19 +353,18 @@ const Github = {
   AmountUnit: 'User(s)',
   Adaptive: true,
   ByYear: true,
-  AmountMin: [1, 1, 5, 10],
-  AmountMax: [100, 1, 100, 100],
-  AmountStep: [1, 1, 1, 1],
-  AmountFree: [0, 0, 0, 0],
+  AmountMin: [1, 5, 10],
+  AmountMax: [100, 100, 100],
+  AmountStep: [1, 1, 1],
+  AmountFree: [0, 0, 0],
   AmountFreeCumulative: false,
   RateName: 'Plan',
   Rates: {
-    'OpenSource project': 0,
-    'Developer (for one user)': 81.6,
-    'Team (min 5 users)': 104.9,
-    'Business Cloud': 244.7
+    'Free': 0,
+    'Team': 48,
+    'Enterprise': 252
   },
-  RateUnit: 'CHF / Users'
+  RateUnit: 'USD / Users'
 }
 
 const Bitbucket = {
