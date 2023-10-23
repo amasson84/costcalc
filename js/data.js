@@ -401,7 +401,7 @@ const Gitlab = {
   Url: [
     { Name: 'Gitlab Website Pricing', Url: 'https://about.gitlab.com/pricing/' }
   ],
-  AmountName: 'Number of user',
+  AmountName: 'Number of users',
   AmountUnit: 'User(s)',
   AmountMin: 1,
   AmountMax: 100,
@@ -412,9 +412,11 @@ const Gitlab = {
   ByYear: true,
   RateName: 'Plan',
   Rates: {
-    'Standard': 875
+    'Free (1 user, 5GB)': 0,
+    'Premium (team, 50 GB)': 348,
+    'Ultimate (temp, 250 GB)': 1188 
   },
-  RateUnit: 'CHF / GB'
+  RateUnit: 'USD / user'
 }
 
 const Figshare = {
