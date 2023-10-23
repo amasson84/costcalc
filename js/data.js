@@ -388,10 +388,10 @@ const Bitbucket = {
   RateName: 'Plan',
   Rates: {
     'Free (up to 5 users)': 0,
-    'Standard for growing teams (min 5 users)': 24,
-    'Premium for large teams (min 5 users)': 60
+    'Standard for growing teams (min 5 users)': 36,
+    'Premium for large teams (min 5 users)': 72
   },
-  RateUnit: 'CHF / Users'
+  RateUnit: 'USD / Users'
 }
 
 
