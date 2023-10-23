@@ -432,8 +432,8 @@ const Figshare = {
   ExtraInfoUrl: 'http://www.snf.ch/SiteCollectionDocuments/snsf-general-implementation-regulations-for-the-funding-regulations-e.pdf#page=15',
   CatName: 'Maximum volume',
   Cat: {
-    '20 GB': 0,
-    '100 GB': 450,
+    '20 GB: free': 0,
+    '100 GB: flat rate': 450,
     'over 100 GB': 0
   },
   CatUnit: 'USD',
@@ -442,29 +442,29 @@ const Figshare = {
   Adaptive: true,
   AmountMin: {
     0: 0,
-    4.5: 20,
-    3.5: 250
+    1: 20,
+    2: 250
   },
   AmountMax: {
     0: 20,
-    4.5: 100,
-    3.5: 5000
+    1: 100,
+    2: 5000
   },
   AmountStep: {
     0: 1,
-    4.5: 100,
-    3.5: 250
+    1: 1,
+    2: 250
   },
   AmountFree: {
     0: 20,
-    4.5: 0,
-    3.5: 0
+    1: 0,
+    2: 0
   },
   AmountFreeCumulative: true,
   RateName: 'Storage',
   Rates: {
     'Storage up to 20 GB': 0,
-    'Storage from 20 to 100 GB': 4.5,
+    'Storage from 20 to 100 GB': 0,
     'Storage over 250 GB': 3.5
   },
   RateUnit: 'CHF / GB'

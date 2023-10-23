@@ -659,7 +659,7 @@ class CategoryAmountRatesCost extends React.Component {
     let AmountStep
     let AmountFree
     if (this.state.Adaptive) {
-      console.log('this.props.data.AmountMin', this.props.data.AmountMin, ' selected rate', this.state.SelectRate)
+      console.log('this.props.data.AmountMin', this.props.data.AmountMin, 'this.props.data.AmountMax', this.props.data.AmountMax, ' selected rate', this.state.SelectRate)
       AmountMin = this.props.data.AmountMin[this.state.SelectRate]
       AmountMax = this.props.data.AmountMax[this.state.SelectRate]
       AmountStep = this.props.data.AmountStep[this.state.SelectRate]
@@ -676,7 +676,7 @@ class CategoryAmountRatesCost extends React.Component {
     if (this.state.Amount < AmountMin) {
       this.setState({ Amount: AmountMin })
     }
-    console.log('in render()', AmountMin, AmountMax, AmountStep, AmountFree)
+    console.log('in render()', this.state.SelectRate, AmountMin, AmountMax, AmountStep, AmountFree)
     return (
             <div className="row align-items-center">
               <div className="col-3">
