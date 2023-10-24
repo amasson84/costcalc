@@ -1577,7 +1577,7 @@ class Main extends React.Component {
                 </div>
                 <div id="service">
                   <p>This service has been developed by the <a href="https://researchdata.epfl.ch">Resarch Data Management Team</a> of the <a href="https://library.epfl.ch">EPFL Library</a>  <br/>
-                     This software is publish under GPL-3.0-only license and your are using <strong> Version {MainData.Version}</strong><br/>
+                     This software is publish under GPL-3.0-only license and you are using <strong>Version {MainData.Version}</strong>.<br/>
                      Source code can be download <a href="https://c4science.ch/source/costcalc/">here</a></p>
                   <p><small>Icons are from the Noun Project (Book by Randi NI, Storage by I Pitu, Database by Novalyi, data cloud by Vectors Market, Information and Next by Gregor Cresnar, Database by Creative Mahira, Archive by dp indo)</small></p>
                 </div>
