@@ -161,7 +161,7 @@ const DropboxPerso = {
   Cat: {
     'Personal Free 2Go': 0,
     'Personal Plus 2TB': 107,
-    'Essentials (3TB)': 193,
+    'Essentials (3TB)': 193
   },
   CatUnit: 'CHF'
 }
@@ -361,9 +361,9 @@ const Github = {
   AmountFreeCumulative: false,
   RateName: 'Plan',
   Rates: {
-    'Free': 0,
-    'Team': 43,
-    'Enterprise': 225
+    Free: 0,
+    Team: 43,
+    Enterprise: 225
   },
   RateUnit: 'CHF / Users'
 }
@@ -394,8 +394,6 @@ const Bitbucket = {
   RateUnit: 'CHF / Users'
 }
 
-
-
 const Gitlab = {
   Style: 'AmountRatesCost',
   Provider: 'Gitlab',
@@ -416,7 +414,7 @@ const Gitlab = {
   Rates: {
     'Free (1 user, 5GB)': 0,
     'Premium (team, 50 GB)': 310,
-    'Ultimate (temp, 250 GB)': 1060 
+    'Ultimate (temp, 250 GB)': 1060
   },
   RateUnit: 'CHF / user'
 }
@@ -577,8 +575,8 @@ const ELN = {
     Benchling,
     UserCostSelect
   ]
-
 }
+
 const Database = {
   Name: 'Database',
   Icon: 'database.png',
