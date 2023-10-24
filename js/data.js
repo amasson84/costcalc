@@ -497,6 +497,30 @@ const Acoua = {
   CatUnit: 'CHF'
 }
 
+const EpflS3 = {
+  Style: 'AmountRatesCost',
+  Provider: 'EPFL-DSI',
+  Name: 'EPFL S3',
+  Url: [
+    { Name: 'Service description', Url: 'https://support.epfl.ch/epfl?id=epfl_kb_article_view&sys_kb_id=e8d10bf997fc7150e55e370f2153af5a' }
+  ],
+  AmountName: 'Volume',
+  AmountUnit: 'TB',
+  AmountMin: 1,
+  AmountMax: 100,
+  AmountStep: 1,
+  AmountFree: 0,
+  Adaptive: false,
+  AmountFreeCumulative: false,
+  ByYear: true,
+  RateName: 'Plan',
+  Rates: {
+    'Project funded by EPFL budgetary allocation': 29,
+    'Project funded by H2020 or SNSF': 83.90
+  },
+  RateUnit: 'CHF / TB'
+}
+
 // System variable definition
 // ----------------------------------------------------
 // ----------------------------------------------------
@@ -602,6 +626,7 @@ const longermarchive = {
   Data: [
     NoneSelected,
     Acoua,
+    EpflS3,
     UserCostSelect
   ]
 }

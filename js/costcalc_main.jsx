@@ -609,7 +609,7 @@ class CategoryAmountRatesCost extends React.Component {
     this.handleCatChange = this.handleCatChange.bind(this)
     this.handleAmountChange = this.handleAmountChange.bind(this)
     this.handleRateChange = this.handleRateChange.bind(this)
-    console.log('in constructor', this.props.data.Rates)
+    // console.log('in constructor', this.props.data.Rates)
     this.state = {
       SelectCat: 0,
       Cat: this.props.data.Cat[Object.keys(this.props.data.Cat)[0]],
@@ -659,7 +659,7 @@ class CategoryAmountRatesCost extends React.Component {
     let AmountStep
     let AmountFree
     if (this.state.Adaptive) {
-      console.log('this.props.data.AmountMin', this.props.data.AmountMin, 'this.props.data.AmountMax', this.props.data.AmountMax, ' selected rate', this.state.SelectRate)
+      // console.log('this.props.data.AmountMin', this.props.data.AmountMin, 'this.props.data.AmountMax', this.props.data.AmountMax, ' selected rate', this.state.SelectRate)
       AmountMin = this.props.data.AmountMin[this.state.SelectRate]
       AmountMax = this.props.data.AmountMax[this.state.SelectRate]
       AmountStep = this.props.data.AmountStep[this.state.SelectRate]
@@ -676,7 +676,7 @@ class CategoryAmountRatesCost extends React.Component {
     if (this.state.Amount < AmountMin) {
       this.setState({ Amount: AmountMin })
     }
-    console.log('in render()', this.state.SelectRate, AmountMin, AmountMax, AmountStep, AmountFree)
+    // console.log('in render()', this.state.SelectRate, AmountMin, AmountMax, AmountStep, AmountFree)
     return (
             <div className="row align-items-center">
               <div className="col-3">
@@ -697,16 +697,8 @@ class CategoryAmountRatesCost extends React.Component {
   }
 
   makeCost (cat, amount, rate, free) {
-    /*
-    let free
-    if (this.state.Adaptive) {
-      console.log('this.props.data.AmounFree', this.props.data.AmountFree, ' selected rate', this.state.SelectRate)
-      free = this.props.data.AmountFree[this.state.SelectRate]
-    } else {
-      free = this.props.data.AmountFree
-    }*/
     let total = cat + (amount - free) * rate
-    console.log(cat, '+ (', amount, '-',free,')*', rate, ' = ', total)
+    // console.log(cat, '+ (', amount, '-',free,')*', rate, ' = ', total)
     if (this.props.data.ByYear) total = total * projectduration
 
     total = toMoney(total)
