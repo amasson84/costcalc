@@ -9,7 +9,7 @@ const Stats = {
   StatsInitMatomo: function (PIWIK_URL, IDSITE) {
     // accurately measure the time spent on the last pageview of a visit
     _paq.push(['enableHeartBeatTimer'])
-    _paq.push(['setGenerationTimeMs', 0])
+    _paq.push(['setPagePerformanceTiming', 0])
     _paq.push(['setDocumentTitle', 'MainPage'])
     // require user consent before processing data
     _paq.push(['requireConsent'])
