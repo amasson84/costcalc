@@ -160,9 +160,10 @@ const DropboxPerso = {
   CatName: 'Plan',
   Cat: {
     'Personal Free 2Go': 0,
-    'Personal Plus 2TB': 120
+    'Personal Plus 2TB': 107,
+    'Essentials (3TB)': 193,
   },
-  CatUnit: 'USD'
+  CatUnit: 'CHF'
 }
 
 const DropboxTeam = {
@@ -188,8 +189,8 @@ const DropboxTeam = {
   AmountFreeCumulative: false,
   RateName: 'Plan',
   Rates: {
-    Standard: 136,
-    Advanced: 204
+    'Business (9TB)': 172,
+    'Business Plus (15TB)': 214
   },
   RateUnit: 'CHF / User'
 }
@@ -361,10 +362,10 @@ const Github = {
   RateName: 'Plan',
   Rates: {
     'Free': 0,
-    'Team': 48,
-    'Enterprise': 252
+    'Team': 43,
+    'Enterprise': 225
   },
-  RateUnit: 'USD / Users'
+  RateUnit: 'CHF / Users'
 }
 
 const Bitbucket = {
@@ -387,10 +388,10 @@ const Bitbucket = {
   RateName: 'Plan',
   Rates: {
     'Free (up to 5 users)': 0,
-    'Standard for growing teams (min 5 users)': 36,
-    'Premium for large teams (min 5 users)': 72
+    'Standard for growing teams (min 5 users)': 32,
+    'Premium for large teams (min 5 users)': 64
   },
-  RateUnit: 'USD / Users'
+  RateUnit: 'CHF / Users'
 }
 
 
@@ -414,10 +415,10 @@ const Gitlab = {
   RateName: 'Plan',
   Rates: {
     'Free (1 user, 5GB)': 0,
-    'Premium (team, 50 GB)': 348,
-    'Ultimate (temp, 250 GB)': 1188 
+    'Premium (team, 50 GB)': 310,
+    'Ultimate (temp, 250 GB)': 1060 
   },
-  RateUnit: 'USD / user'
+  RateUnit: 'CHF / user'
 }
 
 const Figshare = {
@@ -441,10 +442,10 @@ const Figshare = {
   RateName: 'Plan',
   Rates: {
     'Free (up to 20 GB)': 0,
-    '21-100 GB (flat rate)': 4.5,
-    'Over 100 GB': 3.5
+    '21-100 GB (flat rate)': 4.0,
+    'Over 100 GB': 3.1
   },
-  RateUnit: 'USD / GB'
+  RateUnit: 'CHF / GB'
 }
 
 const Dryad = {
@@ -460,7 +461,7 @@ const Dryad = {
   CatName: 'Options',
   Cat: {
     'up to 50GB if DPC covered': 0,
-    'up to 50GB if no  DPC covered': 150
+    'up to 50GB if no  DPC covered': 134
   },
   CatUnit: 'CHF',
   AmountName: 'Storage',
@@ -473,7 +474,7 @@ const Dryad = {
   AmountFreeCumulative: false,
   RateName: 'Storage',
   Rates: {
-    'Extra Storage': 5
+    'Extra Storage': 4.5
   },
   RateUnit: 'CHF / GB'
 }
@@ -613,7 +614,7 @@ const MainData = {
   InstName: 'EPFL Library',
   InstLogo: 'logo.png',
   InstLogoWidth: 200,
-  Updated: '2023-10-17',
+  Updated: '2023-10-24',
   HelpUrl: 'mailto:researchdata@epfl.ch',
   Currency: 'CHF',
   OEXRApi: 'cd8d785bdb6646b0a7e4c0eba5a74199',
@@ -623,7 +624,7 @@ const MainData = {
   StatsURL: 'costcalc.epfl.ch/matomo/',
   StatsID: '1',
   StatsContact: 'mailto:researchdata@epfl.ch',
-  Version: 'v2.1',
+  Version: 'v2.2',
   DefaultDuration: 1,
   Data: [storage, ELN, Database, datarepository, coderepository, longermarchive]
 }

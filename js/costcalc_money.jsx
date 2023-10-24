@@ -164,7 +164,7 @@ class PluginsCurrencyChange extends React.Component {
 
 // This function convert the input (ie numnber or string) to the converted currency
 function ConvCurrency (main_cur) {
-  return tomoney(Money.convert(tonumeric(main_cur)), Money.settings.to)
+  return toMoney(Money.convert(toNumeric(main_cur)), Money.settings.to)
 }
 
 // Init function for downloading the rate from Open Exchange Rates
