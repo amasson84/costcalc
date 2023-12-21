@@ -57,6 +57,35 @@ const RcpEpfl = {
   RateUnit: 'CHF / TB'
 }
 
+const ScitasEpfl = {
+  Style: 'AmountRatesCost',
+  Provider: 'EPFL-SCITAS',
+  Name: 'Collaborative Storage – NAS-RCP',
+  Url: [
+    {
+      Name: 'Service description',
+      Url: 'https://scitas-doc.epfl.ch/accounts/prices/'
+    }
+  ],
+  ExtraInfo: '',
+  ByYear: true,
+  Adaptive: false,
+  AmountName: 'Amount',
+  AmountUnit: 'TB',
+  AmountMin: 0,
+  AmountMax: 25,
+  AmountStep: 1,
+  AmountFree: 0,
+  AmountFreeCumulative: false,
+  RateName: 'Performance',
+  Rates: {
+    'User fee 1 (for EPFL: direct costs only)': 25,
+    'User fee 2 (incl. infrastructure maintenance': 63,
+    'User fee 3 (incl. all direct and indirect costs': 93
+  },
+  RateUnit: 'CHF / TB'
+}
+
 const SwitchEpfl = {
   Style: 'CategoryCost',
   Provider: 'Switch',
@@ -551,6 +580,7 @@ const storage = {
   Data: [NoneSelected,
     NasEpfl,
     RcpEpfl,
+    ScitasEpfl,
     MsPersonalEpfl,
     MsSharedEpfl,
     SwitchEpfl,
@@ -637,7 +667,7 @@ const MainData = {
   InstName: 'EPFL Library',
   InstLogo: 'logo.png',
   InstLogoWidth: 200,
-  Updated: '2023-10-24',
+  Updated: '2023-12-21',
   HelpUrl: 'mailto:researchdata@epfl.ch',
   Currency: 'CHF',
   OEXRApi: 'cd8d785bdb6646b0a7e4c0eba5a74199',
