@@ -52,7 +52,7 @@ const RcpEpfl = {
   AmountFreeCumulative: false,
   RateName: 'Performance',
   Rates: {
-    Standard: 40
+    Standard: 27
   },
   RateUnit: 'CHF / TB'
 }
