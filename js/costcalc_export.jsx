@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 // This code manages the export part of the engine
 class ManageExport extends React.Component {
@@ -386,12 +386,13 @@ class ManageExport extends React.Component {
 
   fnSelect (objId) {
     this.fnDeSelect()
+    let range
     if (document.selection) {
-      var range = document.body.createTextRange()
+      range = document.body.createTextRange()
       range.moveToElementText(document.getElementById(objId))
       range.select()
     } else if (window.getSelection) {
-      var range = document.createRange()
+      range = document.createRange()
       range.selectNode(document.getElementById(objId))
       window.getSelection().addRange(range)
     }

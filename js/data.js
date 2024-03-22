@@ -338,7 +338,6 @@ const Zenodo = {
   CatUnit: 'CHF'
 }
 
-
 // SCITAS will no longer accept new users in 2024 (will close down eventually)
 const C4science = {
   Style: 'CategoryCost',
