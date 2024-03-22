@@ -29,5 +29,7 @@ module.exports = {
     'react'
   ],
   rules: {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-react": "off",
   }
 }
