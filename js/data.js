@@ -444,7 +444,7 @@ const Gitlab = {
   Rates: {
     'Free (1 user, 5GB)': 0,
     'Premium (team, 50 GB)': 310,
-    'Ultimate (temp, 250 GB)': 1060
+    'Ultimate (team, 250 GB)': 1060
   },
   RateUnit: 'CHF / user'
 }
