@@ -17,7 +17,7 @@ function Repeat (props) {
 // convert string to numeric
 function toNumeric (value) {
   return parseFloat(
-    value.toString().replace(/[^0-9\.]+/g, '')
+    value.toString().replace(/[^0-9\\.]+/g, '')
   )
 }
 // Covert numeric to money string
@@ -47,7 +47,8 @@ Object.compare = function (obj1, obj2) {
   // Loop through properties in object 1
   for (const p in obj1) {
     // Check property exists on both objects
-    if (obj1.hasOwnProperty(p) !== obj2.hasOwnProperty(p)) return false
+    // if (obj1.hasOwnProperty(p) !== obj2.hasOwnProperty(p)) return false
+    if (Object.prototype.hasOwnProperty.call(obj1, p) !== Object.prototype.hasOwnProperty.call(obj2, p)) return false
 
     switch (typeof (obj1[p])) {
       // Deep compare objects
@@ -272,6 +273,7 @@ class CheckboxInput extends React.Component {
 class ButtonHrefInput extends React.Component {
   constructor (props) {
     super(props)
+    console.log('ButtonHrefInput constructor called')
   }
 
   componentDidMount () {
@@ -493,7 +495,7 @@ class CostOutput extends React.Component {
             <div className={'form-group row align-items-center'}>
               <label htmlFor={this.props.id} className={'col-form-label'}>{this.props.name}</label>
               <div className="col align-self-center">
-                <input type={'text'} className={'form-control'} id={this.props.id} className={classN}
+                <input type={'text'} id={this.props.id} className={classN}
                        value={this.props.value} onChange={this.handleChange} readOnly data-toggle="tooltip" data-placement="top" title={this.props.tips}/>
               </div>
             </div>
@@ -762,16 +764,20 @@ class NoneSelect extends React.Component {
   constructor (props) {
     super(props)
     this.export = []
-  }
-
-  render () {
     const Cost = toMoney(0)
     this.props.onCostChange(this.props.n, Cost)
     this.props.export(this.export)
+  }
+
+  render () {
+    /*
+    const Cost = toMoney(0)
+    this.props.onCostChange(this.props.n, Cost)
+    this.props.export(this.export)
+    */
 
     return (<div className="alert alert-info" id="infotxt">
                 Please select a provider in the list.
-
             </div>
     )
   }
@@ -806,10 +812,11 @@ class UserCost extends React.Component {
     if (byYear) total = amount * projectduration
     //       this.setState({total:total});
     this.props.onCostChange(this.props.n, toMoney(total))
+    return toMoney(total)
   }
 
   handleCostChange (value) {
-    this.setState({ value })
+    this.setState({ value: value })
   }
 
   handleProviderChange (txt) {
@@ -831,12 +838,13 @@ class UserCost extends React.Component {
   }
 
   handleConvMoneyChange (conv) {
+    // FIXME is this working?
     this.setState({ conv })
   }
-
+  
   componentDidUpdate () {
     this.makeCost(this.state.ByYear, this.state.value)
-    //  this.makeExport();
+    // this.makeExport();
   }
 
   classtxt (error) {
@@ -938,6 +946,7 @@ class ProviderPluginsSelector extends React.Component {
 
   makeExportcmp (data) {
     this.state.exportcmp = data
+    // this.setState({ exportcmp: data })
   }
 
   makeExport () {
@@ -1004,6 +1013,7 @@ class ProviderPluginsSelector extends React.Component {
     const selected = this.state.selected
     this.state.manualname = false
     this.state.keys = this.ProvidersName(this.props.data)
+    // this.setState({ manualname: false, ProvidersName: this.props.data})
     const Cmp = this.cmp2string(this.cmpdata(selected).Style)
     const Cdata = this.cmpdata(selected)
     const id = this.props.data.Name.replace(/\s/g, '') + this.props.n
@@ -1074,7 +1084,7 @@ class ProviderPluginsSelector extends React.Component {
       case 'CategoryCost' : return CategoryCost
       case 'CategoryAmountRatesCost' : return CategoryAmountRatesCost
       case 'NoneSelect' : return NoneSelect
-      case 'UserCost' : { this.setState({ manualname: true }); return UserCost }
+      case 'UserCost' : { this.state.manualname = true; return UserCost }
     }
   }
 

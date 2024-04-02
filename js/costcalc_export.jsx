@@ -183,7 +183,7 @@ class ManageExport extends React.Component {
     let Convcol = null
     if (this.props.conv.Enable) {
       movecol = 4
-      Convcol = <span>&lt;td align="center"&gt; &lt;strong&gt;{ConvCurrency(this.props.data.total)}&lt;/strong&gt;&lt;/td&gt;</span>
+      Convcol = <span>&lt;td align=&quot;center&quot;&gt; &lt;strong&gt;{ConvCurrency(this.props.data.total)}&lt;/strong&gt;&lt;/td&gt;</span>
     }
     return (
             <div id="htmlexport">
@@ -197,7 +197,7 @@ class ManageExport extends React.Component {
                 &lt;tr &gt;<br/>
                 &lt;td&gt;{projectname}&lt;/td&gt;
                 &lt;td&gt;{projectduration} year{disps}&lt;/td&gt;
-                &lt;td colSpan={hcol.length - movecol} align="right"&gt;&lt;strong&gt;Total Cost&lt;/strong&gt;&lt;/td&gt;&lt;td align="center"&gt;&lt;strong&gt;
+                &lt;td colSpan={hcol.length - movecol} align=&quot;right&quot;&gt;&lt;strong&gt;Total Cost&lt;/strong&gt;&lt;/td&gt;&lt;td align=&quot;center&quot;&gt;&lt;strong&gt;
                 {this.props.data.total}&lt;/strong&gt;&lt;/td&gt;
                 {Convcol}
                 <br/>
