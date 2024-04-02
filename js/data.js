@@ -555,7 +555,7 @@ const EpflS3 = {
 const NoneSelected = {
   Style: 'NoneSelect',
   Provider: 'None',
-  Name: 'Select a Provider',
+  Name: '',
   Url: '',
   ByYear: false
 }
