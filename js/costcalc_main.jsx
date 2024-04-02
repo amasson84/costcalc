@@ -816,7 +816,7 @@ class UserCost extends React.Component {
   }
 
   handleCostChange (value) {
-    this.setState({ value: value })
+    this.setState({ value })
   }
 
   handleProviderChange (txt) {
@@ -838,10 +838,9 @@ class UserCost extends React.Component {
   }
 
   handleConvMoneyChange (conv) {
-    // FIXME is this working?
     this.setState({ conv })
   }
-  
+
   componentDidUpdate () {
     this.makeCost(this.state.ByYear, this.state.value)
     // this.makeExport();
