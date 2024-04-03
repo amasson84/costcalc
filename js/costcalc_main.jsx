@@ -161,13 +161,14 @@ class AmountInput extends React.Component {
 
 AmountInput.propTypes = {
   onChange: PropTypes.func,
+  tips: PropTypes.string,
   value: PropTypes.number,
   name: PropTypes.string,
   id: PropTypes.string,
-  min: PropTypes.number,
-  max: PropTypes.number,
-  step: PropTypes.number,
-  unit: PropTypes.number
+  min: PropTypes.string,
+  max: PropTypes.string,
+  step: PropTypes.string,
+  unit: PropTypes.string
 }
 
 // Display a select input box
@@ -248,12 +249,17 @@ class SelectorInput extends React.Component {
   }
 }
 
-AmountInput.propTypes = {
+SelectorInput.propTypes = {
   onChange: PropTypes.func,
   tips: PropTypes.string,
-
+  rate: PropTypes.number,
+  unit: PropTypes.number,
+  name: PropTypes.string,
+  id: PropTypes.string,
+  class: PropTypes.string,
+  options: PropTypes.array,
+  selected: PropTypes.number
 }
-
 
 // Make the read more button
 class MakeknowmoreInput extends React.Component {
