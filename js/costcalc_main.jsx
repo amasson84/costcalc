@@ -1705,7 +1705,12 @@ class Main extends React.Component {
 // Main Declaration
 // ---------------------
 // ---------------------
-ReactDOM.render(<Main />, document.getElementById('root'))
+//ReactDOM.render(<Main />, document.getElementById('root'))
+
+const container = document.getElementById('root');
+const root = ReactDOM.createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(<Main />);
+
 // Display the stats popup after 10s
 if (Stats.Enable) { setTimeout(function () { $('#PopupStats').modal('show') }, 10000) }
 // Enable tooltip
