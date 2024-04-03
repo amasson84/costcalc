@@ -249,16 +249,17 @@ class SelectorInput extends React.Component {
   }
 }
 
+// FIXME inconsistent strings and numbers for this.props.selected (at least)
 SelectorInput.propTypes = {
   onChange: PropTypes.func,
   tips: PropTypes.string,
   rate: PropTypes.number,
-  unit: PropTypes.number,
+  unit: PropTypes.string,
   name: PropTypes.string,
   id: PropTypes.string,
   class: PropTypes.string,
   options: PropTypes.array,
-  selected: PropTypes.number
+  selected: PropTypes.string
 }
 
 // Make the read more button
@@ -300,6 +301,10 @@ class MakeknowmoreInput extends React.Component {
   }
 }
 
+MakeknowmoreInput.propTypes = {
+  data: PropTypes.object
+}
+
 // Display a checkbox
 class CheckboxInput extends React.Component {
   constructor (props) {
@@ -323,6 +328,14 @@ class CheckboxInput extends React.Component {
     )
   }
 }
+
+CheckboxInput.propTypes = {
+  defaults: PropTypes.bool,
+  id: PropTypes.string,
+  name: PropTypes.string,
+  onChange: PropTypes.func
+}
+
 // Display a btn with link
 class ButtonHrefInput extends React.Component {
   constructor (props) {
@@ -343,6 +356,13 @@ class ButtonHrefInput extends React.Component {
             <a id={this.props.id} href={this.props.url} type="button" className="btn btn-primary" data-toggle="tooltip" data-placement="top" title={this.props.tips} aria-disabled="true" target="_blank" rel="noreferrer">{this.props.name}</a>
     )
   }
+}
+
+ButtonHrefInput.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  url: PropTypes.string,
+  tips: PropTypes.string
 }
 
 // Button with validation popup
@@ -400,6 +420,17 @@ class ButtonInputWpop extends React.Component {
     )
   }
 }
+
+ButtonInputWpop.propTypes = {
+  n: PropTypes.number,
+  idp: PropTypes.string,
+  id: PropTypes.string,
+  class: PropTypes.string,
+  name: PropTypes.string,
+  info: PropTypes.string,
+  tips: PropTypes.string,
+  onClick: PropTypes.func
+}
 // Display a button
 class ButtonInput extends React.Component {
   constructor (props) {
@@ -434,6 +465,18 @@ class ButtonInput extends React.Component {
     )
   }
 }
+
+// FIXME: name is sometimes a string, sometimes an object?
+ButtonInput.propTypes = {
+  n: PropTypes.number,
+  id: PropTypes.string,
+  class: PropTypes.string,
+  name: PropTypes.object,
+  tips: PropTypes.string,
+  info: PropTypes.string,
+  onClick: PropTypes.func
+}
+
 // Display a menu
 class MenuInput extends React.Component {
   constructor (props) {
@@ -477,6 +520,16 @@ class MenuInput extends React.Component {
     )
   }
 }
+
+MenuInput.propTypes = {
+  id: PropTypes.string,
+  class: PropTypes.string,
+  name: PropTypes.string,
+  tips: PropTypes.string,
+  options: PropTypes.array,
+  listoptions: PropTypes.array
+}
+
 // Text input box
 class TxtInput extends React.Component {
   constructor (props) {
@@ -521,6 +574,20 @@ class TxtInput extends React.Component {
   }
 }
 
+TxtInput.propTypes = {
+  id: PropTypes.string,
+  class: PropTypes.string,
+  name: PropTypes.string,
+  className: PropTypes.string,
+  value: PropTypes.string,
+  placeholder: PropTypes.string,
+  Prepend: PropTypes.string,
+  tips: PropTypes.string,
+  info: PropTypes.string,
+  InvalidMessage: PropTypes.string,
+  onChange: PropTypes.func
+}
+
 // Outputs definition
 // ---------------------
 // ---------------------
@@ -556,6 +623,17 @@ class CostOutput extends React.Component {
     )
   }
 }
+
+CostOutput.propTypes = {
+  id: PropTypes.string,
+  class: PropTypes.string,
+  value: PropTypes.string,
+  name: PropTypes.string,
+  tips: PropTypes.string,
+  display: PropTypes.string,
+  onCostChange: PropTypes.func
+}
+
 // Display a text box for display
 function Textoutput (props) {
   return (
@@ -565,6 +643,9 @@ function Textoutput (props) {
   )
 }
 
+Textoutput.propTypes = {
+  text: PropTypes.string
+}
 // Plugins definition
 // ---------------------
 // ---------------------
@@ -657,6 +738,14 @@ class AmountRatesCost extends React.Component {
     this.props.onCostChange(this.props.n, total)
     return total
   }
+}
+
+AmountRatesCost.propTypes = {
+  id: PropTypes.string,
+  n: PropTypes.number,
+  data: PropTypes.object,
+  export: PropTypes.func,
+  onCostChange: PropTypes.func
 }
 
 class CategoryAmountRatesCost extends React.Component {
@@ -763,6 +852,14 @@ class CategoryAmountRatesCost extends React.Component {
   }
 }
 
+CategoryAmountRatesCost.propTypes = {
+  id: PropTypes.string,
+  n: PropTypes.number,
+  data: PropTypes.object,
+  export: PropTypes.func,
+  onCostChange: PropTypes.func
+}
+
 class CategoryCost extends React.Component {
   constructor (props) {
     super(props)
@@ -814,6 +911,15 @@ class CategoryCost extends React.Component {
   }
 }
 
+CategoryCost.propTypes = {
+  id: PropTypes.string,
+  n: PropTypes.number,
+  data: PropTypes.object,
+  export: PropTypes.func,
+  onCostChange: PropTypes.func,
+  onChange: PropTypes.func
+}
+
 class NoneSelect extends React.Component {
   constructor (props) {
     super(props)
@@ -835,6 +941,13 @@ class NoneSelect extends React.Component {
             </div>
     )
   }
+}
+
+NoneSelect.propTypes = {
+  n: PropTypes.number,
+  export: PropTypes.func,
+  onCostChange: PropTypes.func,
+  onChange: PropTypes.func
 }
 
 class UserCost extends React.Component {
@@ -937,6 +1050,17 @@ class UserCost extends React.Component {
             </div>
     )
   }
+}
+
+UserCost.propTypes = {
+  id: PropTypes.string,
+  n: PropTypes.number,
+  export: PropTypes.func,
+  onCostChange: PropTypes.func,
+  handlebyYearChange: PropTypes.func,
+  handleServiceChange: PropTypes.func,
+  handleProviderChange: PropTypes.func,
+  handleCostChange: PropTypes.func
 }
 
 // Combine plugins
@@ -1152,6 +1276,17 @@ class ProviderPluginsSelector extends React.Component {
   }
 }
 
+ProviderPluginsSelector.propTypes = {
+  n: PropTypes.number,
+  showMinus: PropTypes.bool,
+  conv: PropTypes.object,
+  data: PropTypes.object,
+  export: PropTypes.func,
+  handleCostChange: PropTypes.func,
+  handleAddPlugin: PropTypes.func,
+  handleRmvPlugin: PropTypes.func
+}
+
 // Displays the header of a plugin (button +- name cost ...)
 class ModuleHeader extends React.Component {
   constructor (props) {
@@ -1267,6 +1402,23 @@ class ModuleHeader extends React.Component {
   }
 }
 
+// FIXME Cost is sometimes a string and sometimes a number?
+ModuleHeader.propTypes = {
+  showMinus: PropTypes.bool,
+  showPlus: PropTypes.bool,
+  id: PropTypes.string,
+  keys: PropTypes.array,
+  selected: PropTypes.number,
+  n: PropTypes.number,
+  comments: PropTypes.string,
+  Cost: PropTypes.string,
+  Cdata: PropTypes.object,
+  handleAddPlugin: PropTypes.func,
+  handleRmvPlugin: PropTypes.func,
+  conv: PropTypes.object,
+  data: PropTypes.object
+}
+
 // displays one kind plugin it manages the add and removes option
 class ManagePlugins extends React.Component {
   constructor (props) {
@@ -1352,6 +1504,14 @@ class ManagePlugins extends React.Component {
   }
 }
 
+ManagePlugins.propTypes = {
+  handleCostChange: PropTypes.func,
+  export: PropTypes.func,
+  n: PropTypes.number,
+  conv: PropTypes.object,
+  data: PropTypes.object
+}
+
 // displays all the plugins defined in the Maindata
 class PluginsMain extends React.Component {
   constructor (props) {
@@ -1426,6 +1586,13 @@ class PluginsMain extends React.Component {
             </div>
     )
   }
+}
+
+PluginsMain.propTypes = {
+  export: PropTypes.func,
+  TotalCost: PropTypes.func,
+  conv: PropTypes.object,
+  data: PropTypes.array
 }
 
 // MAIN
