@@ -1,5 +1,10 @@
 'use strict'
 
+// Declarations for entities defined in other scripts
+let React
+
+let MainData
+
 let _paq = window._paq || []
 
 const Stats = {

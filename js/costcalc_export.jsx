@@ -1,5 +1,16 @@
 'use strict'
 
+// Declarations for entities defined in other scripts
+let React
+let Proptypes
+
+let ButtonInput
+let Stats
+let ConvCurrency
+
+let projectduration
+let projectname
+
 // This code manages the export part of the engine
 class ManageExport extends React.Component {
   constructor (props) {
@@ -401,4 +412,9 @@ class ManageExport extends React.Component {
   fnDeSelect () {
     if (document.selection) { document.selection.empty() } else if (window.getSelection) { window.getSelection().removeAllRanges() }
   }
+}
+
+ManageExport.propTypes = {
+  conv: Proptypes.object,
+  data: Proptypes.object
 }

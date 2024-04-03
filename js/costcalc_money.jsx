@@ -1,4 +1,16 @@
-'use strict';
+'use strict'
+
+// Declarations for entities defined in other scripts
+let React
+let PropTypes
+let fx
+
+let SelectorInput
+let TxtInput
+let MainData
+
+let toMoney
+let toNumeric
 
 // Money is the http://openexchangerates.github.io/money.js/#playground Lib
 const Money = fx.noConflict()
@@ -65,6 +77,11 @@ class CurrencySelect extends React.Component {
       return (null)
     }
   }
+}
+
+CurrencySelect.propTypes = {
+  id: PropTypes.string,
+  money: PropTypes.func
 }
 
 class PluginsCurrencyChange extends React.Component {
@@ -162,9 +179,15 @@ class PluginsCurrencyChange extends React.Component {
   }
 }
 
+PluginsCurrencyChange.propTypes = {
+  id: PropTypes.string,
+  name: PropTypes.string,
+  onCostChange: PropTypes.func
+}
+
 // This function convert the input (ie numnber or string) to the converted currency
-function ConvCurrency (main_cur) {
-  return toMoney(Money.convert(toNumeric(main_cur)), Money.settings.to)
+function ConvCurrency (mainCurrency) {
+  return toMoney(Money.convert(toNumeric(mainCurrency)), Money.settings.to)
 }
 
 // Init function for downloading the rate from Open Exchange Rates
