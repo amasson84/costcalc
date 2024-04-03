@@ -298,4 +298,6 @@ class PopupStats extends React.Component {
   }
 }
 
+PopupStats.propTypes = {}
+
 Stats.InitStat()

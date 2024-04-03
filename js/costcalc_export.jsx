@@ -2,7 +2,7 @@
 
 // Declarations for entities defined in other scripts
 let React
-let Proptypes
+let PropTypes
 
 let ButtonInput
 let Stats
