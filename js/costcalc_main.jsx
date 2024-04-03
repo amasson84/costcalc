@@ -3,6 +3,24 @@
 let projectname = ''
 let projectduration = 0
 
+// Declarations for entities defined in other scripts
+let MainData
+let Stats
+let MoneyEnable
+let MoneyGetRates
+let ConvCurrency
+
+let PluginsCurrencyChange
+let PopupStats
+let ManageExport
+let CurrencySelect
+
+let _paq
+
+let React
+let ReactDOM
+let PropTypes
+
 // Functions Tools
 // ---------------------
 // ---------------------
@@ -14,12 +32,19 @@ function Repeat (props) {
   }
   return <div>{items}</div>
 }
+
+Repeat.propTypes = {
+  numTimes: PropTypes.number,
+  children: PropTypes.func
+}
+
 // convert string to numeric
 function toNumeric (value) {
   return parseFloat(
     value.toString().replace(/[^0-9\\.]+/g, '')
   )
 }
+
 // Covert numeric to money string
 function toMoney (numeric, currency) {
   if (typeof numeric === 'string') {
@@ -33,6 +58,7 @@ function toMoney (numeric, currency) {
   }
   return numeric.toFixed(0).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + ' ' + strcur
 }
+
 // return the sum of an array
 function sum (obj) {
   const val = Object.values(obj)
@@ -42,6 +68,7 @@ function sum (obj) {
   }
   return total
 }
+
 // Comapare two obj return true is similar
 Object.compare = function (obj1, obj2) {
   // Loop through properties in object 1
@@ -86,6 +113,7 @@ function randomInt (not) {
   } while (cont)
   return rnd
 }
+
 // Inputs Definition
 // ---------------------
 // ---------------------
@@ -130,6 +158,18 @@ class AmountInput extends React.Component {
     )
   }
 }
+
+AmountInput.propTypes = {
+  onChange: PropTypes.func,
+  value: PropTypes.number,
+  name: PropTypes.string,
+  id: PropTypes.string,
+  min: PropTypes.number,
+  max: PropTypes.number,
+  step: PropTypes.number,
+  unit: PropTypes.number
+}
+
 // Display a select input box
 class SelectorInput extends React.Component {
   constructor (props) {
@@ -207,6 +247,14 @@ class SelectorInput extends React.Component {
     )
   }
 }
+
+AmountInput.propTypes = {
+  onChange: PropTypes.func,
+  tips: PropTypes.string,
+
+}
+
+
 // Make the read more button
 class MakeknowmoreInput extends React.Component {
   constructor (props) {
@@ -1297,6 +1345,7 @@ class ManagePlugins extends React.Component {
     )
   }
 }
+
 // displays all the plugins defined in the Maindata
 class PluginsMain extends React.Component {
   constructor (props) {
@@ -1705,11 +1754,9 @@ class Main extends React.Component {
 // Main Declaration
 // ---------------------
 // ---------------------
-//ReactDOM.render(<Main />, document.getElementById('root'))
-
-const container = document.getElementById('root');
-const root = ReactDOM.createRoot(container); // createRoot(container!) if you use TypeScript
-root.render(<Main />);
+const container = document.getElementById('root')
+const root = ReactDOM.createRoot(container) // createRoot(container!) if you use TypeScript
+root.render(<Main />)
 
 // Display the stats popup after 10s
 if (Stats.Enable) { setTimeout(function () { $('#PopupStats').modal('show') }, 10000) }
