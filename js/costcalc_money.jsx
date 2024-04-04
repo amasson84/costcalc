@@ -197,7 +197,7 @@ function ConvCurrency (mainCurrency) {
 function MoneyGetRates () {
   // Load exchange rates data via AJAX:
   if (MainData.OEXRApi !== '') {
-    const com = $.ajax({
+    $.ajax({
       // NB: using Open Exchange Rates here, but you can use any source!
       url: 'https://openexchangerates.org/api/latest.json?app_id=' + MainData.OEXRApi,
       dataType: 'json',
