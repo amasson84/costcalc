@@ -20,7 +20,7 @@
 
     "description": "A dynamic online tool for calculating the cost of research data storage services. It's highly modular and can be adapted for all kind of application. The system is really easy to install as it uses only opensource javascript libraries.",
 
-    "upload_type": "image",
+    "upload_type": "software",
 
     "keywords": [
         "RDM",
