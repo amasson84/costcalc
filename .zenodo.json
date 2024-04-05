@@ -1,0 +1,40 @@
+{
+    "creators": [
+        {
+            "orcid": "0000-0002-7993-5698",
+            "affiliation": "EPFL",
+            "name": "Masson, Antoine"
+        },
+        {
+            "orcid": "0000-0003-3268-3195",
+            "affiliation": "EPFL",
+            "name": "Borel, Alain"
+        }
+    ],
+
+    "license": "gpl-3.0-only",
+
+    "title": "RDM Cost Calculator",
+
+    "version": "2.3",
+
+    "description": "A dynamic online tool for calculating the cost of research data storage services. It's highly modular and can be adapted for all kind of application. The system is really easy to install as it uses only opensource javascript libraries.",
+
+    "upload_type": "image",
+
+    "keywords": [
+        "RDM",
+        "DMP",
+        "Webtools",
+        "Research Data Management"
+    ],
+
+    "language": "javascript",
+
+    "keywords": ["Cats", "Laser", "Behavior"],
+
+    "communities": [
+        {"identifier": "epfl"}
+    ]
+}
+

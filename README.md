@@ -30,7 +30,6 @@ The documentation of the project explains how to install it and configure it. Se
 * index.html : main index for production
 * **docs** contains the documentation for changing the database of provider or the engine itself.
 * __index-dev.html__ : Index file for development only
-*  __index-pres.html__ : Index file for presentation only
 
 
 ## Citation
@@ -40,6 +39,6 @@ The citation information are in the __CITATION__ file and __CODEMETA.json__.
 
 ## License and Term of Usage
 
-This project is release under GNuv3 license see __LICENSE__.
+This project is release under the GNU GPLv3 license, see __LICENSE__.
 
 It's a work of the Research Data Management Team at EPFL Library in Switzerland.
