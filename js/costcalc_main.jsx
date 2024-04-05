@@ -467,7 +467,7 @@ class ButtonInput extends React.Component {
 }
 
 ButtonInput.propTypes = {
-  n: PropTypes.number,
+  n: PropTypes.string,
   id: PropTypes.string,
   class: PropTypes.string,
   name: PropTypes.object,
@@ -655,7 +655,7 @@ class AmountRatesCost extends React.Component {
     this.handleRateChange = this.handleRateChange.bind(this)
     this.state = {
       Amount: 1,
-      SelectRate: 0,
+      SelectRate: '0',
       Rate: this.props.data.Rates[Object.keys(this.props.data.Rates)[0]],
       Adaptive: false
 
@@ -1785,7 +1785,7 @@ class Main extends React.Component {
                     <p className="lead">
                       We hope you will enjoy this tool and it will be useful for you.
                     </p>
-                    <ButtonInput class="btn btn-primary" id="head-howto" name="To Know More (HOWTO)" onClick={this.move2howto}/> &nbsp;
+                    <ButtonInput class="btn btn-primary" id="head-howto" name={<span>To Know More (HOWTO)</span>} onClick={this.move2howto}/> &nbsp;
                       {helpbtn}
                   </div>
                 </div>
@@ -1901,7 +1901,7 @@ class Main extends React.Component {
                       You can export your work into different formats : <br/>
                       <samp> HTML</samp> : This format can be used in any wordprocessing software (such as Microsoft Word or Libreoffice).<br/>
                       <samp>HTML Source code</samp>, <samp>Markdown</samp>, and <samp>CSV</samp> formats are also possible.<br/>
-                      Click on the  <ButtonInput class="btn-secondary" id="btn-export" name="Copy to Clipboard" tips="Copy the output into your clipboard"
+                      Click on the  <ButtonInput class="btn-secondary" id="btn-export" name={<span>Copy to Clipboard</span>} tips="Copy the output into your clipboard"
                                                  onClick={this.fctnull}/> in order to copy your work into your clipboard.
                       A simple <kbd>Paste</kbd> will transfer your work into any software.
 

@@ -70,19 +70,19 @@ class ManageExport extends React.Component {
     return (
             <div className="row" id="export-btn">
               <div className="col-auto">
-                <ButtonInput class="btn-primary" onClick={this.make_export} id="btn-export" name="Export HTML" tips="Export in HTML, can also be used into Word"
+                <ButtonInput class="btn-primary" onClick={this.make_export} id="btn-export" name={<span>Export HTML</span>} tips="Export in HTML, can also be used into Word"
                              n="html"/>
               </div>
               <div className="col-auto">
-                <ButtonInput class="btn-secondary" onClick={this.make_export} id="btn-export" name="Export HTML Source" tips="Export in HTML source code"
+                <ButtonInput class="btn-secondary" onClick={this.make_export} id="btn-export" name={<span>Export HTML Source</span>} tips="Export in HTML source code"
                              n="htmlsrc"/>
               </div>
               <div className="col-auto">
-                <ButtonInput class="btn-success" onClick={this.make_export} id="btn-export" name="Export Markdown" tips="Export in Markdown source code"
+                <ButtonInput class="btn-success" onClick={this.make_export} id="btn-export" name={<span>Export Markdown</span>} tips="Export in Markdown source code"
                              n="mark"/>
               </div>
               <div className="col-auto">
-                <ButtonInput class="btn-warning" onClick={this.make_export} id="btn-warning" name="Export CSV" tips="Export in CSV source code"
+                <ButtonInput class="btn-warning" onClick={this.make_export} id="btn-warning" name={<span>Export CSV</span>} tips="Export in CSV source code"
                              n="csv"/>
               </div>
             </div>
@@ -92,14 +92,14 @@ class ManageExport extends React.Component {
   options_btn (opt) {
     let Namermv = ''
     if (this.state.rmvempty) {
-      Namermv = 'Display Empty Lines'
+      Namermv = <span>Display Empty Lines</span>
     } else {
-      Namermv = 'Remove Empty Lines'
+      Namermv = <span>Remove Empty Lines</span>
     }
     return (
             <div className="row">
               <div className="col-auto">
-                  <ButtonInput class="btn-secondary" onClick={this.make_copy} id="btn-export" name="Copy to Clipboard" tips="Copy the output into your clipboard"
+                  <ButtonInput class="btn-secondary" onClick={this.make_copy} id="btn-export" name={<span>Copy to Clipboard</span>} tips="Copy the output into your clipboard"
                                n="mark"/>
               </div>
               <div className="col-auto">
@@ -107,7 +107,7 @@ class ManageExport extends React.Component {
                              n="mark"/>
               </div>
               <div className="col-auto">
-                <ButtonInput class="btn-dark" onClick={this.hide} id="btn-export" name="Hide Export" tips="Hide export"
+                <ButtonInput class="btn-dark" onClick={this.hide} id="btn-export" name={<span>Hide Export</span>} tips="Hide export"
                              n="mark"/>
               </div>
             </div>
@@ -416,5 +416,5 @@ class ManageExport extends React.Component {
 
 ManageExport.propTypes = {
   conv: PropTypes.object,
-  data: PropTypes.object
+  data: PropTypes.array
 }
