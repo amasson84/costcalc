@@ -55,7 +55,7 @@ class CurrencySelect extends React.Component {
   componentDidUpdate () {
     if (this.state.prevselec !== this.state.SelectCur) {
       this.props.money({ Enable: this.state.Enable, Cur: this.state.Cur })
-      this.state.prevselec = this.state.SelectCur
+      this.setState({ prevselec: this.state.SelectCur })
     }
   }
 
@@ -137,7 +137,7 @@ class PluginsCurrencyChange extends React.Component {
   componentDidUpdate () {
     if (this.state.prevvalue !== this.state.value) {
       this.makecost()
-      this.state.prevvalue = this.state.value
+      this.setState({ prevvalue: this.state.value })
     }
   }
 
