@@ -249,7 +249,6 @@ class SelectorInput extends React.Component {
   }
 }
 
-// FIXME inconsistent strings and numbers for this.props.selected (at least)
 SelectorInput.propTypes = {
   onChange: PropTypes.func,
   tips: PropTypes.string,
@@ -338,10 +337,11 @@ CheckboxInput.propTypes = {
 
 // Display a btn with link
 class ButtonHrefInput extends React.Component {
+  /*
   constructor (props) {
     super(props)
-    console.log('ButtonHrefInput constructor called')
   }
+  */
 
   componentDidMount () {
     $('[data-toggle="tooltip"]').tooltip()
@@ -466,7 +466,6 @@ class ButtonInput extends React.Component {
   }
 }
 
-// FIXME: name is sometimes a string, sometimes an object?
 ButtonInput.propTypes = {
   n: PropTypes.number,
   id: PropTypes.string,
@@ -524,7 +523,7 @@ class MenuInput extends React.Component {
 MenuInput.propTypes = {
   id: PropTypes.string,
   class: PropTypes.string,
-  name: PropTypes.string,
+  name: PropTypes.object,
   tips: PropTypes.string,
   options: PropTypes.array,
   listoptions: PropTypes.array
@@ -1081,10 +1080,10 @@ class ProviderPluginsSelector extends React.Component {
     this.makeExportcmp = this.makeExportcmp.bind(this)
     this.makeExport = this.makeExport.bind(this)
     this.state = {
-      selected: 0,
+      selected: '0',
       keys: this.ProvidersName(props.data),
-      n: 1,
-      cost: 0,
+      n: '1',
+      cost: '0',
       comments: '',
       Provider: '',
       Name: '',
@@ -1402,13 +1401,12 @@ class ModuleHeader extends React.Component {
   }
 }
 
-// FIXME Cost is sometimes a string and sometimes a number?
 ModuleHeader.propTypes = {
   showMinus: PropTypes.bool,
   showPlus: PropTypes.bool,
   id: PropTypes.string,
   keys: PropTypes.array,
-  selected: PropTypes.number,
+  selected: PropTypes.string,
   n: PropTypes.number,
   comments: PropTypes.string,
   Cost: PropTypes.string,
