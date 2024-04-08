@@ -426,7 +426,7 @@ ButtonInputWpop.propTypes = {
   idp: PropTypes.string,
   id: PropTypes.string,
   class: PropTypes.string,
-  name: PropTypes.string,
+  name: PropTypes.object,
   info: PropTypes.string,
   tips: PropTypes.string,
   onClick: PropTypes.func
@@ -801,18 +801,18 @@ class CategoryAmountRatesCost extends React.Component {
     let AmountMin
     let AmountMax
     let AmountStep
-    let AmountFree
+    // let AmountFree
     if (this.state.Adaptive) {
       // console.log('this.props.data.AmountMin', this.props.data.AmountMin, 'this.props.data.AmountMax', this.props.data.AmountMax, ' selected rate', this.state.SelectRate)
       AmountMin = this.props.data.AmountMin[this.state.SelectRate]
       AmountMax = this.props.data.AmountMax[this.state.SelectRate]
       AmountStep = this.props.data.AmountStep[this.state.SelectRate]
-      AmountFree = this.props.data.AmountFree[this.state.SelectRate]
+      // AmountFree = this.props.data.AmountFree[this.state.SelectRate]
     } else {
       AmountMin = this.props.data.AmountMin
       AmountMax = this.props.data.AmountMax
       AmountStep = this.props.data.AmountStep
-      AmountFree = this.props.data.AmountFree
+      // AmountFree = this.props.data.AmountFree
     }
     if (this.state.Amount > AmountMax) {
       this.setState({ Amount: AmountMax })
@@ -1802,13 +1802,13 @@ class Main extends React.Component {
             <div id="page_foot" >
               <div className="jumbotron jumbotron-fluid">
                 <div className="alert alert-danger" role="alert" id="infotxt">
-                  The values published on this service are only informative and cannot be used for exact calculation. If you see some mistake or would like to
-                  have another services please contact us.
+                  The values we report are only informative and should not be used for exact calculations. However, feel free to contact us if you see some mistake, or if you would like us to
+                  add other services.
                   <br/><strong>Last Database Update : {MainData.Updated} </strong>
                 </div>
                 <div id="service">
-                  <p>This service has been developed by the <a href="https://researchdata.epfl.ch">Resarch Data Management Team</a> of the <a href="https://library.epfl.ch">EPFL Library</a>  <br/>
-                     This software is publish under GPL-3.0-only license and you are using <strong>Version {MainData.Version}</strong>.<br/>
+                  <p>This application has been developed by the <a href="https://researchdata.epfl.ch">Resarch Data Management Team</a> of the <a href="https://library.epfl.ch">EPFL Library</a>  <br/>
+                     This software is published under GPL-3.0-only license, and you are using <strong>Version {MainData.Version}</strong>.<br/>
                      Source code can be download <a href="https://c4science.ch/source/costcalc/">here</a></p>
                   <p><small>Icons are from the Noun Project (Book by Randi NI, Storage by I Pitu, Database by Novalyi, data cloud by Vectors Market, Information and Next by Gregor Cresnar, Database by Creative Mahira, Archive by dp indo)</small></p>
                 </div>
@@ -1826,7 +1826,7 @@ class Main extends React.Component {
                 <dt className="col-sm-3">Change Currency</dt>
                 <dd className="col-sm-9">
                   <p>If you need another currency than {MainData.Currency} you can add an extra currency by selecting in the <mark>Change Currency menu</mark></p>
-                  <p> Actual rate is automatically applied using <a href="https://openexchangerates.org/">openexchangerates</a></p>
+                  <p> The current exchange rate is automatically applied using <a href="https://openexchangerates.org/">openexchangerates</a></p>
                 </dd>
               </dl>
     }
@@ -1841,7 +1841,7 @@ class Main extends React.Component {
                     <dt className="col-sm-3">Project Name and Duration</dt>
                     <dd className="col-sm-9">
                       <p>  The Project name is only used for you.</p>
-                      <p> <mark>Project Duration</mark> is used for subscription services charged by year : the yearly cost will be multiplied by the duration of the project.</p>
+                      <p> <mark>Project Duration</mark> is used for subscription services charged by year: the yearly cost will be multiplied by the duration of the project.</p>
                     </dd>
                   </dl>
 
@@ -1849,7 +1849,7 @@ class Main extends React.Component {
                   <dl className="row">
                     <dt className="col-sm-3">Categories</dt>
                     <dd className="col-sm-9">
-                      This tool is divided by categories (for example Activate storage). Click
+                      This tool is divided into categories (for example Active storage). Click
                       on the category name, and it will expand.
                     </dd>
                   </dl>
@@ -1901,7 +1901,7 @@ class Main extends React.Component {
                     <dt className="col-sm-3">Export</dt>
                     <dd className="col-sm-9">
                       You can export your work into different formats : <br/>
-                      <samp> HTML</samp> : This format can be used in any wordprocessing software (such as Microsoft Word or Libreoffice).<br/>
+                      <samp>HTML</samp> : This format can be used in any wordprocessing software (such as Microsoft Word or Libreoffice).<br/>
                       <samp>HTML Source code</samp>, <samp>Markdown</samp>, and <samp>CSV</samp> formats are also possible.<br/>
                       Click on the  <ButtonInput class="btn-secondary" id="btn-export" name={<span>Copy to Clipboard</span>} tips="Copy the output into your clipboard"
                                                  onClick={this.fctnull}/> in order to copy your work into your clipboard.
