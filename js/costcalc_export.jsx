@@ -90,7 +90,7 @@ class ManageExport extends React.Component {
   }
 
   options_btn (opt) {
-    let Namermv = ''
+    let Namermv = <span/>
     if (this.state.rmvempty) {
       Namermv = <span>Display Empty Lines</span>
     } else {

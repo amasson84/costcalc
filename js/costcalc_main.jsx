@@ -1489,17 +1489,16 @@ class ManagePlugins extends React.Component {
     }
     this.makeExport()
     return (
-               <div>
-                    <Repeat numTimes={this.giveN()}>
+              <div>
+                  <Repeat numTimes={this.giveN()}>
                         {(index) => <ProviderPluginsSelector data={this.props.data} key={this.state.displayed[index]}
                                                  showMinus={showMinus} n={index}
                                                  handleCostChange={this.handleCostChange} handleAddPlugin={this.handleAddPlugin}
                                                              handleRmvPlugin={this.handleRmvPlugin} export={this.makeExportplug}
                                                              conv={this.props.conv}/>}
 
-                    </Repeat>
-               </div>
-
+                  </Repeat>
+              </div>
     )
   }
 }
