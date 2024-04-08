@@ -416,5 +416,5 @@ class ManageExport extends React.Component {
 
 ManageExport.propTypes = {
   conv: PropTypes.object,
-  data: PropTypes.array
+  data: PropTypes.object
 }

@@ -162,7 +162,7 @@ class AmountInput extends React.Component {
 AmountInput.propTypes = {
   onChange: PropTypes.func,
   tips: PropTypes.string,
-  value: PropTypes.number,
+  value: PropTypes.string,
   name: PropTypes.string,
   id: PropTypes.string,
   min: PropTypes.string,
@@ -580,7 +580,7 @@ TxtInput.propTypes = {
   className: PropTypes.string,
   value: PropTypes.string,
   placeholder: PropTypes.string,
-  Prepend: PropTypes.string,
+  Prepend: PropTypes.object,
   tips: PropTypes.string,
   info: PropTypes.string,
   InvalidMessage: PropTypes.string,
@@ -654,7 +654,7 @@ class AmountRatesCost extends React.Component {
     this.handleAmountChange = this.handleAmountChange.bind(this)
     this.handleRateChange = this.handleRateChange.bind(this)
     this.state = {
-      Amount: 1,
+      Amount: '1',
       SelectRate: '0',
       Rate: this.props.data.Rates[Object.keys(this.props.data.Rates)[0]],
       Adaptive: false
@@ -710,8 +710,8 @@ class AmountRatesCost extends React.Component {
     return (
             <div className="row align-items-center">
               <div className="col">
-                <AmountInput id={this.props.id} min={AmountMin} max={AmountMax}
-                             step={AmountStep} value={this.state.Amount} name={this.props.data.AmountName}
+                <AmountInput id={this.props.id} min={AmountMin.toString()} max={AmountMax.toString()}
+                             step={AmountStep.toString()} value={this.state.Amount.toString()} name={this.props.data.AmountName}
                              unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} tips="Select the desired amount"/>
               </div>
               <div className="col-3">
@@ -755,10 +755,10 @@ class CategoryAmountRatesCost extends React.Component {
     this.handleRateChange = this.handleRateChange.bind(this)
     // console.log('in constructor', this.props.data.Rates)
     this.state = {
-      SelectCat: 0,
+      SelectCat: '0',
       Cat: this.props.data.Cat[Object.keys(this.props.data.Cat)[0]],
       Amount: 0,
-      SelectRate: 0,
+      SelectRate: '0',
       Rate: this.props.data.Rates[Object.keys(this.props.data.Rates)[0]],
       Free: 0,
       Adaptive: false
@@ -865,7 +865,7 @@ class CategoryCost extends React.Component {
     this.handleCatChange = this.handleCatChange.bind(this)
 
     this.state = {
-      SelectCat: 0,
+      SelectCat: '0',
       Cat: this.props.data.Cat[Object.keys(this.props.data.Cat)[0]]
     }
     this.makeExport()
@@ -1030,11 +1030,11 @@ class UserCost extends React.Component {
               <div className="row align-items-baseline">
                 <div className="col-3">
                   <TxtInput id={this.props.id + '-input'} name="Provider" placeholder="Provider here" tips="Add your own cost calculation here" onChange={this.handleProviderChange}
-                            class={this.classtxt(this.state.ProviderError)} Prepend="" InvalidMessage="Please provide a Provider"/>
+                            class={this.classtxt(this.state.ProviderError)} Prepend={<span/>} InvalidMessage="Please provide a Provider"/>
                 </div>
                 <div className="col-3">
                   <TxtInput id={this.props.id + '-input'} name="Service" placeholder="Service here" tips="Add your own cost calculation here" onChange={this.handleServiceChange}
-                            class={this.classtxt(this.state.ServiceError)} Prepend="" InvalidMessage="Please provide a Service"/>
+                            class={this.classtxt(this.state.ServiceError)} Prepend={<span/>} InvalidMessage="Please provide a Service"/>
                 </div>
                 <div className="col-5">
                   <PluginsCurrencyChange id="UserCostcurrency" name={Costname} onCostChange={this.handleCostChange}/>
@@ -1111,8 +1111,10 @@ class ProviderPluginsSelector extends React.Component {
     this.setState({ Provider: this.props.data.Data[select].Provider })
     this.setState({ Name: this.props.data.Data[select].Name })
     this.props.handleCostChange(this.props.n, this.state.cost)
-    // Send a provider even when provider change
-    Stats.RecordEvent('Provider', this.state.Provider, 0)
+    // Send a provider even when provider change, but not for empty values
+    if (this.state.Provider.length) {
+      Stats.RecordEvent('Provider', this.state.Provider, 0)
+    }
   }
 
   componentDidUpdate () {
@@ -1322,7 +1324,7 @@ class ModuleHeader extends React.Component {
     }
     if (this.props.showPlus) {
       plus = <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icon\plus.png" width="20"/>}
-                         onClick={this.handleAddPlugin} n={this.props.n} tips={'Add a new ' + this.props.data.Name}/>
+                         onClick={this.handleAddPlugin} n={this.props.n.toString()} tips={'Add a new ' + this.props.data.Name}/>
     }
     if (this.props.conv.Enable) {
       convout = <CostOutput id="ccostconv" class="itemcost" name="" value={ConvCurrency(this.props.Cost)} tips="Converted cost for this provider"/>
@@ -1610,7 +1612,7 @@ class Main extends React.Component {
     this.state = {
       total: 0,
       export: [],
-      exportmain: [],
+      exportmain: {},
       name: '',
       duration: MainData.DefaultDuration,
       conv: { Enable: false, Cur: '' }
@@ -1703,7 +1705,7 @@ class Main extends React.Component {
                     </div>
                     <div className="col-3">
                       <AmountInput id="project-duration" min="1" max="10" step="1" name="Project Duration" unit="year" tips="Select the duration of the project (in year)"
-                                   value={this.state.duration} onChange={this.handleDurationChange}/>
+                                   value={this.state.duration.toString()} onChange={this.handleDurationChange}/>
                     </div>
                     <div className="col-3">
                       <CurrencySelect id="maincurrency" money={this.handleConvMoneyChange}/>

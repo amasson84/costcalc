@@ -5,7 +5,7 @@ let React
 
 let MainData
 
-let _paq = window._paq || []
+const _paq = window._paq || []
 
 const Stats = {
   Enable: false,
@@ -51,6 +51,7 @@ const Stats = {
     if (this.Enable) {
       switch (this.Engine) {
         case 'matomo':
+          // console.log(['trackEvent', action, name, value])
           _paq.push(['trackEvent', action, name, value])
           break
       }

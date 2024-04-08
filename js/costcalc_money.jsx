@@ -25,7 +25,7 @@ class CurrencySelect extends React.Component {
     selectable.unshift(MainData.Currency)
     this.state = {
       Enable: false,
-      SelectCur: 0,
+      SelectCur: '0',
       Cur: selectable[0],
       Selectable: selectable,
       prevselec: -1
@@ -93,7 +93,7 @@ class PluginsCurrencyChange extends React.Component {
     selectable.unshift(MainData.Currency)
     this.state = {
       Enable: false,
-      SelectCur: 0,
+      SelectCur: '0',
       Cur: selectable[0],
       Selectable: selectable,
       prevvalue: -1,
@@ -206,7 +206,6 @@ function MoneyGetRates () {
         Money.rates = data.rates
         Money.base = data.base
       }
-
     })
       .done(function () {
         console.log('Money data loaded')
