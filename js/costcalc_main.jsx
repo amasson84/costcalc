@@ -829,8 +829,8 @@ class CategoryAmountRatesCost extends React.Component {
               </div>
 
               <div className="col-4">
-                <AmountInput id={this.props.id} min={AmountMin} max={AmountMax} step={AmountStep}
-                             value={this.state.Amount} name={this.props.data.AmountName} unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} />
+                <AmountInput id={this.props.id} min={AmountMin.toString()} max={AmountMax.toString()} step={AmountStep.toString()}
+                             value={this.state.Amount.toString()} name={this.props.data.AmountName} unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} />
               </div>
               <div className="col-4">
                 <SelectorInput id={this.props.id + '-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)} rate={this.state.Rate}
@@ -1124,7 +1124,11 @@ class ProviderPluginsSelector extends React.Component {
 
   makeExportcmp (data) {
     this.state.exportcmp = data
-    // this.setState({ exportcmp: data })
+    /*
+    if (this.state.exportcmp !== data) {
+      this.setState({ exportcmp: data })
+    }
+    */
   }
 
   makeExport () {
@@ -1243,13 +1247,20 @@ class ProviderPluginsSelector extends React.Component {
 
   cmpdata (select) {
     const out = this.props.data.Data[select]
+    const newKeys = this.state.keys
     if (this.state.manualname) {
       out.Name = this.state.Name
       out.ByYear = this.state.manbyyear
       if (this.state.Provider === '') {
-        this.state.keys[select] = 'Please provide a Provider'
+        // this.state.keys[select] = 'Please provide a Provider'
+        newKeys[select] = 'Please provide a Provider'
+        this.setState({ keys: newKeys })
       } else {
-        this.state.keys[select] = this.state.Provider
+        // this.state.keys[select] = this.state.Provider
+        if (this.state.keys[select] !== this.state.Provider) {
+          newKeys[select] = this.state.Provider
+          this.setState({ keys: newKeys })
+        }
       }
     }
     return out
@@ -1262,7 +1273,10 @@ class ProviderPluginsSelector extends React.Component {
       case 'CategoryCost' : return CategoryCost
       case 'CategoryAmountRatesCost' : return CategoryAmountRatesCost
       case 'NoneSelect' : return NoneSelect
-      case 'UserCost' : { this.state.manualname = true; return UserCost }
+      case 'UserCost' : {
+        // TODO fixme: the script freezes when the user enters a char in any input field
+        // this.state.manualname = true
+        return UserCost }
     }
   }
 
@@ -1528,11 +1542,31 @@ class PluginsMain extends React.Component {
 
   handleCostChange (name, e) {
     this.state.varsum[name] = e
+    // TODO there must be a right way to do this
+    /*
+    let newVarsum = this.state.varsum
+    console.log('name', name, 'e', e, 'newVarsum', newVarsum)
+    if (name in this.state.varsum) {
+      if (this.state.varsum[name] !== e) {
+        newVarsum[name] = e
+        //this.setState({ varsum: newVarsum })
+      }
+    }
+    else  {
+      newVarsum[name] = e
+      //this.setState({ varsum: newVarsum })
+    }
+    */
     this.props.TotalCost(sum(this.state.varsum))
   }
 
   makeExportplug (data, n) {
-    this.state.export[n] = data
+    if (this.state.export[n] !== data) {
+      // this.state.export[n] = data
+      const newExport = this.state.export
+      newExport[n] = data
+      this.setState({ export: newExport })
+    }
     this.makeExport()
   }
 
