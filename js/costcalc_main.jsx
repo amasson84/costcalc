@@ -1193,9 +1193,6 @@ class ProviderPluginsSelector extends React.Component {
 
   render () {
     const selected = this.state.selected
-    this.state.manualname = false
-    this.state.keys = this.ProvidersName(this.props.data)
-    // this.setState({ manualname: false, ProvidersName: this.props.data})
     const Cmp = this.cmp2string(this.cmpdata(selected).Style)
     const Cdata = this.cmpdata(selected)
     const id = this.props.data.Name.replace(/\s/g, '') + this.props.n
