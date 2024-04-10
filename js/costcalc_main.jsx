@@ -71,6 +71,13 @@ function sum (obj) {
 
 // Comapare two obj return true is similar
 Object.compare = function (obj1, obj2) {
+  console.log('in Object.compare', obj1, obj2)
+  if (typeof (obj1) === 'undefined' && typeof (obj2) === 'undefined') {
+    return true
+  }
+  if (typeof (obj1) === 'undefined' || typeof (obj2) === 'undefined') {
+    return false
+  }
   // Loop through properties in object 1
   for (const p in obj1) {
     // Check property exists on both objects
@@ -1123,12 +1130,11 @@ class ProviderPluginsSelector extends React.Component {
   }
 
   makeExportcmp (data) {
-    this.state.exportcmp = data
-    /*
-    if (this.state.exportcmp !== data) {
+    // this.state.exportcmp = data
+    // console.log('in makeExportcmp', this.state.exportcmp, data)
+    if (!Object.compare(this.state.exportcmp, data)) {
       this.setState({ exportcmp: data })
     }
-    */
   }
 
   makeExport () {
@@ -1465,12 +1471,23 @@ class ManagePlugins extends React.Component {
   }
 
   handleCostChange (n, cost) {
-    this.state.varsum[n] = cost
+    const newVarsum = this.state.varsum
+    if (!Object.compare(newVarsum[n], cost)) {
+      newVarsum[n] = cost
+      this.setState({ varsum: newVarsum })
+    }
+    // this.state.varsum[n] = cost
     this.props.handleCostChange(this.props.n, sum(this.state.varsum))
   }
 
   makeExportplug (data, n) {
-    this.state.export[n] = data
+    const newExport = this.state.export
+    // console.log('in ManagerPlugin.makeExportplug', Object.compare(newExport[n], data), this.state.export[n] === data)
+    if (!Object.compare(newExport[n], data)) {
+      newExport[n] = data
+      this.setState({ export: newExport })
+    }
+    // this.state.export[n] = data
     this.makeExport()
   }
 
@@ -1538,22 +1555,13 @@ class PluginsMain extends React.Component {
   }
 
   handleCostChange (name, e) {
-    this.state.varsum[name] = e
-    // TODO there must be a right way to do this
-    /*
-    let newVarsum = this.state.varsum
-    console.log('name', name, 'e', e, 'newVarsum', newVarsum)
-    if (name in this.state.varsum) {
-      if (this.state.varsum[name] !== e) {
-        newVarsum[name] = e
-        //this.setState({ varsum: newVarsum })
-      }
-    }
-    else  {
+    // this.state.varsum[name] = e
+    const newVarsum = this.state.varsum
+    // here we are simply comparing numbers, no need for Object.compare()
+    if (newVarsum[name] !== e) {
       newVarsum[name] = e
-      //this.setState({ varsum: newVarsum })
+      this.setState({ varsum: newVarsum })
     }
-    */
     this.props.TotalCost(sum(this.state.varsum))
   }
 
