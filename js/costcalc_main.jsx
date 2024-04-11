@@ -71,7 +71,7 @@ function sum (obj) {
 
 // Comapare two obj return true is similar
 Object.compare = function (obj1, obj2) {
-  console.log('in Object.compare', obj1, obj2)
+  // console.log('in Object.compare', obj1, obj2)
   if (typeof (obj1) === 'undefined' && typeof (obj2) === 'undefined') {
     return true
   }
