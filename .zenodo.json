@@ -31,8 +31,6 @@
 
     "language": "en",
 
-    "keywords": ["Cats", "Laser", "Behavior"],
-
     "communities": [
         {"identifier": "epfl"}
     ]
