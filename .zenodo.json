@@ -29,9 +29,7 @@
         "Research Data Management"
     ],
 
-    "language": "javascript",
-
-    "keywords": ["Cats", "Laser", "Behavior"],
+    "language": "en",
 
     "communities": [
         {"identifier": "epfl"}
