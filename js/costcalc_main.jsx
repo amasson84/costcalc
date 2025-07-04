@@ -1037,11 +1037,11 @@ class UserCost extends React.Component {
               <div className="row align-items-baseline">
                 <div className="col-3">
                   <TxtInput id={this.props.id + '-input'} name="Provider" placeholder="Provider here" tips="Add your own cost calculation here" onChange={this.handleProviderChange}
-                            class={this.classtxt(this.state.ProviderError)} Prepend={<span/>} InvalidMessage="Please provide a Provider"/>
+                            class={this.classtxt(this.state.ProviderError)} Prepend={<span/>} InvalidMessage="Please enter a Provider"/>
                 </div>
                 <div className="col-3">
                   <TxtInput id={this.props.id + '-input'} name="Service" placeholder="Service here" tips="Add your own cost calculation here" onChange={this.handleServiceChange}
-                            class={this.classtxt(this.state.ServiceError)} Prepend={<span/>} InvalidMessage="Please provide a Service"/>
+                            class={this.classtxt(this.state.ServiceError)} Prepend={<span/>} InvalidMessage="Please enter a Service"/>
                 </div>
                 <div className="col-5">
                   <PluginsCurrencyChange id="UserCostcurrency" name={Costname} onCostChange={this.handleCostChange}/>
@@ -1255,8 +1255,8 @@ class ProviderPluginsSelector extends React.Component {
       out.Name = this.state.Name
       out.ByYear = this.state.manbyyear
       if (this.state.Provider === '') {
-        // this.state.keys[select] = 'Please provide a Provider'
-        newKeys[select] = 'Please provide a Provider'
+        // this.state.keys[select] = 'Please enter a Provider'
+        newKeys[select] = 'Please enter a Provider'
         this.setState({ keys: newKeys })
       } else {
         // this.state.keys[select] = this.state.Provider
@@ -1410,7 +1410,7 @@ class ModuleHeader extends React.Component {
   makeinfo (keys, selected, Cdata) {
     let name = Cdata.Name
     if (name === '' && keys[selected] === '') {
-      name = 'Please provide a Provider'
+      name = 'Please enter a Provider'
       return (<span id="module-name">{name}</span>)
     } else if (keys[selected] === 'None') {
       return (<span id="module-name">{name}</span>)
