@@ -9,7 +9,7 @@ const NasEpfl = {
   Name: 'NAS2023',
   Url: [
     {
-      Name: 'DSI-Website',
+      Name: 'DSI service description',
       Url: 'https://support.epfl.ch/help/epfl?id=epfl_service_status&service=49a363acdb34c700ef64731b8c96191f'
     }
   ],
@@ -25,7 +25,7 @@ const NasEpfl = {
   AmountFreeCumulative: false,
   RateName: 'Performance',
   Rates: {
-    Standard: 80
+    Standard: 0
   },
   RateUnit: 'CHF / TB'
 }
@@ -36,7 +36,7 @@ const RcpEpfl = {
   Name: 'Collaborative Storage – NAS-RCP',
   Url: [
     {
-      Name: 'Service description',
+      Name: 'RCP service description',
       Url: 'https://www.epfl.ch/research/facilities/rcp/collaborative-storage-nas-rcp-service-description/'
     }
   ],
@@ -52,7 +52,7 @@ const RcpEpfl = {
   AmountFreeCumulative: false,
   RateName: 'Performance',
   Rates: {
-    Standard: 27
+    Standard: 20.75
   },
   RateUnit: 'CHF / TB'
 }
@@ -60,7 +60,7 @@ const RcpEpfl = {
 const ScitasEpfl = {
   Style: 'AmountRatesCost',
   Provider: 'EPFL-VPA-SCITAS',
-  Name: 'Collaborative Storage – NAS-RCP',
+  Name: 'Collaborative Storage – SCITAS',
   Url: [
     {
       Name: 'Service description',
@@ -584,6 +584,7 @@ const storage = {
     ScitasEpfl,
     MsPersonalEpfl,
     MsSharedEpfl,
+    EpflS3,
     SwitchEpfl,
     GoogleDriveEdu,
     DropboxPerso,
@@ -668,7 +669,7 @@ const MainData = {
   InstName: 'EPFL Library',
   InstLogo: 'logo.png',
   InstLogoWidth: 200,
-  Updated: '2023-12-21',
+  Updated: '2025--07-14',
   HelpUrl: 'mailto:researchdata@epfl.ch',
   Currency: 'CHF',
   OEXRApi: 'cd8d785bdb6646b0a7e4c0eba5a74199',
