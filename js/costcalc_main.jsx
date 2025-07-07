@@ -1255,7 +1255,6 @@ class ProviderPluginsSelector extends React.Component {
       out.Name = this.state.Name
       out.ByYear = this.state.manbyyear
       if (this.state.Provider === '') {
-        // this.state.keys[select] = 'Please provide a Provider'
         newKeys[select] = 'Please select a solution'
         this.setState({ keys: newKeys })
       } else {
