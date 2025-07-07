@@ -1037,11 +1037,11 @@ class UserCost extends React.Component {
               <div className="row align-items-baseline">
                 <div className="col-3">
                   <TxtInput id={this.props.id + '-input'} name="Provider" placeholder="Provider here" tips="Add your own cost calculation here" onChange={this.handleProviderChange}
-                            class={this.classtxt(this.state.ProviderError)} Prepend={<span/>} InvalidMessage="Please provide a Provider"/>
+                            class={this.classtxt(this.state.ProviderError)} Prepend={<span/>} InvalidMessage="Enter the solution provider"/>
                 </div>
                 <div className="col-3">
                   <TxtInput id={this.props.id + '-input'} name="Service" placeholder="Service here" tips="Add your own cost calculation here" onChange={this.handleServiceChange}
-                            class={this.classtxt(this.state.ServiceError)} Prepend={<span/>} InvalidMessage="Please provide a Service"/>
+                            class={this.classtxt(this.state.ServiceError)} Prepend={<span/>} InvalidMessage="Enter the solution/service name"/>
                 </div>
                 <div className="col-5">
                   <PluginsCurrencyChange id="UserCostcurrency" name={Costname} onCostChange={this.handleCostChange}/>
@@ -1219,7 +1219,7 @@ class ProviderPluginsSelector extends React.Component {
                     <div className="row ">
                       <div className="col-auto align-self-end">
                         <div id="provider-selector" >
-                          <SelectorInput id="providerselect" name="Select a provider" selected={selected} options={this.state.keys}
+                          <SelectorInput id="providerselect" name="Select a solution" selected={selected} options={this.state.keys}
                                          class="btn-primary lg-btn" onChange={this.handleProviderChange} tips="Select a provider"/>
                         </div>
                       </div>
@@ -1256,7 +1256,7 @@ class ProviderPluginsSelector extends React.Component {
       out.ByYear = this.state.manbyyear
       if (this.state.Provider === '') {
         // this.state.keys[select] = 'Please provide a Provider'
-        newKeys[select] = 'Please provide a Provider'
+        newKeys[select] = 'Please select a solution'
         this.setState({ keys: newKeys })
       } else {
         // this.state.keys[select] = this.state.Provider
@@ -1288,7 +1288,7 @@ class ProviderPluginsSelector extends React.Component {
 
     const providers = []
     for (let i = 0; i < data.length; i++) {
-      providers.push(data[i].Provider)
+      providers.push(data[i].Name)
     }
     return providers
   }
@@ -1408,14 +1408,15 @@ class ModuleHeader extends React.Component {
   }
 
   makeinfo (keys, selected, Cdata) {
-    let name = Cdata.Name
-    if (name === '' && keys[selected] === '') {
-      name = 'Please provide a Provider'
-      return (<span id="module-name">{name}</span>)
+    let name = Cdata.Provider
+    console.log([name])
+    if (name === 'None' && keys[selected] === '') {
+      name = 'Select a solution (if applicable)'
+      return (<span id="module-provider">{name}</span>)
     } else if (keys[selected] === 'None') {
-      return (<span id="module-name">{name}</span>)
+      return (<span id="module-provider">{name}</span>)
     } else {
-      return (<span><span id="module-provider">{keys[selected]} : </span>  <span id="module-name">{name}</span></span>)
+      return (<span><span id="module-name">{keys[selected]}</span>  <span id="module-provider">({name})</span></span>)
     }
   }
 }

@@ -59,7 +59,7 @@ const RcpEpfl = {
 
 const ScitasEpfl = {
   Style: 'AmountRatesCost',
-  Provider: 'EPFL-SCITAS',
+  Provider: 'EPFL-VPA-SCITAS',
   Name: 'Collaborative Storage – NAS-RCP',
   Url: [
     {
@@ -89,7 +89,7 @@ const ScitasEpfl = {
 const SwitchEpfl = {
   Style: 'CategoryCost',
   Provider: 'Switch',
-  Name: 'Online Storage',
+  Name: 'Switchdrive',
   ByYear: true,
   Url: [
     {
@@ -150,8 +150,8 @@ const MsSharedEpfl = {
 
 const GoogleDriveEdu = {
   Style: 'CategoryCost',
-  Provider: 'Google Workspace',
-  Name: 'Online Storage',
+  Provider: 'Google',
+  Name: 'Google Workspace',
   ByYear: true,
   Adaptive: false,
   ExtraInfo: 'Google Storage is not recommended as the data are stored outside of Switzerland',
@@ -178,8 +178,8 @@ const GoogleDriveEdu = {
 
 const DropboxPerso = {
   Style: 'CategoryCost',
-  Provider: 'Dropbox Personal',
-  Name: 'Online Storage',
+  Provider: 'Dropbox',
+  Name: 'Dropbox Personal',
   ByYear: true,
   ExtraInfo: 'Dropbox must not be used for confidential data as the data are stored outside of Switzerland',
   ExtraInfoUrl: 'https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012882',
@@ -197,8 +197,8 @@ const DropboxPerso = {
 
 const DropboxTeam = {
   Style: 'AmountRatesCost',
-  Provider: 'Dropbox for Team',
-  Name: 'Online Storage',
+  Provider: 'Dropbox',
+  Name: 'Dropbox for Team',
   ByYear: true,
   ExtraInfo: 'Dropbox must not be used for confidential data as the data are stored outside of Switzerland',
   ExtraInfoUrl: 'https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012882',
@@ -563,7 +563,7 @@ const NoneSelected = {
 const UserCostSelect = {
   Style: 'UserCost',
   Provider: 'Manual Provider',
-  Name: '',
+  Name: 'Other',
   Url: '',
   ByYear: false
 }
