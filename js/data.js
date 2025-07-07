@@ -681,5 +681,6 @@ const MainData = {
   StatsContact: 'mailto:researchdata@epfl.ch',
   Version: 'v2.3',
   DefaultDuration: 1,
+  DefaultArchiveDuration: 10,
   Data: [storage, ELN, Database, datarepository, coderepository, longermarchive]
 }

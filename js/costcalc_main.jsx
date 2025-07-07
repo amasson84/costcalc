@@ -2,6 +2,7 @@
 
 let projectname = ''
 let projectduration = 0
+let archiveduration = 0
 
 // Declarations for entities defined in other scripts
 let MainData
@@ -149,6 +150,10 @@ class AmountInput extends React.Component {
 
   render () {
     const value = this.props.value
+    let disps = 's'
+    if (value == 1) {
+      disps = ''
+    }
     let label = null
     if (this.props.name != null && this.props.name !== '') {
       label = <label htmlFor={this.props.id}> {this.props.name} </label>
@@ -159,7 +164,7 @@ class AmountInput extends React.Component {
                 {label}
                 <input type="range" className="form-control-range" id={this.props.id} min={this.props.min} max={this.props.max}
                        step={this.props.step} value={value} onChange={this.handleChange}/>
-                <small id="nas-amount-cost" className="form-text text-muted">{this.props.name} : {value} {this.props.unit} </small>
+                <small id="nas-amount-cost" className="form-text text-muted">{this.props.name} : {value} {this.props.unit}{disps} </small>
               </span>
             </div>
     )
@@ -963,6 +968,7 @@ class UserCost extends React.Component {
     this.handleProviderChange = this.handleProviderChange.bind(this)
     this.handleServiceChange = this.handleServiceChange.bind(this)
     this.handleYearChange = this.handleYearChange.bind(this)
+    this.handlePostYearChange = this.handlePostYearChange.bind(this)
     this.handleConvMoneyChange = this.handleConvMoneyChange.bind(this)
 
     this.state = {
@@ -1644,6 +1650,7 @@ class Main extends React.Component {
     this.makeExportmain = this.makeExportmain.bind(this)
     this.handleNameChange = this.handleNameChange.bind(this)
     this.handleDurationChange = this.handleDurationChange.bind(this)
+    this.handlePostprojectDurationChange = this.handlePostprojectDurationChange.bind(this)
     this.handleConvMoneyChange = this.handleConvMoneyChange.bind(this)
     this.btnClick = this.btnClick.bind(this)
 
@@ -1653,9 +1660,11 @@ class Main extends React.Component {
       exportmain: {},
       name: '',
       duration: MainData.DefaultDuration,
+      archiveduration: MainData.DefaultArchiveDuration,
       conv: { Enable: false, Cur: '' }
     }
     projectduration = this.state.duration
+    archiveduration = this.state.archiveduration
     this.init = true
   }
 
@@ -1691,6 +1700,11 @@ class Main extends React.Component {
   handleDurationChange (d) {
     this.setState({ duration: d })
     projectduration = d
+  }
+
+  handlePostprojectDurationChange (d) {
+    this.setState({ archiveduration: d })
+    archiveduration = d
   }
 
   handleConvMoneyChange (conv) {
@@ -1742,10 +1756,14 @@ class Main extends React.Component {
                                 placeholder="My project name" onChange={this.handleNameChange}/>
                     </div>
                     <div className="col-3">
-                      <AmountInput id="project-duration" min="1" max="10" step="1" name="Project Duration" unit="year" tips="Select the duration of the project (in year)"
+                      <AmountInput id="project-duration" min="1" max="10" step="1" name="Project Duration" unit="year" tips="Select the duration of the project (in years)"
                                    value={this.state.duration.toString()} onChange={this.handleDurationChange}/>
                     </div>
                     <div className="col-3">
+                      <AmountInput id="project-duration" min="1" max="20" step="1" name="Post-project Duration" unit="year" tips="Select the post-project retention duration (in years)"
+                                   value={this.state.archiveduration.toString()} onChange={this.handlePostprojectDurationChange}/>
+                    </div>
+                    <div className="col-2">
                       <CurrencySelect id="maincurrency" money={this.handleConvMoneyChange}/>
                     </div>
                   </div>
@@ -1759,9 +1777,11 @@ class Main extends React.Component {
   // Display the total cost
   final_cost (conv) {
     let disps = ''
+    let disps2 = ''
     if (projectduration > 1) disps = 's'
+    if (archiveduration > 1) disps2 = 's'
     let convout = ''
-    if (conv.Enable) convout = <CostOutput id="convctotal" class="costoutput" name="Total Cost" value={ConvCurrency(this.state.total)} tips="Converted Total cost for the project"/>
+    if (conv.Enable) convout = <CostOutput id="convctotal" class="costoutput" name="Total Cost" value={ConvCurrency(this.ee.total)} tips="Converted Total cost for the project"/>
 
     return (
             <div className="card" id="finalcost">
