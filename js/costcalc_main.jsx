@@ -150,10 +150,6 @@ class AmountInput extends React.Component {
 
   render () {
     const value = this.props.value
-    let disps = 's'
-    if (value == 1) {
-      disps = ''
-    }
     let label = null
     if (this.props.name != null && this.props.name !== '') {
       label = <label htmlFor={this.props.id}> {this.props.name} </label>
@@ -164,7 +160,7 @@ class AmountInput extends React.Component {
                 {label}
                 <input type="range" className="form-control-range" id={this.props.id} min={this.props.min} max={this.props.max}
                        step={this.props.step} value={value} onChange={this.handleChange}/>
-                <small id="nas-amount-cost" className="form-text text-muted">{this.props.name} : {value} {this.props.unit}{disps} </small>
+                <small id="nas-amount-cost" className="form-text text-muted">{this.props.name} : {value} {this.props.unit}(s) </small>
               </span>
             </div>
     )
@@ -973,6 +969,7 @@ class UserCost extends React.Component {
 
     this.state = {
       total: 0,
+      archivetotal = 0
       value: 0,
       ProviderError: true,
       ServiceError: true,
@@ -1203,6 +1200,9 @@ class ProviderPluginsSelector extends React.Component {
     return (ExtraInf)
   }
 
+
+  // TODO add an active/archive phase toggle
+
   render () {
     const selected = this.state.selected
     const Cmp = this.cmp2string(this.cmpdata(selected).Style)
@@ -1239,7 +1239,6 @@ class ProviderPluginsSelector extends React.Component {
                         <TxtInput type="text" id="module-comments" name="My Comments"
                                   placeholder="I can put a comment here..." onChange={this.handleCommentChange}/>
                       </div>
-
                     </div>
 
                     <div id="component" className="container bg-light">
@@ -1328,7 +1327,15 @@ class ModuleHeader extends React.Component {
 
   byyear (by) {
     if (by) {
-      return (<span className="txtbyyear">{projectduration} <br/> years</span>)
+      return (<span className="txtbyyear">{projectduration} <br/> year(s)</span>)
+    } else {
+      return (<span></span>)
+    }
+  }
+
+  byarchiveyear (by) {
+    if (by) {
+      return (<span className="txtbyyear">{archiveduration} <br/> year(s)</span>)
     } else {
       return (<span></span>)
     }
@@ -1776,12 +1783,11 @@ class Main extends React.Component {
 
   // Display the total cost
   final_cost (conv) {
-    let disps = ''
-    let disps2 = ''
-    if (projectduration > 1) disps = 's'
-    if (archiveduration > 1) disps2 = 's'
     let convout = ''
-    if (conv.Enable) convout = <CostOutput id="convctotal" class="costoutput" name="Total Cost" value={ConvCurrency(this.ee.total)} tips="Converted Total cost for the project"/>
+    if (conv.Enable) {
+      convout = <CostOutput id="convctotal" class="costoutput" name="Active Phase Cost" value={ConvCurrency(this.ee.total)} tips="Converted Total cost for the acttive"/>
+      convarchiveout = <CostOutput id="convctotal" class="costoutput" name="Post-project Cost" value={ConvCurrency(this.ee.total)} tips="Converted Total cost for the post-project phase"/>
+    }
 
     return (
             <div className="card" id="finalcost">
@@ -1795,10 +1801,46 @@ class Main extends React.Component {
                       { /* <img className="img-fluid" src="./icon/totalcost.png" width="100"/> */ }
                     </div>
                     <div className="col-5 " id="plugin-name">
-                      <h3>Total Cost for {projectduration} year{disps}</h3>
+                      <h3>Active Phase Cost for {projectduration} year(s)</h3>
                     </div>
                     <div id="plugin-cost" className="col-5  text-right align-self-center">
-                      <CostOutput name="Total Cost" id="ctotal" class="costoutput" value={toMoney(this.state.total)} tips="Total cost for the project"/>
+                      <CostOutput name="Active Phase Cost" id="ctotal" class="costoutput" value={toMoney(this.state.total)} tips="Total cost for the active phase of the project"/>
+                        {convout}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="card bg-light  ">
+                <div className="container">
+                  <div className="row align-items-center">
+                    <div className="col-1">
+                    </div>
+                    <div className="col-1">
+                      { /* <img className="img-fluid" src="./icon/totalcost.png" width="100"/> */ }
+                    </div>
+                    <div className="col-5 " id="plugin-name">
+                      <h3>Post-project Cost for {archiveduration} year(s)</h3>
+                    </div>
+                    <div id="plugin-cost" className="col-5  text-right align-self-center">
+                      <CostOutput name="Post-project Cost" id="ctotal" class="costoutput" value={toMoney(this.state.total)} tips="Total cost for the post-project phase"/>
+                        {convout}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="card bg-light  ">
+                <div className="container">
+                  <div className="row align-items-center">
+                    <div className="col-1">
+                    </div>
+                    <div className="col-1">
+                      { /* <img className="img-fluid" src="./icon/totalcost.png" width="100"/> */ }
+                    </div>
+                    <div className="col-5 " id="plugin-name">
+                      <h3>Total Costs for {projectduration+archiveduration} year(s)</h3>
+                    </div>
+                    <div id="plugin-cost" className="col-5  text-right align-self-center">
+                      <CostOutput name="Total Cost" id="ctotal" class="costoutput" value={toMoney(this.state.total)} tips="Total costs for the project"/>
                         {convout}
                     </div>
                   </div>
