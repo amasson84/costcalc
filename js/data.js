@@ -60,7 +60,7 @@ const RcpEpfl = {
 const ScitasEpfl = {
   Style: 'AmountRatesCost',
   Provider: 'EPFL-VPA-SCITAS',
-  Name: 'Collaborative Storage– SCITAS',
+  Name: 'Collaborative Storage – SCITAS',
   Url: [
     {
       Name: 'Service description',
