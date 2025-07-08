@@ -63,11 +63,11 @@ function toMoney (numeric, currency) {
 // return the sum of an array
 function sum (obj) {
   const val = Object.values(obj)
-  let total = 0
+  let objTotal = 0
   for (let i = 0; i < val.length; i++) {
-    total = total + toNumeric(val[i])
+    objTotal += toNumeric(val[i])
   }
-  return total
+  return objTotal
 }
 
 // Comapare two obj return true is similar
@@ -1473,6 +1473,7 @@ class ManagePlugins extends React.Component {
     this.state = {
       displayed: [],
       varsum: {},
+      postprojectvarsum: {},
       plugins: [],
       export: []
     }
@@ -1495,13 +1496,21 @@ class ManagePlugins extends React.Component {
   }
 
   handleCostChange (n, cost) {
+    console.log("cost:", cost)
     const newVarsum = this.state.varsum
+    const newPostprojectVarsum = this.state.postprojectvarsum
+    console.log(newVarsum, newPostprojectVarsum)
     if (!Object.compare(newVarsum[n], cost)) {
       newVarsum[n] = cost
       this.setState({ varsum: newVarsum })
     }
+    if (!Object.compare(newPostprojectVarsum[n], cost)) {
+      newPostprojectVarsum[n] = cost
+      this.setState({ postprojectvarsum: newPostprojectVarsum })
+    }
     // this.state.varsum[n] = cost
     this.props.handleCostChange(this.props.n, sum(this.state.varsum))
+    this.props.handleCostChange(this.props.n, sum(this.state.postprojectvarsum))
   }
 
   makeExportplug (data, n) {
@@ -1574,19 +1583,27 @@ class PluginsMain extends React.Component {
 
     this.state = {
       varsum: {},
+      postprojectvarsum: {},
       export: []
     }
   }
 
   handleCostChange (name, e) {
+    // TODO assign the value to active or archive phase, not both
     // this.state.varsum[name] = e
     const newVarsum = this.state.varsum
+    const newPostprojectVarsum = this.state.postprojectvarsum
     // here we are simply comparing numbers, no need for Object.compare()
     if (newVarsum[name] !== e) {
       newVarsum[name] = e
       this.setState({ varsum: newVarsum })
     }
-    this.props.TotalCost(sum(this.state.varsum))
+    if (newPostprojectVarsum[name] !== e) {
+      newPostprojectVarsum[name] = e
+      this.setState({ varsum: newVarsum, postprojectvarsum: newPostprojectVarsum })
+    }
+    // TODO instead of 0, do something for the archive phase
+    this.props.TotalCost(sum(this.state.varsum), sum(this.state.postprojectvarsum))
   }
 
   makeExportplug (data, n) {
@@ -1674,6 +1691,7 @@ class Main extends React.Component {
 
     this.state = {
       total: 0,
+      archivetotal: 0,
       export: [],
       exportmain: {},
       name: '',
@@ -1691,9 +1709,12 @@ class Main extends React.Component {
     _paq.push(['enableLinkTracking'])
   }
 
-  handleCostChange (total) {
+  handleCostChange (total, archivetotal) {
     if (this.state.total !== total) {
       this.setState({ total })
+    }
+    if (this.state.archivetotal !== archivetotal) {
+      this.setState({ archivetotal })
     }
   }
 
@@ -1798,7 +1819,7 @@ class Main extends React.Component {
     let convout = ''
     if (conv.Enable) {
       convout = <CostOutput id="convctotal" class="costoutput" name="Active Phase Cost" value={ConvCurrency(this.ee.total)} tips="Converted Total cost for the acttive"/>
-      convarchiveout = <CostOutput id="convctotal" class="costoutput" name="Post-project Cost" value={ConvCurrency(this.ee.total)} tips="Converted Total cost for the post-project phase"/>
+      convarchiveout = <CostOutput id="convctotal" class="costoutput" name="Post-project Cost" value={ConvCurrency(this.ee.archivetotal)} tips="Converted Total cost for the post-project phase"/>
     }
 
     return (
@@ -1834,7 +1855,7 @@ class Main extends React.Component {
                       <h3>Post-project Cost for {archiveduration} year(s)</h3>
                     </div>
                     <div id="plugin-cost" className="col-5  text-right align-self-center">
-                      <CostOutput name="Post-project Cost" id="ctotal" class="costoutput" value={toMoney(this.state.total)} tips="Total cost for the post-project phase"/>
+                      <CostOutput name="Post-project Cost" id="ctotal" class="costoutput" value={toMoney(this.state.archivetotal)} tips="Total cost for the post-project phase"/>
                         {convout}
                     </div>
                   </div>
@@ -1852,7 +1873,7 @@ class Main extends React.Component {
                       <h3>Total Costs for {parseInt(projectduration)+parseInt(archiveduration)} year(s)</h3>
                     </div>
                     <div id="plugin-cost" className="col-5  text-right align-self-center">
-                      <CostOutput name="Total Cost" id="ctotal" class="costoutput" value={toMoney(this.state.total)} tips="Total costs for the project"/>
+                      <CostOutput name="Total Cost" id="ctotal" class="costoutput" value={toMoney(this.state.total+this.state.archivetotal)} tips="Total costs for the project"/>
                         {convout}
                     </div>
                   </div>
