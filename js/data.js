@@ -60,14 +60,14 @@ const RcpEpfl = {
 const ScitasEpfl = {
   Style: 'AmountRatesCost',
   Provider: 'EPFL-VPA-SCITAS',
-  Name: 'Collaborative Storage – SCITAS',
+  Name: 'Collaborative Storage– SCITAS',
   Url: [
     {
       Name: 'Service description',
       Url: 'https://scitas-doc.epfl.ch/accounts/prices/'
     }
   ],
-  ExtraInfo: '',
+  ExtraInfo: 'SCITAS rates are provided as estimations only, the actual costs will be based on actual usage at the end of the year',
   ByYear: true,
   Adaptive: false,
   AmountName: 'Amount',
@@ -79,9 +79,12 @@ const ScitasEpfl = {
   AmountFreeCumulative: false,
   RateName: 'Performance',
   Rates: {
-    'User fee 1 (for EPFL: direct costs only)': 25,
-    'User fee 2 (incl. infrastructure maintenance': 63,
-    'User fee 3 (incl. all direct and indirect costs': 93
+    'User fee 1 (for EPFL: direct costs only)': 13.1,
+    'User fee 2 (incl. infrastructure maintenance': 67.7,
+    'User fee 3 (incl. all direct and indirect costs': 78.6,
+    'User fee 1 with backup': 21.9,
+    'User fee 2 with backup': 109.8,
+    'User fee 3 with backup': 127.0
   },
   RateUnit: 'CHF / TB'
 }
@@ -338,24 +341,6 @@ const Zenodo = {
   CatUnit: 'CHF'
 }
 
-// SCITAS will no longer accept new users in 2024 (will close down eventually)
-const C4science = {
-  Style: 'CategoryCost',
-  Provider: 'EPFL-SCITAS',
-  Name: 'C4Science',
-  Url: [
-    { Name: 'C4Science Website', Url: 'https://www.c4science.ch/' }
-  ],
-  ByYear: true,
-  Adaptive: false,
-  ExtraInfo: 'C4Science is a code repository and collaboration platform created by SCITAS at EPFL, accessible to all swissuniversities members.',
-  CatName: 'Options',
-  Cat: {
-    'Free for text file': 0
-  },
-  CatUnit: 'CHF'
-}
-
 const GitlabEPFL = {
   Style: 'CategoryCost',
   Provider: 'EPFL-VPO-DSI',
@@ -375,7 +360,7 @@ const GitlabEPFL = {
 
 const Github = {
   Style: 'AmountRatesCost',
-  Provider: 'GitHub',
+  Provider: 'Microsoft',
   Name: 'GitHub',
   Url: [
     { Name: 'Github Website Pricing', Url: 'https://github.com/pricing' }
@@ -640,7 +625,6 @@ const coderepository = {
   Url: '',
   Data: [
     NoneSelected,
-    // C4science,
     GitlabEPFL,
     Github,
     Bitbucket,
