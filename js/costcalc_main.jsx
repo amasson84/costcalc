@@ -969,7 +969,7 @@ class UserCost extends React.Component {
 
     this.state = {
       total: 0,
-      archivetotal = 0
+      archivetotal: 0,
       value: 0,
       ProviderError: true,
       ServiceError: true,
@@ -1087,6 +1087,7 @@ class ProviderPluginsSelector extends React.Component {
     this.handleProviderChangetxt = this.handleProviderChangetxt.bind(this)
     this.handleServiceChangetxt = this.handleServiceChangetxt.bind(this)
     this.handlebyYearChange = this.handlebyYearChange.bind(this)
+    this.handlePhaseChange = this.handlePhaseChange.bind(this)
     this.makeExportcmp = this.makeExportcmp.bind(this)
     this.makeExport = this.makeExport.bind(this)
     this.state = {
@@ -1100,7 +1101,9 @@ class ProviderPluginsSelector extends React.Component {
       manualname: false,
       manbyyear: false,
       showPlus: false,
-      exportcmp: ''
+      exportcmp: '',
+      activeChecked: true
+
     }
   }
 
@@ -1178,6 +1181,10 @@ class ProviderPluginsSelector extends React.Component {
     this.setState({ manbyyear: state })
   }
 
+  handlePhaseChange () {
+    this.setState({ activeChecked: !(this.state.activeChecked) })
+  }
+
   // Manage extra display info for a selected provider
 
   extrainfo (Cdata) {
@@ -1238,6 +1245,11 @@ class ProviderPluginsSelector extends React.Component {
                       <div className="col-4 align-self-end">
                         <TxtInput type="text" id="module-comments" name="My Comments"
                                   placeholder="I can put a comment here..." onChange={this.handleCommentChange}/>
+                      </div>
+                      <div className="col-1 align-self-end">
+                      <CheckboxInput
+                        id={this.props.id + '-input'} name="Active phase?"
+                                 tips="Check if the service is charged during the active phase of the project, uncheck if used during the post-project phase" onChange={this.handlePhaseChange}/>
                       </div>
                     </div>
 
@@ -1421,7 +1433,6 @@ class ModuleHeader extends React.Component {
 
   makeinfo (keys, selected, Cdata) {
     let name = Cdata.Provider
-    console.log([name])
     if (name === 'None' && keys[selected] === '') {
       name = 'Select a solution (if applicable)'
       return (<span id="module-provider">{name}</span>)
@@ -1670,6 +1681,7 @@ class Main extends React.Component {
       archiveduration: MainData.DefaultArchiveDuration,
       conv: { Enable: false, Cur: '' }
     }
+
     projectduration = this.state.duration
     archiveduration = this.state.archiveduration
     this.init = true
