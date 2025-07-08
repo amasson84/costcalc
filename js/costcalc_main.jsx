@@ -1248,7 +1248,7 @@ class ProviderPluginsSelector extends React.Component {
                       </div>
                       <div className="col-1 align-self-end">
                       <CheckboxInput
-                        id={this.props.id + '-input'} name="Active phase?"
+                        id={id + '-input'} name="Active phase?" defaults={this.state.activeChecked}
                                  tips="Check if the service is charged during the active phase of the project, uncheck if used during the post-project phase" onChange={this.handlePhaseChange}/>
                       </div>
                     </div>
@@ -1849,7 +1849,7 @@ class Main extends React.Component {
                       { /* <img className="img-fluid" src="./icon/totalcost.png" width="100"/> */ }
                     </div>
                     <div className="col-5 " id="plugin-name">
-                      <h3>Total Costs for {projectduration+archiveduration} year(s)</h3>
+                      <h3>Total Costs for {parseInt(projectduration)+parseInt(archiveduration)} year(s)</h3>
                     </div>
                     <div id="plugin-cost" className="col-5  text-right align-self-center">
                       <CostOutput name="Total Cost" id="ctotal" class="costoutput" value={toMoney(this.state.total)} tips="Total costs for the project"/>
