@@ -1207,9 +1207,6 @@ class ProviderPluginsSelector extends React.Component {
     return (ExtraInf)
   }
 
-
-  // TODO add an active/archive phase toggle
-
   render () {
     const selected = this.state.selected
     const Cmp = this.cmp2string(this.cmpdata(selected).Style)
@@ -1496,7 +1493,7 @@ class ManagePlugins extends React.Component {
   }
 
   handleCostChange (n, cost) {
-    console.log("cost:", cost)
+    console.log('cost:', cost)
     const newVarsum = this.state.varsum
     const newPostprojectVarsum = this.state.postprojectvarsum
     console.log(newVarsum, newPostprojectVarsum)
@@ -1870,10 +1867,10 @@ class Main extends React.Component {
                       { /* <img className="img-fluid" src="./icon/totalcost.png" width="100"/> */ }
                     </div>
                     <div className="col-5 " id="plugin-name">
-                      <h3>Total Costs for {parseInt(projectduration)+parseInt(archiveduration)} year(s)</h3>
+                      <h3>Total Costs for {parseInt(projectduration) + parseInt(archiveduration)} year(s)</h3>
                     </div>
                     <div id="plugin-cost" className="col-5  text-right align-self-center">
-                      <CostOutput name="Total Cost" id="ctotal" class="costoutput" value={toMoney(this.state.total+this.state.archivetotal)} tips="Total costs for the project"/>
+                      <CostOutput name="Total Cost" id="ctotal" class="costoutput" value={toMoney(this.state.total + this.state.archivetotal)} tips="Total costs for the project"/>
                         {convout}
                     </div>
                   </div>
