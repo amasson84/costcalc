@@ -1204,14 +1204,18 @@ class ProviderPluginsSelector extends React.Component {
   }
 
   handleCostChange (n, e) {
+    console.log('')
+    console.log('in ProviderPluginsSelector.handleCostChange()',n, e, this.state.cost, this.state.archivecost)
     if (this.state.activeChecked) {
       if (this.state.cost !== e) {
         this.setState({ cost: e })
+        this.setState({ archivecost: 0 })
         this.props.handleCostChange(n, e)
       }
     } else {
       if (this.state.archivecost !== e) {
         this.setState({ archivecost: e })
+        this.setState({ cost: 0 })
         this.props.handleCostChange(n, e)
       }
     }
@@ -1383,6 +1387,7 @@ class ProviderPluginsSelector extends React.Component {
                      handleProviderChange={this.handleProviderChangetxt}
                      handleServiceChange={this.handleServiceChangetxt}
                      handlebyYearChange={this.handlebyYearChange}
+                     handlePhaseChange={this.handlePhaseChange}
                      export={this.makeExportcmp}/>
               </div>
             </div>
@@ -1652,10 +1657,9 @@ class ManagePlugins extends React.Component {
   }
 
   handleCostChange (n, cost) {
-    console.log('cost:', [cost], 'n', [n])
     const newVarsum = this.state.varsum
     const newPostprojectVarsum = this.state.postprojectvarsum
-    console.log('newvarsum:', newVarsum, 'newpostprojectvarsum:', newPostprojectVarsum)
+    console.log('in ManagerPlugins.handleCostChange()', 'cost:', [cost], 'n', [n], 'newvarsum:', newVarsum, 'newpostprojectvarsum:', newPostprojectVarsum)
     if (!Object.compare(newVarsum[n], cost)) {
       newVarsum[n] = cost
       this.setState({ varsum: newVarsum })
@@ -1753,6 +1757,8 @@ class PluginsMain extends React.Component {
     // this.state.varsum[name] = e
     const newVarsum = this.state.varsum
     const newPostprojectVarsum = this.state.postprojectvarsum
+    console.log('PluginsMain.handleCostChange()', newVarsum, newPostprojectVarsum)
+    
     // here we are simply comparing numbers, no need for Object.compare()
     if (newVarsum[name] !== e) {
       newVarsum[name] = e
@@ -1873,6 +1879,7 @@ class Main extends React.Component {
   }
 
   handleCostChange (total, archivetotal) {
+    console.log('entering Main.handleCostChange()', total, archivetotal)
     if (this.state.total !== total) {
       this.setState({ total })
     }
@@ -1984,12 +1991,13 @@ class Main extends React.Component {
   // Display the total cost
   final_cost (conv) {
     let convout = ''
+    let convarchiveout = ''
     if (conv.Enable) {
       convout = <CostOutput id="convctotal"
                             class="costoutput"
                             name="Active Phase Cost"
                             value={ConvCurrency(this.ee.total)}
-                            tips="Converted Total cost for the acttive"/>
+                            tips="Converted Total cost for the active phase of the project"/>
       convarchiveout = <CostOutput id="convctotal"
                                    class="costoutput"
                                    name="Post-project Cost"
@@ -2038,7 +2046,7 @@ class Main extends React.Component {
                             class="costoutput"
                             value={toMoney(this.state.archivetotal)}
                             tips="Total cost for the post-project phase"/>
-                  {convout}
+                  {convarchiveout}
               </div>
             </div>
           </div>
