@@ -7,12 +7,10 @@ const NasEpfl = {
   Style: 'AmountRatesCost',
   Provider: 'EPFL-VPO-DSI',
   Name: 'NAS2023',
-  Url: [
-    {
-      Name: 'DSI service description',
-      Url: 'https://support.epfl.ch/help/epfl?id=epfl_service_status&service=49a363acdb34c700ef64731b8c96191f'
-    }
-  ],
+  Url: [{
+    Name: 'DSI service description',
+    Url: 'https://support.epfl.ch/help/epfl?id=epfl_service_status&service=49a363acdb34c700ef64731b8c96191f'
+  }],
   ExtraInfo: '',
   ByYear: true,
   Adaptive: false,
@@ -34,12 +32,10 @@ const RcpEpfl = {
   Style: 'AmountRatesCost',
   Provider: 'EPFL-VPA-RCP',
   Name: 'Collaborative Storage – NAS-RCP',
-  Url: [
-    {
-      Name: 'RCP service description',
-      Url: 'https://www.epfl.ch/research/facilities/rcp/collaborative-storage-nas-rcp-service-description/'
-    }
-  ],
+  Url: [{
+    Name: 'RCP service description',
+    Url: 'https://www.epfl.ch/research/facilities/rcp/collaborative-storage-nas-rcp-service-description/'
+  }],
   ExtraInfo: '',
   ByYear: true,
   Adaptive: false,
@@ -61,12 +57,10 @@ const ScitasEpfl = {
   Style: 'AmountRatesCost',
   Provider: 'EPFL-VPA-SCITAS',
   Name: 'Collaborative Storage – SCITAS',
-  Url: [
-    {
-      Name: 'Service description',
-      Url: 'https://scitas-doc.epfl.ch/accounts/prices/'
-    }
-  ],
+  Url: [{
+    Name: 'Service description',
+    Url: 'https://scitas-doc.epfl.ch/accounts/prices/'
+  }],
   ExtraInfo: 'SCITAS rates are provided as estimations only, the actual costs will be based on actual usage at the end of the year',
   ByYear: true,
   Adaptive: false,
@@ -94,12 +88,10 @@ const SwitchEpfl = {
   Provider: 'Switch',
   Name: 'Switchdrive',
   ByYear: true,
-  Url: [
-    {
-      Name: 'Switch Website',
-      Url: 'https://drive.switch.ch/'
-    }
-  ],
+  Url: [{
+    Name: 'Switch Website',
+    Url: 'https://drive.switch.ch/'
+  }],
   CatName: 'Options',
   Cat: {
     'Cloud Based max 50GB': 0
@@ -112,12 +104,10 @@ const MsPersonalEpfl = {
   Provider: 'Microsoft OneDrive',
   Name: 'Microsoft M365 OneDrive',
   ByYear: true,
-  Url: [
-    {
-      Name: 'Service description',
-      Url: 'https://support.epfl.ch/epfl?id=epfl_kb_article_view&sysparm_article=KB0017390&sys_kb_id=44ce400f97b729142f9976971153af0c#mcetoc_1h4lngro134'
-    }
-  ],
+  Url: [{
+    Name: 'Service description',
+    Url: 'https://support.epfl.ch/epfl?id=epfl_kb_article_view&sysparm_article=KB0017390&sys_kb_id=44ce400f97b729142f9976971153af0c#mcetoc_1h4lngro134'
+  }],
   CatName: 'Options',
   Cat: {
     'Individual storage 1TB': 0
@@ -129,12 +119,10 @@ const MsSharedEpfl = {
   Style: 'AmountRatesCost',
   Provider: 'Microsoft SharePoint',
   Name: 'Microsoft M365 SharePoint',
-  Url: [
-    {
-      Name: 'Service description',
-      Url: 'https://support.epfl.ch/epfl?id=epfl_kb_article_view&sysparm_article=KB0017390&sys_kb_id=44ce400f97b729142f9976971153af0c#mcetoc_1h4lngro137'
-    }
-  ],
+  Url: [{
+    Name: 'Service description',
+    Url: 'https://support.epfl.ch/epfl?id=epfl_kb_article_view&sysparm_article=KB0017390&sys_kb_id=44ce400f97b729142f9976971153af0c#mcetoc_1h4lngro137'
+  }],
   ByYear: true,
   Adaptive: false,
   AmountName: 'Amount',
@@ -159,12 +147,10 @@ const GoogleDriveEdu = {
   Adaptive: false,
   ExtraInfo: 'Google Storage is not recommended as the data are stored outside of Switzerland',
   ExtraInfoUrl: 'https://support.epfl.ch/epfl?id=epfl_service_status&service=b1c22728db34c700ef64731b8c9619ad',
-  Url: [
-    {
-      Name: 'Google Education Page',
-      Url: 'https://edu.google.com/intl/en_ALL/'
-    }
-  ],
+  Url: [{
+    Name: 'Google Education Page',
+    Url: 'https://edu.google.com/intl/en_ALL/'
+  }],
   AmountName: 'Amount',
   AmountUnit: 'GB',
   AmountMin: 0,
@@ -205,12 +191,10 @@ const DropboxTeam = {
   ByYear: true,
   ExtraInfo: 'Dropbox must not be used for confidential data as the data are stored outside of Switzerland',
   ExtraInfoUrl: 'https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012882',
-  Url: [
-    {
-      Name: 'Dropbox',
-      Url: 'https://www.dropbox.com/plans?trigger=nr'
-    }
-  ],
+  Url: [{
+    Name: 'Dropbox',
+    Url: 'https://www.dropbox.com/plans?trigger=nr'
+  }],
   Adaptive: false,
   AmountName: 'Number of Users',
   AmountUnit: 'Users',

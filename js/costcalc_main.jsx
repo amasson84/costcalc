@@ -1792,7 +1792,7 @@ class Main extends React.Component {
                 <div className="container">
                   <div className="row">
                     <div className="col-4">
-                      <TxtInput type="text" id="user-projectname" name="Project Name"
+                      <TxtInput type="text" id="user-projectname" name = "Project Name"
                                 placeholder="My project name" onChange={this.handleNameChange}/>
                     </div>
                     <div className="col-3">
