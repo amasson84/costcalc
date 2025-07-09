@@ -534,6 +534,32 @@ const EpflS3 = {
   RateUnit: 'CHF / TB'
 }
 
+const ScitasArchive = {
+  Style: 'AmountRatesCost',
+  Provider: 'EPFL-VPA-SCITAS',
+  Name: 'SCITAS Archive LTO',
+  Url: [
+    { Name: 'User documentation', Url: 'https://scitas-doc.epfl.ch/user-guide/data-management/archiving/' }
+  ],
+  AmountName: 'Volume',
+  AmountUnit: 'TB',
+  AmountMin: 1,
+  AmountMax: 100,
+  AmountStep: 1,
+  AmountFree: 0,
+  Adaptive: false,
+  AmountFreeCumulative: false,
+  ByYear: true,
+  ExtraInfo: 'SCITAS rates are provided as estimations only, the actual costs will be based on actual usage at the end of the year',
+  RateName: 'Plan',
+  Rates: {
+    'User fee 1 (for EPFL: direct costs only)': 4.0,
+    'User fee 2 (incl. infrastructure maintenance': 13.9,
+    'User fee 3 (incl. all direct and indirect costs': 19.1
+  },
+  RateUnit: 'CHF / TB'
+}
+
 // System variable definition
 // ----------------------------------------------------
 // ----------------------------------------------------
@@ -641,6 +667,7 @@ const longermarchive = {
     NoneSelected,
     Acoua,
     EpflS3,
+    ScitasArchive,
     UserCostSelect
   ]
 }
