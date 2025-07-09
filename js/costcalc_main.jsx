@@ -155,14 +155,21 @@ class AmountInput extends React.Component {
       label = <label htmlFor={this.props.id}> {this.props.name} </label>
     }
     return (
-            <div className="col">
-              <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
-                {label}
-                <input type="range" className="form-control-range" id={this.props.id} min={this.props.min} max={this.props.max}
-                       step={this.props.step} value={value} onChange={this.handleChange}/>
-                <small id="nas-amount-cost" className="form-text text-muted">{this.props.name} : {value} {this.props.unit}(s) </small>
-              </span>
-            </div>
+      <div className="col">
+        <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
+          {label}
+          <input type="range"
+                 className="form-control-range"
+                 id={this.props.id}
+                 min={this.props.min}
+                 max={this.props.max}
+                 step={this.props.step}
+                 value={value}
+                 onChange={this.handleChange}/>
+          <small id="nas-amount-cost"
+                 className="form-text text-muted">{this.props.name} : {value} {this.props.unit}(s) </small>
+        </span>
+      </div>
     )
   }
 }
@@ -195,7 +202,11 @@ class SelectorInput extends React.Component {
     const listoptions = []
 
     for (let i = 0; i < data.length; i++) {
-      listoptions.push(<button className="dropdown-item btn-success " type="button" key={i} value={this.rate(i)} onClick={this.handleChange}>{data[i]}</button>)
+      listoptions.push(<button className="dropdown-item btn-success"
+                               type="button"
+                               key={i}
+                               value={this.rate(i)}
+                               onClick={this.handleChange}>{data[i]}</button>)
     }
     return listoptions
   }
@@ -236,12 +247,17 @@ class SelectorInput extends React.Component {
       label = <div className="row"><label htmlFor={this.props.id}> {this.props.name} </label></div>
     }
     return (
-            <div className="Container">
+      <div className="Container">
               {label}
               <div className="row">
                 <div className="btn-group">
-                  <a className={'btn ' + this.props.class + ' dropdown-toggle'} href="#" role="button" id={this.props.id} data-toggle="dropdown"
-                     aria-haspopup="true" aria-expanded="false" >
+                  <a className={'btn ' + this.props.class + ' dropdown-toggle'}
+                     href="#"
+                     role="button"
+                     id={this.props.id}
+                     data-toggle="dropdown"
+                     aria-haspopup="true"
+                     aria-expanded="false" >
                     <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
                       {this.maketitle(this.props.options[this.props.selected])}
                     </span>
@@ -298,9 +314,13 @@ class MakeknowmoreInput extends React.Component {
       // class="btn-primary btn-sm" tips={"Know more about " + data.Name}/>
       //     );
       // }else {
-      return (<MenuInput name={<img src="./icon/info.png" width={this.state.btnsize}/>} options={data.Url}
-                               id="btn-plugin-knowmore"
-                               class="btn-primary btn-sm" tips={'Read more about ' + data.Name + ' solutions'}/>)
+      return (<MenuInput name={<img src="./icon/info.png" width={this.state.btnsize}/>
+      }
+      options = { data.Url }
+      id = "btn-plugin-knowmore"
+      class = "btn-primary btn-sm"
+      tips = { 'Read more about ' + data.Name + ' solutions' }
+      />)
       // }
     } else {
       return null
@@ -327,7 +347,7 @@ class CheckboxInput extends React.Component {
 
   render () {
     return (
-            <div className="form-check">
+      <div className="form-check">
                 <input className="form-check-input" type="checkbox" id={this.props.id} onChange={this.handleChange}
                        defaultChecked={this.state.checked}/>
                     <label className="form-check-label" htmlFor={this.props.id}>{this.props.name}</label>
@@ -361,7 +381,16 @@ class ButtonHrefInput extends React.Component {
 
   render () {
     return (
-            <a id={this.props.id} href={this.props.url} type="button" className="btn btn-primary" data-toggle="tooltip" data-placement="top" title={this.props.tips} aria-disabled="true" target="_blank" rel="noreferrer">{this.props.name}</a>
+      <a id={this.props.id}
+         href={this.props.url}
+         type="button"
+         className="btn btn-primary"
+         data-toggle="tooltip"
+         data-placement="top"
+         title={this.props.tips}
+         aria-disabled="true"
+         target="_blank"
+         rel="noreferrer">{this.props.name}</a>
     )
   }
 }
@@ -400,8 +429,12 @@ class ButtonInputWpop extends React.Component {
 
   render () {
     return (
-            <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
-              <button type="button" className={'btn ' + this.props.class} id={this.props.id} data-toggle="modal" data-target={'#' + this.state.target}>
+      <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
+              <button type="button"
+                      className={'btn ' + this.props.class}
+                      id={this.props.id}
+                      data-toggle="modal"
+                      data-target={'#' + this.state.target}>
                 {this.props.name}
               </button>
 
@@ -464,9 +497,12 @@ class ButtonInput extends React.Component {
 
   render () {
     return (
-            <span>
+      <span>
               <button id={this.props.id} onClick={this.handleChange} type="button"
-                      className={'btn ' + this.props.class} data-toggle="tooltip" data-placement="top" title={this.props.tips}>
+                      className={'btn ' + this.props.class}
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title={this.props.tips}>
                 {this.props.name}
               </button>
             </span>
@@ -506,14 +542,18 @@ class MenuInput extends React.Component {
   makelist (data) {
     const listoptions = []
     for (let i = 0; i < data.length; i++) {
-      listoptions.push(<a className="dropdown-item" href={data[i].Url} key={data[i].Name} target="_blank" rel="noreferrer">{data[i].Name}</a>)
+      listoptions.push(<a className="dropdown-item"
+                          href={data[i].Url}
+                          key={data[i].Name}
+                          target="_blank"
+                          rel="noreferrer">{data[i].Name}</a>)
     }
     return listoptions
   }
 
   render () {
     return (
-            <div className="btn-group">
+      <div className="btn-group">
               <a className={'btn ' + this.props.class + ' btn-sm dropdown-toggle'} href="#" role="button" id={this.props.id} data-toggle="dropdown"
                  aria-haspopup="true" aria-expanded="false" >
                 <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
@@ -562,9 +602,11 @@ class TxtInput extends React.Component {
 
   render () {
     let info = null
-    if (this.props.info != null && this.props.info !== '') info = <small id={this.props.id + '-info'} className="input-group-text">{this.props.info} </small>
+    if (this.props.info != null && this.props.info !== '') {
+      info = <small id={this.props.id + '-info'} className="input-group-text">{this.props.info} </small>
+    }
     return (
-            <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
+      <span data-toggle="tooltip" data-placement="top" title={this.props.tips}>
               <label htmlFor={this.props.id}> {this.props.name} </label>
               <div className={'input-group ' + this.props.className}>
                 <div className="input-group-prepend">
@@ -620,11 +662,17 @@ class CostOutput extends React.Component {
   render () {
     const classN = 'form-control ' + this.props.class
     return (
-            <div className={'form-group row align-items-center'}>
+      <div className={'form-group row align-items-center'}>
               <label htmlFor={this.props.id} className={'col-form-label'}>{this.props.name}</label>
               <div className="col align-self-center">
-                <input type={'text'} id={this.props.id} className={classN}
-                       value={this.props.value} onChange={this.handleChange} readOnly data-toggle="tooltip" data-placement="top" title={this.props.tips}/>
+                <input type={'text'} id={this.props.id}
+                       className={classN}
+                       value={this.props.value}
+                       onChange={this.handleChange}
+                       readOnly
+                       data-toggle="tooltip"
+                       data-placement="top"
+                       title={this.props.tips}/>
               </div>
             </div>
     )
@@ -644,7 +692,7 @@ CostOutput.propTypes = {
 // Display a text box for display
 function Textoutput (props) {
   return (
-        <div className="alert alert-primary" role="alert" data-toggle="tooltip" data-placement="top" title="Expand this...">
+    <div className="alert alert-primary" role="alert" data-toggle="tooltip" data-placement="top" title="Expand this...">
           {props.text}
         </div>
   )
@@ -716,18 +764,29 @@ class AmountRatesCost extends React.Component {
       this.setState({ Amount: AmountMin })
     }
     return (
-            <div className="row align-items-center">
-              <div className="col">
-                <AmountInput id={this.props.id} min={AmountMin.toString()} max={AmountMax.toString()}
-                             step={AmountStep.toString()} value={this.state.Amount.toString()} name={this.props.data.AmountName}
-                             unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} tips="Select the desired amount"/>
-              </div>
-              <div className="col-3">
-                <SelectorInput id={this.props.id + '-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)}
-                               class="btn-secondary" selected={this.state.SelectRate} rate={this.state.Rate}
-                               unit={this.props.data.RateUnit} onChange={this.handleRateChange} />
-              </div>
-            </div>
+      <div className="row align-items-center">
+        <div className="col">
+          <AmountInput id={this.props.id}
+                       min={AmountMin.toString()}
+                       max={AmountMax.toString()}
+                       step={AmountStep.toString()}
+                       value={this.state.Amount.toString()}
+                       name={this.props.data.AmountName}
+                       unit={this.props.data.AmountUnit}
+                       onChange={this.handleAmountChange}
+                       tips="Select the desired amount"/>
+        </div>
+        <div className="col-3">
+          <SelectorInput id={this.props.id + '-Rates'}
+                         name={this.props.data.RateName}
+                         options={Object.keys(this.props.data.Rates)}
+                         class="btn-secondary"
+                         selected={this.state.SelectRate}
+                         rate={this.state.Rate}
+                         unit={this.props.data.RateUnit}
+                         onChange={this.handleRateChange} />
+        </div>
+      </div>
     )
   }
 
@@ -830,21 +889,39 @@ class CategoryAmountRatesCost extends React.Component {
     }
     // console.log('in render()', this.state.SelectRate, AmountMin, AmountMax, AmountStep, AmountFree)
     return (
-            <div className="row align-items-center">
-              <div className="col-3">
-                <SelectorInput id={this.props.id + '-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={this.state.Cat}
-                               class="btn-secondary" selected={this.state.SelectCat} unit={this.props.data.CatUnit} onChange={this.handleCatChange} />
-              </div>
+      <div className="row align-items-center">
+        <div className="col-3">
+          <SelectorInput id={this.props.id + '-category'}
+                         name={this.props.data.CatName}
+                         options={Object.keys(this.props.data.Cat)}
+                         rate={this.state.Cat}
+                         class="btn-secondary"
+                         selected={this.state.SelectCat}
+                         unit={this.props.data.CatUnit}
+                         onChange={this.handleCatChange} />
+        </div>
 
-              <div className="col-4">
-                <AmountInput id={this.props.id} min={AmountMin.toString()} max={AmountMax.toString()} step={AmountStep.toString()}
-                             value={this.state.Amount.toString()} name={this.props.data.AmountName} unit={this.props.data.AmountUnit} onChange={this.handleAmountChange} />
-              </div>
-              <div className="col-4">
-                <SelectorInput id={this.props.id + '-Rates'} name={this.props.data.RateName} options={Object.keys(this.props.data.Rates)} rate={this.state.Rate}
-                                   class="btn-secondary" selected={this.state.SelectRate} unit={this.props.data.RateUnit} onChange={this.handleRateChange} />
-              </div>
-            </div>
+        <div className="col-4">
+          <AmountInput id={this.props.id}
+                       min={AmountMin.toString()}
+                       max={AmountMax.toString()}
+                       step={AmountStep.toString()}
+                       value={this.state.Amount.toString()}
+                       name={this.props.data.AmountName}
+                       unit={this.props.data.AmountUnit}
+                       onChange={this.handleAmountChange} />
+        </div>
+        <div className="col-4">
+          <SelectorInput id={this.props.id + '-Rates'}
+                         name={this.props.data.RateName}
+                         options={Object.keys(this.props.data.Rates)}
+                         rate={this.state.Rate}
+                         class="btn-secondary"
+                         selected={this.state.SelectRate}
+                         unit={this.props.data.RateUnit}
+                         onChange={this.handleRateChange} />
+        </div>
+      </div>
     )
   }
 
@@ -898,13 +975,18 @@ class CategoryCost extends React.Component {
 
   render () {
     return (
-            <div className="row align-items-center">
-                <div className="col-4">
-                    <SelectorInput id={this.props.id + '-category'} name={this.props.data.CatName} options={Object.keys(this.props.data.Cat)} rate={this.state.Cat}
-                                   class="btn-secondary" selected={this.state.SelectCat} unit={this.props.data.CatUnit} onChange={this.handleCatChange} />
-
-                </div>
-            </div>
+      <div className="row align-items-center">
+        <div className="col-4">
+          <SelectorInput id={this.props.id + '-category'}
+                         name={this.props.data.CatName}
+                         options={Object.keys(this.props.data.Cat)}
+                         rate={this.state.Cat}
+                         class="btn-secondary"
+                         selected={this.state.SelectCat}
+                         unit={this.props.data.CatUnit}
+                         onChange={this.handleCatChange} />
+        </div>
+      </div>
     )
   }
 
@@ -945,8 +1027,7 @@ class NoneSelect extends React.Component {
 
     return (<div className="alert alert-info" id="infotxt">
                 Please select a provider in the list.
-            </div>
-    )
+            </div>)
   }
 }
 
@@ -1036,27 +1117,41 @@ class UserCost extends React.Component {
     this.props.export(this.export)
 
     return (
-            <div className="container">
-              <div className="row align-items-baseline">
-                <div className="col-3">
-                  <TxtInput id={this.props.id + '-input'} name="Provider" placeholder="Provider here" tips="Add your own cost calculation here" onChange={this.handleProviderChange}
-                            class={this.classtxt(this.state.ProviderError)} Prepend={<span/>} InvalidMessage="Enter the solution provider"/>
-                </div>
-                <div className="col-3">
-                  <TxtInput id={this.props.id + '-input'} name="Service" placeholder="Service here" tips="Add your own cost calculation here" onChange={this.handleServiceChange}
-                            class={this.classtxt(this.state.ServiceError)} Prepend={<span/>} InvalidMessage="Enter the solution/service name"/>
-                </div>
-                <div className="col-5">
-                  <PluginsCurrencyChange id="UserCostcurrency" name={Costname} onCostChange={this.handleCostChange}/>
-                </div>
-              </div>
-              <div className="row align-items-baseline">
-                <div className="col-auto">
-                  <CheckboxInput id={this.props.id + '-input'} name="Charged by year"
-                                 tips="Check if the service is charged by year so the cost will be adapted for the project duration" onChange={this.handleYearChange}/>
-                </div>
-              </div>
-            </div>
+      <div className="container">
+        <div className="row align-items-baseline">
+          <div className="col-3">
+            <TxtInput id={this.props.id + '-input'}
+                      name="Provider"
+                      placeholder="Provider here"
+                      tips="Add your own cost calculation here"
+                      onChange={this.handleProviderChange}
+                      class={this.classtxt(this.state.ProviderError)}
+                      Prepend={<span/>}
+                      InvalidMessage="Enter the solution provider"/>
+          </div>
+          <div className="col-3">
+            <TxtInput id={this.props.id + '-input'}
+                      name="Service"
+                      placeholder="Service here"
+                      tips="Add your own cost calculation here"
+                      onChange={this.handleServiceChange}
+                      class={this.classtxt(this.state.ServiceError)}
+                      Prepend={<span/>}
+                      InvalidMessage="Enter the solution/service name"/>
+          </div>
+          <div className="col-5">
+            <PluginsCurrencyChange id="UserCostcurrency" name={Costname} onCostChange={this.handleCostChange}/>
+          </div>
+        </div>
+        <div className="row align-items-baseline">
+          <div className="col-auto">
+            <CheckboxInput id={this.props.id + '-input'}
+                           name="Charged by year"
+                           tips="Check if the service is charged by year so the cost will be adapted for the project duration"
+                           onChange={this.handleYearChange}/>
+          </div>
+        </div>
+      </div>
     )
   }
 }
@@ -1095,6 +1190,7 @@ class ProviderPluginsSelector extends React.Component {
       keys: this.ProvidersName(props.data),
       n: '1',
       cost: '0',
+      archivecost: '0',
       comments: '',
       Provider: '',
       Name: '',
@@ -1108,9 +1204,16 @@ class ProviderPluginsSelector extends React.Component {
   }
 
   handleCostChange (n, e) {
-    if (this.state.cost !== e) {
-      this.setState({ cost: e })
-      this.props.handleCostChange(n, e)
+    if (this.state.activeChecked) {
+      if (this.state.cost !== e) {
+        this.setState({ cost: e })
+        this.props.handleCostChange(n, e)
+      }
+    } else {
+      if (this.state.archivecost !== e) {
+        this.setState({ archivecost: e })
+        this.props.handleCostChange(n, e)
+      }
     }
   }
 
@@ -1183,6 +1286,9 @@ class ProviderPluginsSelector extends React.Component {
 
   handlePhaseChange () {
     this.setState({ activeChecked: !(this.state.activeChecked) })
+    if (this.state.activeChecked) {
+
+    }
   }
 
   // Manage extra display info for a selected provider
@@ -1196,7 +1302,7 @@ class ProviderPluginsSelector extends React.Component {
 
     if (typeof Cdata.ExtraInfo !== 'undefined' && Cdata.ExtraInfo !== '') {
       ExtraInf =
-                <div className="col-3 align-self-end">
+        <div className="col-3 align-self-end">
                   <div className="alert alert-info" role="alert">
                     <img src="./icon/info2.png" width="20"/> &nbsp;
                       {Cdata.ExtraInfo}
@@ -1214,51 +1320,75 @@ class ProviderPluginsSelector extends React.Component {
     const id = this.props.data.Name.replace(/\s/g, '') + this.props.n
 
     return (
-            <div id={'plugin'}>
+      <div id={'plugin'}>
+        <div className="card-header" id={id}>
+          <ModuleHeader id={id}
+                        data={this.props.data}
+                        selected={selected}
+                        Cdata={Cdata}
+                        n={this.props.n}
+                        Cost={this.state.cost}
+                        comments={this.state.comments}
+                        handleAddPlugin={this.handleAddPlugin}
+                        handleRmvPlugin={this.handleRmvPlugin}
+                        keys={this.state.keys}
+                        showMinus={this.props.showMinus}
+                        showPlus={this.state.showPlus}
+                        conv={this.props.conv}/>
+        </div>
 
-              <div className="card-header" id={id}>
-                <ModuleHeader id={id} data={this.props.data} selected={selected} Cdata={Cdata} n={this.props.n} Cost={this.state.cost}
-                              comments={this.state.comments} handleAddPlugin={this.handleAddPlugin} handleRmvPlugin={this.handleRmvPlugin}
-                              keys={this.state.keys} showMinus={this.props.showMinus} showPlus={this.state.showPlus} conv={this.props.conv}/>
-              </div>
-
-              <div id={'collapse' + id} className="collapse" aria-labelledby={id} data-parent="#accordionplugins">
-                <div className="card-body">
-                  <div className="container">
-
-                    <div className="row ">
-                      <div className="col-auto align-self-end">
-                        <div id="provider-selector" >
-                          <SelectorInput id="providerselect" name="Select a solution" selected={selected} options={this.state.keys}
-                                         class="btn-primary lg-btn" onChange={this.handleProviderChange} tips="Select a provider"/>
-                        </div>
-                      </div>
-                      <div className="col-auto align-self-end">
-                        <div id="plugin-knowmore" >
-                          <MakeknowmoreInput key={selected} data={Cdata} name="" n="0" />
-                        </div>
-                      </div>
-                      {this.extrainfo(Cdata)}
-                      <div className="col-4 align-self-end">
-                        <TxtInput type="text" id="module-comments" name="My Comments"
-                                  placeholder="I can put a comment here..." onChange={this.handleCommentChange}/>
-                      </div>
-                      <div className="col-1 align-self-end">
-                      <CheckboxInput
-                        id={id + '-input'} name="Active phase?" defaults={this.state.activeChecked}
-                                 tips="Check if the service is charged during the active phase of the project, uncheck if used during the post-project phase" onChange={this.handlePhaseChange}/>
-                      </div>
-                    </div>
-
-                    <div id="component" className="container bg-light">
-                      <Cmp data={Cdata} key={selected} id="component-settings" onCostChange={this.handleCostChange} n={this.props.n}
-                           handleProviderChange={this.handleProviderChangetxt} handleServiceChange={this.handleServiceChangetxt} handlebyYearChange={this.handlebyYearChange}
-                           export={this.makeExportcmp}/>
-                    </div>
+        <div id={'collapse' + id} className="collapse" aria-labelledby={id} data-parent="#accordionplugins">
+          <div className="card-body">
+            <div className="container">
+              <div className="row ">
+                <div className="col-auto align-self-end">
+                  <div id="provider-selector" >
+                    <SelectorInput id="providerselect"
+                                   name="Select a solution"
+                                   selected={selected}
+                                   options={this.state.keys}
+                                   class="btn-primary lg-btn"
+                                   onChange={this.handleProviderChange}
+                                   tips="Select a provider"/>
                   </div>
                 </div>
+                <div className="col-auto align-self-end">
+                  <div id="plugin-knowmore" >
+                    <MakeknowmoreInput key={selected} data={Cdata} name="" n="0" />
+                  </div>
+                </div>
+                {this.extrainfo(Cdata)}
+                <div className="col-4 align-self-end">
+                  <TxtInput type="text"
+                            id="module-comments"
+                            name="My Comments"
+                            placeholder="I can put a comment here..."
+                            onChange={this.handleCommentChange}/>
+                </div>
+                <div className="col-1 align-self-end">
+                <CheckboxInput id={id + '-input'}
+                               name="Active phase?"
+                               defaults={this.state.activeChecked}
+                               tips="Check if the service is charged during the active phase of the project, uncheck if used during the post-project phase"
+                               onChange={this.handlePhaseChange}/>
+                </div>
+              </div>
+
+              <div id="component" className="container bg-light">
+                <Cmp data={Cdata}
+                     key={selected}
+                     id="component-settings"
+                     onCostChange={this.handleCostChange}
+                     n={this.props.n}
+                     handleProviderChange={this.handleProviderChangetxt}
+                     handleServiceChange={this.handleServiceChangetxt}
+                     handlebyYearChange={this.handlebyYearChange}
+                     export={this.makeExportcmp}/>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
     )
   }
 
@@ -1285,14 +1415,16 @@ class ProviderPluginsSelector extends React.Component {
   // return the correct style fct from the str input
   cmp2string (str) {
     switch (str) {
-      case 'AmountRatesCost' : return AmountRatesCost
-      case 'CategoryCost' : return CategoryCost
-      case 'CategoryAmountRatesCost' : return CategoryAmountRatesCost
-      case 'NoneSelect' : return NoneSelect
-      case 'UserCost' : {
-        // TODO fixme: the script freezes when the user enters a char in any input field
-        // this.state.manualname = true
-        return UserCost }
+      case 'AmountRatesCost':
+        return AmountRatesCost
+      case 'CategoryCost':
+        return CategoryCost
+      case 'CategoryAmountRatesCost':
+        return CategoryAmountRatesCost
+      case 'NoneSelect':
+        return NoneSelect
+      case 'UserCost':
+        return UserCost
     }
   }
 
@@ -1355,17 +1487,29 @@ class ModuleHeader extends React.Component {
     let plus = null
     let convout = null
     if (this.props.showMinus) {
-      minus = <ButtonInputWpop class="btn-danger btn-sm" id="plugins-add-btn"
-                                   name={<img className="img-fluid" src="icon\minus.png" width="20"/>}
-                                   onClick={this.handleRmvPlugin} n={this.props.n} tips="Remove this line"
-                                    idp={this.props.id} info={this.props.data.Name}/>
+      minus = <ButtonInputWpop class="btn-danger btn-sm"
+                               id="plugins-add-btn"
+                               name={<img className="img-fluid" src="icon\minus.png" width="20"/>}
+                               onClick={this.handleRmvPlugin}
+                               n={this.props.n}
+                               tips="Remove this line"
+                               idp={this.props.id}
+                               info={this.props.data.Name}/>
     }
     if (this.props.showPlus) {
-      plus = <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icon\plus.png" width="20"/>}
-                         onClick={this.handleAddPlugin} n={this.props.n.toString()} tips={'Add a new ' + this.props.data.Name}/>
+      plus = <ButtonInput class="btn-success btn-sm"
+                          id="plugins-add-btn"
+                          name={<img className="img-fluid" src="icon\plus.png" width="20"/>}
+                          onClick={this.handleAddPlugin}
+                          n={this.props.n.toString()}
+                          tips={'Add a new ' + this.props.data.Name}/>
     }
     if (this.props.conv.Enable) {
-      convout = <CostOutput id="ccostconv" class="itemcost" name="" value={ConvCurrency(this.props.Cost)} tips="Converted cost for this provider"/>
+      convout = <CostOutput id="ccostconv"
+                            class="itemcost"
+                            name=""
+                            value={ConvCurrency(this.props.Cost)}
+                            tips="Converted cost for this provider"/>
     }
 
     return (
@@ -1391,9 +1535,16 @@ class ModuleHeader extends React.Component {
             {/* <div className="row align-items-end"> */}
             {/*    <div className="col-auto"> */}
             <span data-toggle="tooltip" data-placement="top" title="Expand this..." >
-              <button className="btn btn-outline-primary  dropdown-toggle" type="button" data-toggle="collapse" data-target={'#collapse' + this.props.id}
-                      aria-expanded="false" aria-controls={'collapse' + this.props.id} id="btn-plugins" onClick={this.btnClick.bind(this)}>
-                <span id={'plugin-number'}> {this.props.n + 1}. </span> <span id={'plugin-name'}>{this.props.data.Name}</span>
+              <button className="btn btn-outline-primary  dropdown-toggle"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target={'#collapse' + this.props.id}
+                      aria-expanded="false"
+                      aria-controls={'collapse' + this.props.id}
+                      id="btn-plugins"
+                      onClick={this.btnClick.bind(this)}>
+                <span id={'plugin-number'}> {this.props.n + 1}. </span>
+                <span id={'plugin-name'}>{this.props.data.Name}</span>
               </button>
             </span>
             {/*    </div> */}
@@ -1410,7 +1561,11 @@ class ModuleHeader extends React.Component {
           </div>
 
           <div id="plugin-cost" className="col-2 ">
-            <CostOutput id="ccost" class="itemcost" name="" value={this.props.Cost} tips="Total cost for this provider"/>
+            <CostOutput id="ccost"
+                        class="itemcost"
+                        name=""
+                        value={this.props.Cost}
+                        tips="Total cost for this provider"/>
               {convout}
           </div>
           <div className="col-1">
@@ -1436,7 +1591,10 @@ class ModuleHeader extends React.Component {
     } else if (keys[selected] === 'None') {
       return (<span id="module-provider">{name}</span>)
     } else {
-      return (<span><span id="module-name">{keys[selected]}</span>  <span id="module-provider">({name})</span></span>)
+      return (<span>
+                <span id="module-name">{keys[selected]}</span>
+                <span id="module-provider">({name})</span>
+              </span>)
     }
   }
 }
@@ -1473,6 +1631,7 @@ class ManagePlugins extends React.Component {
       postprojectvarsum: {},
       plugins: [],
       export: []
+
     }
     this.state.displayed.push(randomInt(this.state.displayed))
   }
@@ -1493,10 +1652,10 @@ class ManagePlugins extends React.Component {
   }
 
   handleCostChange (n, cost) {
-    console.log('cost:', cost)
+    console.log('cost:', [cost], 'n', [n])
     const newVarsum = this.state.varsum
     const newPostprojectVarsum = this.state.postprojectvarsum
-    console.log(newVarsum, newPostprojectVarsum)
+    console.log('newvarsum:', newVarsum, 'newpostprojectvarsum:', newPostprojectVarsum)
     if (!Object.compare(newVarsum[n], cost)) {
       newVarsum[n] = cost
       this.setState({ varsum: newVarsum })
@@ -1547,16 +1706,20 @@ class ManagePlugins extends React.Component {
     }
     this.makeExport()
     return (
-              <div>
-                  <Repeat numTimes={this.giveN()}>
-                        {(index) => <ProviderPluginsSelector data={this.props.data} key={this.state.displayed[index]}
-                                                 showMinus={showMinus} n={index}
-                                                 handleCostChange={this.handleCostChange} handleAddPlugin={this.handleAddPlugin}
-                                                             handleRmvPlugin={this.handleRmvPlugin} export={this.makeExportplug}
-                                                             conv={this.props.conv}/>}
-
-                  </Repeat>
-              </div>
+      <div>
+        <Repeat numTimes={this.giveN()}>
+          {(index) => <ProviderPluginsSelector data={this.props.data}
+                                               key={this.state.displayed[index]}
+                                               showMinus={showMinus}
+                                               n={index}
+                                               handleCostChange={this.handleCostChange}
+                                               handleAddPlugin={this.handleAddPlugin}
+                                               handleRmvPlugin={this.handleRmvPlugin}
+                                               export={this.makeExportplug}
+                                               conv={this.props.conv}/>
+          }
+        </Repeat>
+      </div>
     )
   }
 }
@@ -1621,45 +1784,48 @@ class PluginsMain extends React.Component {
 
   render () {
     return (
-            <div>
-              <div id="PluginsMain">
-                <div className="card">
-                  <div className="card-header text-white bg-dark">
-                    <div className="row">
-                      <div className="col-2 text-center">
-                        Line controls
-                      </div>
+      <div>
+        <div id="PluginsMain">
+          <div className="card">
+            <div className="card-header text-white bg-dark">
+              <div className="row">
+                <div className="col-2 text-center">
+                  Line controls
+                </div>
 
-                      <div className="col-3 text-center">
-                        Category
-                      </div>
+                <div className="col-3 text-center">
+                  Category
+                </div>
 
-                      <div className="col-4 text-center">
-                        Provider information
-                      </div>
+                <div className="col-4 text-center">
+                  Provider information
+                </div>
 
-                      <div className="col-2 text-center">
-                        Cost
-                      </div>
+                <div className="col-2 text-center">
+                  Cost
+                </div>
 
-                      <div className="col-1 text-center">
+                <div className="col-1 text-center">
 
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="card ">
-                    <div className="accordion" id="accordionplugins">
-                      <Repeat numTimes={this.props.data.length}>
-                        {(index) => <ManagePlugins data={this.props.data[index]} key={index}
-                                                   export={this.makeExportplug} n={index} handleCostChange={this.handleCostChange}
-                                                   conv={this.props.conv}/>}
-                      </Repeat>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
+
+            <div className="card ">
+              <div className="accordion" id="accordionplugins">
+                <Repeat numTimes={this.props.data.length}>
+                  {(index) => <ManagePlugins data={this.props.data[index]}
+                                             key={index}
+                                             export={this.makeExportplug}
+                                             n={index}
+                                             handleCostChange={this.handleCostChange}
+                                             conv={this.props.conv}/>}
+                </Repeat>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     )
   }
 }
@@ -1754,30 +1920,34 @@ class Main extends React.Component {
 
   render () {
     return (
-            <div id="main">
-              <PopupStats />
-                {this.page_head()}
-                <div id="plugins-body" className="container">
+      <div id="main">
+        <PopupStats />
+          {this.page_head()}
+          <div id="plugins-body" className="container">
 
-                  {this.project_info()}
+            {this.project_info()}
 
-                  <PluginsMain TotalCost={this.handleCostChange} data={MainData.Data} export={this.makeExportmain} conv={this.state.conv} />
+            <PluginsMain TotalCost={this.handleCostChange}
+                         data={MainData.Data}
+                         export={this.makeExportmain}
+                         conv={this.state.conv} />
 
-                  {this.final_cost(this.state.conv)}
+            {this.final_cost(this.state.conv)}
 
-                  <ManageExport data={this.state.exportmain} conv={this.state.conv}/>
+            <ManageExport data={this.state.exportmain}
+                          conv={this.state.conv}/>
 
-                  {this.howto()}
-                </div>
+            {this.howto()}
+          </div>
 
-              {this.page_foot()}
-            </div>
+        {this.page_foot()}
+      </div>
     )
   }
 
   project_info () {
     return (
-            <div id="ProjectInfo">
+      <div id="ProjectInfo">
 
               <div className="card-header">
                 <img src="./icon/uset.png" width="40" />
@@ -1815,68 +1985,83 @@ class Main extends React.Component {
   final_cost (conv) {
     let convout = ''
     if (conv.Enable) {
-      convout = <CostOutput id="convctotal" class="costoutput" name="Active Phase Cost" value={ConvCurrency(this.ee.total)} tips="Converted Total cost for the acttive"/>
-      convarchiveout = <CostOutput id="convctotal" class="costoutput" name="Post-project Cost" value={ConvCurrency(this.ee.archivetotal)} tips="Converted Total cost for the post-project phase"/>
+      convout = <CostOutput id="convctotal"
+                            class="costoutput"
+                            name="Active Phase Cost"
+                            value={ConvCurrency(this.ee.total)}
+                            tips="Converted Total cost for the acttive"/>
+      convarchiveout = <CostOutput id="convctotal"
+                                   class="costoutput"
+                                   name="Post-project Cost"
+                                   value={ConvCurrency(this.ee.archivetotal)}
+                                   tips="Converted Total cost for the post-project phase"/>
     }
 
     return (
-            <div className="card" id="finalcost">
-
-              <div className="card bg-light  ">
-                <div className="container">
-                  <div className="row align-items-center">
-                    <div className="col-1">
-                    </div>
-                    <div className="col-1">
-                      { /* <img className="img-fluid" src="./icon/totalcost.png" width="100"/> */ }
-                    </div>
-                    <div className="col-5 " id="plugin-name">
-                      <h3>Active Phase Cost for {projectduration} year(s)</h3>
-                    </div>
-                    <div id="plugin-cost" className="col-5  text-right align-self-center">
-                      <CostOutput name="Active Phase Cost" id="ctotal" class="costoutput" value={toMoney(this.state.total)} tips="Total cost for the active phase of the project"/>
-                        {convout}
-                    </div>
-                  </div>
-                </div>
+      <div className="card" id="finalcost">
+        <div className="card bg-light  ">
+          <div className="container">
+            <div className="row align-items-center">
+              <div className="col-1">
               </div>
-              <div className="card bg-light  ">
-                <div className="container">
-                  <div className="row align-items-center">
-                    <div className="col-1">
-                    </div>
-                    <div className="col-1">
-                      { /* <img className="img-fluid" src="./icon/totalcost.png" width="100"/> */ }
-                    </div>
-                    <div className="col-5 " id="plugin-name">
-                      <h3>Post-project Cost for {archiveduration} year(s)</h3>
-                    </div>
-                    <div id="plugin-cost" className="col-5  text-right align-self-center">
-                      <CostOutput name="Post-project Cost" id="ctotal" class="costoutput" value={toMoney(this.state.archivetotal)} tips="Total cost for the post-project phase"/>
-                        {convout}
-                    </div>
-                  </div>
-                </div>
+              <div className="col-1">
+                { /* <img className="img-fluid" src="./icon/totalcost.png" width="100"/> */ }
               </div>
-              <div className="card bg-light  ">
-                <div className="container">
-                  <div className="row align-items-center">
-                    <div className="col-1">
-                    </div>
-                    <div className="col-1">
-                      { /* <img className="img-fluid" src="./icon/totalcost.png" width="100"/> */ }
-                    </div>
-                    <div className="col-5 " id="plugin-name">
-                      <h3>Total Costs for {parseInt(projectduration) + parseInt(archiveduration)} year(s)</h3>
-                    </div>
-                    <div id="plugin-cost" className="col-5  text-right align-self-center">
-                      <CostOutput name="Total Cost" id="ctotal" class="costoutput" value={toMoney(this.state.total + this.state.archivetotal)} tips="Total costs for the project"/>
-                        {convout}
-                    </div>
-                  </div>
-                </div>
+              <div className="col-5 " id="plugin-name">
+                <h3>Active Phase Cost for {projectduration} year(s)</h3>
               </div>
-            </div>)
+              <div id="plugin-cost" className="col-5  text-right align-self-center">
+                <CostOutput name="Active Phase Cost"
+                            id="ctotal"
+                            class="costoutput"
+                            value={toMoney(this.state.total)}
+                            tips="Total cost for the active phase of the project"/>
+                  {convout}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="card bg-light  ">
+          <div className="container">
+            <div className="row align-items-center">
+              <div className="col-1">
+              </div>
+              <div className="col-1">
+                { /* <img className="img-fluid" src="./icon/totalcost.png" width="100"/> */ }
+              </div>
+              <div className="col-5 " id="plugin-name">
+                <h3>Post-project Cost for {archiveduration} year(s)</h3>
+              </div>
+              <div id="plugin-cost" className="col-5  text-right align-self-center">
+                <CostOutput name="Post-project Cost"
+                            id="ctotal"
+                            class="costoutput"
+                            value={toMoney(this.state.archivetotal)}
+                            tips="Total cost for the post-project phase"/>
+                  {convout}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="card bg-light  ">
+          <div className="container">
+            <div className="row align-items-center">
+              <div className="col-1">
+              </div>
+              <div className="col-1">
+                { /* <img className="img-fluid" src="./icon/totalcost.png" width="100"/> */ }
+              </div>
+              <div className="col-5 " id="plugin-name">
+                <h3>Total Costs for {parseInt(projectduration) + parseInt(archiveduration)} year(s)</h3>
+              </div>
+              <div id="plugin-cost" className="col-5  text-right align-self-center">
+                <CostOutput name="Total Cost" id="ctotal" class="costoutput" value={toMoney(this.state.total + this.state.archivetotal)} tips="Total costs for the project"/>
+                  {convout}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>)
   }
 
   // Define the head (top) of the page
@@ -1884,66 +2069,76 @@ class Main extends React.Component {
     let helpbtn = null
     let imglogo = null
     if (MainData.HelpUrl != null && MainData.HelpUrl !== '') {
-      helpbtn = <a className="btn btn-danger" id="head-help" target="_blank" href={MainData.HelpUrl}
-                       onClick={() => this.btnClick('helpbtn', 0)} rel="noreferrer">
-                            <img src="./icon/help.png" width="20"/>&nbsp;I need help with my DMP</a>
+      helpbtn = <a className="btn btn-danger"
+                   id="head-help"
+                   target="_blank"
+                   href={MainData.HelpUrl}
+                   onClick={() => this.btnClick('helpbtn', 0)}
+                   rel="noreferrer">
+                     <img src="./icon/help.png" width="20"/>&nbsp;I need help with my DMP</a>
     }
-    if (MainData.InstLogo != null && MainData.InstLogo !== '') { imglogo = <img src={'./icon/' + MainData.InstLogo} width={MainData.InstLogoWidth}/> }
+    if (MainData.InstLogo != null && MainData.InstLogo !== '') {
+      imglogo = <img src={'./icon/' + MainData.InstLogo} width={MainData.InstLogoWidth}/>
+    }
+
     return (
-            <div className="jumbotron jumbotron-fluid" id="page_head">
-              <div className="container">
-                <div className="row">
-                  <div className="col-auto">
-                    <img src="./icon/costcalc.png" width="100"/>
-                  </div>
-                  <div className="col-auto">
-                    <h1 className="display-5"> {MainData.InstName} <br/>Cost Calculator for Data Management</h1>
-                  </div>
-                  <div className="col-auto">
-                    {imglogo}
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <p className="lead">
-                      Welcome to our cost calculator. This tool will help researchers to
-                      estimate the cost of managing, storing and publishing data.
-                    </p>
-                    <p className="lead">
-                      Many providers are included in the service and you will be able to calculate a cost
-                      based on your needs.
-                      <br/>Total cost is calculated dynamically based on your inputs.
-                    </p>
-                    <p className="lead">
-                      We hope you will enjoy this tool and it will be useful for you.
-                    </p>
-                    <ButtonInput class="btn btn-primary" id="head-howto" name={<span>To Know More (HOWTO)</span>} onClick={this.move2howto}/> &nbsp;
-                      {helpbtn}
-                  </div>
-                </div>
-              </div>
+      <div className="jumbotron jumbotron-fluid" id="page_head">
+        <div className="container">
+          <div className="row">
+            <div className="col-auto">
+              <img src="./icon/costcalc.png" width="100"/>
             </div>
+            <div className="col-auto">
+              <h1 className="display-5"> {MainData.InstName} <br/>Cost Calculator for Data Management</h1>
+            </div>
+            <div className="col-auto">
+              {imglogo}
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              <p className="lead">
+                Welcome to our cost calculator. This tool will help researchers to
+                estimate the cost of managing, storing and publishing data.
+              </p>
+              <p className="lead">
+                Many providers are included in the service and you will be able to calculate a cost
+                based on your needs.
+                <br/>Total cost is calculated dynamically based on your inputs.
+              </p>
+              <p className="lead">
+                We hope you will enjoy this tool and it will be useful for you.
+              </p>
+              <ButtonInput class="btn btn-primary"
+                           id="head-howto"
+                           name={<span>To Know More (HOWTO)</span>}
+                           onClick={this.move2howto}/> &nbsp;
+                {helpbtn}
+            </div>
+          </div>
+        </div>
+      </div>
     )
   }
 
   // Define the foot (bottom) of the page
   page_foot () {
     return (
-            <div id="page_foot" >
-              <div className="jumbotron jumbotron-fluid">
-                <div className="alert alert-danger" role="alert" id="infotxt">
-                  The values we report are only informative and should not be used for exact calculations. However, feel free to contact us if you see some mistake, or if you would like us to
-                  add other services.
-                  <br/><strong>Last Database Update : {MainData.Updated} </strong>
-                </div>
-                <div id="service">
-                  <p>This application has been developed by the <a href="https://researchdata.epfl.ch">Resarch Data Management Team</a> of the <a href="https://library.epfl.ch">EPFL Library</a>  <br/>
-                     This software is published under GPL-3.0-only license, and you are using <strong>Version {MainData.Version}</strong>.<br/>
-                     Source code can be download <a href="https://github.com/epfllibrary/costcalc">here</a></p>
-                  <p><small>Icons are from the Noun Project (Book by Randi NI, Storage by I Pitu, Database by Novalyi, data cloud by Vectors Market, Information and Next by Gregor Cresnar, Database by Creative Mahira, Archive by dp indo)</small></p>
-                </div>
-              </div>
-            </div>
+      <div id="page_foot" >
+        <div className="jumbotron jumbotron-fluid">
+          <div className="alert alert-danger" role="alert" id="infotxt">
+            The values we report are only informative and should not be used for exact calculations. However, feel free to contact us if you see some mistake, or if you would like us to
+            add other services.
+            <br/><strong>Last Database Update : {MainData.Updated} </strong>
+          </div>
+          <div id="service">
+            <p>This application has been developed by the <a href="https://researchdata.epfl.ch">Resarch Data Management Team</a> of the <a href="https://library.epfl.ch">EPFL Library</a>  <br/>
+               This software is published under GPL-3.0-only license, and you are using <strong>Version {MainData.Version}</strong>.<br/>
+               Source code can be download <a href="https://github.com/epfllibrary/costcalc">here</a></p>
+            <p><small>Icons are from the Noun Project (Book by Randi NI, Storage by I Pitu, Database by Novalyi, data cloud by Vectors Market, Information and Next by Gregor Cresnar, Database by Creative Mahira, Archive by dp indo)</small></p>
+          </div>
+        </div>
+      </div>
     )
   }
 
@@ -1952,97 +2147,103 @@ class Main extends React.Component {
     let curconv = null
     if (MoneyEnable) {
       curconv =
-              <dl className="row">
-                <dt className="col-sm-3">Change Currency</dt>
-                <dd className="col-sm-9">
-                  <p>If you need another currency than {MainData.Currency} you can add an extra currency by selecting in the <mark>Change Currency menu</mark></p>
-                  <p> The current exchange rate is automatically applied using <a href="https://openexchangerates.org/">openexchangerates</a></p>
-                </dd>
-              </dl>
+        <dl className="row">
+          <dt className="col-sm-3">Change Currency</dt>
+          <dd className="col-sm-9">
+            <p>If you need another currency than {MainData.Currency} you can add an extra currency by selecting in the <mark>Change Currency menu</mark></p>
+            <p> The current exchange rate is automatically applied using <a href="https://openexchangerates.org/">openexchangerates</a></p>
+          </dd>
+        </dl>
     }
+
     return (
-            <div id="howto">
-              <div className="card" >
-                <div className="card-header ">
-                  <h2><img src="./icon/sliders.png" width="40"/> HOWTO</h2>
-                </div>
-                <div className="card-body">
-                  <dl className="row">
-                    <dt className="col-sm-3">Project Name and Duration</dt>
-                    <dd className="col-sm-9">
-                      <p>  The Project name is only used for you.</p>
-                      <p> <mark>Project Duration</mark> is used for subscription services charged by year: the yearly cost will be multiplied by the duration of the project.</p>
-                    </dd>
-                  </dl>
+      <div id="howto">
+        <div className="card" >
+          <div className="card-header ">
+            <h2><img src="./icon/sliders.png" width="40"/> HOWTO</h2>
+          </div>
+          <div className="card-body">
+            <dl className="row">
+              <dt className="col-sm-3">Project Name and Duration</dt>
+              <dd className="col-sm-9">
+                <p>  The Project name is only used for you.</p>
+                <p> <mark>Project Duration</mark> is used for subscription services charged by year: the yearly cost will be multiplied by the duration of the project.</p>
+              </dd>
+            </dl>
 
-                  {curconv}
-                  <dl className="row">
-                    <dt className="col-sm-3">Categories</dt>
-                    <dd className="col-sm-9">
-                      This tool is divided into categories (for example Active storage). Click
-                      on the category name, and it will expand.
-                    </dd>
-                  </dl>
+            {curconv}
+            <dl className="row">
+              <dt className="col-sm-3">Categories</dt>
+              <dd className="col-sm-9">
+                This tool is divided into categories (for example Active storage). Click
+                on the category name, and it will expand.
+              </dd>
+            </dl>
 
-                  <dl className="row">
-                    <dt className="col-sm-3">Providers</dt>
-                    <dd className="col-sm-9">
-                      <p>
-                        Providers can be chosen from the <mark>Select a provider box</mark>. You can then tune your settings for this provider to fit your needs.
-                      </p>
+            <dl className="row">
+              <dt className="col-sm-3">Providers</dt>
+              <dd className="col-sm-9">
+                <p>
+                  Providers can be chosen from the <mark>Select a provider box</mark>. You can then tune your settings for this provider to fit your needs.
+                </p>
 
-                      <p>
-                        If the provider you want is not present, you can add it manually with <mark>Provide your own provider</mark> and then enter your provider/service and cost.
-                      </p>
-                    </dd>
-                  </dl>
+                <p>
+                  If the provider you want is not present, you can add it manually with <mark>Provide your own provider</mark> and then enter your provider/service and cost.
+                </p>
+              </dd>
+            </dl>
 
-                  <dl className="row">
-                    <dt className="col-sm-3">Add or Remove Line</dt>
-                    <dd className="col-sm-9">
-                      <p>If you want to add a new line use the <ButtonInput class="btn-success btn-sm" id="plugins-add-btn" name={<img className="img-fluid" src="icon\plus.png" width="20"/>}
-                                                                            tips={'Add a new category'} onClick={this.fctnull}/> button.
-                      </p>
-                      <p>
-                        You can also remove a line with <ButtonInput class="btn-danger btn-sm" id="plugins-add-btn"
-                                                                     name={<img className="img-fluid" src="icon\minus.png" width="20"/>}
-                                                                     tips={'Remove this line'} onClick={this.fctnull}/> button.
-                      </p>
-                    </dd>
-                  </dl>
+            <dl className="row">
+              <dt className="col-sm-3">Add or Remove Line</dt>
+              <dd className="col-sm-9">
+                <p>If you want to add a new line use the <ButtonInput class="btn-success btn-sm"
+                                                                      id="plugins-add-btn"
+                                                                      name={<img className="img-fluid" src="icon\plus.png" width="20"/>}
+                                                                      tips={'Add a new category'}
+                                                                      onClick={this.fctnull}/> button.
+                </p>
+                <p>
+                  You can also remove a line with <ButtonInput class="btn-danger btn-sm"
+                                                               id="plugins-add-btn"
+                                                               name={<img className="img-fluid" src="icon\minus.png" width="20"/>}
+                                                               tips={'Remove this line'}
+                                                               onClick={this.fctnull}/> button.
+                </p>
+              </dd>
+            </dl>
 
-                  <dl className="row">
-                    <dt className="col-sm-3">To know more about</dt>
-                    <dd className="col-sm-9">
-                      Some extra information about the category or the provider can be obtained with the <ButtonInput class="btn-primary btn-sm" id="plugins-add-btn"
-                                                                                                                      name={<img className="img-fluid" src="icon\info.png" width="20"/>}
-                                                                                                                      tips={'Know more'} onClick={this.fctnull}/> button.
-                    </dd>
-                  </dl>
+            <dl className="row">
+              <dt className="col-sm-3">To know more about</dt>
+              <dd className="col-sm-9">
+                Some extra information about the category or the provider can be obtained with the <ButtonInput class="btn-primary btn-sm" id="plugins-add-btn"
+                                                                                                                name={<img className="img-fluid" src="icon\info.png" width="20"/>}
+                                                                                                                tips={'Know more'} onClick={this.fctnull}/> button.
+              </dd>
+            </dl>
 
-                  <dl className="row">
-                    <dt className="col-sm-3">Comments your input</dt>
-                    <dd className="col-sm-9">
-                      Comments are for your own usage, you can use it for remembering what each section is and for a nice export.
-                    </dd>
-                  </dl>
+            <dl className="row">
+              <dt className="col-sm-3">Comments your input</dt>
+              <dd className="col-sm-9">
+                Comments are for your own usage, you can use it for remembering what each section is and for a nice export.
+              </dd>
+            </dl>
 
-                  <dl className="row">
-                    <dt className="col-sm-3">Export</dt>
-                    <dd className="col-sm-9">
-                      You can export your work into different formats : <br/>
-                      <samp>HTML</samp> : This format can be used in any wordprocessing software (such as Microsoft Word or Libreoffice).<br/>
-                      <samp>HTML Source code</samp>, <samp>Markdown</samp>, and <samp>CSV</samp> formats are also possible.<br/>
-                      Click on the  <ButtonInput class="btn-secondary" id="btn-export" name={<span>Copy to Clipboard</span>} tips="Copy the output into your clipboard"
-                                                 onClick={this.fctnull}/> in order to copy your work into your clipboard.
-                      A simple <kbd>Paste</kbd> will transfer your work into any software.
+            <dl className="row">
+              <dt className="col-sm-3">Export</dt>
+              <dd className="col-sm-9">
+                You can export your work into different formats : <br/>
+                <samp>HTML</samp> : This format can be used in any wordprocessing software (such as Microsoft Word or Libreoffice).<br/>
+                <samp>HTML Source code</samp>, <samp>Markdown</samp>, and <samp>CSV</samp> formats are also possible.<br/>
+                Click on the  <ButtonInput class="btn-secondary" id="btn-export" name={<span>Copy to Clipboard</span>} tips="Copy the output into your clipboard"
+                                           onClick={this.fctnull}/> in order to copy your work into your clipboard.
+                A simple <kbd>Paste</kbd> will transfer your work into any software.
 
-                    </dd>
-                  </dl>
+              </dd>
+            </dl>
 
-                </div>
-              </div>
-            </div>)
+          </div>
+        </div>
+      </div>)
   }
 
   // Function use by the howto btn to move the page

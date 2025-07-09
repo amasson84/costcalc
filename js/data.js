@@ -664,7 +664,7 @@ const MainData = {
   InstName: 'EPFL Library',
   InstLogo: 'logo.png',
   InstLogoWidth: 200,
-  Updated: '2025--07-14',
+  Updated: '2025-07-14',
   HelpUrl: 'mailto:researchdata@epfl.ch',
   Currency: 'CHF',
   OEXRApi: 'cd8d785bdb6646b0a7e4c0eba5a74199',
@@ -674,7 +674,7 @@ const MainData = {
   StatsURL: 'costcalc.epfl.ch/matomo/',
   StatsID: '1',
   StatsContact: 'mailto:researchdata@epfl.ch',
-  Version: 'v2.3',
+  Version: 'v2.4',
   DefaultDuration: 1,
   DefaultArchiveDuration: 10,
   Data: [storage, ELN, Database, datarepository, coderepository, longermarchive]
