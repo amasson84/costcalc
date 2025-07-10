@@ -7,12 +7,10 @@ const NasEpfl = {
   Style: 'AmountRatesCost',
   Provider: 'EPFL-VPO-DSI',
   Name: 'NAS2023',
-  Url: [
-    {
-      Name: 'DSI service description',
-      Url: 'https://support.epfl.ch/help/epfl?id=epfl_service_status&service=49a363acdb34c700ef64731b8c96191f'
-    }
-  ],
+  Url: [{
+    Name: 'DSI service description',
+    Url: 'https://support.epfl.ch/help/epfl?id=epfl_service_status&service=49a363acdb34c700ef64731b8c96191f'
+  }],
   ExtraInfo: '',
   ByYear: true,
   Adaptive: false,
@@ -34,12 +32,10 @@ const RcpEpfl = {
   Style: 'AmountRatesCost',
   Provider: 'EPFL-VPA-RCP',
   Name: 'Collaborative Storage – NAS-RCP',
-  Url: [
-    {
-      Name: 'RCP service description',
-      Url: 'https://www.epfl.ch/research/facilities/rcp/collaborative-storage-nas-rcp-service-description/'
-    }
-  ],
+  Url: [{
+    Name: 'RCP service description',
+    Url: 'https://www.epfl.ch/research/facilities/rcp/collaborative-storage-nas-rcp-service-description/'
+  }],
   ExtraInfo: '',
   ByYear: true,
   Adaptive: false,
@@ -61,13 +57,11 @@ const ScitasEpfl = {
   Style: 'AmountRatesCost',
   Provider: 'EPFL-VPA-SCITAS',
   Name: 'Collaborative Storage – SCITAS',
-  Url: [
-    {
-      Name: 'Service description',
-      Url: 'https://scitas-doc.epfl.ch/accounts/prices/'
-    }
-  ],
-  ExtraInfo: '',
+  Url: [{
+    Name: 'Service description',
+    Url: 'https://scitas-doc.epfl.ch/accounts/prices/'
+  }],
+  ExtraInfo: 'SCITAS rates are provided as estimations only, the actual costs will be based on actual usage at the end of the year',
   ByYear: true,
   Adaptive: false,
   AmountName: 'Amount',
@@ -79,9 +73,12 @@ const ScitasEpfl = {
   AmountFreeCumulative: false,
   RateName: 'Performance',
   Rates: {
-    'User fee 1 (for EPFL: direct costs only)': 25,
-    'User fee 2 (incl. infrastructure maintenance': 63,
-    'User fee 3 (incl. all direct and indirect costs': 93
+    'User fee 1 (for EPFL: direct costs only)': 13.1,
+    'User fee 2 (incl. infrastructure maintenance': 67.7,
+    'User fee 3 (incl. all direct and indirect costs': 78.6,
+    'User fee 1 with backup': 21.9,
+    'User fee 2 with backup': 109.8,
+    'User fee 3 with backup': 127.0
   },
   RateUnit: 'CHF / TB'
 }
@@ -91,12 +88,10 @@ const SwitchEpfl = {
   Provider: 'Switch',
   Name: 'Switchdrive',
   ByYear: true,
-  Url: [
-    {
-      Name: 'Switch Website',
-      Url: 'https://drive.switch.ch/'
-    }
-  ],
+  Url: [{
+    Name: 'Switch Website',
+    Url: 'https://drive.switch.ch/'
+  }],
   CatName: 'Options',
   Cat: {
     'Cloud Based max 50GB': 0
@@ -109,12 +104,10 @@ const MsPersonalEpfl = {
   Provider: 'Microsoft OneDrive',
   Name: 'Microsoft M365 OneDrive',
   ByYear: true,
-  Url: [
-    {
-      Name: 'Service description',
-      Url: 'https://support.epfl.ch/epfl?id=epfl_kb_article_view&sysparm_article=KB0017390&sys_kb_id=44ce400f97b729142f9976971153af0c#mcetoc_1h4lngro134'
-    }
-  ],
+  Url: [{
+    Name: 'Service description',
+    Url: 'https://support.epfl.ch/epfl?id=epfl_kb_article_view&sysparm_article=KB0017390&sys_kb_id=44ce400f97b729142f9976971153af0c#mcetoc_1h4lngro134'
+  }],
   CatName: 'Options',
   Cat: {
     'Individual storage 1TB': 0
@@ -126,12 +119,10 @@ const MsSharedEpfl = {
   Style: 'AmountRatesCost',
   Provider: 'Microsoft SharePoint',
   Name: 'Microsoft M365 SharePoint',
-  Url: [
-    {
-      Name: 'Service description',
-      Url: 'https://support.epfl.ch/epfl?id=epfl_kb_article_view&sysparm_article=KB0017390&sys_kb_id=44ce400f97b729142f9976971153af0c#mcetoc_1h4lngro137'
-    }
-  ],
+  Url: [{
+    Name: 'Service description',
+    Url: 'https://support.epfl.ch/epfl?id=epfl_kb_article_view&sysparm_article=KB0017390&sys_kb_id=44ce400f97b729142f9976971153af0c#mcetoc_1h4lngro137'
+  }],
   ByYear: true,
   Adaptive: false,
   AmountName: 'Amount',
@@ -156,12 +147,10 @@ const GoogleDriveEdu = {
   Adaptive: false,
   ExtraInfo: 'Google Storage is not recommended as the data are stored outside of Switzerland',
   ExtraInfoUrl: 'https://support.epfl.ch/epfl?id=epfl_service_status&service=b1c22728db34c700ef64731b8c9619ad',
-  Url: [
-    {
-      Name: 'Google Education Page',
-      Url: 'https://edu.google.com/intl/en_ALL/'
-    }
-  ],
+  Url: [{
+    Name: 'Google Education Page',
+    Url: 'https://edu.google.com/intl/en_ALL/'
+  }],
   AmountName: 'Amount',
   AmountUnit: 'GB',
   AmountMin: 0,
@@ -202,12 +191,10 @@ const DropboxTeam = {
   ByYear: true,
   ExtraInfo: 'Dropbox must not be used for confidential data as the data are stored outside of Switzerland',
   ExtraInfoUrl: 'https://support.epfl.ch/kb_view_customer.do?sysparm_article=KB0012882',
-  Url: [
-    {
-      Name: 'Dropbox',
-      Url: 'https://www.dropbox.com/plans?trigger=nr'
-    }
-  ],
+  Url: [{
+    Name: 'Dropbox',
+    Url: 'https://www.dropbox.com/plans?trigger=nr'
+  }],
   Adaptive: false,
   AmountName: 'Number of Users',
   AmountUnit: 'Users',
@@ -338,24 +325,6 @@ const Zenodo = {
   CatUnit: 'CHF'
 }
 
-// SCITAS will no longer accept new users in 2024 (will close down eventually)
-const C4science = {
-  Style: 'CategoryCost',
-  Provider: 'EPFL-SCITAS',
-  Name: 'C4Science',
-  Url: [
-    { Name: 'C4Science Website', Url: 'https://www.c4science.ch/' }
-  ],
-  ByYear: true,
-  Adaptive: false,
-  ExtraInfo: 'C4Science is a code repository and collaboration platform created by SCITAS at EPFL, accessible to all swissuniversities members.',
-  CatName: 'Options',
-  Cat: {
-    'Free for text file': 0
-  },
-  CatUnit: 'CHF'
-}
-
 const GitlabEPFL = {
   Style: 'CategoryCost',
   Provider: 'EPFL-VPO-DSI',
@@ -375,7 +344,7 @@ const GitlabEPFL = {
 
 const Github = {
   Style: 'AmountRatesCost',
-  Provider: 'GitHub',
+  Provider: 'Microsoft',
   Name: 'GitHub',
   Url: [
     { Name: 'Github Website Pricing', Url: 'https://github.com/pricing' }
@@ -549,6 +518,32 @@ const EpflS3 = {
   RateUnit: 'CHF / TB'
 }
 
+const ScitasArchive = {
+  Style: 'AmountRatesCost',
+  Provider: 'EPFL-VPA-SCITAS',
+  Name: 'SCITAS Archive LTO',
+  Url: [
+    { Name: 'User documentation', Url: 'https://scitas-doc.epfl.ch/user-guide/data-management/archiving/' }
+  ],
+  AmountName: 'Volume',
+  AmountUnit: 'TB',
+  AmountMin: 1,
+  AmountMax: 100,
+  AmountStep: 1,
+  AmountFree: 0,
+  Adaptive: false,
+  AmountFreeCumulative: false,
+  ByYear: true,
+  ExtraInfo: 'SCITAS rates are provided as estimations only, the actual costs will be based on actual usage at the end of the year',
+  RateName: 'Plan',
+  Rates: {
+    'User fee 1 (for EPFL: direct costs only)': 4.0,
+    'User fee 2 (incl. infrastructure maintenance': 13.9,
+    'User fee 3 (incl. all direct and indirect costs': 19.1
+  },
+  RateUnit: 'CHF / TB'
+}
+
 // System variable definition
 // ----------------------------------------------------
 // ----------------------------------------------------
@@ -640,7 +635,6 @@ const coderepository = {
   Url: '',
   Data: [
     NoneSelected,
-    // C4science,
     GitlabEPFL,
     Github,
     Bitbucket,
@@ -657,6 +651,7 @@ const longermarchive = {
     NoneSelected,
     Acoua,
     EpflS3,
+    ScitasArchive,
     UserCostSelect
   ]
 }
@@ -669,7 +664,7 @@ const MainData = {
   InstName: 'EPFL Library',
   InstLogo: 'logo.png',
   InstLogoWidth: 200,
-  Updated: '2025--07-14',
+  Updated: '2025-07-10',
   HelpUrl: 'mailto:researchdata@epfl.ch',
   Currency: 'CHF',
   OEXRApi: 'cd8d785bdb6646b0a7e4c0eba5a74199',
@@ -679,7 +674,8 @@ const MainData = {
   StatsURL: 'costcalc.epfl.ch/matomo/',
   StatsID: '1',
   StatsContact: 'mailto:researchdata@epfl.ch',
-  Version: 'v2.3',
+  Version: 'v2.4',
   DefaultDuration: 1,
+  DefaultArchiveDuration: 10,
   Data: [storage, ELN, Database, datarepository, coderepository, longermarchive]
 }
