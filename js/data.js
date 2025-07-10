@@ -483,8 +483,7 @@ const Acoua = {
   ByYear: false,
   Adaptive: false,
   Url: [
-    { Name: 'About ACOUA', Url: 'https://www.epfl.ch/campus/library/acoua-support/' },
-    { Name: 'ACOUA (access limited to EPFL network)', Url: 'http://acoua.epfl.ch' }
+    { Name: 'About ACOUA', Url: 'https://go.epfl.ch/acoua' },
   ],
   ExtraInfo: 'The ACOUA service is exclusively designed for EPFL researchers.',
   CatName: 'Options',
@@ -570,7 +569,7 @@ const storage = {
   Name: 'Active Storage',
   Icon: 'storage.png',
   Url: [
-    { Name: 'EPFL RDM software information', Url: 'https://www.epfl.ch/campus/library/services-researchers/rdm-software/' },
+    { Name: 'Research Data storage solutions at EPFL', Url: 'https://go.epfl.ch/rdm-storage' },
     { Name: 'Comparison of file synchronization software', Url: 'https://en.wikipedia.org/wiki/Comparison_of_file_synchronization_software' }
   ],
   Data: [NoneSelected,
@@ -593,7 +592,7 @@ const ELN = {
   Name: 'Electronic LabBook',
   Icon: 'eln.png',
   Url: [
-    { Name: 'EPFL RDM software information', Url: 'https://www.epfl.ch/campus/library/services-researchers/rdm-software/' }
+    { Name: 'EPFL data collection tools (including ELNs)', Url: 'https://www.epfl.ch/campus/library/services-researchers/tools-and-guides/rdm-tools/#collect' }
   ],
   Data: [NoneSelected,
     SLIMSEpfl,
@@ -618,7 +617,7 @@ const datarepository = {
   Name: 'Data Repository',
   Icon: 'drepos.png',
   Url: [
-    { Name: 'EPFL RDM software information', Url: 'https://www.epfl.ch/campus/library/services-researchers/rdm-software/' }
+    { Name: 'EPFL information on data repositories and related platforms', Url: 'https://go.epfl.ch/datarepo' }
   ],
   Data: [
     NoneSelected,
