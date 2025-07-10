@@ -1893,14 +1893,14 @@ class Main extends React.Component {
                   </dl>
 
                   <dl className="row">
-                    <dt className="col-sm-3">Providers</dt>
+                    <dt className="col-sm-3">Solutions: platforms and providers</dt>
                     <dd className="col-sm-9">
                       <p>
-                        Providers can be chosen from the <mark>Select a provider box</mark>. You can then tune your settings for this provider to fit your needs.
+                        Solutions can be chosen from the <mark>Select a solution box</mark>. You can then tune your settings for this provider to fit your needs.
                       </p>
 
                       <p>
-                        If the provider you want is not present, you can add it manually with <mark>Provide your own provider</mark> and then enter your provider/service and cost.
+                        If the solution you want is not present, you can add it manually using the <mark>Other</mark> item, and then enter your provider/service and cost.
                       </p>
                     </dd>
                   </dl>
